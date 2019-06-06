@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="animated bounceInDown">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Style/css")
+
+</head>
+<body>
+
+    <!-- menu -->
+    <header class=" bounce ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+            <a class="navbar-brand" href="#">RH</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+                <ul class="navbar-nav ">
+                    
+
+                </ul>
+            </div>
+
+            <ul class="nav justify-content-end logout">
+                <li> <a class="nav-link" href="#">Logout</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="content">
+                @RenderBody()
+            </div>
+
+        </div>
+    </section>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

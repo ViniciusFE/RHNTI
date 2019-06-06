@@ -1,0 +1,12 @@
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\RH.Model.dll.config
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\RH.Model.dll
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\RH.Model.pdb
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\EntityFramework.dll
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\EntityFramework.xml
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\obj\Debug\RH.Model.csprojAssemblyReference.cache
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\obj\Debug\RH.Model.csproj.CoreCompileInputs.cache
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\obj\Debug\RH.Model.csproj.CopyComplete
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\obj\Debug\RH.Model.dll
+C:\Users\Matheus\Source\Repos\ViniciusEugenio\RH\RH.Model\obj\Debug\RH.Model.pdb

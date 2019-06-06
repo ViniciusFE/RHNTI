@@ -1,0 +1,52 @@
+﻿@model IEnumerable<RH.Model.Cargo>
+
+@{
+    ViewBag.Title = "Cargos";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Cargo", "CadastrarCargo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Car_Nome)
+        </th>
+        <th>
+            Cargo chefe
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car_Setor_Set_ID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Car_Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cargo2.Car_Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Car_DataCadastro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Car_Setor_Set_ID)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Car_ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Car_ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Car_ID })
+    </td>
+</tr>
+}
+
+</table>

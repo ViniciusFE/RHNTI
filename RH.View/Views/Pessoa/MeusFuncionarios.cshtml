@@ -1,0 +1,92 @@
+﻿@model IEnumerable<RH.Model.Pessoa>
+
+@{
+    ViewBag.Title = "MeusFuncionarios";
+}
+
+
+<h2 class="text-center titulo-Lista">Meus Funcionarios</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nome")
+        </th>
+        <th>
+            @Html.DisplayName("CPF")
+        </th>
+        <th>
+            @Html.DisplayName("Carteira de Trabalho")
+        </th>
+        <th>
+            @Html.DisplayName("Salario")
+        </th>
+        <th>
+            @Html.DisplayName("Cidade")
+        </th>
+        <th>
+            @Html.DisplayName("Endereco")
+        </th>
+        <th>
+            @Html.DisplayName("Data de Admissão")
+        </th>
+        <th>
+            @Html.DisplayName("Situation")
+        </th>
+        <th>
+            @Html.DisplayName("Cargo")
+        </th>
+        <th>
+            @Html.DisplayName("Foto")
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_CTrabalho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Salario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_DataAdmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Situation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Cargo_Car_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pes_Imagem)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Pes_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Pes_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Pes_ID })
+            </td>
+        </tr>
+    }
+
+
+
+
+</table>

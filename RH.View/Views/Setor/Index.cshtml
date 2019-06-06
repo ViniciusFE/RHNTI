@@ -1,0 +1,48 @@
+﻿@model IEnumerable<RH.Model.Setor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Criar Setor", "CadastrarSetor")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Set_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Set_DataCadastro)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa.Emp_Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Set_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Set_DataCadastro)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa.Emp_Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Set_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Set_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Set_ID })
+        </td>
+    </tr>
+}
+
+</table>

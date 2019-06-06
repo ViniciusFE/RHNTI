@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RH.Model.Empresa>
+
+@{
+    Layout = "~/Views/Shared/Layout_Empresa.cshtml";
+}
+
+@{
+    ViewBag.Title = "MinhasEmpresas";
+}
+
+<h2 class="text-center titulo-Lista">Minhas Empresas</h2>
+<div class="col-md-2 text-center cria-empresa "><a href="~/Empresa/CadastrarEmpresa"><i class="fas fa-plus"></i> Criar Empresa</a> </div>
+
+<div class="logout-emp">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Logout</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <div class="container-fluid">
+
+
+
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2  box">
+                <div class="Titulo"> <ul><li>@Html.DisplayFor(modelItem => item.Emp_Nome)</li></ul> </div>
+                <div class="abrir"> <a class="link" href="">Entrar</a> </div>
+            </div>
+
+
+
+        }
+
+        <nav aria-label="Page navigation example " class="paginacao">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>

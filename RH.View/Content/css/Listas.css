@@ -1,0 +1,137 @@
+body {
+  padding-top: 0 !important;
+  margin-bottom: 0; }
+  body #left-Lista {
+    clip-path: polygon(0 0, 0 39%, 28% 0);
+    width: 100%;
+    height: 100%;
+    background-color: #944848;
+    position: absolute;
+    z-index: -1; }
+    @media (max-width: 842px) {
+      body #left-Lista {
+        background-color: white; } }
+  body #right-Lista {
+    clip-path: polygon(100% 67%, 77% 100%, 100% 100%);
+    width: 100%;
+    height: 100%;
+    background-color: #944848;
+    position: absolute;
+    z-index: -1; }
+    @media (max-width: 842px) {
+      body #right-Lista {
+        background-color: white; } }
+
+section .titulo-Lista {
+  position: absolute;
+  font-size: 20px;
+  top: 18%;
+  left: 40%;
+  right: 40%;
+  color: grey;
+  font-weight: normal; }
+  @media (max-width: 842px) {
+    section .titulo-Lista {
+      top: 5%; } }
+
+section .container {
+  padding-left: 9% !important;
+  background-color: transparent !important;
+  color: black;
+  padding-top: 9%; }
+  @media (max-width: 991px) {
+    section .container {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 20%; } }
+  section .container .box {
+    font-size: 90%;
+    font-family: 'Montserrat';
+    border: solid 1px rgba(128, 128, 128, 0.445);
+    height: 100%;
+    padding-top: 15%;
+    background-color: white;
+    float: left;
+    margin-top: 10px;
+    margin-right: 10px; }
+    section .container .box .Titulo {
+      position: absolute;
+      top: 42%;
+      left: 30%;
+      text-align: center; }
+      @media (max-width: 991px) {
+        section .container .box .Titulo {
+          left: 20%; } }
+      section .container .box .Titulo ul {
+        padding: 0; }
+        section .container .box .Titulo ul li {
+          text-decoration: none;
+          list-style-type: none; }
+    section .container .box .abrir {
+      position: absolute;
+      left: 30%;
+      top: 38%;
+      display: none; }
+      @media (max-width: 991px) {
+        section .container .box .abrir {
+          top: 30%;
+          left: 20%; } }
+      section .container .box .abrir a {
+        font-size: 25px;
+        font-weight: bold;
+        color: white; }
+  section .container .box:hover {
+    background-color: rgba(128, 128, 128, 0.445);
+    transition: 2s; }
+    section .container .box:hover .abrir {
+      display: inline; }
+      section .container .box:hover .abrir a {
+        text-decoration: none; }
+      section .container .box:hover .abrir a:hover {
+        color: #944848;
+        transition: 2s; }
+    section .container .box:hover .Titulo {
+      display: none; }
+
+section .logout-emp ul li .nav-link {
+  font-size: 20px;
+  position: absolute !important;
+  top: 90%;
+  left: 85%;
+  color: white !important; }
+  @media (max-width: 842px) {
+    section .logout-emp ul li .nav-link {
+      position: relative !important;
+      top: 0%;
+      left: 0%;
+      color: #944848 !important; } }
+
+section .cria-empresa {
+  padding-top: 4%; }
+  section .cria-empresa a {
+    color: white;
+    font-style: none;
+    text-decoration: none; }
+    @media (max-width: 842px) {
+      section .cria-empresa a {
+        color: #944848; } }
+    @media (max-width: 768px) {
+      section .cria-empresa a {
+        margin-right: 60%; } }
+
+section nav.paginacao {
+  position: absolute;
+  margin-bottom: 5 !important;
+  bottom: 8%;
+  left: 44%; }
+  @media (max-width: 768px) {
+    section nav.paginacao {
+      top: 15% !important;
+      bottom: 0 !important;
+      left: 31%; } }
+  section nav.paginacao ul {
+    margin-bottom: 0rem !important; }
+    section nav.paginacao ul li a {
+      color: #944848; }
+    section nav.paginacao ul li a:hover {
+      color: black; }

@@ -1,0 +1,145 @@
+@model IEnumerable<RH.Model.Pessoa>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+
+<style>
+    #TextBox {
+        border: 2px solid #456879;
+        border-radius: 10px;
+        height: 200px;
+        width: 550px;
+        resize: none;
+    }
+</style>
+
+<br />
+<br />
+<div class="card">
+    <div class="card-header">
+        <h1 class="text-center">Avaliação de Funcionários</h1>
+        <br />
+        <div class="form-group">
+            @Html.Label("Chefes de Setores", "Chefes", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownList("Pes_Nome", null, "Por favor selecione um chefe de setor", htmlAttributes: new { @class = "form-control", @id = "Chefes" })
+        </div>
+    </div>
+    <div class="card-body" id="Funcionarios">
+
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalAvaliar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Avaliação de funcionário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Por favor digite a avaliação do funcionário</h4>
+                @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
+                <br />
+                <div align="center">
+                    <br />
+                    <img id="Carregando" src="~/Imagem/805.gif" style="width:60px; height:60px; display:none;" />
+                    <br />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar Avaliação</button>
+                <button type="button" class="btn btn-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        var IdFuncionario;
+
+        $(document).ready(function () {
+
+            $(".Abrir").click(function () {
+                alert("Teste");
+            });
+
+            $("#Chefes").change(function () {
+                var id = $(this).val();
+                var url = "@Url.Action("MeusFuncionarios","Avaliacao")";
+                $.post(url, { id: id }, resposta);
+            });
+
+            $("#TextBox").keyup(function () {
+                var texto = $(this).val();
+
+                if (texto != "") {
+                    $("#BtnAvaliar").removeAttr("disabled");
+                }
+
+                else {
+                    $("#BtnAvaliar").attr("disabled", "disabled");
+                }
+            });
+
+            $("#BtnAvaliar").click(function () {
+                var avaliacao = $("#TextBox").val();
+                alert(IdFuncionario);
+                alert(avaliacao);
+                var url = "@Url.Action("AvaliacaoFuncionario","Avaliacao")";
+                $("#TextBox").attr("disabled", "disabed");
+                $.post(url, { id: IdFuncionario, Avaliacao: avaliacao }, RespostaAvaliacao);
+                $(this).attr("disabled", "disabled");
+                $("#Carregando").css("display", "inline");
+            });
+            
+            function RespostaAvaliacao(resposta) {
+                $("#Carregando").css("display", "none");
+                $("modal-body").html("<h4>" + resposta + "</h4>");
+                $("BtnAvaliar").attr("disabled", "disabled");
+            }
+
+            function resposta(Funcionarios) {
+                var quantidade = Funcionarios.length;
+                var result = quantidade / 3;
+                for (var x = 0; x < result; x++) {
+                    $("#Funcionarios").append(
+                    "<h3 class='text-center'>Funcionários</h3>"+
+                    "<div class='card'>"+
+                    "<div class= 'card-body'>" +
+                    "<div class='row'>"+
+                        "<div class='col-4'>" +
+                        "<img src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + Funcionarios[x, 2] + "' class='rounded-circle'/>" +
+                    "</div>"+
+                        "<div class='col-6'>" +
+                        "<h4>Nome do funcionário: " + Funcionarios[x, 0] + "</h4>" +
+                        "<h4>Cargo ocupado: " + Funcionarios[x, 1] + "</h4>" +
+                        "</div>" +
+                        "<div class='col-2'>" +
+                        "<button onclick='Abrir("+Funcionarios[x,2]+")' class='btn btn-success Abrir'><spam class='fa fa-star'></spam> Dar Avaliacao</button>"+
+                        "</div>"+
+            "</div >"+
+                    "</div >" +
+                    "</div>"
+                    );
+                }
+
+            }
+
+          
+
+        });
+
+        function Abrir(id) {
+            IdFuncionario = id;
+            $("#ModalAvaliar").modal('show');
+        }
+
+    </script>
+}
