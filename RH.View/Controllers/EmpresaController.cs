@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
+using PagedList;
 
 namespace RH.View.Controllers
 {
@@ -23,10 +24,12 @@ namespace RH.View.Controllers
             return View();
         }
 
-        public ActionResult MinhasEmpresas()
+        public ActionResult MinhasEmpresas(int? pagina)
         {
+            int paginaTamanho = 4;
+            int paginaNumero = (pagina ?? 1);
             List<Empresa> MinhasEmpresas = _Control.SelecionarTodasEmpresasAluno(1);
-            return View(MinhasEmpresas);
+            return View(MinhasEmpresas.ToPagedList(paginaNumero, paginaTamanho));
         }
 
         public ActionResult CadastrarEmpresa()
@@ -36,9 +39,9 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarEmpresa(Empresa aEmpresa,HttpPostedFileBase Imagem)
+        public ActionResult CadastrarEmpresa(Empresa aEmpresa, HttpPostedFileBase Imagem)
         {
-            if(Imagem!=null)
+            if (Imagem != null)
             {
                 byte[] Arquivo = new byte[Imagem.ContentLength];
                 Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
@@ -51,7 +54,7 @@ namespace RH.View.Controllers
                 return View();
             }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 aEmpresa.Emp_DataCadastro = DateTime.Now;
                 aEmpresa.Emp_DataAtual = Convert.ToDateTime("01/01/2019");

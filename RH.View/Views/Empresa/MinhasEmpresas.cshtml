@@ -1,4 +1,8 @@
-﻿@model IEnumerable<RH.Model.Empresa>
+﻿
+
+@model PagedList.IPagedList<RH.Model.Empresa>
+@using PagedList.Mvc
+
 
 @{
     Layout = "~/Views/Shared/Layout_Empresa.cshtml";
@@ -35,25 +39,17 @@
             </div>
 
 
-
         }
 
         <nav aria-label="Page navigation example " class="paginacao">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    @Html.PagedListPager(Model, page => Url.Action("MinhasEmpresas", new { pagina = page }))
+
                 </li>
             </ul>
         </nav>
+
+
 
     </div>
