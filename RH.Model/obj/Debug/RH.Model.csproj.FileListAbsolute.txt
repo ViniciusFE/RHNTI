@@ -22,3 +22,15 @@ C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.csproj.
 C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.csproj.CopyComplete
 C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.dll
 C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.pdb
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\RH.Model.dll.config
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\RH.Model.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\RH.Model.pdb
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\EntityFramework.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\EntityFramework.xml
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.csprojAssemblyReference.cache
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.csproj.CoreCompileInputs.cache
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.csproj.CopyComplete
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.Model\obj\Debug\RH.Model.pdb

@@ -49,6 +49,7 @@ namespace RH.View.Controllers
                 {                    
                     oCargo.Car_Situation = true;
                     oCargo.Car_DataCadastro = DateTime.Now;
+                    oCargo.Car_Cargo_Car_ID = null;
                     _Control.CadastrarCargo(oCargo);
 
                     oCargo.Car_Cargo_Car_ID = oCargo.Car_ID;

@@ -16,7 +16,7 @@ namespace RH.Model
             [DisplayName("Código do cargo")]
             public int Car_ID { get; set; }
 
-            [DisplayName("Código do setor")]
+            [DisplayName("Setor")]
             public int Car_Setor_Set_ID { get; set; }
 
             [DisplayName("Cargo chefe")]

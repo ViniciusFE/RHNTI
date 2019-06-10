@@ -18,10 +18,11 @@
             Cargo chefe
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Car_DataCadastro)
+            @Html.DisplayNameFor(model => model.Car_Setor_Set_ID)
+          
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Car_Setor_Set_ID)
+            @Html.DisplayNameFor(model => model.Car_DataCadastro)
         </th>
         <th></th>
     </tr>
@@ -36,10 +37,10 @@
         @Html.DisplayFor(modelItem => item.Cargo2.Car_Nome)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Car_DataCadastro)
+        @Html.DisplayFor(modelItem => item.Setor.Set_Nome)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Car_Setor_Set_ID)
+        @Html.DisplayFor(modelItem => item.Car_DataCadastro)
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Car_ID }) |

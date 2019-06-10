@@ -15,12 +15,13 @@
             @Html.DisplayNameFor(model => model.Set_Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Set_DataCadastro)
+            @Html.DisplayNameFor(model => model.Empresa.Emp_Nome)
+           
         </th>
 
 
         <th>
-            @Html.DisplayNameFor(model => model.Empresa.Emp_Nome)
+            @Html.DisplayNameFor(model => model.Set_DataCadastro)
         </th>
         <th></th>
     </tr>
@@ -31,11 +32,12 @@
             @Html.DisplayFor(modelItem => item.Set_Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Set_DataCadastro)
+            @Html.DisplayFor(modelItem => item.Empresa.Emp_Nome)
+
         </td>
 
         <td>
-            @Html.DisplayFor(modelItem => item.Empresa.Emp_Nome)
+            @Html.DisplayFor(modelItem => item.Set_DataCadastro)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Set_ID }) |
