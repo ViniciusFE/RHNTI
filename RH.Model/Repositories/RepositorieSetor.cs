@@ -30,6 +30,11 @@ namespace RH.Model.Repositories
             return odb.Setor.Where(p => p.Set_Empresa_Emp_ID.Equals(IDEmpresa) && p.Set_Situation == true).ToList();
         }
 
+        public Setor SelecionarSetor(int id)
+        {
+            return (from p in odb.Setor where p.Set_ID == id select p).FirstOrDefault();
+        }
+
         public void CadastrarSetor(Setor oSetor)
         {
             odb.Entry(oSetor).State = System.Data.Entity.EntityState.Added;

@@ -27,6 +27,11 @@ namespace RH.Control
             return _RepositorieSetor.SelecionarSetorEmpresa(idEmpresa);
         }
 
+        public Setor SelecionarSetor(int id)
+        {
+            return _RepositorieSetor.SelecionarSetor(id);
+        }
+
         public void CadastrarSetor(Setor Osetor)
         {
              _RepositorieSetor.CadastrarSetor(Osetor);

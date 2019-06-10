@@ -60,5 +60,27 @@ namespace RH.View.Controllers
             
         }
 
+        public ActionResult AlterarSetor(int id)
+        {
+            Setor oSetor = _Control.SelecionarSetor(id);
+            ViewBag.Set_Empresa_Emp_ID = new SelectList(_EControl.SelecionarTodasEmpresa(), "Emp_ID", "Emp_Nome", oSetor.Set_Empresa_Emp_ID);
+            return View(oSetor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AlterarSetor(Setor oSetor)
+        {
+            Setor nSetor = _Control.SelecionarSetor(oSetor.Set_ID);
+            nSetor.Set_Nome = oSetor.Set_Nome;
+            nSetor.Set_Empresa_Emp_ID = oSetor.Set_Empresa_Emp_ID;
+            if (ModelState.IsValid)
+            {
+                _Control.AlterarSetor(nSetor);
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
