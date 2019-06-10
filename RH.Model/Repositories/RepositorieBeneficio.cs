@@ -27,7 +27,7 @@ namespace RH.Model.Repositories
 
         public Beneficio SelecionarBeneficio(int id)
         {
-            return odb.Beneficio.Where(p => p.Ben_ID.Equals(id) && p.Ben_Situation == true).FirstOrDefault();
+            return odb.Beneficio.Where(p => p.Ben_Situation == true && p.Ben_ID.Equals(id)).FirstOrDefault();
         }
 
         public void CadastrarBeneficio(Beneficio oBeneficio)
