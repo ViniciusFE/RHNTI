@@ -124,6 +124,7 @@
     <Compile Include="Repositories\RepositorieAluno.cs" />
     <Compile Include="Repositories\RepositorieAvaliacao.cs" />
     <Compile Include="Repositories\RepositorieCargo.cs" />
+    <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
     <Compile Include="Repositories\RepositorieProfessor.cs" />
