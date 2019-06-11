@@ -30,6 +30,11 @@ namespace RH.Model.Repositories
             return odb.Empresa.Where(p => p.Emp_Aluno_Alu_ID.Equals(IDUsuario) && p.Emp_Situation == true).ToList();
         }
 
+        public Empresa SelecionarEmpresa(int id)
+        {
+            return odb.Empresa.Where(p => p.Emp_ID.Equals(id) && p.Emp_Situation == true).FirstOrDefault();
+        }
+
         public void CadastrarEmpresa(Empresa aEmpresa)
         {
             odb.Entry(aEmpresa).State = System.Data.Entity.EntityState.Added;

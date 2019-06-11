@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
-using PagedList;
+using PageList;
 
 namespace RH.View.Controllers
 {
@@ -64,6 +64,23 @@ namespace RH.View.Controllers
                 return RedirectToAction("MinhasEmpresas");
             }
             return View();
+        }
+
+        public ActionResult EditarEmpresa(int id)
+        {
+            Empresa aEmpresa = _Control.SelecionarEmpresa(id);
+            return View(aEmpresa);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarEmpresa(Empresa aEmpresa)
+        {
+            if(ModelState.IsValid)
+            {
+                _Control.AlterarEmpresa(aEmpresa);
+            }
+            return View(aEmpresa);
         }
     }
 }

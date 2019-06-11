@@ -36,5 +36,10 @@ namespace RH.Control
         {
             _RepositorieEmpresa.CadastrarEmpresa(aEmpresa);
         }
+
+        public Empresa SelecionarEmpresa(int id)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresa(id);
+        }
     }
 }
