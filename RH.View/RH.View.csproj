@@ -262,6 +262,7 @@
     <Content Include="Views\Avaliacao\Index.cshtml" />
     <Content Include="Views\Setor\AlterarSetor.cshtml" />
     <Content Include="Views\Cargo\AlterarCargo.cshtml" />
+    <Content Include="Views\Empresa\EditarEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

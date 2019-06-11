@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
-using PageList;
+using PagedList;
 
 namespace RH.View.Controllers
 {
@@ -74,10 +74,17 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarEmpresa(Empresa aEmpresa)
+        public ActionResult EditarEmpresa(Empresa aEmpresa,HttpPostedFileBase Imagem)
         {
             if(ModelState.IsValid)
             {
+                if(Imagem!=null)
+                {
+                    byte[] imagem = new byte[Imagem.ContentLength];
+                    Imagem.InputStream.Read(imagem, 0, Imagem.ContentLength);
+                    aEmpresa.Emp_Logo = imagem;
+                }
+
                 _Control.AlterarEmpresa(aEmpresa);
             }
             return View(aEmpresa);
