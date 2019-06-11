@@ -34,7 +34,7 @@ namespace RH.Control
 
         public void AlterarEmpresa(Empresa aEmpresa)
         {
-            _RepositorieEmpresa.CadastrarEmpresa(aEmpresa);
+            _RepositorieEmpresa.AlterarEmpresa(aEmpresa);
         }
 
         public Empresa SelecionarEmpresa(int id)

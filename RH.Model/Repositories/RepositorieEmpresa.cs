@@ -43,7 +43,13 @@ namespace RH.Model.Repositories
 
         public void AlterarEmpresa(Empresa aEmpresa)
         {
+            var local = odb.Set<Empresa>()
+                        .Local
+                        .FirstOrDefault(f => f.Emp_ID == aEmpresa.Emp_ID);
+
+            odb.Entry(local).State = System.Data.Entity.EntityState.Detached;
             odb.Entry(aEmpresa).State = System.Data.Entity.EntityState.Modified;
+            odb.SaveChanges();
         }
 
         public void ExcluirEmpresa(Empresa aEmpresa)

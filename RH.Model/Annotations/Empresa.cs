@@ -20,27 +20,27 @@ namespace RH.Model
             public int Emp_Aluno_Alu_ID { get; set; }
 
             [DisplayName("Nome da Empresa")]
-            [Required(ErrorMessage ="Por favor digite o nome da empresa")]
+            [Required(ErrorMessage = "Por favor digite o nome da empresa")]
             public string Emp_Nome { get; set; }
 
             [DisplayName("Estado")]
-            [Required(ErrorMessage ="Por favor selecione o estado da empresa")]
+            [Required(ErrorMessage = "Por favor selecione o estado da empresa")]
             public string Emp_Estado { get; set; }
 
             [DisplayName("Cidade")]
-            [Required(ErrorMessage ="Por favor digite a cidade da empresa")]
+            [Required(ErrorMessage = "Por favor digite a cidade da empresa")]
             public string Emp_Cidade { get; set; }
 
             [DisplayName("Endereço")]
-            [Required(ErrorMessage ="Por favor digite o endereço da empresa")]
+            [Required(ErrorMessage = "Por favor digite o endereço da empresa")]
             public string Emp_Endereco { get; set; }
 
             [DisplayName("CNPJ")]
-            [Required(ErrorMessage ="Por favor digite o CNPJ da empresa")]
+            [Required(ErrorMessage = "Por favor digite o CNPJ da empresa")]
             public string Emp_CNPJ { get; set; }
 
             [DisplayName("Registro Estadual")]
-            [Required(ErrorMessage ="Por favor digite o Registro Estadual da Empresa")]
+            [Required(ErrorMessage = "Por favor digite o Registro Estadual da Empresa")]
             public string Emp_RegistroEstadual { get; set; }
 
             [DisplayName("Data de cadastro")]

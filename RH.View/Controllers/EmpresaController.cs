@@ -76,18 +76,39 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditarEmpresa(Empresa aEmpresa,HttpPostedFileBase Imagem)
         {
-            if(ModelState.IsValid)
-            {
-                if(Imagem!=null)
-                {
-                    byte[] imagem = new byte[Imagem.ContentLength];
-                    Imagem.InputStream.Read(imagem, 0, Imagem.ContentLength);
-                    aEmpresa.Emp_Logo = imagem;
-                }
+            Empresa empresa = _Control.SelecionarEmpresa(aEmpresa.Emp_ID);
 
-                _Control.AlterarEmpresa(aEmpresa);
+            if (!ModelState.IsValid)
+            {
+                return View(aEmpresa);
             }
-            return View(aEmpresa);
+
+            if (Imagem != null)
+            {
+                byte[] imagem = new byte[Imagem.ContentLength];
+                Imagem.InputStream.Read(imagem, 0, Imagem.ContentLength);
+                aEmpresa.Emp_Logo = imagem;
+            }
+
+            else
+            {
+                aEmpresa.Emp_Logo = empresa.Emp_Logo;
+            }
+
+            aEmpresa.Emp_DataAtual = empresa.Emp_DataAtual;
+            aEmpresa.Emp_DataCadastro = empresa.Emp_DataCadastro;
+            aEmpresa.Emp_Aluno_Alu_ID = empresa.Emp_Aluno_Alu_ID;
+            aEmpresa.Emp_Situation = empresa.Emp_Situation;
+
+            _Control.AlterarEmpresa(aEmpresa);
+            return RedirectToAction("MinhasEmpresas");
+
+        }
+
+        public ActionResult GetImagem(int id)
+        {
+            Empresa aEmpresa = _Control.SelecionarEmpresa(id);
+            return File(aEmpresa.Emp_Logo, aEmpresa.Emp_Logo.GetType().ToString());
         }
     }
 }
