@@ -32,6 +32,11 @@ namespace RH.Control
             return _RepositorieCargo.SelecionarCargoPorNome(n);
         }
 
+        public Cargo SelecionarCargo(int id)
+        {
+            return _RepositorieCargo.SelecionarCargo(id);
+        }
+
         public void CadastrarCargo(Cargo oCargo)
         {
             _RepositorieCargo.CadastrarCargo(oCargo);
