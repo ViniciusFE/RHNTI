@@ -502,3 +502,11 @@ C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.View\obj\Debug\RH.View.csproj.CoreC
 C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.View\obj\Debug\RH.View.csproj.CopyComplete
 C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.View\obj\Debug\RH.View.dll
 C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.View\obj\Debug\RH.View.pdb
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\cs-page-rank.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.IO.dll
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\cs-page-rank.pdb
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.pdb
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.xml
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.IO.pdb
+C:\Users\NTI\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.IO.xml
