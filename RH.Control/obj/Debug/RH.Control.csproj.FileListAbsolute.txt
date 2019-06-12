@@ -73,3 +73,18 @@ C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.Control\obj\Debug\RH.Control.csproj
 C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.Control\obj\Debug\RH.Control.csproj.CopyComplete
 C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.Control\obj\Debug\RH.Control.dll
 C:\Users\PC\Source\Repos\ViniciusFE\RHNTI\RH.Control\obj\Debug\RH.Control.pdb
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\RH.Control.dll.config
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\RH.Control.dll
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\RH.Control.pdb
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\EntityFramework.dll
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\RH.Model.dll
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\RH.Model.pdb
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\RH.Model.dll.config
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\EntityFramework.xml
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\obj\Debug\RH.Control.csprojAssemblyReference.cache
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\obj\Debug\RH.Control.csproj.CoreCompileInputs.cache
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\obj\Debug\RH.Control.csproj.CopyComplete
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\obj\Debug\RH.Control.dll
+C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.Control\obj\Debug\RH.Control.pdb

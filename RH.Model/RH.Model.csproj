@@ -53,6 +53,7 @@
     <Compile Include="Aluno.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Annotations\Aluno.cs" />
     <Compile Include="Annotations\Cargo.cs" />
     <Compile Include="Annotations\Empresa.cs" />
     <Compile Include="Annotations\Setor.cs" />
