@@ -32,6 +32,19 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarProfessor(Professor oProfessor,string Senha)
         {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            if(Senha!=oProfessor.Pro_Senha)
+            {
+                ModelState.AddModelError("Senha", "As senhas digitadas não são iguais");
+                return View(oProfessor);
+            }
+
+            oProfessor.Pro_Situation = true;
+            _Control.AdicionarProfessor(oProfessor);
             return View();
         }
     }
