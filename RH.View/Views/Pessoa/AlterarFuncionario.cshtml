@@ -1,15 +1,18 @@
 ﻿@model RH.Model.Pessoa
 
 @{
-    ViewBag.Title = "CadastrarFuncionario";
+    /**/
+
+    ViewBag.Title = "AlterarFuncionario";
 }
 
-<h2 class="text-center">Cadastrar Funcionario</h2>
+<h2 class="text-center">Alterar Funcionario</h2>
 
 
-@using (Html.BeginForm("CadastrarFuncionario", "Pessoa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AlterarFuncionario", "Pessoa", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+
 
     <h4 class="text-center">Funcionario</h4>
     <hr />
@@ -31,7 +34,7 @@
             @Html.Label("Nome", htmlAttributes: new { @class = "control-label col-md-2" })
 
             @Html.EditorFor(model => model.Pes_Nome, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Nome do Funcionario" } })
-            @Html.ValidationMessage("Nome", "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Pes_Nome, "", new { @class = "text-danger" })
 
         </div>
 
@@ -39,7 +42,7 @@
             @Html.Label("CPF", htmlAttributes: new { @class = "control-label col-md-2" })
 
             @Html.EditorFor(model => model.Pes_CPF, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CPF do Funcionario" } })
-            @Html.ValidationMessage("CPF", "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Pes_CPF, "", new { @class = "text-danger" })
 
         </div>
 
@@ -106,7 +109,7 @@
         <div class="from-group col-md-12">
             <div class="form-group col-md-6 ">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Criar" class="btn btn-outline-secondary" />
+                    <input type="submit" value="Alterar" class="btn btn-outline-secondary" />
                 </div>
             </div>
         </div>
@@ -119,5 +122,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
 }

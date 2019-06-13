@@ -265,6 +265,7 @@
     <Content Include="Views\Cargo\AlterarCargo.cshtml" />
     <Content Include="Views\Empresa\EditarEmpresa.cshtml" />
     <Content Include="Views\Aluno\CadasrarAluno.cshtml" />
+    <Content Include="Views\Pessoa\AlterarFuncionario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

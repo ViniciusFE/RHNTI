@@ -4,10 +4,17 @@
     ViewBag.Title = "MeusFuncionarios";
 }
 
+<style>
 
-<h2 class="text-center titulo-Lista">Meus Funcionarios</h2>
+    img {
+        width: 80px;
+        height: 80px;
+    }
+</style>
+
+<h2 class="text-center titulo-Lista">Funcionarios</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Funcionario", "CadastrarFuncionario")
 </p>
 <table class="table">
     <tr>
@@ -76,17 +83,16 @@
                 @Html.DisplayFor(modelItem => item.Pes_Cargo_Car_ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pes_Imagem)
+
+                <img src='@Url.Action("GetImagemFuncionario","Pessoa",new {id=item.Pes_ID })' />
+
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Pes_ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Pes_ID }) |
+                @Html.ActionLink("Editar", "AlterarFuncionario", new { id = item.Pes_ID })
+                @Html.ActionLink("Details", "Details", new { id = item.Pes_ID })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Pes_ID })
             </td>
         </tr>
     }
-
-
-
 
 </table>

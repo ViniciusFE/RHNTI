@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -32,11 +33,13 @@ namespace RH.Model.Repositories
         public void AlterarFuncionario(Pessoa oFuncionario)
         {
             Db.Entry(oFuncionario).State = System.Data.Entity.EntityState.Modified;
+            Db.SaveChanges();
         }
 
         public void DeletarFuncionario(Pessoa oFuncionario)
         {
             Db.Entry(oFuncionario).State = System.Data.Entity.EntityState.Deleted;
+            Db.SaveChanges();
         }
 
         public List<Pessoa> SelcionarTodosMeusFuncionarios(int id)

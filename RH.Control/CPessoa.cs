@@ -29,7 +29,7 @@ namespace RH.Control
 
         public void AlterarFuncionario(Pessoa oFuncionario)
         {
-            RepFuncionario.CadastrarFuncionario(oFuncionario);
+            RepFuncionario.AlterarFuncionario(oFuncionario);
         }
 
         public void DeletarFuncionario(Pessoa oFuncionario)
