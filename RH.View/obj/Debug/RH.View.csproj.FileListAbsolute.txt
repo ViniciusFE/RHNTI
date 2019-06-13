@@ -618,3 +618,11 @@ C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.View\obj\Debug\RH
 C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.View\obj\Debug\RH.View.csproj.CopyComplete
 C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.View\obj\Debug\RH.View.dll
 C:\Users\NTI\source\repos\ViniciusFE\RHNTI Atualizado\RHNTI\RH.View\obj\Debug\RH.View.pdb
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\cs-page-rank.dll
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.dll
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.IO.dll
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\cs-page-rank.pdb
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.pdb
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.xml
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.IO.pdb
+C:\Users\thail\Source\Repos\ViniciusFE\RHNTI\RH.View\bin\MathNet.Numerics.IO.xml
