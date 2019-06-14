@@ -29,6 +29,8 @@ namespace RH.View.Controllers
 
         public ActionResult MinhasEmpresas(int? pagina)
         {
+            Session["IDEmpresa"] = null;
+
             int paginaTamanho = 4;
             int paginaNumero = (pagina ?? 1);
             Aluno oAluno = (Aluno)Session["User"];
@@ -36,6 +38,7 @@ namespace RH.View.Controllers
             return View(MinhasEmpresas.ToPagedList(paginaNumero, paginaTamanho));
         }
 
+        [AutorizacaoEmpresa]
         public ActionResult CadastrarEmpresa()
         {
             return View();
@@ -71,6 +74,7 @@ namespace RH.View.Controllers
             return View();
         }
 
+        [AutorizacaoEmpresa]        
         public ActionResult EditarEmpresa(int id)
         {
             Empresa aEmpresa = _Control.SelecionarEmpresa(id);
