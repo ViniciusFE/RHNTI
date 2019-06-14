@@ -1,17 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
+using RH.View.Filtro;
+
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class CargoController : Controller
     {
         private CCargo _Control;
         private CSetor _Control_s;
         private RHEntities x = Model.Helper.Connection.GetConnection();
+
         public CargoController()
         {
             _Control = new CCargo();

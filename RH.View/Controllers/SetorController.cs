@@ -5,8 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
+using RH.View.Filtro;
+
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class SetorController : Controller
     {
         private CSetor _Control;
@@ -41,7 +44,7 @@ namespace RH.View.Controllers
             {
                 oSetor.Set_DataCadastro = DateTime.Now;
                 oSetor.Set_Situation = true;
-                oSetor.Set_Empresa_Emp_ID = Convert.ToInt32("IDEmpresa");
+                oSetor.Set_Empresa_Emp_ID = Convert.ToInt32(Session["IDEmpresa"]);
                 _Control.CadastrarSetor(oSetor);
                 //Cargo t = _CCargo.SelecionarCargoPorNome("-");
                 //if (t == null)

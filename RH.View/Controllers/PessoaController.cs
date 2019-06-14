@@ -1,5 +1,6 @@
-﻿using RH.Control;
+using RH.Control;
 using RH.Model;
+using RH.View.Filtro;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class PessoaController : Controller
     {
         private CPessoa DbPessoa = new CPessoa();

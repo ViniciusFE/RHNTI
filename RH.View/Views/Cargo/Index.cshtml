@@ -1,53 +1,48 @@
-﻿@model IEnumerable<RH.Model.Cargo>
+@model IEnumerable<RH.Model.Cargo>
 
 @{
     ViewBag.Title = "Cargos";
 }
 
-<h2>Index</h2>
 
+<br />
 <p>
-    @Html.ActionLink("Cadastrar Cargo", "CadastrarCargo")
+    <a class="btn btn-success" href="@Url.Action("CadastrarCargo","Cargo")">Cadastrar Novo Cargo</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Car_Nome)
-        </th>
-        <th>
-            Cargo chefe
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Car_Setor_Set_ID)
-          
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Car_DataCadastro)
-        </th>
-        <th></th>
-    </tr>
+<h2>Cargos Cadastrados</h2>
+<br />
 
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Car_Nome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cargo2.Car_Nome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Setor.Set_Nome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Car_DataCadastro)
-    </td>
-    <td>
-        @Html.ActionLink("Alterar", "AlterarCargo", new { id = item.Car_ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Car_ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Car_ID })
-    </td>
-</tr>
+@foreach (var x in Model)
+{
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header">@x.Car_Nome</div>
+                </div>
+
+                <div class="card-body bg-light">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <p>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
+                            <p>@x.Car_DataCadastro</p>
+                            @if (x.Car_Cargo_Car_ID == null)
+                            {
+                                <p>Este cargo ocupa a posição de chefe do setor</p>
+                            }
+                        </div>
+                        <div class="col-md-6 text-white">
+                            <a class="btn btn-warning">Alterar Cargo</a>
+                            <a class="btn btn-danger">Excluir Cargo</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 }
-
-</table>
