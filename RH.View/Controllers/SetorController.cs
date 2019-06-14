@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -38,9 +38,10 @@ namespace RH.View.Controllers
         public ActionResult CadastrarSetor(Setor oSetor)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 oSetor.Set_DataCadastro = DateTime.Now;
                 oSetor.Set_Situation = true;
+                oSetor.Set_Empresa_Emp_ID = Convert.ToInt32("IDEmpresa");
                 _Control.CadastrarSetor(oSetor);
                 //Cargo t = _CCargo.SelecionarCargoPorNome("-");
                 //if (t == null)

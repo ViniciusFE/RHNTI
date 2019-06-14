@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +28,7 @@ namespace RH.Model
             public int Set_DataCadastro { get; set; }
 
             [DisplayName("Empresa")]
-            [Required(ErrorMessage = "Por favor selecione a Empresa")]
+            //[Required(ErrorMessage = "Por favor selecione a Empresa")]
             public int Set_Empresa_Emp_ID { get; set; }
         }
     }

@@ -1,4 +1,4 @@
-﻿@model RH.Model.Setor
+@model RH.Model.Setor
 
 @{
     ViewBag.Title = "Cadastrar Setor";
@@ -23,14 +23,6 @@
 
             @Html.EditorFor(model => model.Set_Nome, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Nome do Setor" } })
             @Html.ValidationMessageFor(model => model.Set_Nome, "", new { @class = "text-danger" })
-
-        </div>
-
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Set_Empresa_Emp_ID, htmlAttributes: new { @class = "control-label col-md-4" })
-
-            @Html.DropDownList("Set_Empresa_Emp_ID", null, "Selecione a empresa", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Set_Empresa_Emp_ID, "", new { @class = "text-danger" })
 
         </div>
 

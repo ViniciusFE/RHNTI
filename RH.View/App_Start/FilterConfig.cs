@@ -1,4 +1,5 @@
-﻿using System.Web;
+using RH.View.Filtro;
+using System.Web;
 using System.Web.Mvc;
 
 namespace RH.View
@@ -7,7 +8,7 @@ namespace RH.View
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new Autorizacao());
         }
     }
 }

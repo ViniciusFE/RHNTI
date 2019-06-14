@@ -6,9 +6,12 @@ using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
 using PagedList;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [Autorizacao]
+
     public class EmpresaController : Controller
     {
         private CEmpresa _Control;
@@ -28,7 +31,8 @@ namespace RH.View.Controllers
         {
             int paginaTamanho = 4;
             int paginaNumero = (pagina ?? 1);
-            List<Empresa> MinhasEmpresas = _Control.SelecionarTodasEmpresasAluno(1);
+            Aluno oAluno = (Aluno)Session["User"];
+            List<Empresa> MinhasEmpresas = _Control.SelecionarTodasEmpresasAluno(oAluno.Alu_ID);
             return View(MinhasEmpresas.ToPagedList(paginaNumero, paginaTamanho));
         }
 
@@ -59,7 +63,8 @@ namespace RH.View.Controllers
                 aEmpresa.Emp_DataCadastro = DateTime.Now;
                 aEmpresa.Emp_DataAtual = Convert.ToDateTime("01/01/2019");
                 aEmpresa.Emp_Situation = true;
-                aEmpresa.Emp_Aluno_Alu_ID = Convert.ToInt32(1);
+                Aluno oAluno = (Aluno)Session["User"];
+                aEmpresa.Emp_Aluno_Alu_ID = Convert.ToInt32(oAluno.Alu_ID);
                 _Control.CadastrarEmpresa(aEmpresa);
                 return RedirectToAction("MinhasEmpresas");
             }
