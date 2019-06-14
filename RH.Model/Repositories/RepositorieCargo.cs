@@ -24,6 +24,11 @@ namespace RH.Model.Repositories
             return odb.Cargo.Where(p => p.Car_Situation == true).ToList();
         }
 
+        public List<Cargo> SelecionarTodosCargosEmpresa(int id)
+        {
+            return odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(id)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c).ToList();
+        }
+
         public List<Cargo> SelecionarCargoPorSetor(int IDSetor)
         {
             return odb.Cargo.Where(p => p.Car_Setor_Set_ID.Equals(IDSetor) && p.Car_Situation == true).ToList();

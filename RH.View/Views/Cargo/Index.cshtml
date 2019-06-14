@@ -32,10 +32,15 @@
                             {
                                 <p>Este cargo ocupa a posição de chefe do setor</p>
                             }
+
+                            else
+                            {
+                                <p>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
+                            }
                         </div>
                         <div class="col-md-6 text-white">
-                            <a class="btn btn-warning">Alterar Cargo</a>
-                            <a class="btn btn-danger">Excluir Cargo</a>
+                            <a class="btn btn-warning" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})">Alterar Cargo</a>
+                            <button class="btn btn-danger">Excluir Cargo</button>
                         </div>
                     </div>
 

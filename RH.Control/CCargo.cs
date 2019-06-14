@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +11,12 @@ namespace RH.Control
     public class CCargo
     {
         private RepositorieCargo _RepositorieCargo;
+        private RepositorieSetor _RepositorieSetor;
 
         public CCargo()
         {
             _RepositorieCargo = new RepositorieCargo();
+            _RepositorieSetor = new RepositorieSetor();
         }
 
         public List<Cargo> SelecionarTodosCargos()
@@ -50,6 +52,21 @@ namespace RH.Control
         public void ExcluirCargo(Cargo oCargo)
         {
             _RepositorieCargo.ExcluirCargo(oCargo);
+        }
+
+        public List<Cargo> SelecionarTodosCargosEmpresa(int id)
+        {
+            return _RepositorieCargo.SelecionarTodosCargosEmpresa(id);
+        }
+
+        public List<Setor> SelecionarTodosSetores()
+        {
+            return _RepositorieSetor.SelecionarTodosSetores();
+        }
+
+        public List<Setor> SelecionarSetoresEmpresa(int id)
+        {
+            return _RepositorieSetor.SelecionarSetorEmpresa(id);
         }
     }
 }

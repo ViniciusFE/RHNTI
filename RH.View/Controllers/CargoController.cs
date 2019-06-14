@@ -13,13 +13,10 @@ namespace RH.View.Controllers
     public class CargoController : Controller
     {
         private CCargo _Control;
-        private CSetor _Control_s;
-        private RHEntities x = Model.Helper.Connection.GetConnection();
 
         public CargoController()
         {
             _Control = new CCargo();
-            _Control_s = new CSetor();
         }
 
         // GET: Cargo
@@ -34,12 +31,13 @@ namespace RH.View.Controllers
         {
             Cargo x = new Cargo();
             x.Car_ID = 1;
-            x.Car_Nome = "Selecione este cargo caso ele seja chefe dele mesmo.";
-            List<Cargo> lc = _Control.SelecionarTodosCargos();
+            x.Car_Nome = "Este cargo é o chefe do setor";
+            int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
+            List<Cargo> lc = _Control.SelecionarTodosCargosEmpresa(IDEmpresa);
             lc.Add(x);
             
             ViewBag.Car_Cargo_Car_ID = new SelectList(lc, "Car_ID", "Car_Nome");
-            ViewBag.Car_Setor_Set_ID = new SelectList(_Control_s.SelecionarTodosSetores(), "Set_ID", "Set_Nome");
+            ViewBag.Car_Setor_Set_ID = new SelectList(_Control.SelecionarSetoresEmpresa(IDEmpresa), "Set_ID", "Set_Nome");
             return View();
         }
 
@@ -73,7 +71,8 @@ namespace RH.View.Controllers
         public ActionResult AlterarCargo(int id)
         {
             Cargo oCargo = _Control.SelecionarCargo(id);
-            ViewBag.Car_Setor_Set_ID = new SelectList(_Control_s.SelecionarTodosSetores(), "Set_ID", "Set_Nome",oCargo.Car_Setor_Set_ID);
+            int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
+            ViewBag.Car_Setor_Set_ID = new SelectList(_Control.SelecionarSetoresEmpresa(IDEmpresa), "Set_ID", "Set_Nome",oCargo.Car_Setor_Set_ID);
 
             //Cargo x = new Cargo();
             //x.Car_ID = oCargo.Car_ID;
