@@ -11,7 +11,6 @@ using RH.View.Filtro;
 namespace RH.View.Controllers
 {
     [Autorizacao]
-
     public class EmpresaController : Controller
     {
         private CEmpresa _Control;

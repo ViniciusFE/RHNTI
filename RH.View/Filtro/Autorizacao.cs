@@ -9,7 +9,7 @@ namespace RH.View.Filtro
 {
     public class Autorizacao:ActionFilterAttribute
     {
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             object usuario=filterContext.HttpContext.Session["User"];
 
