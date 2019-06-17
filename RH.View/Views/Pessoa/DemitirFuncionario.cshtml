@@ -1,0 +1,87 @@
+﻿@model IEnumerable<RH.Model.Pessoa>
+
+@{
+    ViewBag.Title = "DemitirFuncionario";
+}
+
+<h2>DemitirFuncionario</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_CTrabalho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_Salario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_Cidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_Endereco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_DataAdmissao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_Situation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pes_Imagem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo.Car_Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_CPF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_CTrabalho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_Salario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_Cidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_Endereco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_DataAdmissao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_Situation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pes_Imagem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo.Car_Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Pes_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Pes_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Pes_ID })
+        </td>
+    </tr>
+}
+
+</table>
