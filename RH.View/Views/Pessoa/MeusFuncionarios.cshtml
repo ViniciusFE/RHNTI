@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RH.Model.Pessoa>
+@model IEnumerable<RH.Model.Pessoa>
 
 @{
     ViewBag.Title = "MeusFuncionarios";
@@ -12,87 +12,42 @@
     }
 </style>
 
-<h2 class="text-center titulo-Lista">Funcionarios</h2>
-<p>
-    @Html.ActionLink("Criar Funcionario", "CadastrarFuncionario")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Nome")
-        </th>
-        <th>
-            @Html.DisplayName("CPF")
-        </th>
-        <th>
-            @Html.DisplayName("Carteira de Trabalho")
-        </th>
-        <th>
-            @Html.DisplayName("Salario")
-        </th>
-        <th>
-            @Html.DisplayName("Cidade")
-        </th>
-        <th>
-            @Html.DisplayName("Endereco")
-        </th>
-        <th>
-            @Html.DisplayName("Data de Admissão")
-        </th>
-        <th>
-            @Html.DisplayName("Situation")
-        </th>
-        <th>
-            @Html.DisplayName("Cargo")
-        </th>
-        <th>
-            @Html.DisplayName("Foto")
-        </th>
-        <th></th>
-    </tr>
+<br />
+<h2 class="text-center titulo-Lista">Meus Funcionarios</h2>
+<br />
 
+<div class="container">
+    <div class="row">
+        <div class="card-body">
+            @foreach (var x in Model)
+            {
+                <div class="col-md-4">
+                    <img src="@Url.Action("GetImagemFuncionario",new { id=x.Pes_ID})"/>
+                </div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_CTrabalho)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_Salario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_DataAdmissao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_Situation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pes_Cargo_Car_ID)
-            </td>
-            <td>
+                <div class="col-md-5">
+                    <h4>Nome: @x.Pes_Nome</h4>
+                    @foreach(var y in ViewBag.Cargos)
+                    {
+                        if(y.Car_ID==x.Pes_Cargo_Car_ID)
+                        {
+                            <h4>@y.Car_Nome</h4>
+                        }
+                    }
+                    <h4>@x.Pes_DataAdmissao</h4>
+                    <h4>@x.Pes_Salario</h4>
+                    <h4>@x.Pes_CTrabalho</h4>
+                    <h4>@x.Pes_CPF</h4>
+                    <h4>@x.Pes_Cidade</h4>
+                    <h4>@x.Pes_Endereco</h4>
+                </div>
 
-                <img src='@Url.Action("GetImagemFuncionario","Pessoa",new {id=item.Pes_ID })' />
-
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "AlterarFuncionario", new { id = item.Pes_ID })
-                @Html.ActionLink("Details", "Details", new { id = item.Pes_ID })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Pes_ID })
-            </td>
-        </tr>
-    }
-
-</table>
+                <div class="col-md-3">
+                    <button class="btn btn-warning">Alterar</button>
+                    <button class="btn btn-danger">Demitir</button>
+                </div>
+            }
+        </div>
+        
+    </div>
+</div>
