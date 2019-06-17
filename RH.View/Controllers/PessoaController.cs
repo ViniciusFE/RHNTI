@@ -167,6 +167,14 @@ namespace RH.View.Controllers
             return View(Funcionarios);
         }
 
+        public ActionResult Demitir(int id)
+        {
+            Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
+            aPessoa.Pes_Situation = false;
+            DbPessoa.AlterarFuncionario(aPessoa);
+            return Json("O funcionário foi demitido com sucesso!");
+        }
+
     }
 
 }
