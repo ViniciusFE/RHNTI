@@ -42,6 +42,22 @@ namespace RH.Model.Repositories
             Db.SaveChanges();
         }
 
+        public bool AutenticaCargo(int cargo)
+        {
+            //var pes = Db.Pessoa.SqlQuery("select count(Pes_Cargo_Car_ID) from Pessoa where Pes_Cargo_Car_ID = " + cargo) ;
+            //int pes= Db.Pessoa.Where(i => i.Pes_Cargo_Car_ID==cargo).Count();
+            int pes = Db.Pessoa.SqlQuery("select * from Pessoa where Pes_Cargo_Car_ID =" + cargo).Count();
+            var pes2 = Db.Pessoa.Where(i => i.Pes_Cargo_Car_ID == cargo).FirstOrDefault();
+            if (pes == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public List<Pessoa> SelcionarTodosMeusFuncionarios(int id)
         {
             return Db.Pessoa.SqlQuery("select * from Pessoa inner join Cargo on Pes_Cargo_Car_ID = Car_ID where Car_Cargo_Car_ID = " + id + " and Car_Situation = 1 and Pes_Situation = 1").ToList();

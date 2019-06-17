@@ -31,14 +31,11 @@ namespace RH.View.Controllers
         {
             try
             {
-
                 if (Imagem != null)
                 {
-
                     byte[] Arquivo = new byte[Imagem.ContentLength];
                     Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
                     oFuncionario.Pes_Imagem = Arquivo;
-
                 }
                 else
                 {
@@ -57,14 +54,9 @@ namespace RH.View.Controllers
                 }
                 else
                 {
-
-                    DbPessoa.CadastrarFuncionario(oFuncionario);
-
+                    DbPessoa.AlterarFuncionario(oFuncionario);
                     return RedirectToAction("MeusFuncionarios");
-
                 }
-
-
 
             }
             catch (DbEntityValidationException e)
@@ -76,7 +68,7 @@ namespace RH.View.Controllers
                     foreach (var ve in eve.ValidationErrors)
                     {
                         Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
+                        ve.PropertyName, ve.ErrorMessage);
                     }
                 }
                 throw;

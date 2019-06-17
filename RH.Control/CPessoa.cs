@@ -39,6 +39,11 @@ namespace RH.Control
             RepFuncionario.DeletarFuncionario(oFuncionario);
         }
 
+        public bool AutenticaCargo(int cargo)
+        {
+            return RepFuncionario.AutenticaCargo(cargo);
+        }
+
         public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
         {
             return RepFuncionario.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
@@ -53,5 +58,6 @@ namespace RH.Control
         {
             return _RepositorieCargo.SelecionarTodosCargosEmpresa(IDEmpresa);
         }
+
     }
 }
