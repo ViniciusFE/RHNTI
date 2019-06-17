@@ -70,7 +70,7 @@ namespace RH.Model.Repositories
 
         public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
         {
-            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = 1 and p.Pes_Situation = 1 and c.Car_Situation=1 and s.Set_Situation=1").ToList();
+            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = 1 and p.Pes_Situation = "+IDEmpresa+" and c.Car_Situation=1 and s.Set_Situation=1").ToList();
         }
     }
 }
