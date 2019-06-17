@@ -12,55 +12,74 @@
         margin-left: 16px;
         border-radius: 13%;
     }
+
+    #Carregando {
+        align-content: center;
+    }
 </style>
 
 <br />
 <h2 class="text-center titulo-Lista">Meus Funcionarios</h2>
 <br />
 
-<div class="container">
-    <div class="row justify-content-center">
-        @foreach (var x in Model)
-        {
-            <div class="card" style="width: 100rem;">
-                <div class="card-header">
-                    <h4>Nome: @x.Pes_Nome</h4>
-                </div>
+<a class="btn btn-success" href="@Url.Action("CadastrarFuncionario","Pessoa")">Cadastrar Funcionário</a>
+<br />
+<hr />
 
-                <div class="card-body row">
-                    <div class="col-md-4">
-                        <img src="@Url.Action("GetImagemFuncionario", new { id = x.Pes_ID })" class="imagem-funcionario"/>
+@if (Model.Count() > 0)
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            @foreach (var x in Model)
+            {
+                <div class="card" style="width: 100rem;" id="card-@x.Pes_ID">
+                    <div class="card-header">
+                        <h4>Nome: @x.Pes_Nome</h4>
                     </div>
 
-                    <div class="col-md-5">
-                        @foreach (var y in ViewBag.Cargos)
-                        {
-                            if (y.Car_ID == x.Pes_Cargo_Car_ID)
+                    <div class="card-body row">
+                        <div class="col-md-4">
+                            <img src="@Url.Action("GetImagemFuncionario", new { id = x.Pes_ID })" class="imagem-funcionario" />
+                        </div>
+
+                        <div class="col-md-5">
+                            @foreach (var y in ViewBag.Cargos)
                             {
-                                <h4>Cargo de ocupação: @y.Car_Nome</h4>
+                                if (y.Car_ID == x.Pes_Cargo_Car_ID)
+                                {
+                                    <h4>Cargo de ocupação: @y.Car_Nome</h4>
+                                }
                             }
-                        }
 
-                        <h4>Data de Admissão: @x.Pes_DataAdmissao</h4>
-                        <h4>Salário: @x.Pes_Salario</h4>
-                        <h4>Carteira de Trabalho: @x.Pes_CTrabalho</h4>
-                        <h4>CPF: @x.Pes_CPF</h4>
-                        <h4>Cidade: @x.Pes_Cidade</h4>
-                        <h4>Endereço: @x.Pes_Endereco</h4>
-                    </div>
+                            <h4>Data de Admissão: @x.Pes_DataAdmissao</h4>
+                            <h4>Salário: @x.Pes_Salario</h4>
+                            <h4>Carteira de Trabalho: @x.Pes_CTrabalho</h4>
+                            <h4>CPF: @x.Pes_CPF</h4>
+                            <h4>Cidade: @x.Pes_Cidade</h4>
+                            <h4>Endereço: @x.Pes_Endereco</h4>
+                        </div>
 
-                    <div class="col-md-3">
-                        <button class="btn btn-warning">Alterar</button>
-                        <button class="btn btn-danger" data-id="@x.Pes_ID" id="demitir">Demitir</button>
+                        <div class="col-md-3">
+                            <button class="btn btn-warning text-white">Alterar</button>
+                            <button class="btn btn-danger demitir" data-id="@x.Pes_ID">Demitir</button>
+                        </div>
+
                     </div>
-                    
                 </div>
-            </div>
-            <br />
-            <br />
-        }
+                <br />
+                <br />
+            }
+        </div>
     </div>
-</div>
+}
+
+else
+{
+    <h1 class="text-center">Sua empresa ainda não possui nenhum funcionário cadastrado...</h1>
+}
+
+<hr />
+
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalDemissao">
     <div class="modal-dialog" role="document">
@@ -72,11 +91,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Tem certeza que deseja demitir o funcionário?</p>
+                <p id="texto" class="text-center">Tem certeza que deseja demitir o funcionário?</p>
+                <div style="display:none;" id="Carregando" align="center">
+                    <img src="~/Imagem/833.gif" class="align-items-center" />
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="DemitirFuncionario">Sim</button>
-                <button type="button" class="btn btn-danger">Não</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="BtnNao">Não</button>
             </div>
         </div>
     </div>
@@ -87,17 +109,31 @@
     $(document).ready(function () {
         var IDFuncionario;
 
-        $("#demitir").click(function () {
+        $(".demitir").click(function () {
             IDFuncionario = $(this).attr("data-id");
+            $("#texto").css("display", "block");
+            $("#Carregando").css("display", "none");
+            $("#DemitirFuncionario").removeAttr("disabled");
+            $(".modal-body").html("<p id='texto'>Tem certeza que deseja demitir o funcionário?</p>");
+            $("#BtnNao").removeAttr("disabled");
+            $("#ModalDemissao").modal('show');
         });
 
         $("#DemitirFuncionario").click(function () {
+            $(this).attr("disabled", "disabled");
+            $("#BtnNao").attr("disabled","disabled");
             var url = "@Url.Action("Demitir","Pessoa")";
-            $.post(url, { id=IDFuncionario }, RespostaServidor);
+            $("#texto").css("display", "none");
+            $("#Carregando").css("display", "block");
+            $.post(url, { id: IDFuncionario }, RespostaServidor);
         });
 
         function RespostaServidor(retorno) {
-           
+            $("#texto").css("display", "block");
+            $("#Carregando").css("display", "none");
+            $(".modal-body").html("<p id='texto' class='text-center'>" + retorno + "</p>");
+            $("#DemitirFuncionario").attr("disabled", "disabled");
+            $("#card-" + IDFuncionario + "").slideUp("slow");
         }
     });
     </script>

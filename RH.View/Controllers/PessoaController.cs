@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace RH.View.Controllers
 {
-    [AutorizacaoEmpresa]
+    [Autorizacao]
     public class PessoaController : Controller
     {
         private CPessoa DbPessoa = new CPessoa();
@@ -27,6 +27,7 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizacaoEmpresa]
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
             var cargo = oFuncionario.Pes_Cargo_Car_ID;
@@ -88,6 +89,7 @@ namespace RH.View.Controllers
 
         //edição dados do Funcionario
 
+        [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(int id)
         {
             var aPessoa = DbPessoa.SelecionarFuncionario(id);
@@ -97,6 +99,7 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
             try
@@ -156,6 +159,7 @@ namespace RH.View.Controllers
             return File(aPessoa.Pes_Imagem, aPessoa.Pes_Imagem.GetType().ToString());
         }
 
+        [AutorizacaoEmpresa]
         public ActionResult MeusFuncionarios()
         {
             int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
