@@ -30,7 +30,7 @@ namespace RH.View.Controllers
         public ActionResult CadastrarCargo()
         {
             Cargo x = new Cargo();
-            x.Car_ID = 1;
+            x.Car_ID = -42;
             x.Car_Nome = "Este cargo é o chefe do setor";
             int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
             List<Cargo> lc = _Control.SelecionarTodosCargosEmpresa(IDEmpresa);
@@ -47,7 +47,7 @@ namespace RH.View.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (oCargo.Car_Cargo_Car_ID == 1)
+                if (oCargo.Car_Cargo_Car_ID == -42)
                 {                    
                     oCargo.Car_Situation = true;
                     oCargo.Car_DataCadastro = DateTime.Now;
