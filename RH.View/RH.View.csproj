@@ -182,6 +182,7 @@
     <Content Include="gulpFile.js" />
     <Content Include="Imagem\1486504363-building-business-company-house-home-real-estate-state_81296.png" />
     <Content Include="Imagem\805.gif" />
+    <Content Include="Imagem\833.gif" />
     <Content Include="package.json" />
     <Content Include="Content\sass\Login.scss" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -270,7 +271,6 @@
     <Content Include="Views\Aluno\CadasrarAluno.cshtml" />
     <Content Include="Views\Pessoa\AlterarFuncionario.cshtml" />
     <Content Include="Views\Professor\CadastrarProfessor.cshtml" />
-    <Content Include="Views\Pessoa\Funcionarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
