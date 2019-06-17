@@ -29,49 +29,59 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
-            try
-            {
-                if (Imagem != null)
-                {
-                    byte[] Arquivo = new byte[Imagem.ContentLength];
-                    Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
-                    oFuncionario.Pes_Imagem = Arquivo;
-                }
-                else
-                {
-                    ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionari");
-                    return View();
-                }
-                if (oFuncionario.Pes_Nome == null)
-                {
-                    ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionari");
-                    return View();
-                }
-                if (oFuncionario.Pes_CPF == null)
-                {
-                    ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionari");
-                    return View();
-                }
-                else
-                {
-                    DbPessoa.AlterarFuncionario(oFuncionario);
-                    return RedirectToAction("MeusFuncionarios");
-                }
+            var cargo = oFuncionario.Pes_Cargo_Car_ID;
 
-            }
-            catch (DbEntityValidationException e)
+            if (DbPessoa.AutenticaCargo(cargo) == true)
             {
-                foreach (var eve in e.EntityValidationErrors)
+                ModelState.AddModelError("", "Este Cargo ja Pertence a Outro Funcionario");
+                return View();
+            }
+            else
+            {
+                try
                 {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
+                    if (Imagem != null)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                        ve.PropertyName, ve.ErrorMessage);
+                        byte[] Arquivo = new byte[Imagem.ContentLength];
+                        Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
+                        oFuncionario.Pes_Imagem = Arquivo;
                     }
+                    else
+                    {
+                        ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionari");
+                        return View();
+                    }
+                    if (oFuncionario.Pes_Nome == null)
+                    {
+                        ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionari");
+                        return View();
+                    }
+                    if (oFuncionario.Pes_CPF == null)
+                    {
+                        ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionari");
+                        return View();
+                    }
+                    else
+                    {
+                        DbPessoa.CadastrarFuncionario(oFuncionario);
+                        return RedirectToAction("MeusFuncionarios");
+                    }
+
                 }
-                throw;
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
             }
 
         }
