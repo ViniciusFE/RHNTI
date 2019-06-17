@@ -1,19 +1,48 @@
 ﻿@model IEnumerable<RH.Model.Pessoa>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <style>
     #TextBox {
         border: 2px solid #456879;
         border-radius: 10px;
-        height: 200px;
+        height: auto;
         width: 550px;
         resize: none;
     }
+
+    span {
+        text-decoration: none;
+        font-size: 90%;
+        font-weight: normal;
+    }
+
+    .imagem-funcionario {
+        width: 180px;
+        height: 220px;
+        margin-left: 16px;
+        border-radius: 13%;
+    }
+
+    .dados-funcionario {
+        padding-top: 66px;
+    }
+
+    button.btn.btn-outline-success.Abrir.Funcionario-avaliacao {
+        border-radius: 10px;
+        margin-top: 80px;
+        color: #944848;
+        border-color: #944848;
+    }
+
+        button.btn.btn-outline-success.Abrir.Funcionario-avaliacao:hover {
+            background-color: lightgray;
+            color: #944848;
+        }
 </style>
 
 <br />
@@ -52,8 +81,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar Avaliação</button>
-                <button type="button" class="btn btn-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar Avaliação</button>
+                <button type="button" class="btn btn-outline-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
             </div>
         </div>
     </div>
@@ -98,7 +127,7 @@
                 $(this).attr("disabled", "disabled");
                 $("#Carregando").css("display", "inline");
             });
-            
+
             function RespostaAvaliacao(resposta) {
                 $("#Carregando").css("display", "none");
                 $("modal-body").html("<h4>" + resposta + "</h4>");
@@ -115,14 +144,14 @@
                     "<div class= 'card-body'>" +
                     "<div class='row'>"+
                         "<div class='col-4'>" +
-                        "<img src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + Funcionarios[x, 2] + "' class='rounded-circle'/>" +
+                        "<img class='imagem-funcionario' src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + Funcionarios[x, 2] + "' class=''/>" +
                     "</div>"+
-                        "<div class='col-6'>" +
-                        "<h4>Nome do funcionário: " + Funcionarios[x, 0] + "</h4>" +
-                        "<h4>Cargo ocupado: " + Funcionarios[x, 1] + "</h4>" +
+                        "<div class='col-6 dados-funcionario'>" +
+                        "<h4>Nome do funcionário: <span>" + Funcionarios[x, 0] + "</span></h4>" +
+                        "<h4>Cargo ocupado: <span> " + Funcionarios[x, 1] + "</span></h4>" +
                         "</div>" +
                         "<div class='col-2'>" +
-                        "<button onclick='Abrir("+Funcionarios[x,2]+")' class='btn btn-success Abrir'><spam class='fa fa-star'></spam> Dar Avaliacao</button>"+
+                        "<button onclick='Abrir("+Funcionarios[x,2]+")' class='btn btn-outline-success Abrir Funcionario-avaliacao'><spam class='fa fa-star'></spam> Dar Avaliacao</button>"+
                         "</div>"+
             "</div >"+
                     "</div >" +
@@ -132,7 +161,7 @@
 
             }
 
-          
+
 
         });
 
@@ -143,3 +172,4 @@
 
     </script>
 }
+
