@@ -51,5 +51,10 @@ namespace RH.Model.Repositories
         {
             return Db.Pessoa.SqlQuery("select * from Pessoa inner join Cargo on Pessoa.Pes_Cargo_Car_ID = Car_ID where Car_Cargo_Car_ID is null and Car_Situation = 1 and Pes_Situation = 1").ToList();
         }
+
+        public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
+        {
+            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = 1 and p.Pes_Situation = 1 and c.Car_Situation=1 and s.Set_Situation=1").ToList();
+        }
     }
 }

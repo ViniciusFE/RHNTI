@@ -19,12 +19,6 @@ namespace RH.View.Controllers
         {
             return View();
         }
-        //listagem de Funcionario
-        public ActionResult MeusFuncionarios()
-        {
-            List<Pessoa> MeusFuncionarios = DbPessoa.SelecionarTodosFuncionario();
-            return View(MeusFuncionarios);
-        }
         //cadastro de Funcionario
         public ActionResult CadastrarFuncionario()
         {
@@ -158,6 +152,17 @@ namespace RH.View.Controllers
         {
             var aPessoa = DbPessoa.SelecionarFuncionario(id);
             return File(aPessoa.Pes_Imagem, aPessoa.Pes_Imagem.GetType().ToString());
+        }
+
+        public ActionResult MeusFuncionarios()
+        {
+            int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
+            List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
+            List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
+            List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
+            ViewBag.Setores = Setores;
+            ViewBag.Cargos = Cargos;
+            return View(Funcionarios);
         }
 
     }

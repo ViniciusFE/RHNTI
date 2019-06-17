@@ -270,7 +270,7 @@
     <Content Include="Views\Aluno\CadasrarAluno.cshtml" />
     <Content Include="Views\Pessoa\AlterarFuncionario.cshtml" />
     <Content Include="Views\Professor\CadastrarProfessor.cshtml" />
-    <Content Include="Views\Pessoa\DemitirFuncionario.cshtml" />
+    <Content Include="Views\Pessoa\Funcionarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
