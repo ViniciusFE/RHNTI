@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace RH.View.Controllers
 {
-    [AutorizacaoEmpresa]
+    [Autorizacao]
     public class PessoaController : Controller
     {
         private CPessoa DbPessoa = new CPessoa();
@@ -19,12 +19,6 @@ namespace RH.View.Controllers
         {
             return View();
         }
-        //listagem de Funcionario
-        public ActionResult MeusFuncionarios()
-        {
-            List<Pessoa> MeusFuncionarios = DbPessoa.SelecionarTodosFuncionario();
-            return View(MeusFuncionarios);
-        }
         //cadastro de Funcionario
         public ActionResult CadastrarFuncionario()
         {
@@ -33,65 +27,69 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizacaoEmpresa]
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
-            try
+            var cargo = oFuncionario.Pes_Cargo_Car_ID;
+
+            if (DbPessoa.AutenticaCargo(cargo) == true)
             {
-
-                if (Imagem != null)
-                {
-
-                    byte[] Arquivo = new byte[Imagem.ContentLength];
-                    Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
-                    oFuncionario.Pes_Imagem = Arquivo;
-
-                }
-                else
-                {
-                    ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionari");
-                    return View();
-                }
-                if (oFuncionario.Pes_Nome == null)
-                {
-                    ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionari");
-                    return View();
-                }
-                if (oFuncionario.Pes_CPF == null)
-                {
-                    ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionari");
-                    return View();
-                }
-                else
-                {
-
-                    DbPessoa.CadastrarFuncionario(oFuncionario);
-
-                    return RedirectToAction("MeusFuncionarios");
-
-                }
-
-
-
+                ModelState.AddModelError("", "Este Cargo ja Pertence a Outro Funcionario");
+                return View();
             }
-            catch (DbEntityValidationException e)
+            else
             {
-                foreach (var eve in e.EntityValidationErrors)
+                try
                 {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
+                    if (Imagem != null)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
+                        byte[] Arquivo = new byte[Imagem.ContentLength];
+                        Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
+                        oFuncionario.Pes_Imagem = Arquivo;
                     }
+                    else
+                    {
+                        ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionari");
+                        return View();
+                    }
+                    if (oFuncionario.Pes_Nome == null)
+                    {
+                        ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionari");
+                        return View();
+                    }
+                    if (oFuncionario.Pes_CPF == null)
+                    {
+                        ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionari");
+                        return View();
+                    }
+                    else
+                    {
+                        DbPessoa.CadastrarFuncionario(oFuncionario);
+                        return RedirectToAction("MeusFuncionarios");
+                    }
+
                 }
-                throw;
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
             }
 
         }
 
         //edição dados do Funcionario
 
+        [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(int id)
         {
             var aPessoa = DbPessoa.SelecionarFuncionario(id);
@@ -101,6 +99,7 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
             try
@@ -158,6 +157,26 @@ namespace RH.View.Controllers
         {
             var aPessoa = DbPessoa.SelecionarFuncionario(id);
             return File(aPessoa.Pes_Imagem, aPessoa.Pes_Imagem.GetType().ToString());
+        }
+
+        [AutorizacaoEmpresa]
+        public ActionResult MeusFuncionarios()
+        {
+            int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
+            List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
+            List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
+            List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
+            ViewBag.Setores = Setores;
+            ViewBag.Cargos = Cargos;
+            return View(Funcionarios);
+        }
+
+        public ActionResult Demitir(int id)
+        {
+            Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
+            aPessoa.Pes_Situation = false;
+            DbPessoa.AlterarFuncionario(aPessoa);
+            return Json("O funcionário foi demitido com sucesso!");
         }
 
     }

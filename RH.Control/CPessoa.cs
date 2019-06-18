@@ -11,6 +11,8 @@ namespace RH.Control
     public class CPessoa
     {
         private RepositoriePessoa RepFuncionario = new RepositoriePessoa();
+        private RepositorieSetor _RepositorieSetor = new RepositorieSetor();
+        private RepositorieCargo _RepositorieCargo = new RepositorieCargo();
 
         public void CadastrarFuncionario(Pessoa oFuncionario)
         {
@@ -36,5 +38,26 @@ namespace RH.Control
         {
             RepFuncionario.DeletarFuncionario(oFuncionario);
         }
+
+        public bool AutenticaCargo(int cargo)
+        {
+            return RepFuncionario.AutenticaCargo(cargo);
+        }
+
+        public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
+        {
+            return RepFuncionario.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
+        }
+
+        public List<Setor> SelecionarTodosSetores(int IDEmpresa)
+        {
+            return _RepositorieSetor.SelecionarSetorEmpresa(IDEmpresa);
+        }
+
+        public List<Cargo> SelecionarCargosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieCargo.SelecionarTodosCargosEmpresa(IDEmpresa);
+        }
+
     }
 }
