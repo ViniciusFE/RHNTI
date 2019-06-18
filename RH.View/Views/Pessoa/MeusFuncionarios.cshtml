@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <button class="btn btn-warning text-white">Alterar</button>
+                            <a class="btn btn-warning text-white" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})">Alterar</a>
                             <button class="btn btn-danger demitir" data-id="@x.Pes_ID">Demitir</button>
                         </div>
 
@@ -91,10 +91,6 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                <p id="texto" class="text-center">Tem certeza que deseja demitir o funcionário?</p>
-                <div style="display:none;" id="Carregando" align="center">
-                    <img src="~/Imagem/833.gif" class="align-items-center" />
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="DemitirFuncionario">Sim</button>
@@ -108,24 +104,39 @@ else
     <script>
     $(document).ready(function () {
         var IDFuncionario;
+        var motivo;
+
+        $(".motivodemissao").prop("checked", true);
 
         $(".demitir").click(function () {
             IDFuncionario = $(this).attr("data-id");
             $("#texto").css("display", "block");
             $("#Carregando").css("display", "none");
-            $("#DemitirFuncionario").removeAttr("disabled");
-            $(".modal-body").html("<p id='texto'>Tem certeza que deseja demitir o funcionário?</p>");
+            $(".modal-body").html("<h5 id='texto' class='text-center'>Tem certeza que deseja demitir o funcionário?</h5>"+
+                "<p class='text-center'>Por favor marque o motivo da demissão do funcionário.</p>"+
+                "<div class='text-center'>"+
+                    "<label><input type='radio' name='Motivo' value='Pediu demissao' id='pediudemissao' checked/>Pediu demissão</label>"+
+                    "<label><input type='radio' name='Motivo' value='Foi demitido' id='demitido'/>Foi demitido</label>"+
+                "</div>");
             $("#BtnNao").removeAttr("disabled");
             $("#ModalDemissao").modal('show');
         });
 
         $("#DemitirFuncionario").click(function () {
+            if ($("#pediudemissao").prop("checked")) {
+                motivo = $("#pediudemissao").val();
+            }
+
+            else if ($("#demitido").prop("checked")) {
+                motivo = $("#demitido").val();
+            }
+
             $(this).attr("disabled", "disabled");
             $("#BtnNao").attr("disabled","disabled");
             var url = "@Url.Action("Demitir","Pessoa")";
             $("#texto").css("display", "none");
             $("#Carregando").css("display", "block");
-            $.post(url, { id: IDFuncionario }, RespostaServidor);
+            $.post(url, { id: IDFuncionario, Motivo: motivo }, RespostaServidor);
         });
 
         function RespostaServidor(retorno) {

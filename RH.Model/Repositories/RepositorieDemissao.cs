@@ -25,5 +25,17 @@ namespace RH.Model.Repositories
             odb.Entry(aDemissao).State = System.Data.Entity.EntityState.Added;
             odb.SaveChanges();
         }
+
+        public void AlterarDemissao(Demissao aDemissao)
+        {
+            odb.Entry(aDemissao).State = System.Data.Entity.EntityState.Modified;
+            odb.SaveChanges();
+        }
+
+        public Demissao SelecionarDemissao(int id)
+        {
+            return odb.Demissao.Where(p => p.Dem_ID.Equals(id)).FirstOrDefault();
+        }
+
     }
 }

@@ -171,11 +171,32 @@ namespace RH.View.Controllers
             return View(Funcionarios);
         }
 
-        public ActionResult Demitir(int id)
+        public ActionResult Demitir(int id,string Motivo)
         {
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
             aPessoa.Pes_Situation = false;
             DbPessoa.AlterarFuncionario(aPessoa);
+
+            Demissao aDemissao = new Demissao()
+            {
+                Dem_Data = DateTime.Now,
+                Dem_Motivo = Motivo,
+                Dem_Pessoa_Pes_ID = id,
+                Dem_Situation = true
+            };
+
+            if(Motivo=="Pediu demissão")
+            {
+                aDemissao.Dem_Salario = aPessoa.Pes_Salario * 2;
+            }
+
+            else
+            {
+                aDemissao.Dem_Salario = aPessoa.Pes_Salario - (aPessoa.Pes_Salario / 2);
+            }
+
+            DbPessoa.CadastrarDemissao(aDemissao);
+
             return Json("O funcionário foi demitido com sucesso!");
         }
 
