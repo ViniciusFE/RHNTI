@@ -20,22 +20,30 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">@x.Car_Nome</div>
+                    <div class="card-header">Nome: @x.Car_Nome</div>
                 </div>
 
                 <div class="card-body bg-light">
                     <div class="row">
                         <div class="col-md-6 text-center">
-                            <p>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
-                            <p>@x.Car_DataCadastro</p>
-                            @if (x.Car_Cargo_Car_ID == null)
+                            <p>Setor do Cargo: @Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
+                            <p>Data de Cadastro: @x.Car_DataCadastro</p>
+                            @if (x.Car_Cargo_Car_ID == x.Car_ID)
                             {
                                 <p>Este cargo ocupa a posição de chefe do setor</p>
                             }
 
                             else
                             {
-                                <p>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
+                                foreach (var y in ViewBag.CargosChefe)
+                                {
+                                    if (x.Car_Cargo_Car_ID == y.Car_ID)
+                                    {
+                                        <p>Este cargo responde ao cargo de @y.Car_Nome</p>
+                                        break;
+                                    }
+
+                                }
                             }
                         </div>
                         <div class="col-md-6 text-white">

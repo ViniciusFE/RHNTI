@@ -22,7 +22,9 @@ namespace RH.View.Controllers
         // GET: Cargo
         public ActionResult Index()
         {
-            List<Cargo> _cargos = _Control.SelecionarTodosCargos();
+            List<Cargo> _cargos = _Control.SelecionarTodosCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            List<Cargo> CargosChefe = _Control.CargosChefeEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.CargosChefe = CargosChefe;
             return View(_cargos);
         }
 

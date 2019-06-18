@@ -4,7 +4,7 @@
     ViewBag.Title = "EditarEmpresa";
 }
 
-<h2>EditarEmpresa</h2>
+<h2 class="text-center">Editar Empresa</h2>
 
 
 @using (Html.BeginForm(Html.BeginForm("EditarEmpresa", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" })))
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Empresa</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Emp_ID)
