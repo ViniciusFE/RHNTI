@@ -28,7 +28,7 @@
                         <div class="col-md-6 text-center">
                             <p>Setor do Cargo: @Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
                             <p>Data de Cadastro: @x.Car_DataCadastro</p>
-                            @if (x.Car_Cargo_Car_ID == x.Car_ID)
+                            @if (x.Car_Cargo_Car_ID == null)
                             {
                                 <p>Este cargo ocupa a posição de chefe do setor</p>
                             }
