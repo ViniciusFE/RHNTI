@@ -1,4 +1,4 @@
-@model IEnumerable<RH.Model.Pessoa>
+﻿@model IEnumerable<RH.Model.Pessoa>
 
 @{
     ViewBag.Title = "MeusFuncionarios";
@@ -15,6 +15,9 @@
 
     #Carregando {
         align-content: center;
+    }
+    .modal-backdrop.show {
+        height: 100%;
     }
 </style>
 
@@ -106,11 +109,36 @@ else
 
 @section Scripts{
     <script>
+
+        window.addEventListener('click', function (e) {
+            var mouse = {
+                page: {
+                    x: e.pageX,
+                    y: e.pageY
+                },
+                client: {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+            }
+            console.log(mouse.page.y);
+
+            if (document.querySelector("#ModalDemissao").style.display == "none") {
+                document.querySelector(".modal-content").style.marginTop = (mouse.page.y - 100) + "px";
+
+            }
+
+        });
+
+
     $(document).ready(function () {
         var IDFuncionario;
+            
 
         $(".demitir").click(function () {
             IDFuncionario = $(this).attr("data-id");
+            var altura = $(document).height() - (300 * IDFuncionario) + 'px';
+
             $("#texto").css("display", "block");
             $("#Carregando").css("display", "none");
             $("#DemitirFuncionario").removeAttr("disabled");
