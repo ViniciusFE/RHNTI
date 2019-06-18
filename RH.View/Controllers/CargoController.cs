@@ -76,13 +76,31 @@ namespace RH.View.Controllers
             int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
             ViewBag.Car_Setor_Set_ID = new SelectList(_Control.SelecionarSetoresEmpresa(IDEmpresa), "Set_ID", "Set_Nome",oCargo.Car_Setor_Set_ID);
 
-            //Cargo x = new Cargo();
-            //x.Car_ID = oCargo.Car_ID;
-            //x.Car_Nome = "Selecione este cargo caso ele seja chefe dele mesmo.";
-            List<Cargo> lc = _Control.SelecionarTodosCargos();
-            //lc.Add(x);
+            //Remove o cargo dele da lista, pois um cargo não pode ter como chefe o próprio cargo.
+            List<Cargo> lc = _Control.SelecionarTodosCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            Cargo cargo = _Control.SelecionarCargo(id);
+            lc.Remove(cargo);
 
-            ViewBag.Car_Cargo_Car_ID = new SelectList(lc, "Car_ID", "Car_Nome",oCargo.Car_Cargo_Car_ID);
+            //Adiciona a opção de chefe na lista
+            Cargo x = new Cargo();
+            x.Car_ID = -42;
+            x.Car_Nome = "Este cargo é o chefe do setor";
+            lc.Add(x);
+
+            //Ordena por ordem de ID
+            lc.OrderBy(p => p.Car_ID);
+
+            //Se o cargo não possuir um chefe ele coloca a opção de chefe se não a quem esse cargo responde
+            if(oCargo==null)
+            {
+                ViewBag.Car_Cargo_Car_ID = new SelectList(lc, "Car_ID", "Car_Nome", -42);
+            }
+
+            else
+            {
+                ViewBag.Car_Cargo_Car_ID = new SelectList(lc, "Car_ID", "Car_Nome", oCargo.Car_Cargo_Car_ID);
+            }
+            
 
             return View(oCargo);
         }
@@ -96,7 +114,12 @@ namespace RH.View.Controllers
                 Cargo x = _Control.SelecionarCargo(oCargo.Car_ID);
                 x.Car_Nome = oCargo.Car_Nome;
                 x.Car_Setor_Set_ID = oCargo.Car_Setor_Set_ID;
-                x.Car_Cargo_Car_ID = oCargo.Car_Cargo_Car_ID;
+
+                if(oCargo.Car_ID==-42)
+                {
+                    x.Car_Cargo_Car_ID = null;
+                }
+                
                 _Control.AlterarCargo(x);                
             }
             return RedirectToAction("Index");
