@@ -13,6 +13,7 @@ namespace RH.Control
         private RepositoriePessoa RepFuncionario = new RepositoriePessoa();
         private RepositorieSetor _RepositorieSetor = new RepositorieSetor();
         private RepositorieCargo _RepositorieCargo = new RepositorieCargo();
+        private RepositorieDemissao _RepositorieDemissao = new RepositorieDemissao();
 
         public void CadastrarFuncionario(Pessoa oFuncionario)
         {
@@ -57,6 +58,11 @@ namespace RH.Control
         public List<Cargo> SelecionarCargosEmpresa(int IDEmpresa)
         {
             return _RepositorieCargo.SelecionarTodosCargosEmpresa(IDEmpresa);
+        }
+
+        public void CadastrarDemissao(Demissao aDemissao)
+        {
+            _RepositorieDemissao.CadastrarDemissao(aDemissao);
         }
 
     }

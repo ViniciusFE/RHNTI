@@ -34,7 +34,7 @@ namespace RH.View.Controllers
 
             if (DbPessoa.AutenticaCargo(cargo) == true)
             {
-                ModelState.AddModelError("", "Este Cargo ja Pertence a Outro Funcionario");
+                ModelState.AddModelError("", "Este Cargo ja Pertence a Outro Funcionário");
                 return View();
             }
             else
@@ -49,21 +49,22 @@ namespace RH.View.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionari");
+                        ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionário");
                         return View();
                     }
                     if (oFuncionario.Pes_Nome == null)
                     {
-                        ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionari");
+                        ModelState.AddModelError("Nome", "Por favor digite o nome o Funcionário");
                         return View();
                     }
                     if (oFuncionario.Pes_CPF == null)
                     {
-                        ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionari");
+                        ModelState.AddModelError("CPF", "Por favor digite o CPF do Funciónario");
                         return View();
                     }
                     else
                     {
+                        oFuncionario.Pes_Situation = true;
                         DbPessoa.CadastrarFuncionario(oFuncionario);
                         return RedirectToAction("MeusFuncionarios");
                     }
@@ -114,17 +115,17 @@ namespace RH.View.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionari");
+                    ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionário");
                     return View();
                 }
                 if (oFuncionario.Pes_Nome == null)
                 {
-                    ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionari");
+                    ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionário");
                     return View();
                 }
                 if (oFuncionario.Pes_CPF == null)
                 {
-                    ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionari");
+                    ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionário");
                     return View();
                 }
                 else
@@ -171,11 +172,32 @@ namespace RH.View.Controllers
             return View(Funcionarios);
         }
 
-        public ActionResult Demitir(int id)
+        public ActionResult Demitir(int id,string Motivo)
         {
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
             aPessoa.Pes_Situation = false;
             DbPessoa.AlterarFuncionario(aPessoa);
+
+            Demissao aDemissao = new Demissao()
+            {
+                Dem_Data = DateTime.Now,
+                Dem_Motivo = Motivo,
+                Dem_Pessoa_Pes_ID = id,
+                Dem_Situation = true
+            };
+
+            if(Motivo=="Pediu demissão")
+            {
+                aDemissao.Dem_Salario = aPessoa.Pes_Salario * 2;
+            }
+
+            else
+            {
+                aDemissao.Dem_Salario = aPessoa.Pes_Salario - (aPessoa.Pes_Salario / 2);
+            }
+
+            DbPessoa.CadastrarDemissao(aDemissao);
+
             return Json("O funcionário foi demitido com sucesso!");
         }
 

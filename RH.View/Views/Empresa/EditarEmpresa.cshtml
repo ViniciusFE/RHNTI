@@ -13,7 +13,11 @@
     }
 </style>
 
+<<<<<<< HEAD
 <h2 class="text-center">EditarEmpresa</h2>
+=======
+<h2 class="text-center">Editar Empresa</h2>
+>>>>>>> 2d5ac815289a1f634351c98627f40967a691e32c
 
 
 @using (Html.BeginForm(Html.BeginForm("EditarEmpresa", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" })))
@@ -21,7 +25,10 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
+<<<<<<< HEAD
     <h4 class="text-center">Empresa</h4>
+=======
+>>>>>>> 2d5ac815289a1f634351c98627f40967a691e32c
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Emp_ID)

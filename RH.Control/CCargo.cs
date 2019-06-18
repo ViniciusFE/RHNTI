@@ -68,5 +68,10 @@ namespace RH.Control
         {
             return _RepositorieSetor.SelecionarSetorEmpresa(id);
         }
+
+        public List<Cargo> CargosChefeEmpresa(int IDEmpresa)
+        {
+            return _RepositorieCargo.CargosChefeEmpresa(IDEmpresa);
+        }
     }
 }
