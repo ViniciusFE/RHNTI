@@ -74,7 +74,7 @@ namespace RH.Model.Repositories
 
         public List<Cargo> CargosChefeEmpresa(int IDEmpresa)
         {
-            return odb.Cargo.SqlQuery("select * from Cargo c inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and c.Car_Situation = 1 and s.Set_Empresa_Emp_ID = " + IDEmpresa + " and c.Car_Cargo_Car_ID = c.Car_ID").ToList();
+            return odb.Cargo.SqlQuery("select * from Cargo c inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and c.Car_Situation = 1 and s.Set_Empresa_Emp_ID = " + IDEmpresa + " and c.Car_Cargo_Car_ID is null").ToList();
         }
 
     }

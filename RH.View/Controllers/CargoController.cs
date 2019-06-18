@@ -91,7 +91,7 @@ namespace RH.View.Controllers
             lc.OrderBy(p => p.Car_ID);
 
             //Se o cargo não possuir um chefe ele coloca a opção de chefe se não a quem esse cargo responde
-            if(oCargo==null)
+            if(oCargo.Car_Cargo_Car_ID==null)
             {
                 ViewBag.Car_Cargo_Car_ID = new SelectList(lc, "Car_ID", "Car_Nome", -42);
             }
