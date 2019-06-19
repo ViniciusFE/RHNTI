@@ -94,7 +94,7 @@ namespace RH.View.Controllers
         public ActionResult AlterarFuncionario(int id)
         {
             var aPessoa = DbPessoa.SelecionarFuncionario(id);
-            ViewBag.Car_Setor_Set_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome",aPessoa.Pes_Cargo_Car_ID);
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome",aPessoa.Pes_Cargo_Car_ID);
             return View(aPessoa);
         }
 
@@ -103,54 +103,16 @@ namespace RH.View.Controllers
         [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
-            ViewBag.Car_Setor_Set_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
-            try
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
+
+            if(!ModelState.IsValid)
             {
-                if (Imagem != null)
-                {
-
-                    byte[] Arquivo = new byte[Imagem.ContentLength];
-                    Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
-                    oFuncionario.Pes_Imagem = Arquivo;
-
-                }
-                else
-                {
-                    ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionário");
-                    return View();
-                }
-                if (oFuncionario.Pes_Nome == null)
-                {
-                    ModelState.AddModelError("Nome", "Por favor selecionenome o Funcionário");
-                    return View();
-                }
-                if (oFuncionario.Pes_CPF == null)
-                {
-                    ModelState.AddModelError("CPF", "Por favor selecione cpf o Funcionário");
-                    return View();
-                }
-                else
-                {
-
-                    DbPessoa.AlterarFuncionario(oFuncionario);
-
-                    return RedirectToAction("MeusFuncionarios");
-                }
-
+                return View();
             }
-            catch (DbEntityValidationException e)
+
+            else
             {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
+
             }
         }
 
