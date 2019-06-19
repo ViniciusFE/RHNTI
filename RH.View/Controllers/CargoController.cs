@@ -131,5 +131,38 @@ namespace RH.View.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public ActionResult ExcluirCargo(int id,int IDPessoa=0)
+        {
+            Cargo oCargo = _Control.SelecionarCargo(id);
+            if (IDPessoa==0)
+            {
+                Pessoa aPessoa = _Control.SelecionarPessoaCargo(id);
+
+                if (aPessoa != null)
+                {
+                    return Json("Este cargo não pode ser excluído, pois está atualmente ocupado pelo funcionário " + aPessoa.Pes_Nome + " tem certeza que deseja continuar? isso fará com o que o funcionário que o ocupa o cargo seja demitido.", aPessoa.Pes_ID.ToString());
+                }
+
+                else
+                {
+                    oCargo.Car_Situation = false;
+                    _Control.ExcluirCargo(oCargo);
+                }
+            }
+
+            else
+            {
+                Pessoa aPessoa = _Control.SelecionarFuncionario(IDPessoa);
+                aPessoa.Pes_Situation = false;
+                _Control.AlterarFuncionario(aPessoa);
+
+                oCargo.Car_Situation = false;
+                _Control.AlterarCargo(oCargo);
+            }
+
+            return Json("O cargo foi excluído com sucesso!");
+        }
+
     }
 }

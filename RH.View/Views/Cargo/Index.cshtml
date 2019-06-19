@@ -19,43 +19,118 @@
 
             <div class="col-md-12">
 
-                <div class="card">
+                <div class="card" id="Cargo-@x.Car_ID">
                     <div class="card-header">Nome: @x.Car_Nome</div>
-                </div>
-
-                <div class="card-body bg-light">
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <p>Setor do Cargo: @Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
-                            <p>Data de Cadastro: @x.Car_DataCadastro</p>
-                            @if (x.Car_Cargo_Car_ID == null)
-                            {
-                                <p>Este cargo ocupa a posição de chefe do setor</p>
-                            }
-
-                            else
-                            {
-                                foreach (var y in ViewBag.CargosChefe)
+                    <div class="card-body bg-light">
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <p>Setor do Cargo: @Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
+                                <p>Data de Cadastro: @x.Car_DataCadastro</p>
+                                @if (x.Car_Cargo_Car_ID == null)
                                 {
-                                    if (x.Car_Cargo_Car_ID == y.Car_ID)
-                                    {
-                                        <p>Este cargo responde ao cargo de @y.Car_Nome</p>
-                                        break;
-                                    }
-
+                                    <p>Este cargo ocupa a posição de chefe do setor</p>
                                 }
-                            }
+
+                                else
+                                {
+                                    foreach (var y in ViewBag.CargosChefe)
+                                    {
+                                        if (x.Car_Cargo_Car_ID == y.Car_ID)
+                                        {
+                                            <p>Este cargo responde ao cargo de @y.Car_Nome</p>
+                                            break;
+                                        }
+
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-6 text-white">
+                                <a class="btn btn-warning text-white" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})">Alterar Cargo</a>
+                                <button class="btn btn-danger" data-id="@x.Car_ID" id="AbrirModal">Excluir Cargo</button>
+                            </div>
                         </div>
-                        <div class="col-md-6 text-white">
-                            <a class="btn btn-warning" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})">Alterar Cargo</a>
-                            <button class="btn btn-danger">Excluir Cargo</button>
-                        </div>
+
                     </div>
-
                 </div>
-
             </div>
 
         </div>
     </div>
+}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Cargo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 id="Confirmacao">Tem certeza que deseja excluir esse cargo?</h5>
+                <div align="center">
+                    <img src="~/Imagem/833.gif" id="Carregando" style="display:none;" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="Excluir">Sim</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="BtnNao">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+
+        var IDCargo;
+        var IDFuncionario=0;
+
+        $("#AbrirModal").click(function () {
+            IDCargo = $(this).attr("data-id");
+            $("#ModalExcluir").modal('show');
+            $("#Excluir").removeAttr("disabled");
+            $("#BtnNao").removeAttr("disabled");
+        });
+
+        $("#Excluir").click(function () {
+            $("#Confirmacao").css("display", "none");
+            $("#Carregando").css("display", "block");
+            $(this).attr("disabled", "disabled");
+            $("#BtnNao").attr("disabled", "disabled");
+
+            var url = "@Url.Action("ExcluirCargo","Cargo")";
+
+            if (IDFuncionario == 0) {
+                $.post(url, { id: IDCargo }, RespostaServidor);
+            }
+
+            else {
+                $.post(url, { id: IDCargo, IDPessoa: IDFuncionario }, RespostaServidor);
+            }
+            
+        });
+
+        function RespostaServidor(retorno, ID) {
+            if (ID != "") {
+                $("#Confirmacao").html(retorno);
+                $("#Confirmacao").css("display", "block");
+                $("#Carregando").css("display", "none");
+                $("#Excluir").removeAttr("disabled");
+                $("#BtnNao").removeAttr("disabled");
+                IDFuncionario = ID;
+            }
+
+            else {
+                $("#Confirmacao").html(retorno);
+                $("#Confirmacao").css("display", "block");
+                $("#Carregando").css("display", "none");
+                $("#Cargo-" + IDCargo).slideUp('slow');
+                IDFuncionario = 0;
+            }
+            
+        }
+    });
+    </script>
 }

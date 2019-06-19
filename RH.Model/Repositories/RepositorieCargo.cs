@@ -53,7 +53,7 @@ namespace RH.Model.Repositories
 
         public void ExcluirCargo(Cargo oCargo)
         {
-            odb.Entry(oCargo).State = System.Data.Entity.EntityState.Deleted;
+            odb.Entry(oCargo).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
         }
 
