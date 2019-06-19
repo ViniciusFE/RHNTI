@@ -40,6 +40,11 @@ namespace RH.View
 
                 ));
 
+            bundles.Add(new StyleBundle("~/Content/Pages/css").Include(
+               "~/Content/css/pages.css"
+
+             ));
+
         }
     }
 }

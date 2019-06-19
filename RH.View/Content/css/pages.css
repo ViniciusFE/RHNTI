@@ -1,0 +1,73 @@
+﻿
+#TextBox {
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: auto;
+    width: 550px;
+    resize: none;
+}
+
+span.textUser {
+    text-decoration: none;
+    font-size: 80%;
+    font-weight: normal;
+}
+
+.imagem-funcionario {
+    width: 180px;
+    height: 220px;
+    margin-left: 16px;
+    border-radius: 13%;
+}
+
+.dados-funcionario {
+    padding-top: 66px;
+}
+
+button.btn.btn-outline-success.Abrir.Funcionario-avaliacao {
+    border-radius: 10px;
+    margin-top: 80px;
+    color: #944848;
+    border-color: #944848;
+}
+
+    button.btn.btn-outline-success.Abrir.Funcionario-avaliacao:hover {
+        background-color: lightgray;
+        color: #944848;
+    }
+
+.imagem-funcionario {
+    width: 250px;
+    height: 250px;
+    margin-left: 16px;
+    border-radius: 13%;
+}
+
+#Carregando {
+    align-content: center;
+}
+
+.modal-backdrop.show {
+    height: 100%;
+}
+
+section.cargos-section.col-md-12 {
+    margin-bottom: 20px!important;
+}
+
+a.btn.btn-warning.custom, a.btn.btn-warning.custom:active {
+    color: #944848 !important;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+button.btn.btn-danger.custom, button.btn.btn-danger.custom:active {
+    color: #fff;
+    background-color: #944848;
+    border-color: #944848;
+}
+a.btn.btn-success.custom, a.btn.btn-success.custom:active {
+    color: #fff;
+    background-color: #adb5bd;
+    border-color: #dee2e6;
+}

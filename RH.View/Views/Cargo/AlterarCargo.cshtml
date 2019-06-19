@@ -19,14 +19,16 @@
 
         <div class="form-row">
 
-            <div class="form-group col-12">
-                @*@Html.LabelFor(model => model.Car_Setor_Set_ID, "Car_Setor_Set_ID", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label class="control-label ">Setor</label>
 
-                @Html.DropDownList("Car_Setor_Set_ID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
+
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
 
             </div>
+
 
             <div class="form-group col-6">
                 @*@Html.LabelFor(model => model.Car_Cargo_Car_ID, "Car_Cargo_Car_ID", htmlAttributes: new { @class = "control-label col-md-2" })*@
@@ -38,30 +40,31 @@
             </div>
 
             <div class="form-group col-6">
-                @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label" })
+                @*@Html.LabelFor(model => model.Car_Setor_Set_ID, "Car_Setor_Set_ID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label ">Setor</label>
 
-                @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
+                @Html.DropDownList("Car_Setor_Set_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
 
             </div>
 
             @*<div class="form-group">
-                    @Html.LabelFor(model => model.Car_DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Car_DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Car_DataCadastro, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
+            @Html.LabelFor(model => model.Car_DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car_DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car_DataCadastro, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
             @*<div class="form-group">
-                    @Html.LabelFor(model => model.Car_Situation, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.Car_Situation)
-                            @Html.ValidationMessageFor(model => model.Car_Situation, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>*@
+            @Html.LabelFor(model => model.Car_Situation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Car_Situation)
+                    @Html.ValidationMessageFor(model => model.Car_Situation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

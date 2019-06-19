@@ -5,45 +5,12 @@
 
     ViewBag.Title = "Index";
 }
+@Styles.Render("~/Content/Pages/css")
 
 <style>
-    #TextBox {
-        border: 2px solid #456879;
-        border-radius: 10px;
-        height: auto;
-        width: 550px;
-        resize: none;
-    }
-
-    span {
-        text-decoration: none;
-        font-size: 90%;
-        font-weight: normal;
-    }
-
-    .imagem-funcionario {
-        width: 180px;
-        height: 220px;
-        margin-left: 16px;
-        border-radius: 13%;
-    }
-
-    .dados-funcionario {
-        padding-top: 66px;
-    }
-
-    button.btn.btn-outline-success.Abrir.Funcionario-avaliacao {
-        border-radius: 10px;
-        margin-top: 80px;
-        color: #944848;
-        border-color: #944848;
-    }
-
-        button.btn.btn-outline-success.Abrir.Funcionario-avaliacao:hover {
-            background-color: lightgray;
-            color: #944848;
-        }
 </style>
+
+
 
 <br />
 <br />
@@ -90,7 +57,7 @@
 
 @section Scripts
 {
-    <script>
+<script>
         var IdFuncionario;
 
         $(document).ready(function () {
@@ -147,8 +114,8 @@
                         "<img class='imagem-funcionario' src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + Funcionarios[x, 2] + "' class=''/>" +
                     "</div>"+
                         "<div class='col-6 dados-funcionario'>" +
-                        "<h4>Nome do funcionário: <span>" + Funcionarios[x, 0] + "</span></h4>" +
-                        "<h4>Cargo ocupado: <span> " + Funcionarios[x, 1] + "</span></h4>" +
+                        "<h4>Nome do funcionário: <span class='textUser'>" + Funcionarios[x, 0] + "</span></h4>" +
+                        "<h4>Cargo ocupado: <span class='textUser'> " + Funcionarios[x, 1] + "</span></h4>" +
                         "</div>" +
                         "<div class='col-2'>" +
                         "<button onclick='Abrir("+Funcionarios[x,2]+")' class='btn btn-outline-success Abrir Funcionario-avaliacao'><spam class='fa fa-star'></spam> Dar Avaliacao</button>"+
@@ -170,6 +137,6 @@
             $("#ModalAvaliar").modal('show');
         }
 
-    </script>
+</script>
 }
 
