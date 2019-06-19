@@ -115,9 +115,15 @@ namespace RH.View.Controllers
                 x.Car_Nome = oCargo.Car_Nome;
                 x.Car_Setor_Set_ID = oCargo.Car_Setor_Set_ID;
 
+                //Se  o cargo vier com o valor -42 ele será o chefe do setor
                 if(oCargo.Car_ID==-42)
                 {
                     x.Car_Cargo_Car_ID = null;
+                }
+
+                else
+                {
+                    x.Car_Cargo_Car_ID = oCargo.Car_Cargo_Car_ID;
                 }
                 
                 _Control.AlterarCargo(x);                
