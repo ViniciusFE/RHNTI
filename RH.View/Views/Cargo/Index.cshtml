@@ -3,20 +3,20 @@
 @{
     ViewBag.Title = "Cargos";
 }
+@Styles.Render("~/Content/Pages/css")
 
 
 <br />
 <p>
-    <a class="btn btn-success" href="@Url.Action("CadastrarCargo","Cargo")">Cadastrar Novo Cargo</a>
+    <a class="btn btn-success custom" href="@Url.Action("CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
 </p>
-<h2>Cargos Cadastrados</h2>
+<h2 class="text-center">Cargos Cadastrados</h2>
 <br />
+<div class="container">
+    @foreach (var x in Model)
+    {
 
-@foreach (var x in Model)
-{
-    <div class="container">
         <div class="row">
-
             <div class="col-md-12">
 
                 <div class="card" id="Cargo-@x.Car_ID">
@@ -35,19 +35,21 @@
                                 {
                                     foreach (var y in ViewBag.CargosChefe)
                                     {
+
                                         if (x.Car_Cargo_Car_ID == y.Car_ID)
                                         {
                                             <p>Este cargo responde ao cargo de @y.Car_Nome</p>
                                             break;
                                         }
 
+
                                     }
                                 }
-                            </div>
-                            <div class="col-md-6 text-white">
-                                <a class="btn btn-warning text-white" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})">Alterar Cargo</a>
-                                <button class="btn btn-danger" data-id="@x.Car_ID" id="AbrirModal">Excluir Cargo</button>
-                            </div>
+                        </div>
+                        <div class="col-md-6 text-white text-right">
+                            <a class="btn btn-warning custom" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
+                            <button class="btn btn-danger custom"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
+
                         </div>
 
                     </div>
@@ -56,7 +58,9 @@
 
         </div>
     </div>
+    <br />
 }
+    </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
     <div class="modal-dialog" role="document">
@@ -134,3 +138,4 @@
     });
     </script>
 }
+
