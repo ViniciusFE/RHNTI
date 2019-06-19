@@ -11,6 +11,9 @@
     <a class="btn btn-success custom" href="@Url.Action("CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
 </p>
 <h2 class="text-center">Cargos Cadastrados</h2>
+
+<hr />
+
 <br />
 <div class="container">
     @foreach (var x in Model)
@@ -60,6 +63,7 @@
     </div>
     <br />
 }
+    <hr />
     </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
@@ -72,7 +76,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5 id="Confirmacao">Tem certeza que deseja excluir esse cargo?</h5>
+                <h5 id="Confirmacao"></h5>
                 <div align="center">
                     <img src="~/Imagem/833.gif" id="Carregando" style="display:none;" />
                 </div>
@@ -89,13 +93,15 @@
     $(document).ready(function () {
 
         var IDCargo;
-        var IDFuncionario=0;
+        var IDFuncionario = 0;
+        var request = true;
 
         $(".AbrirModal").click(function () {
             IDCargo = $(this).attr("data-id");
             $("#ModalExcluir").modal('show');
             $("#Excluir").removeAttr("disabled");
             $("#BtnNao").removeAttr("disabled");
+            $("#Confirmacao").html("Tem certeza que deseja excluir esse cargo?");
         });
 
         $("#Excluir").click(function () {
@@ -106,35 +112,15 @@
 
             var url = "@Url.Action("ExcluirCargo","Cargo")";
 
-            if (IDFuncionario == 0) {
-                $.post(url, { id: IDCargo }, RespostaServidor);
-            }
-
-            else {
-                $.post(url, { id: IDCargo, IDPessoa: IDFuncionario }, RespostaServidor);
-            }
+            $.post(url, { id: IDCargo }, RespostaServidor);
             
         });
 
-        function RespostaServidor(retorno, ID) {
-            if (ID != "") {
+        function RespostaServidor(retorno) {
                 $("#Confirmacao").html(retorno);
                 $("#Confirmacao").css("display", "block");
                 $("#Carregando").css("display", "none");
-                $("#Excluir").removeAttr("disabled");
-                $("#BtnNao").removeAttr("disabled");
-                IDFuncionario = ID;
             }
-
-            else {
-                $("#Confirmacao").html(retorno);
-                $("#Confirmacao").css("display", "block");
-                $("#Carregando").css("display", "none");
-                $("#Cargo-" + IDCargo).slideUp('slow');
-                IDFuncionario = 0;
-            }
-            
-        }
     });
     </script>
 }
