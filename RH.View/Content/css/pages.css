@@ -71,3 +71,7 @@ a.btn.btn-success.custom, a.btn.btn-success.custom:active {
     background-color: #adb5bd;
     border-color: #dee2e6;
 }
+
+.card-body.bg-light{
+    background:white!important;
+}

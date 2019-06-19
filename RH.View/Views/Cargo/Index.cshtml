@@ -1,94 +1,94 @@
-@model IEnumerable<RH.Model.Cargo>
+﻿@model IEnumerable<RH.Model.Cargo>
 
-@{
+    @{
     ViewBag.Title = "Cargos";
-}
-@Styles.Render("~/Content/Pages/css")
+    }
+    @Styles.Render("~/Content/Pages/css")
 
 
-<br />
-<p>
-    <a class="btn btn-success custom" href="@Url.Action("CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
-</p>
-<h2 class="text-center">Cargos Cadastrados</h2>
+    <br />
+    <p>
+        <a class="btn btn-success custom" href="@Url.Action(" CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
+    </p>
+    <h2 class="text-center">Cargos Cadastrados</h2>
 
-<hr />
+    <hr />
 
-<br />
-<div class="container">
-    @foreach (var x in Model)
-    {
+    <br />
+    <div class="container">
+        @foreach (var x in Model)
+        {
 
         <div class="row">
             <div class="col-md-12">
 
                 <div class="card" id="Cargo-@x.Car_ID">
-                    <div class="card-header">Nome: @x.Car_Nome</div>
+                    <div class="card-header"><h4>Nome:<span class='textUser'> @x.Car_Nome</span></h4></div>
                     <div class="card-body bg-light">
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <p>Setor do Cargo: @Html.DisplayFor(modelItem => x.Setor.Set_Nome)</p>
-                                <p>Data de Cadastro: @x.Car_DataCadastro</p>
+                                <p><h4>Setor do Cargo: <span class='textUser'>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</span></h4></p>
+                                <p><h4>Data de Cadastro:<span class='textUser'> @x.Car_DataCadastro</span></h4></p>
                                 @if (x.Car_Cargo_Car_ID == null)
                                 {
-                                    <p>Este cargo ocupa a posição de chefe do setor</p>
+                                <p>Este cargo ocupa a posição de chefe do setor</p>
                                 }
 
                                 else
                                 {
-                                    foreach (var y in ViewBag.CargosChefe)
-                                    {
+                                foreach (var y in ViewBag.CargosChefe)
+                                {
 
-                                        if (x.Car_Cargo_Car_ID == y.Car_ID)
-                                        {
-                                            <p>Este cargo responde ao cargo de @y.Car_Nome</p>
-                                            break;
-                                        }
-
-
-                                    }
+                                if (x.Car_Cargo_Car_ID == y.Car_ID)
+                                {
+                                <p>Este cargo responde ao cargo de @y.Car_Nome</p>
+                                break;
                                 }
-                        </div>
-                        <div class="col-md-6 text-white text-right">
-                            <a class="btn btn-warning custom" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
-                            <button class="btn btn-danger custom AbrirModal" data-id="@x.Car_ID"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
+
+
+                                }
+                                }
+                            </div>
+                            <div class="col-md-6 text-white text-right">
+                                <a class="btn btn-warning custom" href="@Url.Action(" AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
+                                <button class="btn btn-danger custom AbrirModal" data-id="@x.Car_ID"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
+
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-    <br />
-}
-    <hr />
+        <br />
+        }
+        <hr />
     </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Excluir Cargo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5 id="Confirmacao"></h5>
-                <div align="center">
-                    <img src="~/Imagem/833.gif" id="Carregando" style="display:none;" />
+    <div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir Cargo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 id="Confirmacao"></h5>
+                    <div align="center">
+                        <img src="~/Imagem/833.gif" id="Carregando" style="display:none;" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="Excluir">Sim</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="BtnNao">Não</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="Excluir">Sim</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" id="BtnNao">Não</button>
-            </div>
         </div>
     </div>
-</div>
-@section Scripts{
+    @section Scripts{
     <script>
     $(document).ready(function () {
 
@@ -113,7 +113,7 @@
             var url = "@Url.Action("ExcluirCargo","Cargo")";
 
             $.post(url, { id: IDCargo }, RespostaServidor);
-            
+
         });
 
         function RespostaServidor(retorno) {
@@ -123,5 +123,5 @@
             }
     });
     </script>
-}
+    }   
 
