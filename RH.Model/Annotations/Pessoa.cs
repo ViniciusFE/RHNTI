@@ -49,6 +49,8 @@ namespace RH.Model
             [DisplayName("Cargo do Funcionário")]
             [Required(ErrorMessage ="Por favor selecione o cargo de ocupação do funcionário")]
             public int Pes_Cargo_Car_ID { get; set; }
+
+            [DisplayName("Imagem do funcionário")]
             public byte[] Pes_Imagem { get; set; }
         }
     }
