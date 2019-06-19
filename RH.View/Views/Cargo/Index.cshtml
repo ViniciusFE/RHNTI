@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-6 text-white text-right">
                             <a class="btn btn-warning custom" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
-                            <button class="btn btn-danger custom"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
+                            <button class="btn btn-danger custom AbrirModal" data-id="@x.Car_ID"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
 
                         </div>
 
@@ -91,7 +91,7 @@
         var IDCargo;
         var IDFuncionario=0;
 
-        $("#AbrirModal").click(function () {
+        $(".AbrirModal").click(function () {
             IDCargo = $(this).attr("data-id");
             $("#ModalExcluir").modal('show');
             $("#Excluir").removeAttr("disabled");
