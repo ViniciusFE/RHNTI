@@ -105,14 +105,34 @@ namespace RH.View.Controllers
         {
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 
+            //Retorna pra tela de alteração com todos os erros
             if(!ModelState.IsValid)
             {
                 return View();
             }
 
+            //Altera o funcionário e redireciona para tela de meus funcionários
             else
             {
+                Pessoa aPessoa = DbPessoa.SelecionarFuncionario(oFuncionario.Pes_ID);
 
+                if(Imagem!=null)
+                {
+                    byte[] NovaImagem = new byte[Imagem.ContentLength];
+                    Imagem.InputStream.Read(NovaImagem, 0, Imagem.ContentLength);
+                    aPessoa.Pes_Imagem = NovaImagem;
+                }
+
+                aPessoa.Pes_Nome = oFuncionario.Pes_Nome;
+                aPessoa.Pes_Salario = oFuncionario.Pes_Salario;
+                aPessoa.Pes_Endereco = oFuncionario.Pes_Endereco;
+                aPessoa.Pes_CTrabalho = oFuncionario.Pes_CTrabalho;
+                aPessoa.Pes_CPF = oFuncionario.Pes_CPF;
+                aPessoa.Pes_Cidade = oFuncionario.Pes_Cidade;
+                aPessoa.Pes_Cargo_Car_ID = oFuncionario.Pes_Cargo_Car_ID;
+                DbPessoa.AlterarFuncionario(aPessoa);
+
+                return RedirectToAction("MeusFuncionarios");
             }
         }
 
