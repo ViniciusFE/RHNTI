@@ -1,4 +1,4 @@
-﻿@model RH.Model.Pessoa
+@model RH.Model.Pessoa
 
 @{
     ViewBag.Title = "CadastrarFuncionario";
@@ -75,13 +75,6 @@
             </div>
         </div>
 
-        <div class="form-group col-md-6">
-            @Html.Label("Data de Admissao", htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="">
-                @Html.EditorFor(model => model.Pes_DataAdmissao, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                @Html.ValidationMessageFor(model => model.Pes_DataAdmissao, "", new { @class = "text-danger " })
-            </div>
-        </div>
 
         <div class="form-group col-md-6">
             @Html.Label("Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
