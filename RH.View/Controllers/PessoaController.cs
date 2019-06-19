@@ -36,12 +36,7 @@ namespace RH.View.Controllers
 
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            if (Imagem==null)
+            if (Imagem == null)
             {
                 ModelState.AddModelError("Imagem", "Por favor selecione a imagem do funcionário");
                 return View();
@@ -49,10 +44,17 @@ namespace RH.View.Controllers
 
             else
             {
-                byte [] ImagemFuncionario = new byte[Imagem.ContentLength];
+                byte[] ImagemFuncionario = new byte[Imagem.ContentLength];
                 Imagem.InputStream.Read(ImagemFuncionario, 0, Imagem.ContentLength);
                 oFuncionario.Pes_Imagem = ImagemFuncionario;
             }
+
+            if (oFuncionario.Pes_Cargo_Car_ID==0)
+            {
+                return View();
+            }
+
+            
 
             DbPessoa.CadastrarFuncionario(oFuncionario);
             return RedirectToAction("MeusFuncionarios");
