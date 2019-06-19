@@ -31,6 +31,9 @@ namespace RH.View.Controllers
         [AutorizacaoEmpresa]
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
+            oFuncionario.Pes_Situation = true;
+            oFuncionario.Pes_DataAdmissao = DateTime.Now;
+
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 
             if (!ModelState.IsValid)
@@ -38,9 +41,9 @@ namespace RH.View.Controllers
                 return View();
             }
 
-           if(Imagem==null)
+            if (Imagem==null)
             {
-                ModelState.AddModelError("Iamge", "Por selecione a imagem do funcionário");
+                ModelState.AddModelError("Imagem", "Por favor selecione a imagem do funcionário");
                 return View();
             }
 
@@ -51,8 +54,6 @@ namespace RH.View.Controllers
                 oFuncionario.Pes_Imagem = ImagemFuncionario;
             }
 
-            oFuncionario.Pes_Situation = true;
-            oFuncionario.Pes_DataAdmissao = DateTime.Now;
             DbPessoa.CadastrarFuncionario(oFuncionario);
             return RedirectToAction("MeusFuncionarios");
 
