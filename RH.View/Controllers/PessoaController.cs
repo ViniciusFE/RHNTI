@@ -22,6 +22,7 @@ namespace RH.View.Controllers
         //cadastro de Funcionario
         public ActionResult CadastrarFuncionario()
         {
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome");
             return View();
         }
 
@@ -30,61 +31,30 @@ namespace RH.View.Controllers
         [AutorizacaoEmpresa]
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
-            var cargo = oFuncionario.Pes_Cargo_Car_ID;
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 
-            if (DbPessoa.AutenticaCargo(cargo) == true)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Este Cargo ja Pertence a Outro Funcionário");
                 return View();
             }
+
+           if(Imagem==null)
+            {
+                ModelState.AddModelError("Iamge", "Por selecione a imagem do funcionário");
+                return View();
+            }
+
             else
             {
-                try
-                {
-                    if (Imagem != null)
-                    {
-                        byte[] Arquivo = new byte[Imagem.ContentLength];
-                        Imagem.InputStream.Read(Arquivo, 0, Imagem.ContentLength);
-                        oFuncionario.Pes_Imagem = Arquivo;
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Imagem", "Por favor selecione uma foto para o Funcionário");
-                        return View();
-                    }
-                    if (oFuncionario.Pes_Nome == null)
-                    {
-                        ModelState.AddModelError("Nome", "Por favor digite o nome o Funcionário");
-                        return View();
-                    }
-                    if (oFuncionario.Pes_CPF == null)
-                    {
-                        ModelState.AddModelError("CPF", "Por favor digite o CPF do Funciónario");
-                        return View();
-                    }
-                    else
-                    {
-                        oFuncionario.Pes_Situation = true;
-                        DbPessoa.CadastrarFuncionario(oFuncionario);
-                        return RedirectToAction("MeusFuncionarios");
-                    }
-
-                }
-                catch (DbEntityValidationException e)
-                {
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
-                    }
-                    throw;
-                }
+                byte [] ImagemFuncionario = new byte[Imagem.ContentLength];
+                Imagem.InputStream.Read(ImagemFuncionario, 0, Imagem.ContentLength);
+                oFuncionario.Pes_Imagem = ImagemFuncionario;
             }
+
+            oFuncionario.Pes_Situation = true;
+            oFuncionario.Pes_DataAdmissao = DateTime.Now;
+            DbPessoa.CadastrarFuncionario(oFuncionario);
+            return RedirectToAction("MeusFuncionarios");
 
         }
 
@@ -112,28 +82,25 @@ namespace RH.View.Controllers
             }
 
             //Altera o funcionário e redireciona para tela de meus funcionários
-            else
+            Pessoa aPessoa = DbPessoa.SelecionarFuncionario(oFuncionario.Pes_ID);
+
+            if (Imagem != null)
             {
-                Pessoa aPessoa = DbPessoa.SelecionarFuncionario(oFuncionario.Pes_ID);
-
-                if(Imagem!=null)
-                {
-                    byte[] NovaImagem = new byte[Imagem.ContentLength];
-                    Imagem.InputStream.Read(NovaImagem, 0, Imagem.ContentLength);
-                    aPessoa.Pes_Imagem = NovaImagem;
-                }
-
-                aPessoa.Pes_Nome = oFuncionario.Pes_Nome;
-                aPessoa.Pes_Salario = oFuncionario.Pes_Salario;
-                aPessoa.Pes_Endereco = oFuncionario.Pes_Endereco;
-                aPessoa.Pes_CTrabalho = oFuncionario.Pes_CTrabalho;
-                aPessoa.Pes_CPF = oFuncionario.Pes_CPF;
-                aPessoa.Pes_Cidade = oFuncionario.Pes_Cidade;
-                aPessoa.Pes_Cargo_Car_ID = oFuncionario.Pes_Cargo_Car_ID;
-                DbPessoa.AlterarFuncionario(aPessoa);
-
-                return RedirectToAction("MeusFuncionarios");
+                byte[] NovaImagem = new byte[Imagem.ContentLength];
+                Imagem.InputStream.Read(NovaImagem, 0, Imagem.ContentLength);
+                aPessoa.Pes_Imagem = NovaImagem;
             }
+
+            aPessoa.Pes_Nome = oFuncionario.Pes_Nome;
+            aPessoa.Pes_Salario = oFuncionario.Pes_Salario;
+            aPessoa.Pes_Endereco = oFuncionario.Pes_Endereco;
+            aPessoa.Pes_CTrabalho = oFuncionario.Pes_CTrabalho;
+            aPessoa.Pes_CPF = oFuncionario.Pes_CPF;
+            aPessoa.Pes_Cidade = oFuncionario.Pes_Cidade;
+            aPessoa.Pes_Cargo_Car_ID = oFuncionario.Pes_Cargo_Car_ID;
+            DbPessoa.AlterarFuncionario(aPessoa);
+
+            return RedirectToAction("MeusFuncionarios");
         }
 
 
