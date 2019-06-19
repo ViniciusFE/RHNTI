@@ -94,7 +94,7 @@ namespace RH.View.Controllers
         public ActionResult AlterarFuncionario(int id)
         {
             var aPessoa = DbPessoa.SelecionarFuncionario(id);
-
+            ViewBag.Car_Setor_Set_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome",aPessoa.Pes_Cargo_Car_ID);
             return View(aPessoa);
         }
 
@@ -103,6 +103,7 @@ namespace RH.View.Controllers
         [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
+            ViewBag.Car_Setor_Set_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
             try
             {
                 if (Imagem != null)

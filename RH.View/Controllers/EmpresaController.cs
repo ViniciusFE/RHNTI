@@ -37,7 +37,6 @@ namespace RH.View.Controllers
             return View(MinhasEmpresas.ToPagedList(paginaNumero, paginaTamanho));
         }
 
-        [AutorizacaoEmpresa]
         public ActionResult CadastrarEmpresa()
         {
             return View();
