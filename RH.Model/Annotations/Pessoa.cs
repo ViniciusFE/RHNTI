@@ -17,27 +17,27 @@ namespace RH.Model
             public int Pes_ID { get; set; }
 
             [DisplayName("Nome")]
-            [Required(ErrorMessage ="Por favor digite o nome do funcionário")]
+            [Required(ErrorMessage = "Por favor digite o nome do funcionário")]
             public string Pes_Nome { get; set; }
 
             [DisplayName("CPF")]
-            [Required(ErrorMessage ="Por favor digite o cpf do funcionário")]
+            [Required(ErrorMessage = "Por favor digite o cpf do funcionário")]
             public string Pes_CPF { get; set; }
 
             [DisplayName("Carteria de Trabalho")]
-            [Required(ErrorMessage ="Por favor digite a carteira de trabalho do funcionário")]
+            [Required(ErrorMessage = "Por favor digite a carteira de trabalho do funcionário")]
             public string Pes_CTrabalho { get; set; }
 
             [DisplayName("Salário")]
-            [Required(ErrorMessage ="Por favor digite o salário do funcionário")]
+            [Required(ErrorMessage = "Por favor digite o salário do funcionário")]
             public double Pes_Salario { get; set; }
 
             [DisplayName("Cidade")]
-            [Required(ErrorMessage ="Por favor digite a cidade do funcionário")]
+            [Required(ErrorMessage = "Por favor digite a cidade do funcionário")]
             public string Pes_Cidade { get; set; }
 
             [DisplayName("Endereço")]
-            [Required(ErrorMessage =("Por favor digite o endereço do funcionário"))]
+            [Required(ErrorMessage = ("Por favor digite o endereço do funcionário"))]
             public string Pes_Endereco { get; set; }
 
             [DisplayName("Data de admissão")]
@@ -47,7 +47,7 @@ namespace RH.Model
             public bool Pes_Situation { get; set; }
 
             [DisplayName("Cargo do Funcionário")]
-            [Required(ErrorMessage ="Por favor selecione o cargo de ocupação do funcionário")]
+            [Required(ErrorMessage = "Por favor selecione o cargo de ocupação do funcionário")]
             public int Pes_Cargo_Car_ID { get; set; }
 
             [DisplayName("Imagem do funcionário")]

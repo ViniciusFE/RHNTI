@@ -31,7 +31,7 @@
             @Html.Label("Nome", htmlAttributes: new { @class = "control-label col-md-2" })
 
             @Html.EditorFor(model => model.Pes_Nome, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Nome do Funcionario" } })
-            @Html.ValidationMessage("Nome", "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Pes_Nome, "", new { @class = "text-danger" })
 
         </div>
 
@@ -39,7 +39,7 @@
             @Html.Label("CPF", htmlAttributes: new { @class = "control-label col-md-2" })
 
             @Html.EditorFor(model => model.Pes_CPF, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CPF do Funcionario" } })
-            @Html.ValidationMessage("CPF", "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model=>model.Pes_CPF, "", new { @class = "text-danger" })
 
         </div>
 
@@ -79,7 +79,7 @@
         <div class="form-group col-md-6">
             @Html.Label("Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="">
-                @Html.EditorFor(model => model.Pes_Cargo_Car_ID, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Cargo do Funcionario" } })
+                @Html.DropDownList("Pes_Cargo_Car_ID",null, "Selecione o cargo do funcionário", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Pes_Cargo_Car_ID, "", new { @class = "text-danger" })
             </div>
         </div>
