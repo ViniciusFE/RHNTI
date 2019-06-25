@@ -26,3 +26,7 @@ body {
       max-width: 100% !important; }
     body section .container .content .back a {
       color: black !important; }
+
+.dropdown-menu.show, body header nav.navbar.navbar-expand-lg.navbar-light.bg-light a:hover {
+    background-color: #944848;
+}

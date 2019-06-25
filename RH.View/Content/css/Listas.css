@@ -135,3 +135,27 @@ section nav.paginacao {
       color: #944848; }
     section nav.paginacao ul li a:hover {
       color: black; }
+
+
+
+.Titulo1 {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+img {
+    width: 159px;
+    height: 159px;
+}
+
+section .container .box:hover img {
+    filter: opacity(8%);
+    transition: .2s;
+}
+
+section .container .box {
+    height: 160px;
+    width: 160px;
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+}

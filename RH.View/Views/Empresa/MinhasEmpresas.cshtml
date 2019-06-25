@@ -12,6 +12,8 @@
     ViewBag.Title = "MinhasEmpresas";
 }
 
+
+
 <h2 class="text-center titulo-Lista">Minhas Empresas</h2>
 <div class="col-md-2 text-center cria-empresa "><a href="~/Empresa/CadastrarEmpresa"><i class="fas fa-plus"></i> Criar Empresa</a> </div>
 
@@ -33,10 +35,14 @@
 
         @foreach (var item in Model)
         {
-            <div class="col-md-2  box">
-                <div class="Titulo"> <ul><li>@Html.DisplayFor(modelItem => item.Emp_Nome)</li></ul> </div>
-                <div class="abrir"> <a class="link" href="@Url.Action("Index","Home",new { id=item.Emp_ID})">Entrar</a> </div>
-            </div>
+        <div class="col-md-2  box">
+            <img src="@Url.Action("GetImagem", new { id = item.Emp_ID })">
+            <div class="abrir"> <a class="link" href="@Url.Action("Index","Home",new { id=item.Emp_ID})">
+    <div class="Titulo1 text-center"> @Html.DisplayFor(modelItem => item.Emp_Nome) </div>
+
+    Entrar
+</a> </div>
+        </div>
 
 
         }
