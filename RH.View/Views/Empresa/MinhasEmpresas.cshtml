@@ -37,7 +37,7 @@
         {
         <div class="col-md-2  box">
             <img src="@Url.Action("GetImagem", new { id = item.Emp_ID })">
-            <div class="abrir"> <a class="link" href="@Url.Action("Index","Home",new { id=item.Emp_ID})">
+            <div class="abrir"> <a class="link" href="@Url.Action("Index","Home",new { id=item.Emp_ID,nomeEmpresa=item.Emp_Nome})">
     <div class="Titulo1 text-center"> @Html.DisplayFor(modelItem => item.Emp_Nome) </div>
 
     Entrar
