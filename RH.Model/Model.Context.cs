@@ -40,8 +40,7 @@ namespace RH.Model
         public virtual DbSet<PessoaBeneficio> PessoaBeneficio { get; set; }
         public virtual DbSet<Professor> Professor { get; set; }
         public virtual DbSet<Prova> Prova { get; set; }
-        public virtual DbSet<Questao> Questao { get; set; }
-        public virtual DbSet<QuestaoAvaliacao> QuestaoAvaliacao { get; set; }
+        public virtual DbSet<Resposta> Resposta { get; set; }
         public virtual DbSet<Setor> Setor { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Treinamento> Treinamento { get; set; }

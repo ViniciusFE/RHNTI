@@ -17,7 +17,7 @@ namespace RH.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Empresa()
         {
-            this.Prova = new HashSet<Prova>();
+            this.Beneficio = new HashSet<Beneficio>();
             this.Setor = new HashSet<Setor>();
             this.Treinamento = new HashSet<Treinamento>();
         }
@@ -34,10 +34,11 @@ namespace RH.Model
         public System.DateTime Emp_DataAtual { get; set; }
         public bool Emp_Situation { get; set; }
         public byte[] Emp_Logo { get; set; }
+        public bool Emp_Avaliativa { get; set; }
     
         public virtual Aluno Aluno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Prova> Prova { get; set; }
+        public virtual ICollection<Beneficio> Beneficio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Setor> Setor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

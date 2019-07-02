@@ -14,6 +14,16 @@ namespace RH.Model
     
     public partial class DadoBancario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DadoBancario()
+        {
+            this.Prova = new HashSet<Prova>();
+            this.Prova1 = new HashSet<Prova>();
+            this.Prova2 = new HashSet<Prova>();
+            this.Prova3 = new HashSet<Prova>();
+            this.Prova4 = new HashSet<Prova>();
+        }
+    
         public int DB_ID { get; set; }
         public int DB_Pessoa_Pes_ID { get; set; }
         public string DB_Tipo { get; set; }
@@ -22,5 +32,15 @@ namespace RH.Model
         public bool DB_Situation { get; set; }
     
         public virtual Pessoa Pessoa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova4 { get; set; }
     }
 }

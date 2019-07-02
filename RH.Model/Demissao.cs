@@ -14,13 +14,36 @@ namespace RH.Model
     
     public partial class Demissao
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Demissao()
+        {
+            this.Prova = new HashSet<Prova>();
+            this.Prova1 = new HashSet<Prova>();
+            this.Prova2 = new HashSet<Prova>();
+            this.Resposta = new HashSet<Resposta>();
+            this.Resposta1 = new HashSet<Resposta>();
+            this.Resposta2 = new HashSet<Resposta>();
+        }
+    
         public int Dem_ID { get; set; }
         public int Dem_Pessoa_Pes_ID { get; set; }
-        public System.DateTime Dem_Data { get; set; }
+        public System.DateTime Dem_DataCadastro { get; set; }
         public string Dem_Motivo { get; set; }
         public double Dem_Salario { get; set; }
         public bool Dem_Situation { get; set; }
     
         public virtual Pessoa Pessoa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta2 { get; set; }
     }
 }
