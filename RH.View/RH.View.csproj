@@ -152,6 +152,7 @@
     <Compile Include="Controllers\AlunoController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\CargoController.cs" />
+    <Compile Include="Controllers\DependenteController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -275,6 +276,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Dependente\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
