@@ -17,8 +17,8 @@ namespace RH.Model
         public int Vag_ID { get; set; }
         public int Vag_Cargo_Car_ID { get; set; }
         public string Vag_Descricao { get; set; }
-        public System.DateTime Vag_DataCadastro { get; set; }
-        public System.DateTime Vag_DataTermino { get; set; }
+        public string Vag_DataCadastro { get; set; }
+        public string Vag_DataTermino { get; set; }
         public bool Vag_Situation { get; set; }
     
         public virtual Cargo Cargo { get; set; }

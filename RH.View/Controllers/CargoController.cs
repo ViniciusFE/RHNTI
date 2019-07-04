@@ -23,23 +23,12 @@ namespace RH.View.Controllers
         public ActionResult Index()
         {
             List<Cargo> _cargos = _Control.SelecionarTodosCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
-            List<Cargo> CargosChefe = _Control.CargosChefeEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
-            ViewBag.CargosChefe = CargosChefe;
             return View(_cargos);
         }
 
 
         public ActionResult CadastrarCargo()
         {
-            Cargo x = new Cargo();
-            x.Car_ID = -42;
-            x.Car_Nome = "Este cargo é o chefe do setor";
-            int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
-            List<Cargo> lc = _Control.SelecionarTodosCargosEmpresa(IDEmpresa);
-            lc.Add(x);
-            
-            ViewBag.Car_Cargo_Car_ID = new SelectList(lc, "Car_ID", "Car_Nome");
-            ViewBag.Car_Setor_Set_ID = new SelectList(_Control.SelecionarSetoresEmpresa(IDEmpresa), "Set_ID", "Set_Nome");
             return View();
         }
 
@@ -47,14 +36,7 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarCargo(Cargo oCargo)
         {
-            if (ModelState.IsValid)
-            {
-                oCargo.Car_Situation = true;
-                oCargo.Car_DataCadastro = DateTime.Now;
-                _Control.CadastrarCargo(oCargo);
-                return RedirectToAction("Index");
 
-            }
             return View();
         }
 

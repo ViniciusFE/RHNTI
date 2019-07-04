@@ -43,7 +43,7 @@ namespace RH.Model
         public double Pes_Salario { get; set; }
         public string Pes_Cidade { get; set; }
         public string Pes_Endereco { get; set; }
-        public System.DateTime Pes_DataAdmissao { get; set; }
+        public string Pes_DataCadastro { get; set; }
         public bool Pes_Situation { get; set; }
         public int Pes_Cargo_Car_ID { get; set; }
         public byte[] Pes_Imagem { get; set; }

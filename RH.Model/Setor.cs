@@ -33,7 +33,7 @@ namespace RH.Model
         public int Set_ID { get; set; }
         public int Set_Empresa_Emp_ID { get; set; }
         public string Set_Nome { get; set; }
-        public System.DateTime Set_DataCadastro { get; set; }
+        public string Set_DataCadastro { get; set; }
         public bool Set_Situation { get; set; }
         public int Set_Setor_Set_ID { get; set; }
     

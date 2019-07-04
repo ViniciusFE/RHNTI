@@ -27,7 +27,7 @@ namespace RH.Model
     
         public int Dem_ID { get; set; }
         public int Dem_Pessoa_Pes_ID { get; set; }
-        public System.DateTime Dem_DataCadastro { get; set; }
+        public string Dem_DataCadastro { get; set; }
         public string Dem_Motivo { get; set; }
         public double Dem_Salario { get; set; }
         public bool Dem_Situation { get; set; }

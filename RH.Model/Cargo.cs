@@ -34,7 +34,7 @@ namespace RH.Model
         public int Car_ID { get; set; }
         public int Car_Setor_Set_ID { get; set; }
         public string Car_Nome { get; set; }
-        public System.DateTime Car_DataCadastro { get; set; }
+        public string Car_DataCadastro { get; set; }
         public bool Car_Situation { get; set; }
     
         public virtual Setor Setor { get; set; }

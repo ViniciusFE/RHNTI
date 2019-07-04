@@ -34,6 +34,7 @@ namespace RH.Model
         public string DP_Nome { get; set; }
         public string DP_Parentesco { get; set; }
         public bool DP_Situation { get; set; }
+        public string DP_DataCadastro { get; set; }
     
         public virtual Pessoa Pessoa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

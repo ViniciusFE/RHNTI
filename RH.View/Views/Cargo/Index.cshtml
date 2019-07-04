@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RH.Model.Cargo>
+@model IEnumerable<RH.Model.Cargo>
 
     @{
     ViewBag.Title = "Cargos";
@@ -8,7 +8,7 @@
 
     <br />
     <p>
-        <a class="btn btn-success custom" href="@Url.Action(" CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
+        <a class="btn btn-success custom" href="@Url.Action("CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
     </p>
     <h2 class="text-center">Cargos Cadastrados</h2>
 
@@ -29,30 +29,10 @@
                             <div class="col-md-6 text-center">
                                 <p><h4>Setor do Cargo: <span class='textUser'>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</span></h4></p>
                                 <p><h4>Data de Cadastro:<span class='textUser'> @x.Car_DataCadastro</span></h4></p>
-                                @if (x.Car_Cargo_Car_ID == null)
-                                {
-                                <p>Este cargo ocupa a posição de chefe do setor</p>
-                                }
-
-                                else
-                                {
-                                foreach (var y in ViewBag.CargosChefe)
-                                {
-
-                                if (x.Car_Cargo_Car_ID == y.Car_ID)
-                                {
-                                <p>Este cargo responde ao cargo de @y.Car_Nome</p>
-                                break;
-                                }
-
-
-                                }
-                                }
                             </div>
                             <div class="col-md-6 text-white text-right">
                                 <a class="btn btn-warning custom" href="@Url.Action(" AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
                                 <button class="btn btn-danger custom AbrirModal" data-id="@x.Car_ID"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
-
                             </div>
 
                         </div>
@@ -63,8 +43,9 @@
         </div>
         <br />
         }
-        <hr />
+        
     </div>
+    <hr />
 
     <div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
         <div class="modal-dialog" role="document">

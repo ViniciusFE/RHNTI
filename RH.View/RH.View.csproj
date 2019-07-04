@@ -259,7 +259,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\LayoutSemMenu.cshtml" />
-    <Content Include="Views\Cargo\CadastrarCargo.cshtml" />
     <Content Include="Views\Cargo\Index.cshtml" />
     <Content Include="Views\Shared\Layout_Empresa.cshtml" />
     <Content Include="Views\Pessoa\CadastrarFuncionario.cshtml" />

@@ -28,7 +28,7 @@ namespace RH.Model
         public int DB_Pessoa_Pes_ID { get; set; }
         public string DB_Tipo { get; set; }
         public string DB_Numero { get; set; }
-        public System.DateTime DB_DataCadastro { get; set; }
+        public string DB_DataCadastro { get; set; }
         public bool DB_Situation { get; set; }
     
         public virtual Pessoa Pessoa { get; set; }
