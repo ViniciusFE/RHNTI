@@ -31,7 +31,7 @@ namespace RH.Model
         public string Emp_CNPJ { get; set; }
         public string Emp_RegistroEstadual { get; set; }
         public System.DateTime Emp_DataCadastro { get; set; }
-        public System.DateTime Emp_DataAtual { get; set; }
+        public string Emp_DataAtual { get; set; }
         public bool Emp_Situation { get; set; }
         public byte[] Emp_Logo { get; set; }
         public bool Emp_Avaliativa { get; set; }
