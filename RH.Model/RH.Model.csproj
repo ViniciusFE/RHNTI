@@ -54,9 +54,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Annotations\Aluno.cs" />
-    <Compile Include="Annotations\Cargo.cs" />
     <Compile Include="Annotations\Empresa.cs" />
-    <Compile Include="Annotations\Pessoa.cs" />
     <Compile Include="Annotations\Professor.cs" />
     <Compile Include="Annotations\Setor.cs" />
     <Compile Include="Avaliacao.cs">
@@ -118,20 +116,18 @@
     <Compile Include="Prova.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Questao.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="QuestaoAvaliacao.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\RepositorieAluno.cs" />
     <Compile Include="Repositories\RepositorieAvaliacao.cs" />
     <Compile Include="Repositories\RepositorieCargo.cs" />
     <Compile Include="Repositories\RepositorieDemissao.cs" />
+    <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
     <Compile Include="Repositories\RepositorieProfessor.cs" />
     <Compile Include="Repositories\RepositorieSetor.cs" />
+    <Compile Include="Resposta.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Setor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -62,10 +62,11 @@ namespace RH.View.Controllers
             if (ModelState.IsValid)
             {
                 aEmpresa.Emp_DataCadastro = DateTime.Now;
-                aEmpresa.Emp_DataAtual = Convert.ToDateTime("01/01/2019");
+                aEmpresa.Emp_DataAtual = "01/01";
                 aEmpresa.Emp_Situation = true;
                 Aluno oAluno = (Aluno)Session["User"];
                 aEmpresa.Emp_Aluno_Alu_ID = Convert.ToInt32(oAluno.Alu_ID);
+                aEmpresa.Emp_Avaliativa = false;
                 _Control.CadastrarEmpresa(aEmpresa);
                 return RedirectToAction("MinhasEmpresas");
             }

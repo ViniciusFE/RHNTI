@@ -152,6 +152,7 @@
     <Compile Include="Controllers\AlunoController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\CargoController.cs" />
+    <Compile Include="Controllers\DependenteController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -258,7 +259,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\LayoutSemMenu.cshtml" />
-    <Content Include="Views\Cargo\CadastrarCargo.cshtml" />
     <Content Include="Views\Cargo\Index.cshtml" />
     <Content Include="Views\Shared\Layout_Empresa.cshtml" />
     <Content Include="Views\Pessoa\CadastrarFuncionario.cshtml" />
@@ -271,10 +271,12 @@
     <Content Include="Views\Aluno\CadasrarAluno.cshtml" />
     <Content Include="Views\Pessoa\AlterarFuncionario.cshtml" />
     <Content Include="Views\Professor\CadastrarProfessor.cshtml" />
+    <Content Include="Views\Cargo\CadastrarCargo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Dependente\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

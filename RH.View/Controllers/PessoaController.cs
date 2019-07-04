@@ -22,6 +22,13 @@ namespace RH.View.Controllers
         //cadastro de Funcionario
         public ActionResult CadastrarFuncionario()
         {
+            List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            if(Cargos.Count==0)
+            {
+                ViewBag.Cargos = "Você ainda não pode cadastrar funcionários, pois ainda não existem cargos cadastrados na sua empresa, por favor cadastre um cargo e a funcionalidade de cadastrar funcionários estará habilitada.";
+            }
+
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome");
             return View();
         }
@@ -32,7 +39,7 @@ namespace RH.View.Controllers
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
             oFuncionario.Pes_Situation = true;
-            oFuncionario.Pes_DataAdmissao = DateTime.Now;
+            oFuncionario.Pes_DataCadastro="01/01";
 
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 
@@ -133,7 +140,7 @@ namespace RH.View.Controllers
 
             Demissao aDemissao = new Demissao()
             {
-                Dem_Data = DateTime.Now,
+                Dem_DataCadastro = "01/01",
                 Dem_Motivo = Motivo,
                 Dem_Pessoa_Pes_ID = id,
                 Dem_Situation = true

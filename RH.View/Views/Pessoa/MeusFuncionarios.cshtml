@@ -41,7 +41,7 @@
                                 }
                             }
 
-                            <h4>Data de Admissão: <span class='textUser'> @x.Pes_DataAdmissao </span></h4>
+                            <h4>Data de Admissão: <span class='textUser'> @x.Pes_DataCadastro </span></h4>
                             <h4>Salário:<span class='textUser'> @x.Pes_Salario R$</span></h4>
                             <h4>Carteira de Trabalho: <span class='textUser'>@x.Pes_CTrabalho</span></h4>
                             <h4>CPF:<span class='textUser'> @x.Pes_CPF</span></h4>
@@ -51,6 +51,7 @@
 
                         <div class="col-md-3">
                             <a class="btn btn-warning custom text-white" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                            <button>Dependentes</button>
                             <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
                         </div>
 

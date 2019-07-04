@@ -4,50 +4,128 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6830ba8142b441c1845749b38559fccd" Name="Diagram1">
-        <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="14.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.CadastroTreinamento" Width="1.5" PointX="19.5" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Cargo" Width="1.5" PointX="12" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Curso" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.DadoBancario" Width="1.5" PointX="16.5" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.DadoDependente" Width="1.5" PointX="16.5" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Demissao" Width="1.5" PointX="16.5" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Empresa" Width="1.5" PointX="7.5" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Movimentacao" Width="1.5" PointX="16.5" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Pessoa" Width="1.5" PointX="14.25" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.PessoaBeneficio" Width="1.5" PointX="16.5" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Professor" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="9.75" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Questao" Width="1.5" PointX="16.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.QuestaoAvaliacao" Width="1.5" PointX="18.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Setor" Width="1.5" PointX="9.75" PointY="18" IsExpanded="true" />
+      <Diagram DiagramId="48b6047cdac74d9cb52d52d94a87e98d" Name="Diagram1">
+        <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="9.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.CadastroTreinamento" Width="1.5" PointX="19.5" PointY="42.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Cargo" Width="1.5" PointX="12" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Curso" Width="1.5" PointX="3" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.DadoBancario" Width="1.5" PointX="16.5" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.DadoDependente" Width="1.5" PointX="16.5" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Demissao" Width="1.5" PointX="16.5" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Empresa" Width="1.5" PointX="7.5" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Movimentacao" Width="1.5" PointX="16.5" PointY="48.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Pessoa" Width="1.5" PointX="14.25" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.PessoaBeneficio" Width="1.5" PointX="19.5" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Professor" Width="1.5" PointX="0.75" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="21.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Resposta" Width="1.5" PointX="24.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Setor" Width="1.5" PointX="9.75" PointY="36.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Treinamento" Width="1.5" PointX="9.75" PointY="28.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Treinamento" Width="1.5" PointX="9.75" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="48" IsExpanded="true" />
         <AssociationConnector Association="RHModel.FK_Aluno_Curso" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Empresa_Aluno" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Aluno" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Avaliacao_Pessoa" ManuallyRouted="false" />
-        <AssociationConnector Association="RHModel.FK_QuestaoAvaliacao_Avaliacao" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Avaliacao" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Avaliacao1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Avaliacao2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Avaliacao3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Avaliacao4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Avaliacao" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Avaliacao1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Avaliacao2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Avaliacao3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Avaliacao4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Beneficio_Empresa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_PessoaBeneficio_Beneficio" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Beneficio" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Beneficio1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Beneficio2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Beneficio3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Beneficio4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Beneficio" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Beneficio1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Beneficio2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Beneficio3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Beneficio4" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_CadastroTreinamento_Pessoa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_CadastroTreinamento_Treinamento" ManuallyRouted="false" />
-        <AssociationConnector Association="RHModel.FK_Cargo_Cargo" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Cargo_Setor" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Pessoa_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Cargo1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Cargo2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Cargo3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Cargo4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Cargo1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Cargo2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Cargo3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Cargo4" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Vaga_Cargo" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Curso_Professor" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_DadoBancario_Pessoa" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoBancario" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoBancario1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoBancario2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoBancario3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoBancario4" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_DadoPendente_Pessoa" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoDependente" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoDependente1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoDependente2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoDependente3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_DadoDependente4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_DadoDependente" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_DadoDependente1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_DadoDependente2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_DadoDependente3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_DadoDependente4" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Demissao_Pessoa" ManuallyRouted="false" />
-        <AssociationConnector Association="RHModel.FK_Prova_Empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Demissao" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Demissao1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Demissao2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Demissao" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Demissao1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Demissao2" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Setor_Empresa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Treinamento_Empresa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Movimentacao_Pessoa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_PessoaBeneficio_Pessoa" ManuallyRouted="false" />
-        <AssociationConnector Association="RHModel.FK_QuestaoAvaliacao_Questao" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Pessoa" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Pessoa1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Pessoa2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Pessoa3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Pessoa4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Pessoa" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Pessoa1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Pessoa2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Pessoa3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Pessoa4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_PessoaBeneficio" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_PessoaBeneficio1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_PessoaBeneficio2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_PessoaBeneficio3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_PessoaBeneficio4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Professor" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Setor" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Setor1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Setor2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Setor3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Prova_Setor4" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Setor" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Setor1" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Setor2" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Setor3" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Resposta_Setor4" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -53,6 +53,7 @@
     <Compile Include="CBeneficio.cs" />
     <Compile Include="CCargo.cs" />
     <Compile Include="CDemissao.cs" />
+    <Compile Include="CDependente.cs" />
     <Compile Include="CEmpresa.cs" />
     <Compile Include="CPessoa.cs" />
     <Compile Include="CProfessor.cs" />

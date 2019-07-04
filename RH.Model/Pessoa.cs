@@ -24,6 +24,16 @@ namespace RH.Model
             this.Demissao = new HashSet<Demissao>();
             this.Movimentacao = new HashSet<Movimentacao>();
             this.PessoaBeneficio = new HashSet<PessoaBeneficio>();
+            this.Prova = new HashSet<Prova>();
+            this.Prova1 = new HashSet<Prova>();
+            this.Prova2 = new HashSet<Prova>();
+            this.Prova3 = new HashSet<Prova>();
+            this.Prova4 = new HashSet<Prova>();
+            this.Resposta = new HashSet<Resposta>();
+            this.Resposta1 = new HashSet<Resposta>();
+            this.Resposta2 = new HashSet<Resposta>();
+            this.Resposta3 = new HashSet<Resposta>();
+            this.Resposta4 = new HashSet<Resposta>();
         }
     
         public int Pes_ID { get; set; }
@@ -33,7 +43,7 @@ namespace RH.Model
         public double Pes_Salario { get; set; }
         public string Pes_Cidade { get; set; }
         public string Pes_Endereco { get; set; }
-        public System.DateTime Pes_DataAdmissao { get; set; }
+        public string Pes_DataCadastro { get; set; }
         public bool Pes_Situation { get; set; }
         public int Pes_Cargo_Car_ID { get; set; }
         public byte[] Pes_Imagem { get; set; }
@@ -53,5 +63,25 @@ namespace RH.Model
         public virtual ICollection<Movimentacao> Movimentacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PessoaBeneficio> PessoaBeneficio { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova4 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resposta> Resposta4 { get; set; }
     }
 }

@@ -66,7 +66,7 @@ namespace RH.View.Controllers
             Avaliacao aAvaliacao = new Avaliacao()
             {
                 Ava_Pessoa_Pes_ID = id,
-                Ava_Data = DateTime.Now,
+                Ava_DataCadastro = DateTime.Now,
                 Ava_Situation = true,
             };
             _Control.CadastrarAvaliacao(aAvaliacao);

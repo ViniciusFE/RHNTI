@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "CadastrarFuncionario";
+
+    if (ViewBag.Cargos == null)
+    {
+        ViewBag.Cargos = "";
+    }
 }
 
 <h2 class="text-center">Cadastrar Funcionario</h2>
@@ -21,7 +26,7 @@
         <div class="custom-file col-md-12">
 
             <input type="file" class="custom-file-input" id="customFile" name="imagem">
-            <label class="custom-file-label" for="customFile">Escolha a Foto do Seu Funcionario</label>
+            <label class="custom-file-label" for="customFile">Escolha a Foto do Seu Funcionário</label>
             @Html.ValidationMessage("Imagem", "", new { @class = "text-danger" })
 
         </div>
@@ -39,7 +44,7 @@
             @Html.Label("CPF", htmlAttributes: new { @class = "control-label col-md-2" })
 
             @Html.EditorFor(model => model.Pes_CPF, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CPF do Funcionario" } })
-            @Html.ValidationMessageFor(model=>model.Pes_CPF, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Pes_CPF, "", new { @class = "text-danger" })
 
         </div>
 
@@ -79,7 +84,7 @@
         <div class="form-group col-md-6">
             @Html.Label("Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="">
-                @Html.DropDownList("Pes_Cargo_Car_ID",null, "Selecione o cargo do funcionário", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Pes_Cargo_Car_ID", null, "Selecione o cargo do funcionário", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Pes_Cargo_Car_ID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -101,7 +106,45 @@
     @Html.ActionLink("Voltar", "MeusFuncionarios")
 </div>
 
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalCargo">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Demitir funcionário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">@ViewBag.Cargos</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn bg-success text-white" data-dismiss="modal" id="BtnNao">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
 
+    $(document).ready(function () {
+
+        $("#ModalCargo").on('hide.bs.modal', function () {
+            $(location).attr("href", "@Url.Action("CadastrarCargo","Cargo")");
+        });
+
+
+    });
+    </script>
+
+    @if(ViewBag.Cargos!="")
+    {
+        <script>
+            $("#ModalCargo").modal('show');
+        </script>
+    }
 }
+

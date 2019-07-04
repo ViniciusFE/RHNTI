@@ -18,6 +18,7 @@ namespace RH.Model
         public Professor()
         {
             this.Curso = new HashSet<Curso>();
+            this.Prova = new HashSet<Prova>();
         }
     
         public int Pro_ID { get; set; }
@@ -28,5 +29,7 @@ namespace RH.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Curso> Curso { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
     }
 }

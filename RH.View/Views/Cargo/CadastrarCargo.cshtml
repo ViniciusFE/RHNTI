@@ -1,57 +1,64 @@
 ﻿@model RH.Model.Cargo
+
 @{
     ViewBag.Title = "CadastrarCargo";
 }
 
-<h2 class="text-center">Cadastrar Cargo</h2>
+<h2>CadastrarCargo</h2>
 
 
-@using (Html.BeginForm("CadastrarCargo", "Cargo", FormMethod.Post))
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
-        <h4 class="text-center">Cargo</h4>
+        <h4>Cargo</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-row">
-            <div class="form-group col-12">
-                @Html.LabelFor(model => model.Car_Setor_Set_ID, htmlAttributes: new { @class = "control-label " })
-
-                @Html.DropDownList("Car_Setor_Set_ID", null, "Selecione o setor", htmlAttributes: new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car_Setor_Set_ID, "Car_Setor_Set_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Car_Setor_Set_ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
-
             </div>
+        </div>
 
-            <div class="form-group col-6">
-                @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label " })
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
                 @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
-
             </div>
+        </div>
 
-            <div class="form-group col-6">
-                @Html.LabelFor(model => model.Car_Cargo_Car_ID, htmlAttributes: new { @class = "control-label " })
-
-                @Html.DropDownList("Car_Cargo_Car_ID", null, "Selecione o cargo chefe", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Car_Cargo_Car_ID, "", new { @class = "text-danger" })
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car_DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car_DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car_DataCadastro, "", new { @class = "text-danger" })
             </div>
+        </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car_Situation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Car_Situation)
+                    @Html.ValidationMessageFor(model => model.Car_Situation, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Criar" class="btn btn-outline-secondary" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div class="back">
-    <a href="~/Cargo/Index"><i class="fas fa-arrow-left"></i> Voltar</a>
+<div>
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
