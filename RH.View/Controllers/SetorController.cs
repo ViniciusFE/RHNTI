@@ -42,7 +42,7 @@ namespace RH.View.Controllers
         {
             if (ModelState.IsValid)
             {
-                oSetor.Set_DataCadastro = DateTime.Now;
+                oSetor.Set_DataCadastro = "01/01";
                 oSetor.Set_Situation = true;
                 oSetor.Set_Empresa_Emp_ID = Convert.ToInt32(Session["IDEmpresa"]);
                 _Control.CadastrarSetor(oSetor);

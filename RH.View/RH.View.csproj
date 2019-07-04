@@ -271,6 +271,7 @@
     <Content Include="Views\Aluno\CadasrarAluno.cshtml" />
     <Content Include="Views\Pessoa\AlterarFuncionario.cshtml" />
     <Content Include="Views\Professor\CadastrarProfessor.cshtml" />
+    <Content Include="Views\Cargo\CadastrarCargo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
