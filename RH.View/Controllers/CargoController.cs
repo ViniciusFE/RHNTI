@@ -29,6 +29,8 @@ namespace RH.View.Controllers
 
         public ActionResult CadastrarCargo()
         {
+            List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome");
             return View();
         }
 
@@ -36,7 +38,19 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarCargo(Cargo oCargo)
         {
+            List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome");
 
+            if (ModelState.IsValid)
+            {
+                string dia = DateTime.Now.Day.ToString();
+                string mes = DateTime.Now.Month.ToString();
+                oCargo.Car_DataCadastro = dia + "/" + mes;
+                oCargo.Car_Situation = true;
+                _Control.CadastrarCargo(oCargo);
+                return RedirectToAction("Index");
+            }
+            
             return View();
         }
 
