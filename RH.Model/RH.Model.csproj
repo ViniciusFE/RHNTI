@@ -119,12 +119,14 @@
     </Compile>
     <Compile Include="Repositories\RepositorieAluno.cs" />
     <Compile Include="Repositories\RepositorieAvaliacao.cs" />
+    <Compile Include="Repositories\RepositorieBeneficio.cs" />
     <Compile Include="Repositories\RepositorieCargo.cs" />
     <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
     <Compile Include="Repositories\RepositorieProfessor.cs" />
+    <Compile Include="Repositories\RepositorieQuestao.cs" />
     <Compile Include="Repositories\RepositorieSetor.cs" />
     <Compile Include="Resposta.cs">
       <DependentUpon>Model.tt</DependentUpon>
