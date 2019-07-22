@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
 using RH.View.Filtro;
+using PagedList;
 
 namespace RH.View.Controllers
 {
@@ -24,28 +25,68 @@ namespace RH.View.Controllers
         }
 
         // GET: Setor
-        public ActionResult Index()
+        public ActionResult Index(int? pagina,string Pesquisa= "Pesquisar setores")
         {
-            List<Setor> _setores = _Control.SelecionarTodosSetores();
-            return View(_setores);
+            ViewBag.Pesquisa = null;
+            ViewBag.Pesquisado = Pesquisa;
+            ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            List<Setor> _setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            if(Pesquisa!="Pesquisar setores")
+            {
+                _setores = _setores.Where(p => p.Set_Nome.Contains(Pesquisa)).ToList();
+                if(_setores.Count()==0)
+                {
+                    ViewBag.Pesquisa="Não foi encontrado nenhum resultado referente a pesquisa '"+Pesquisa+"', verifique o que foi digitado e tente novamente.";
+                }
+            }
+
+            int paginaTamanho = 4;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(_setores.ToPagedList(paginaNumero,paginaTamanho));
         }
 
         public ActionResult CadastrarSetor()
         {
-            ViewBag.Set_Empresa_Emp_ID = new SelectList(_EControl.SelecionarTodasEmpresa(), "Emp_ID", "Emp_Nome");
+            ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarSetor(Setor oSetor)
+        public ActionResult CadastrarSetor(Setor oSetor,int SetorRespondente)
         {
+            ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
             if (ModelState.IsValid)
             {
-                oSetor.Set_DataCadastro = "01/01";
+                Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+                oSetor.Set_DataCadastro = aEmpresa.Emp_DataAtual;
                 oSetor.Set_Situation = true;
                 oSetor.Set_Empresa_Emp_ID = Convert.ToInt32(Session["IDEmpresa"]);
+
+                if(SetorRespondente==0)
+                {
+                    oSetor.Set_Setor_Set_ID = oSetor.Set_ID;
+                }
+
+                else
+                {
+                    oSetor.Set_Setor_Set_ID = SetorRespondente;
+                }
+
                 _Control.CadastrarSetor(oSetor);
+
+                if(SetorRespondente==0)
+                {
+                    Setor oSetor2 = _Control.SelecionarSetorPeloNome(oSetor.Set_Nome);
+                    oSetor2.Set_Setor_Set_ID = oSetor2.Set_ID;
+                    _Control.AlterarSetor(oSetor2);
+                }
+
                 //Cargo t = _CCargo.SelecionarCargoPorNome("-");
                 //if (t == null)
                 //{
@@ -67,23 +108,59 @@ namespace RH.View.Controllers
         public ActionResult AlterarSetor(int id)
         {
             Setor oSetor = _Control.SelecionarSetor(id);
-            ViewBag.Set_Empresa_Emp_ID = new SelectList(_EControl.SelecionarTodasEmpresa(), "Emp_ID", "Emp_Nome", oSetor.Set_Empresa_Emp_ID);
+            ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             return View(oSetor);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AlterarSetor(Setor oSetor)
+        public ActionResult AlterarSetor(Setor oSetor,int SetorRespondente)
         {
-            Setor nSetor = _Control.SelecionarSetor(oSetor.Set_ID);
-            nSetor.Set_Nome = oSetor.Set_Nome;
-            nSetor.Set_Empresa_Emp_ID = oSetor.Set_Empresa_Emp_ID;
+            ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            
             if (ModelState.IsValid)
             {
-                _Control.AlterarSetor(nSetor);
+                Setor nSetor = _Control.SelecionarSetor(oSetor.Set_ID);
+                oSetor.Set_Empresa_Emp_ID = nSetor.Set_Empresa_Emp_ID;
+                oSetor.Set_Situation = nSetor.Set_Situation;
+                oSetor.Set_DataCadastro = nSetor.Set_DataCadastro;
+                if(SetorRespondente==0)
+                {
+                    oSetor.Set_Setor_Set_ID = nSetor.Set_ID;
+                }
+
+                else
+                {
+                    oSetor.Set_Setor_Set_ID = SetorRespondente;
+                }
+
+                _Control.AlterarSetor(oSetor);
+                return RedirectToAction("Index");
+            }
+            return View(oSetor);
+            
+        }
+
+        public ActionResult ExcluirSetor(int id)
+        {
+            string[] retorno = new string[2];
+
+            if(!_Control.PossuiSetores(id))
+            {
+                Setor oSetor = _Control.SelecionarSetor(id);
+                oSetor.Set_Situation = false;
+                _Control.AlterarSetor(oSetor);
+
+                retorno[0] = "O setor foi excluído com sucesso!";
+                retorno[1] = "Excluido";
+
+                return Json(retorno);
             }
 
-            return RedirectToAction("Index");
+            retorno[0] = "O setor não pode ser excluído, poís existem outros setores que respondem ao mesmo. Para excluir esse setor primeiro apague ou altere os setores que respondem a este.";
+            retorno[1] = "Erro";
+
+            return Json(retorno);
         }
 
     }

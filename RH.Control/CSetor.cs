@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +11,12 @@ namespace RH.Control
     public class CSetor
     {
         private RepositorieSetor _RepositorieSetor;
+        private RepositorieEmpresa _RepositorieEmpresa;
 
         public CSetor()
         {
             _RepositorieSetor = new RepositorieSetor();
+            _RepositorieEmpresa = new RepositorieEmpresa();
         }
 
         public List<Setor> SelecionarTodosSetores()
@@ -47,5 +49,19 @@ namespace RH.Control
             _RepositorieSetor.ExcluirSetor(oSetor);
         }
 
+        public Empresa SelecionarEmpresa(int id)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresa(id);
+        }
+
+        public Setor SelecionarSetorPeloNome(string NomeSetor)
+        {
+            return _RepositorieSetor.SelecionarSetorPeloNome(NomeSetor);
+        }
+
+        public bool PossuiSetores(int IDSetor)
+        {
+            return _RepositorieSetor.PossuiSetores(IDSetor);
+        }
     }
 }

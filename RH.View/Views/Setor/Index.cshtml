@@ -1,50 +1,195 @@
-﻿@model IEnumerable<RH.Model.Setor>
+@model PagedList.IPagedList<RH.Model.Setor>
 
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@using PagedList.Mvc
 
-<p>
-    @Html.ActionLink("Criar Setor", "CadastrarSetor")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Set_Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa.Emp_Nome)
-           
-        </th>
+@Styles.Render("~/Content/Pages/css")
+
+<style>
 
 
-        <th>
-            @Html.DisplayNameFor(model => model.Set_DataCadastro)
-        </th>
-        <th></th>
-    </tr>
+    #Load {
+        display: none;
+    }
+</style>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Set_Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresa.Emp_Nome)
+<br />
+<a class="btn btn-success custom" href="@Url.Action("CadastrarSetor","Setor")"><i class="fas fa-plus"></i> Cadastrar Setor</a>
+<br />
+<br />
 
-        </td>
+@if (Model.Count() > 0 || ViewBag.Pesquisa != null)
+{
+    using (Html.BeginForm("Index", "Setor", FormMethod.Get))
+    {
+        <div class="input-group col-md-4 float-right">
+            @if (ViewBag.Pesquisado != "Pesquisar setores")
+            {
+                <input type="text" class="form-control" placeholder="Pesquisar setores" name="Pesquisa" value="@ViewBag.Pesquisado">
+            }
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Set_DataCadastro)
-        </td>
-        <td>
-            @Html.ActionLink("Alterar", "AlterarSetor", new { id=item.Set_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Set_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Set_ID })
-        </td>
-    </tr>
+            else
+            {
+                <input type="text" class="form-control" placeholder="Pesquisar setores" name="Pesquisa">
+            }
+
+            <div class="input-group-append">
+                <button class="btn btn-success custom" type="submit"><span class="fa fa-search"></span></button>
+            </div>
+        </div>
+    }
+
+    <br />
+    <br />
 }
 
-</table>
+<br />
+<h2 class="text-center titulo-Lista">Meus Setores</h2>
+<hr />
+
+@if (ViewBag.Pesquisa != null)
+{
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>@ViewBag.Pesquisa</h4>
+        </div>
+    </div>
+}
+
+else
+{
+    if (Model.Count() > 0)
+    {
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach (var x in Model)
+                {
+                    <div class="card" style="width: 100rem;" id="card-@x.Set_ID">
+                        <div class="card-header">
+                            <h4>Nome do Setor:<span class='textUser'> @x.Set_Nome</span></h4>
+                        </div>
+
+                        <div class="card-body row">
+                            <div class="col-md-9">
+                                <h4>Data de Cadastro: @x.Set_DataCadastro</h4>
+                                @if (x.Set_ID == x.Set_Setor_Set_ID)
+                                {
+                                    <h4>Este setor responde a si mesmo</h4>
+                                }
+
+                                else
+                                {
+                                    foreach (var y in ViewBag.Setores)
+                                    {
+                                        if (y.Set_ID == x.Set_Setor_Set_ID)
+                                        {
+                                            <h4>Setor Respondente: @y.Set_Nome</h4>
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            <div class="col-md-3 float-right">
+                                <a class="btn btn-warning custom text-white" href="@Url.Action("AlterarSetor","Setor",new { id=x.Set_ID})"><i class="fas fa-edit"></i> Alterar</a>
+                                <button class="btn btn-danger custom excluir" data-id="@x.Set_ID"><i class="fas fa-ban"></i> Excluir Setor</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+
+            <nav aria-label="Page navigation example " class="paginacao">
+                <ul class="pagination">
+                    <li class="page-item">
+                        @Html.PagedListPager(Model, page => Url.Action("index", new { pagina = page }))
+
+                    </li>
+                </ul>
+            </nav>
+    }
+
+    else
+    {
+        <div class="alert alert-primary">
+            <div class="alert-body">
+                <h4>Esta empresa ainda não possui nenhum setor cadastrado...</h4>
+            </div>
+        </div>
+    }
+
+    <hr />
+}
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluirSetor">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Setor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="Mensagem">
+                    Tem certeza que deseja excluir esse setor?
+                </div>
+                <div align="center" id="Load">
+                    <img src='~/Imagem/833.gif' />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success requisicao" id="ExcluirSetor">Sim</button>
+                <button type="button" class="btn btn-danger requisicao" data-dismiss="modal" id="BtnNao">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            var IDSetor;
+
+            $(".excluir").click(function () {
+                $(".requisicao").removeAttr("disabled");
+                $("#ModalExcluirSetor").modal('show');
+                $("#Mensagem").html("Tem certeza que deseja excluir esse setor?");
+                IDSetor = $(this).attr("data-id");
+
+            });
+
+
+
+            $("#ExcluirSetor").click(function () {
+                $(".requisicao").attr("disabled", "disabled");
+                $("#Mensagem").css("display", "none");
+                $("#Load").css("display", "block");
+                var url = "@Url.Action("ExcluirSetor", "Setor")";
+                $.post(url, { id: IDSetor }, Output);
+            });
+
+            function Output(resposta) {
+                $("#Mensagem").css("display", "block");
+                $("#Load").css("display", "none");
+                $("#Mensagem").html(resposta[0]);
+
+                if (resposta[1] == "Excluido") {
+                    $("#card-" + IDSetor).slideUp('slow');
+                }
+            }
+
+        });
+
+    </script>
+}
+
