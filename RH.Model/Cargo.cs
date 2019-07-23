@@ -36,6 +36,7 @@ namespace RH.Model
         public string Car_Nome { get; set; }
         public string Car_DataCadastro { get; set; }
         public bool Car_Situation { get; set; }
+        public bool Car_Chefe { get; set; }
     
         public virtual Setor Setor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,7 +1,9 @@
 @model IEnumerable<RH.Model.Cargo>
 
 @{
-    ViewBag.Title = "Cargos";
+    /**/
+
+    ViewBag.Title = "Meus Cargos";
 }
 @Styles.Render("~/Content/Pages/css")
 
@@ -11,77 +13,103 @@
     <a class="btn btn-success custom" href="@Url.Action("CadastrarCargo","Cargo")"><i class="fas fa-plus"></i> Cadastrar Novo Cargo</a>
 </p>
 
-@if (Model.Count() > 0)
-{
-    using (Html.BeginForm("Index", "Setor", FormMethod.Get))
+
+
+    @using (Html.BeginForm("Index", "Cargo", FormMethod.Get))
     {
-        <div class="input-group col-md-4 float-right">
-            @if (ViewBag.Pesquisado != "Pesquisar setores")
-            {
-                <input type="text" class="form-control" placeholder="Pesquisar cargos" name="Pesquisa" value="@ViewBag.Pesquisado">
-            }
+<div class="input-group col-md-4 float-right">
 
-            else
-            {
-                <input type="text" class="form-control" placeholder="Pesquisar setores" name="Pesquisa">
-            }
+    @if (!string.IsNullOrEmpty(ViewBag.Pesquisado))
+    {
+        <input type="text" class="form-control" name="Pesquisa" value="@ViewBag.Pesquisado" placeholder="Pesquisar cargos">
+    }
 
-            <div class="input-group-append">
-                <button class="btn btn-success custom" type="submit"><span class="fa fa-search"></span></button>
-            </div>
-        </div>
+    else
+    {
+        <input type="text" class="form-control" name="Pesquisa" placeholder="Pesquisar cargos">
+    }
+
+    <div class="input-group-append">
+        <button class="btn btn-success custom" type="submit"><span class="fa fa-search"></span></button>
+    </div>
+</div>
     }
 
     <br />
     <br />
-}
 
 <h2 class="text-center">Cargos Cadastrados</h2>
 
 <hr />
-
-@if (Model.Count() > 0)
+@if (ViewBag.Pesquisado != null && Model.Count()==0)
 {
-    <div class="container">
-        @foreach (var x in Model)
-        {
-
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="card" id="Cargo-@x.Car_ID">
-                        <div class="card-header"><h4>Nome:<span class='textUser'> @x.Car_Nome</span></h4></div>
-                        <div class="card-body bg-light">
-                            <div class="row">
-                                <div class="col-md-6 text-center">
-                                    <p><h4>Setor do Cargo: <span class='textUser'>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</span></h4></p>
-                                    <p><h4>Data de Cadastro:<span class='textUser'> @x.Car_DataCadastro</span></h4></p>
-                                </div>
-                                <div class="col-md-6 text-white text-right">
-                                    <a class="btn btn-warning custom" href="@Url.Action(" AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
-                                    <button class="btn btn-danger custom AbrirModal" data-id="@x.Car_ID"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <br />
-        }
-
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>Não foi encontrado nenhum resultado referente a pesquisa '@ViewBag.Pesquisado', verifique o que foi digitado e tente novamente.</h4>
+        </div>
     </div>
 }
 
 else
 {
-    <div class="alert alert-primary">
-        <div class="alert-body">
-            <h4>Esta empresa ainda não possui nenhum cargo cadastrado...</h4>
+    if (Model.Count() > 0)
+    {
+        <div class="container">
+            @foreach (var x in Model)
+            {
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="card" id="Cargo-@x.Car_ID">
+                            <div class="card-header"><h4>Nome:<span class='textUser'> @x.Car_Nome</span></h4></div>
+                            <div class="card-body bg-light">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        <p><h4>Setor do Cargo: <span class='textUser'>@Html.DisplayFor(modelItem => x.Setor.Set_Nome)</span></h4></p>
+                                        <p><h4>Data de Cadastro:<span class='textUser'> @x.Car_DataCadastro</span></h4></p>
+                                        <p>
+                                            <h4>
+                                                @if (x.Car_Chefe)
+                                                {
+                                                    <span>Chefe do setor</span>
+                                                }
+
+                                                else
+                                                {
+                                                    <span>Funcionário</span>
+                                                }
+                                            </h4>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 text-white text-right">
+                                        <a class="btn btn-warning custom" href="@Url.Action("AlterarCargo","Cargo",new { id=x.Car_ID})"><i class="fas fa-pencil-alt"></i> Alterar Cargo</a>
+                                        <button class="btn btn-danger custom AbrirModal" data-id="@x.Car_ID"><i class="fas fa-trash-alt"></i> Excluir Cargo</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+            }
+
         </div>
-    </div>
+    }
+
+    else
+    {
+        <div class="alert alert-primary">
+            <div class="alert-body">
+                <h4>Esta empresa ainda não possui nenhum cargo cadastrado...</h4>
+            </div>
+        </div>
+    }
 }
+
+
 
 <hr />
 
@@ -95,7 +123,7 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                <h5 id="Confirmacao"></h5>
+                <p id="Confirmacao"></p>
                 <div align="center">
                     <img src="~/Imagem/833.gif" id="Carregando" style="display:none;" />
                 </div>
@@ -140,6 +168,7 @@ else
                 $("#Confirmacao").html(retorno);
                 $("#Confirmacao").css("display", "block");
                 $("#Carregando").css("display", "none");
+                $("#Cargo-" + IDCargo).slideUp('slow');
             }
     });
     </script>

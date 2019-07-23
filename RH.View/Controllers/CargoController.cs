@@ -18,11 +18,19 @@ namespace RH.View.Controllers
         {
             _Control = new CCargo();
         }
-
+        
         // GET: Cargo
-        public ActionResult Index()
+        public ActionResult Index(string Pesquisa="")
         {
+            ViewBag.Pesquisado = null;
             List<Cargo> _cargos = _Control.SelecionarTodosCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            if(!string.IsNullOrEmpty(Pesquisa))
+            {
+                _cargos = _cargos.Where(p => p.Car_Nome.Contains(Pesquisa)).ToList();
+                ViewBag.Pesquisado = Pesquisa;
+            }
+
             return View(_cargos);
         }
 
@@ -36,36 +44,71 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarCargo(Cargo oCargo)
+        public ActionResult CadastrarCargo(Cargo oCargo,bool ChefeSetor)
         {
             List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome");
 
+            if(ChefeSetor)
+            {
+                bool StatusChefe = _Control.SelecionarChefeSetor(oCargo.Car_Setor_Set_ID);
+                if (StatusChefe)
+                {
+                    ModelState.AddModelError("ChefeSetor", "Este setor já possui um chefe, troque o status de chefe do cargo ou selecione outro setor de atividade");
+                    return View();
+                }
+            }
+
+            bool CargosComMesmoNome = _Control.CargosComMesmoNome(oCargo.Car_Nome, oCargo.Car_Setor_Set_ID);
+            if (CargosComMesmoNome)
+            {
+                ModelState.AddModelError("Car_Nome", "Este setor já possui um cargo com este nome");
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
-                string dia = DateTime.Now.Day.ToString();
-                string mes = DateTime.Now.Month.ToString();
-                oCargo.Car_DataCadastro = dia + "/" + mes;
+                Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+                oCargo.Car_DataCadastro = aEmpresa.Emp_DataAtual;
+                oCargo.Car_Chefe = ChefeSetor;
                 oCargo.Car_Situation = true;
                 _Control.CadastrarCargo(oCargo);
                 return RedirectToAction("Index");
             }
-            
+
             return View();
         }
 
         public ActionResult AlterarCargo(int id)
         {
-         
-            return View();
+            List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome");
+
+            Cargo oCargo = _Control.SelecionarCargo(id);
+            return View(oCargo);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AlterarCargo(Cargo oCargo)
+        public ActionResult AlterarCargo(Cargo oCargo,bool ChefeSetor)
         {
-            return RedirectToAction("Index");
+            List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome");
 
+            if(ModelState.IsValid)
+            {
+                Cargo oCargo1 = _Control.SelecionarCargo(oCargo.Car_ID);
+
+                oCargo1.Car_Nome = oCargo.Car_Nome;
+                oCargo1.Car_Setor_Set_ID = oCargo.Car_Setor_Set_ID;
+                oCargo1.Car_Chefe = oCargo.Car_Chefe;
+
+                _Control.AlterarCargo(oCargo1);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(oCargo);
         }
 
         public ActionResult ExcluirCargo(int id)

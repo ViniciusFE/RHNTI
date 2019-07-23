@@ -9,44 +9,68 @@
     }
 }
 
-<h2>CadastrarCargo</h2>
-
+@Styles.Render("~/Content/Pages/css")
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Cargo</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header">
+                <h1>Cadastrar Cargo</h1>
             </div>
+            <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
+                    </div>
 
-            <div class="col-md-10">
-                @Html.LabelFor(model => model.Car_Setor_Set_ID, "Setor pertencente", htmlAttributes: new { @class = "control-label" })
-                @Html.DropDownList("Car_Setor_Set_ID", null, "Selecione o setor que o cargo pertence", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Car_Setor_Set_ID, "Setor pertencente", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("Car_Setor_Set_ID", null, "Selecione o setor que o cargo pertence", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        @Html.LabelFor(model => model.Car_Chefe, "Este cargo ocupa a posição de chefe do setor?", htmlAttributes: new { @class = "control-label text-center" })
+                        <br />
+                        <label><input type="radio" value="true" name="ChefeSetor" checked /> Sim</label>
+                        <label><input type="radio" value="false" name="ChefeSetor" /> Não</label>
+                        <br />
+                        @Html.ValidationMessage("ChefeSetor", "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
             </div>
-
-        </div>
-
-
-        <div class="form-group">
-            <div class="form-group col-md-6 ">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Cadastrar" class="btn btn-outline-secondary" />
+            <div class="card-footer">
+                <div class="form-group">
+                    <div class="form-group col-md-6 ">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-outline-secondary"><span class="fa fa-plus"></span> Cadastrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <br />
+        
+        <div class="back">
+            <a href="~/Cargo/Index"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+
     </div>
 }
+
+
+
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalSetor">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -66,9 +90,6 @@
     </div>
 </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

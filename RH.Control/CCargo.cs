@@ -13,12 +13,14 @@ namespace RH.Control
         private RepositorieCargo _RepositorieCargo;
         private RepositorieSetor _RepositorieSetor;
         private RepositoriePessoa _RepositoriePessoa;
+        private RepositorieEmpresa _RepositorieEmpresa;
 
         public CCargo()
         {
             _RepositorieCargo = new RepositorieCargo();
             _RepositorieSetor = new RepositorieSetor();
             _RepositoriePessoa = new RepositoriePessoa();
+            _RepositorieEmpresa = new RepositorieEmpresa();
         }
 
         public List<Cargo> SelecionarTodosCargos()
@@ -89,6 +91,21 @@ namespace RH.Control
         public Pessoa SelecionarFuncionario(int id)
         {
             return _RepositoriePessoa.SelecionarFuncionario(id);
+        }
+
+        public Empresa SelecionarEmpresa(int id)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresa(id);
+        }
+
+        public bool SelecionarChefeSetor(int IDSetor)
+        {
+            return _RepositorieCargo.SelecionarChefeSetor(IDSetor);
+        }
+
+        public bool CargosComMesmoNome(string NomeCargo,int IDSetor)
+        {
+            return _RepositorieCargo.CargosComMesmoNome(NomeCargo, IDSetor);
         }
     }
 }
