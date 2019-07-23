@@ -13,6 +13,30 @@
 <a class="btn btn-success custom" href="@Url.Action("CadastrarFuncionario","Pessoa")"><i class="fas fa-user-plus"></i> Cadastrar Funcionário</a>
 <br />
 <br />
+
+@using (Html.BeginForm("Index", "Cargo", FormMethod.Get))
+{
+    <div class="input-group col-md-4 float-right">
+
+        @if (!string.IsNullOrEmpty(ViewBag.Pesquisado))
+        {
+            <input type="text" class="form-control" name="Pesquisa" value="@ViewBag.Pesquisado" placeholder="Pesquisar funcionários">
+        }
+
+        else
+        {
+            <input type="text" class="form-control" name="Pesquisa" placeholder="Pesquisar funcionários">
+        }
+
+        <div class="input-group-append">
+            <button class="btn btn-success custom" type="submit"><span class="fa fa-search"></span></button>
+        </div>
+    </div>
+    <br />
+    <br />
+}
+
+
 <h2 class="text-center titulo-Lista">Funcionários Cadastrados</h2>
 <hr />
 
@@ -50,7 +74,6 @@
                         </div>
 
                     </div>
-
                     <div class="card-footer">
                         <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
                         <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
