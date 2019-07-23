@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
 using RH.View.Filtro;
+using PagedList;
 
 namespace RH.View.Controllers
 {
@@ -20,7 +21,7 @@ namespace RH.View.Controllers
         }
         
         // GET: Cargo
-        public ActionResult Index(string Pesquisa="")
+        public ActionResult Index(int? pagina,string Pesquisa="")
         {
             ViewBag.Pesquisado = null;
             List<Cargo> _cargos = _Control.SelecionarTodosCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
@@ -31,7 +32,10 @@ namespace RH.View.Controllers
                 ViewBag.Pesquisado = Pesquisa;
             }
 
-            return View(_cargos);
+            int paginaTamanho = 4;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(_cargos.ToPagedList(paginaNumero,paginaTamanho));
         }
 
 
@@ -137,7 +141,7 @@ namespace RH.View.Controllers
 
             if (aPessoa != null)
             {
-                return Json("Este cargo não pode ser excluído, pois está atualmente ocupado pelo funcionário " + aPessoa.Pes_Nome+", para excluir esse cargo primeiramente demita o funcionário que o ocupa.");
+                return Json("Não é possivel escluir esse cargo, pois existem funcionários cadastrados nesse cargo, por favor antes de excluir esse cargo exclua os funcionários que estão cadastrados no mesmo");
             }
 
             else
