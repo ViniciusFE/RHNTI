@@ -4,37 +4,70 @@
     ViewBag.Title = "AlterarCargo";
 }
 
-<h2>Alterar Cargo</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Cargo</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Car_ID)
 
         <div class="form-row">
 
+            <div class="container my-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Alterar Cargo</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
+                            </div>
 
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.Car_Setor_Set_ID, "Setor pertencente", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("Car_Setor_Set_ID", null, "Selecione o setor que o cargo pertence", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                            <div class="text-center">
+                                @Html.LabelFor(model => model.Car_Chefe, "Este cargo ocupa a posição de chefe do setor?", htmlAttributes: new { @class = "control-label text-center" })
+                                <br />
+                                @if (Model.Car_Chefe)
+                                {
+                                    <label><input type="radio" value="true" name="ChefeSetor" checked /> Sim</label>
+                                    <label><input type="radio" value="false" name="ChefeSetor" /> Não</label>
+                                }
 
-            <div class="form-group col-12">
-                @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label" })
+                                else
+                                {
+                                    <label><input type="radio" value="true" name="ChefeSetor" /> Sim</label>
+                                    <label><input type="radio" value="false" name="ChefeSetor" checked /> Não</label>
+                                }
+                                <br />
+                                @Html.ValidationMessage("ChefeSetor", "", new { @class = "text-danger" })
+                            </div>
 
-                @Html.EditorFor(model => model.Car_Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Car_Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-group">
+                            <div class="form-group col-md-6 ">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" class="btn btn-outline-secondary"><span class="fa fa-plus"></span> Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
 
-            </div>
-
-            <div class="form-group col-6">
-                @*@Html.LabelFor(model => model.Car_Setor_Set_ID, "Car_Setor_Set_ID", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label class="control-label ">Setor</label>
-
-                @Html.DropDownList("Car_Setor_Set_ID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Car_Setor_Set_ID, "", new { @class = "text-danger" })
+                <div class="back">
+                    <a href="~/Cargo/Index"><i class="fas fa-arrow-left"></i> Voltar</a>
+                </div>
 
             </div>
 
@@ -56,18 +89,8 @@
             </div>
         </div>*@
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-outline-secondary" />
-            </div>
-        </div>
     </div>
 }
-
-<div class="back">
-    <a href="~/Cargo/Index"><i class="fas fa-arrow-left"></i> Voltar</a>
-
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
