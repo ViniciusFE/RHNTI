@@ -159,8 +159,8 @@ else
             $(".modal-body").html("<h5 id='texto' class='text-center'>Tem certeza que deseja demitir o funcionário?</h5>"+
                 "<p class='text-center'>Por favor marque o motivo da demissão do funcionário.</p>"+
                 "<div class='text-center'>"+
-                    "<label><input type='radio' name='Motivo' value='Pediu demissao' id='pediudemissao' checked/>Pediu demissão</label>"+
-                    "<label><input type='radio' name='Motivo' value='Foi demitido' id='demitido'/>Foi demitido</label>"+
+                    "<label class='mr-4'><input type='radio' name='Motivo' value='Pediu demissao' id='pediudemissao' checked/> Pediu demissão</label>"+
+                    "<label class='mr-4'><input type='radio' name='Motivo' value='Foi demitido' id='demitido'/> Foi demitido</label>"+
                 "</div>");
             $("#BtnNao").removeAttr("disabled");
             $("#ModalDemissao").modal('show');

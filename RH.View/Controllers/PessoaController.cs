@@ -4,6 +4,7 @@ using RH.View.Filtro;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -121,7 +122,7 @@ namespace RH.View.Controllers
         }
 
         [AutorizacaoEmpresa]
-        public ActionResult MeusFuncionarios()
+        public ActionResult MeusFuncionarios(string Pesquisa="")
         {
             int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
             List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
@@ -129,6 +130,13 @@ namespace RH.View.Controllers
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
+
+            if(Pesquisa!=null)
+            {
+                Funcionarios = Funcionarios.Where(p => p.Pes_Nome.Contains(Pesquisa)).ToList();
+                ViewBag.Pesquisado = Pesquisa;
+            }
+
             return View(Funcionarios);
         }
 
