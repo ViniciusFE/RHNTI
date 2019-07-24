@@ -77,7 +77,7 @@
                     <div class="card-footer">
                         <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
                         <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                        <button class="btn btn-warning custom"><span class="fa fa-users"></span> Dependentes</button>
+                        <a class="btn btn-warning custom" href="@Url.Action("Index","Dependente",new { IDFuncionario=x.Pes_ID})"><span class="fa fa-users"></span> Dependentes</a>
                         <button class="btn btn-success custom"><span class="fa fa-money-check-alt"></span> Dados Bancários</button>
                     </div>
                 </div>

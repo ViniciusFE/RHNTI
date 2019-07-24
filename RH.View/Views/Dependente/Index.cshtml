@@ -1,0 +1,94 @@
+@model IEnumerable<RH.Model.DadoDependente>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/Pages/css")
+
+
+
+<br />
+<a class="btn btn-success custom"><span class="fa fa-plus"></span> Cadastrar novo dependente</a>
+<br />
+<hr />
+@if (Model.Count() > 0)
+{
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header">
+                <h2>Dependentes do funcionário </h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DP_Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DP_Parentesco)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DP_Situation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DP_DataCadastro)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Pessoa.Pes_Nome)
+                        </th>
+                        <th>
+                            Ações
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DP_Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DP_Parentesco)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DP_Situation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DP_DataCadastro)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pessoa.Pes_Nome)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.DP_ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.DP_ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.DP_ID })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="alert alert-primary" role="alert">
+
+        <div class="alert-body">
+            <h4>Este Funcionário não possui nenhum dependente cadastrado</h4>
+        </div>
+
+    </div>
+}
+
+<hr />
+
+
+
