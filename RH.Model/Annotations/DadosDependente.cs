@@ -17,7 +17,6 @@ namespace RH.Model
             public int DP_ID { get; set; }
 
             [DisplayName("Funcionário")]
-            [Required(ErrorMessage ="Selecione a quem essa pessoa é dependente")]
             public int DP_Pessoa_Pes_ID { get; set; }
 
             [DisplayName("Nome")]

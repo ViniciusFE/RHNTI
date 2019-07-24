@@ -275,6 +275,7 @@
     <Content Include="Views\Cargo\CadastrarCargo.cshtml" />
     <Content Include="Views\Dependente\Index.cshtml" />
     <Content Include="Views\Dependente\CadastrarDependente.cshtml" />
+    <Content Include="Views\Dependente\AlterarDependente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

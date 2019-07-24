@@ -11,19 +11,20 @@
 
 
 <br />
-<a class="btn btn-success custom"><span class="fa fa-plus"></span> Cadastrar novo dependente</a>
+<a class="btn btn-success custom" href="@Url.Action("CadastrarDependente","Dependente",new { IDFuncionario=ViewBag.IDFuncionario})"><span class="fa fa-plus"></span> Cadastrar novo dependente</a>
 <br />
 <hr />
+
 @if (Model.Count() > 0)
 {
     <div class="container my-4">
         <div class="card">
             <div class="card-header">
-                <h2>Dependentes do funcionário </h2>
+                <h2>Dependentes do funcionário @ViewBag.NomeFuncionario</h2>
             </div>
             <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <tr>
+                <table class="table table-bordered table-hover text-center ">
+                    <tr class="custom text-white" style="background-color: rgb(148,72,72);">
                         <th>
                             @Html.DisplayNameFor(model => model.DP_Nome)
                         </th>
@@ -31,13 +32,7 @@
                             @Html.DisplayNameFor(model => model.DP_Parentesco)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DP_Situation)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.DP_DataCadastro)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Pessoa.Pes_Nome)
                         </th>
                         <th>
                             Ações
@@ -46,26 +41,21 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr id="Dependente-@item.DP_ID">
                             <td>
                                 @Html.DisplayFor(modelItem => item.DP_Nome)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.DP_Parentesco)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DP_Situation)
-                            </td>
+                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.DP_DataCadastro)
                             </td>
+                           
                             <td>
-                                @Html.DisplayFor(modelItem => item.Pessoa.Pes_Nome)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.DP_ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.DP_ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.DP_ID })
+                                <a class="btn btn-warning custom" href="@Url.Action("AlterarDependente","Dependente",new { id=item.DP_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                                <button class="btn btn-danger custom AbrirModal" data-id="@item.DP_ID"><i class="fas fa-user-times"></i> Excluir</button>
                             </td>
                         </tr>
                     }
@@ -89,6 +79,80 @@ else
 }
 
 <hr />
+
+<div class="back">
+    <a href="~/Pessoa/MeusFuncionarios"><i class="fas fa-arrow-left"></i> Voltar</a>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluirDependente">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Dependente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="Mensagem">
+
+                </div>
+
+                <div id="Carregando" align="center" style="display:none;">
+                    <img src="~/Imagem/833.gif"/>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success BtnModal" id="ExcluirDependente">Sim</button>
+                <button type="button" class="btn btn-danger BtnModal" data-dismiss="modal" id="BtnNao">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+
+    <script>
+        $(document).ready(function () {
+
+            var IDDependente;
+
+            $(".AbrirModal").click(function () {
+
+                IDDependente = $(this).attr("data-id");
+                $("#Mensagem").html("Tem certeza que deseja excluir esse dependente?");
+                $("#ModalExcluirDependente").modal('show');
+                $(".BtnModal").removeAttr("disabled");
+            });
+
+            $("#ExcluirDependente").click(function () {
+
+                var url = "@Url.Action("ExcluirDependente","Dependente")";
+                $("#Mensagem").css("display", "none");
+                $("#Carregando").css("display", "block");
+                $(".BtnModal").attr("disabled","disabled");
+
+                $.post(url, { id: IDDependente }, Output);
+            });
+
+            function Output(retorno) {
+
+                $("#Mensagem").css("display", "block");
+                $("#Carregando").css("display", "none");
+                $("#Mensagem").html(retorno);
+                $("#Dependente-" + IDDependente).slideUp('10000');
+            }
+
+        });
+    </script>
+
+}
 
 
 

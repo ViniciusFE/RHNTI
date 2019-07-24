@@ -14,7 +14,7 @@
 <br />
 <br />
 
-@using (Html.BeginForm("Index", "Cargo", FormMethod.Get))
+@using (Html.BeginForm("MeusFuncionarios", "Pessoa", FormMethod.Get))
 {
     <div class="input-group col-md-4 float-right">
 
@@ -77,7 +77,7 @@
                     <div class="card-footer">
                         <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
                         <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                        <a class="btn btn-warning custom" href="#"><i class="fa fa-users"></i> Dependentes</a>
+                        <a class="btn btn-warning custom" href="@Url.Action("Index","Dependente",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-users"></i> Dependentes</a>
                         <a class="btn btn-warning custom" href="#"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                     </div>
                 </div>
