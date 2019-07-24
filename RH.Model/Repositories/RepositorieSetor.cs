@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +44,11 @@ namespace RH.Model.Repositories
 
         public void AlterarSetor(Setor oSetor)
         {
+            var local = odb.Set<Setor>()
+                       .Local
+                       .FirstOrDefault(f => f.Set_ID == oSetor.Set_ID);
+
+            odb.Entry(local).State = System.Data.Entity.EntityState.Detached;
             odb.Entry(oSetor).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
         }
@@ -52,6 +57,23 @@ namespace RH.Model.Repositories
         {
             odb.Entry(oSetor).State = System.Data.Entity.EntityState.Deleted;
             odb.SaveChanges();
+        }
+
+        public Setor SelecionarSetorPeloNome(string NomeSetor)
+        {
+            return odb.Setor.Where(p => p.Set_Nome.Equals(NomeSetor) && p.Set_Situation == true).FirstOrDefault();
+        }
+
+        public bool PossuiSetores(int IDSetor)
+        {
+            List<Setor> Setores = odb.Setor.Where(p => p.Set_Setor_Set_ID == IDSetor && p.Set_ID != IDSetor).ToList();
+
+            if(Setores.Count()>0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

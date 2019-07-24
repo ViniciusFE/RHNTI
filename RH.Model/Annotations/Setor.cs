@@ -16,9 +16,6 @@ namespace RH.Model
             [DisplayName("Código do Setor")]
             public int Set_ID { get; set; }
 
-            //[DisplayName("Nome da Empresa")]
-            //public int Set_Empresa_Emp_ID { get; set; }
-
             [DisplayName("Nome do Setor")]
             [Required(ErrorMessage ="Por favor digite o nome do Setor")]
             public int Set_Nome { get; set; }
@@ -30,6 +27,10 @@ namespace RH.Model
             [DisplayName("Empresa")]
             //[Required(ErrorMessage = "Por favor selecione a Empresa")]
             public int Set_Empresa_Emp_ID { get; set; }
+
+            [DisplayName("Setor respondente")]
+            [Required(ErrorMessage ="Por favor selecione o setor a qual esse setor responde, se caso esse setor não responde a nenhum outro por favor selecione a primeira opção")]
+            public int Set_Setor_Set_ID { get; set; }
         }
     }
 }

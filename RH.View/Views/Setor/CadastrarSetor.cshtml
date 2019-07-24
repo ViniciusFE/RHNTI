@@ -4,47 +4,63 @@
     ViewBag.Title = "Cadastrar Setor";
 }
 
-<h2 class="text-center">Cadastrar Setor</h2>
-
+@Styles.Render("~/Content/Pages/css")
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4 class="text-center">Setor</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-row">
+        <div class="form">
+            <div class="card my-4">
+                <div class="card-header">
+                    <h1>Cadastrar Setor</h1>
+                </div>
+                <div class="card-body">
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.Set_Nome, htmlAttributes: new { @class = "control-label col-md-4" })
 
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Set_Nome, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.EditorFor(model => model.Set_Nome, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Nome do Setor" } })
+                        @Html.ValidationMessageFor(model => model.Set_Nome, "", new { @class = "text-danger" })
 
-            @Html.EditorFor(model => model.Set_Nome, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Nome do Setor" } })
-            @Html.ValidationMessageFor(model => model.Set_Nome, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.Set_Nome, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <select class="form-control" name="SetorRespondente">
+                            <option disabled selected>Selecione o setor respondente</option>
+                            <option value="0">Este setor responde a si mesmo</option>
+                            @foreach (var x in ViewBag.Setores)
+                            {
+                                <option value="@x.Set_ID">@x.Set_Nome</option>
+                            }
+                        </select>
 
-        </div>
-
-
-        <div class="from-group col-md-12">
-            <div class="form-group col-md-6 ">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-outline-secondary" />
+                        @Html.ValidationMessageFor(model => model.Set_Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="from-group col-md-12">
+                        <div class="form-group col-md-6 ">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button class="btn btn-outline-secondary custom" type="submit"><span class="fa fa-plus"></span> Cadastrar Setor</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
-
     </div>
-</div>
 
-    }
+}
 
 <div class="back">
     <a href="~/Setor/Index"><i class="fas fa-arrow-left"></i> Voltar</a>
 
 </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -26,7 +26,7 @@ namespace RH.Model.Repositories
 
         public List<Cargo> SelecionarTodosCargosEmpresa(int id)
         {
-            return odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(id)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c).ToList();
+            return odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(id)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c).Where(c=>c.Car_Situation==true).ToList();
         }
 
         public List<Cargo> SelecionarCargoPorSetor(int IDSetor)
@@ -75,6 +75,30 @@ namespace RH.Model.Repositories
         public List<Cargo> CargosChefeEmpresa(int IDEmpresa)
         {
             return odb.Cargo.SqlQuery("select * from Cargo c inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and c.Car_Situation = 1 and s.Set_Empresa_Emp_ID = " + IDEmpresa + " and c.Car_Cargo_Car_ID is null").ToList();
+        }
+
+        public bool SelecionarChefeSetor(int IDSetor)
+        {
+            Cargo oCargo=odb.Cargo.Where(c => c.Car_Setor_Set_ID.Equals(IDSetor) && c.Car_Situation == true && c.Car_Chefe == true).FirstOrDefault();
+
+            if(oCargo!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CargosComMesmoNome(string NomeCargo,int IDSetor)
+        {
+            Cargo oCargo = odb.Cargo.Where(p => p.Car_Nome.Equals(NomeCargo) && p.Car_Setor_Set_ID.Equals(IDSetor) && p.Car_Situation==true).FirstOrDefault();
+
+            if(oCargo!=null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
     }
