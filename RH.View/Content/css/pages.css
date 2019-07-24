@@ -55,7 +55,7 @@ section.cargos-section.col-md-12 {
     margin-bottom: 20px!important;
 }
 
-a.btn.btn-warning.custom, a.btn.btn-warning.custom:active {
+a.btn.btn-warning.custom, a.btn.btn-warning.custom:active  {
     color: #944848 !important;
     background-color: #ffffff;
     border-color: #ffffff;
@@ -66,7 +66,7 @@ button.btn.btn-danger.custom, button.btn.btn-danger.custom:active {
     background-color: #944848;
     border-color: #944848;
 }
-a.btn.btn-success.custom, a.btn.btn-success.custom:active {
+a.btn.btn-success.custom, a.btn.btn-success.custom:active, button.btn.btn-success.custom, button.btn.btn-success.custom:active {
     color: #fff;
     background-color: #adb5bd;
     border-color: #dee2e6;

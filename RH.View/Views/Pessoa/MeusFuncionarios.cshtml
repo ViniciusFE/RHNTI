@@ -1,4 +1,4 @@
-@model IEnumerable<RH.Model.Pessoa>
+﻿@model IEnumerable<RH.Model.Pessoa>
 
 @{
     ViewBag.Title = "MeusFuncionarios";
@@ -77,8 +77,8 @@
                     <div class="card-footer">
                         <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
                         <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                        <button class="btn btn-warning custom"><span class="fa fa-users"></span> Dependentes</button>
-                        <button class="btn btn-success custom"><span class="fa fa-money-check-alt"></span> Dados Bancários</button>
+                        <a class="btn btn-warning custom" href="#"><i class="fa fa-users"></i> Dependentes</a>
+                        <a class="btn btn-warning custom" href="#"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                     </div>
                 </div>
                 <br />
@@ -132,10 +132,10 @@ else
             console.log(mouse.page.y);
 
             if (document.querySelector("#ModalDemissao").style.display == "none") {
-                document.querySelector(".modal-content").style.marginTop = (mouse.page.y - 100) + "px";
+                document.querySelector(".modal-content").style.marginTop = (mouse.page.y - 380) + "px";
 
             } else {
-                document.querySelector(".modal-content").style.marginTop = (mouse.page.y - 100) + "px";
+                document.querySelector(".modal-content").style.marginTop = (mouse.page.y - 400) + "px";
 
             }
 
