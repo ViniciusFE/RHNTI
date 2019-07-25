@@ -55,6 +55,7 @@
     <Compile Include="CAvaliacao.cs" />
     <Compile Include="CBeneficio.cs" />
     <Compile Include="CCargo.cs" />
+    <Compile Include="CDadoBancario.cs" />
     <Compile Include="CDemissao.cs" />
     <Compile Include="CDependente.cs" />
     <Compile Include="CEmpresa.cs" />

@@ -33,8 +33,22 @@ namespace RH.Model.Repositories
 
         public void AlterarDependente(DadoDependente oDependente)
         {
+            DadoDependente DP = odb.DadoDependente.Where(p => p.DP_ID.Equals(oDependente.DP_ID)).First();
+            odb.Entry(DP).State = System.Data.Entity.EntityState.Detached;
             odb.Entry(oDependente).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
+        }
+
+        public bool VerificarParentesco(int IDFuncionario,string Parentesco)
+        {
+            DadoDependente DP = odb.DadoDependente.Where(p => p.DP_Pessoa_Pes_ID.Equals(IDFuncionario) && p.DP_Parentesco.Equals(Parentesco) && p.DP_Situation==true).FirstOrDefault();
+
+            if(DP!=null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -55,7 +55,7 @@ section.cargos-section.col-md-12 {
     margin-bottom: 20px!important;
 }
 
-a.btn.btn-warning.custom, a.btn.btn-warning.custom:active  {
+a.btn.btn-warning.custom, a.btn.btn-warning.custom:active, button.btn.btn-warning.custom, button.btn.btn-warning.custom:active {
     color: #944848 !important;
     background-color: #ffffff;
     border-color: #ffffff;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,9 +18,13 @@ namespace RH.View.Controllers
         }
 
         // GET: Beneficio
-        public ActionResult Index()
+        public ActionResult Index(int IDFuncionario)
         {
+            Pessoa Funcionario = _Control.SelecionarFuncionario(IDFuncionario);
             List<Beneficio> b = _Control.SelecionarTodosBeneficios();
+
+            ViewBag.IDFuncionario = IDFuncionario;
+            ViewBag.NomeFuncionario = Funcionario.Pes_Nome;
             return View(b);
         }
 

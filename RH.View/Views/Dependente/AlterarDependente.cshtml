@@ -1,0 +1,50 @@
+@model RH.Model.DadoDependente
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.DP_ID)
+
+    <div class="form-horizontal">
+        <div class="container my-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Alterar dependente para o funcionário @ViewBag.NomeFuncionario</h1>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DP_Nome, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DP_Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DP_Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(model => model.DP_Parentesco, htmlAttributes: new { @class = "control-label col-md-12" })
+                            @Html.DropDownListFor(model => model.DP_Parentesco, null, "Selecione o parentesco da pessoa", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DP_Parentesco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-outline-secondary"><span class="fa fa-plus"></span> Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="back">
+            <a href="@Url.Action("Index","Dependente",new { IDFuncionario=Model.DP_Pessoa_Pes_ID})"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

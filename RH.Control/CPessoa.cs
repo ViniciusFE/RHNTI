@@ -1,4 +1,4 @@
-﻿using RH.Model;
+using RH.Model;
 using RH.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ namespace RH.Control
         private RepositorieSetor _RepositorieSetor = new RepositorieSetor();
         private RepositorieCargo _RepositorieCargo = new RepositorieCargo();
         private RepositorieDemissao _RepositorieDemissao = new RepositorieDemissao();
+        private RepositorieBeneficio _RepositorieBeneficio = new RepositorieBeneficio();
 
         public void CadastrarFuncionario(Pessoa oFuncionario)
         {
@@ -63,6 +64,11 @@ namespace RH.Control
         public void CadastrarDemissao(Demissao aDemissao)
         {
             _RepositorieDemissao.CadastrarDemissao(aDemissao);
+        }
+
+        public List<Beneficio> BeneficiosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.BeneficiosEmpresa(IDEmpresa);
         }
 
     }
