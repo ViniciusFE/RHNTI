@@ -13,6 +13,8 @@ namespace RH.View.Controllers
     public class PessoaController : Controller
     {
         private CPessoa DbPessoa = new CPessoa();
+        private CBeneficio DbBeneficos = new CBeneficio();
+
 
         // GET: Funcionario
         public ActionResult Index()
@@ -123,13 +125,27 @@ namespace RH.View.Controllers
         [AutorizacaoEmpresa]
         public ActionResult MeusFuncionarios()
         {
+            
             int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
             List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
             List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
+
+            
+            ViewBag.Beneficios = DbBeneficos.SelecionarTodosBeneficios();
+            
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
             return View(Funcionarios);
+        }
+        
+        public ActionResult SelecionarBeneficios(int id )
+        {
+
+
+            ViewBag.Resullt = "Beneficio Atribuido com Sucesso";
+
+            return ViewBag.Result;
         }
 
         public ActionResult Demitir(int id,string Motivo)

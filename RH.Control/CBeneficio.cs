@@ -39,7 +39,7 @@ namespace RH.Control
 
         public List<Beneficio> SelecionarTodosBeneficios()
         {
-            return _C.SelecionarTodosBeneficions();
+            return _C.SelecionarTodosBeneficions().ToList();
         }
     }
 }
