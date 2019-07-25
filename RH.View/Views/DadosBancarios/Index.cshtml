@@ -1,0 +1,51 @@
+@model IEnumerable<RH.Model.DadoBancario>
+
+<div class="container my-4">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h1>Benefícios do Funcionário @ViewBag.NomeFuncionario</h1>
+        </div>
+
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DB_Tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DB_Numero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DB_DataCadastro)
+                    </th>
+                    <th>Ações</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DB_Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DB_Numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DB_DataCadastro)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.DB_ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.DB_ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.DB_ID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    </div>
+
+</div>

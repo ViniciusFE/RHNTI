@@ -85,9 +85,12 @@ namespace RH.View.Controllers
             return View(oDado);
         }
 
-        //public ActionResult ExcluirDadoBancario(int id)
-        //{
-        //    _Control
-        //}
+        public ActionResult ExcluirDadoBancario(int id)
+        {
+            DadoBancario oDado=_Control.SelecionarDadoBancario(id);
+            oDado.DB_Situation = false;
+            _Control.AlterarDadoBancario(oDado);
+            return Json("Dado bancário excluído com sucesso!");
+        }
     }
 }
