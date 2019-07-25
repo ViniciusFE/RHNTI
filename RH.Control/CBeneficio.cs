@@ -48,7 +48,5 @@ namespace RH.Control
         {
             return _RepositoriePessoa.SelecionarFuncionario(IDFuncionario);
         }
-
-        
     }
 }

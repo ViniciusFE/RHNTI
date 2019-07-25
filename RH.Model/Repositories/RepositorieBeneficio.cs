@@ -26,6 +26,11 @@ namespace RH.Model.Repositories
             return Db.Beneficio.Find(id);
         }
 
+        public List<Beneficio> SelecionarBeneficioporEmpresa(int id)
+        {
+            return Db.Beneficio.Where(i => i.Ben_Empresa_Emp_ID == id && i.Ben_Situation == true).ToList();
+        }
+
         public void Incluir(Beneficio oBeneficio)
         {
             Db.Entry(oBeneficio).State = EntityState.Added;

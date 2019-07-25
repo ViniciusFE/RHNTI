@@ -85,9 +85,9 @@ namespace RH.View.Controllers
             return View(oDado);
         }
 
-        public ActionResult ExcluirDadoBancario(int id)
-        {
-            _Control
-        }
+        //public ActionResult ExcluirDadoBancario(int id)
+        //{
+        //    _Control
+        //}
     }
 }
