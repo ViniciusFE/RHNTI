@@ -46,6 +46,8 @@ namespace RH.View.Controllers
 
             if(ModelState.IsValid)
             {
+                Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+                oDado.DB_DataCadastro = aEmpresa.Emp_DataAtual;
                 oDado.DB_Pessoa_Pes_ID = IDFuncionario;
                 oDado.DB_Situation = true;
                 _Control.CadastrarDadoBancario(oDado);
@@ -85,9 +87,12 @@ namespace RH.View.Controllers
             return View(oDado);
         }
 
-        //public ActionResult ExcluirDadoBancario(int id)
-        //{
-        //    _Control
-        //}
+        public ActionResult ExcluirDadoBancario(int id)
+        {
+            DadoBancario oDado=_Control.SelecionarDadoBancario(id);
+            oDado.DB_Situation = false;
+            _Control.AlterarDadoBancario(oDado);
+            return Json("Dado bancário excluído com sucesso!");
+        }
     }
 }

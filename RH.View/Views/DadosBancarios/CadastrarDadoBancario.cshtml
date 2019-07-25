@@ -1,0 +1,60 @@
+@model RH.Model.DadoBancario
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container my-4">
+        <div class="card">
+
+            <div class="card-header">
+                <h1>Cadastrar dado bancário</h1>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DB_Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.DB_Tipo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DB_Tipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DB_Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.DB_Numero, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DB_Numero, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-outline-secondary"><span class="fa fa-plus"></span> Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+}
+
+    <div class="back">
+        <a href="@Url.Action("Index","DadosBancarios",new { IDFuncionario=ViewBag.IDFuncionario})"><i class="fas fa-arrow-left"></i> Voltar</a>
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
