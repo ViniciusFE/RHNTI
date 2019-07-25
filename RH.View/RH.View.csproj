@@ -279,6 +279,7 @@
     <Content Include="Views\Dependente\AlterarDependente.cshtml" />
     <Content Include="Views\Beneficio\Index.cshtml" />
     <Content Include="Views\DadosBancarios\Index.cshtml" />
+    <Content Include="Views\DadosBancarios\CadastrarDadoBancario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

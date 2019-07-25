@@ -46,6 +46,8 @@ namespace RH.View.Controllers
 
             if(ModelState.IsValid)
             {
+                Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+                oDado.DB_DataCadastro = aEmpresa.Emp_DataAtual;
                 oDado.DB_Pessoa_Pes_ID = IDFuncionario;
                 oDado.DB_Situation = true;
                 _Control.CadastrarDadoBancario(oDado);
