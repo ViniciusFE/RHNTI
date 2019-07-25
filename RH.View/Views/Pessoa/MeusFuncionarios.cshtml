@@ -174,7 +174,6 @@ else
     </div>
 </div>
 
-
 <!-- Modal Demitir-->
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalDemissao">
     <div class="modal-dialog" role="document">
@@ -186,10 +185,29 @@ else
                 </button>
             </div>
             <div class="modal-body">
+                <div id="MensagemInicial">
+                    <h5 id='texto' class='text-center'>Tem certeza que deseja demitir o funcionário?</h5>
+                    <p class='text-center'>Por favor marque o motivo da demissão do funcionário.</p>
+                    <div class='text-center'>
+
+                        <label class='mr-4'><input type='radio' name='Motivo' value='Pediu demissao' id='pediudemissao' checked /> Pediu demissão</label>
+                        <label class='mr-4'><input type='radio' name='Motivo' value='Foi demitido' id='demitido' /> Foi demitido</label>
+
+                    </div>
+                </div>
+
+                <div id="MensagemRetorno" style="display:none;">
+
+                </div>
+
+                <div id="Carregando" align="center" style="display:none;">
+                    <img src="~/Imagem/833.gif" />
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning custom" id="DemitirFuncionario">Sim</button>
-                <button type="button" class="btn btn-danger custom demitir" data-dismiss="modal" id="BtnNao">Não</button>
+                <button type="button" class="btn btn-warning custom BtnModal" id="DemitirFuncionario">Sim</button>
+                <button type="button" class="btn btn-danger custom demitir BtnModal" data-dismiss="modal" id="BtnNao">Não</button>
             </div>
         </div>
     </div>
@@ -244,39 +262,35 @@ else
 
             $("#texto").css("display", "block");
             $("#Carregando").css("display", "none");
-            $(".modal-body").html("<h5 id='texto' class='text-center'>Tem certeza que deseja demitir o funcionário?</h5>"+
-                "<p class='text-center'>Por favor marque o motivo da demissão do funcionário.</p>"+
-                "<div class='text-center'>"+
-                    "<label class='mr-4'><input type='radio' name='Motivo' value='Pediu demissao' id='pediudemissao' checked/> Pediu demissão</label>"+
-                    "<label class='mr-4'><input type='radio' name='Motivo' value='Foi demitido' id='demitido'/> Foi demitido</label>"+
-                "</div>");
-            $("#BtnNao").removeAttr("disabled");
             $("#ModalDemissao").modal('show');
+            $("BtnModal").removeAttr("disabled");
+            $("#MensagemInicial").css("display", "block");
+            $("#MensagemRetorno").css("display", "none");
         });
 
         $("#DemitirFuncionario").click(function () {
             if ($("#pediudemissao").prop("checked")) {
-                motivo = $("#pediudemissao").val();
+                motivo = "Pediu demissão";
             }
 
             else if ($("#demitido").prop("checked")) {
-                motivo = $("#demitido").val();
+                motivo = "Demitido";
             }
 
-            $(this).attr("disabled", "disabled");
-            $("#BtnNao").attr("disabled","disabled");
+            $(".BtnModal").attr("disabled", "disabled");
+
             var url = "@Url.Action("Demitir","Pessoa")";
-            $("#texto").css("display", "none");
+
+            $("#MensagemInicial").css("display", "none");
             $("#Carregando").css("display", "block");
-            alert(motivo);
+
             $.post(url, { id: IDFuncionario, Motivo: motivo }, RespostaServidor);
         });
 
         function RespostaServidor(retorno) {
-            $("#texto").css("display", "block");
+            $("#MensagemRetorno").css("display", "block");
+            $("#MensagemRetorno").html(retorno);
             $("#Carregando").css("display", "none");
-            $(".modal-body").html("<p id='texto' class='text-center'>" + retorno + "</p>");
-            $("#DemitirFuncionario").attr("disabled", "disabled");
             $("#card-" + IDFuncionario + "").slideUp("slow");
         }
     });

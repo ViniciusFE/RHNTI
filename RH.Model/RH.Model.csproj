@@ -132,6 +132,7 @@
     <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
+    <Compile Include="Repositories\RepositoriePessoaBeneficio.cs" />
     <Compile Include="Repositories\RepositorieProfessor.cs" />
     <Compile Include="Repositories\RepositorieSetor.cs" />
     <Compile Include="Resposta.cs">

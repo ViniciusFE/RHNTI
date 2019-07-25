@@ -15,6 +15,10 @@ namespace RH.Control
         private RepositorieCargo _RepositorieCargo = new RepositorieCargo();
         private RepositorieDemissao _RepositorieDemissao = new RepositorieDemissao();
         private RepositorieBeneficio _RepositorieBeneficio = new RepositorieBeneficio();
+        private RepositorieDadosBancarios _RepositorieDadoBancario = new RepositorieDadosBancarios();
+        private RepositoriePessoaBeneficio _RepositoriePessoaBeneficio = new RepositoriePessoaBeneficio();
+        private RepositorieDependente _RepositorieDependente = new RepositorieDependente();
+        private RepositorieEmpresa _RepositorieEmpresa = new RepositorieEmpresa();
 
         public void CadastrarFuncionario(Pessoa oFuncionario)
         {
@@ -69,6 +73,46 @@ namespace RH.Control
         public List<Beneficio> BeneficiosEmpresa(int IDEmpresa)
         {
             return _RepositorieBeneficio.BeneficiosEmpresa(IDEmpresa);
+        }
+
+        public void DesabilitarDadosBancarios(int IDFuncionario)
+        {
+            _RepositorieDadoBancario.DesabilitarDadosBancarios(IDFuncionario);
+        }
+
+        public List<PessoaBeneficio> BeneficiosFuncionario(int IDFuncionario)
+        {
+            return _RepositoriePessoaBeneficio.BeneficiosFuncionario(IDFuncionario);
+        }
+
+        public PessoaBeneficio SelecionarBeneficioFuncionario(int IDFuncionario)
+        {
+            return _RepositoriePessoaBeneficio.SelecionarBeneficio(IDFuncionario);
+        }
+
+        public void CadastrarBeneficioFuncionario(PessoaBeneficio Beneficio)
+        {
+            _RepositoriePessoaBeneficio.CadastrarBeneficioFuncionario(Beneficio);
+        }
+
+        public void AlterarBeneficioFuncionario(PessoaBeneficio Beneficio)
+        {
+            _RepositoriePessoaBeneficio.AlterarBeneficioFuncionario(Beneficio);
+        }
+
+        public void DesabilitarBeneficiosFuncionario(int IDFuncionario)
+        {
+            _RepositoriePessoaBeneficio.DesabilitarBeneficiosFuncionario(IDFuncionario);
+        }
+
+        public void DesabilitarDependentesFuncionario(int IDFuncionario)
+        {
+            _RepositorieDependente.DesabilitarDependentes(IDFuncionario);
+        }
+
+        public Empresa SelecionarEmpresa(int IDEmpresa)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresa(IDEmpresa);
         }
 
     }

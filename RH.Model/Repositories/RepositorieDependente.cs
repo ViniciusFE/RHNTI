@@ -50,5 +50,11 @@ namespace RH.Model.Repositories
 
             return false;
         }
+
+        public void DesabilitarDependentes(int IDFuncionario)
+        {
+            odb.Database.ExecuteSqlCommand("update DadoDependente set DP_Situation=0 where DP_Pessoa_Pes_ID=" + IDFuncionario);
+            odb.SaveChanges();
+        }
     }
 }

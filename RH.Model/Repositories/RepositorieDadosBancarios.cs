@@ -41,5 +41,11 @@ namespace RH.Model.Repositories
             odb.Entry(oDado).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
         }
+
+        public void DesabilitarDadosBancarios(int IDFuncionario)
+        {
+            odb.Database.ExecuteSqlCommand("update DadoBancario set DB_Situation=0 where DB_Pessoa_Pes_ID" + IDFuncionario);
+            odb.SaveChanges();
+        }
     }
 }

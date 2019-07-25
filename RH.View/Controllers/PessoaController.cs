@@ -168,10 +168,11 @@ namespace RH.View.Controllers
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
             aPessoa.Pes_Situation = false;
             DbPessoa.AlterarFuncionario(aPessoa);
+            Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
 
             Demissao aDemissao = new Demissao()
             {
-                Dem_DataCadastro = "01/01",
+                Dem_DataCadastro = aEmpresa.Emp_DataAtual,
                 Dem_Motivo = Motivo,
                 Dem_Pessoa_Pes_ID = id,
                 Dem_Situation = true
@@ -188,6 +189,9 @@ namespace RH.View.Controllers
             }
 
             DbPessoa.CadastrarDemissao(aDemissao);
+            DbPessoa.DesabilitarDadosBancarios(id);
+            DbPessoa.DesabilitarBeneficiosFuncionario(id);
+            DbPessoa.DesabilitarDependentesFuncionario(id);
 
             return Json("O funcionário foi demitido com sucesso!");
         }
