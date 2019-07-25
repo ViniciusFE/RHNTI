@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +42,11 @@ namespace RH.Model.Repositories
         {
             Db.Entry(oBeneficio).State = EntityState.Deleted;
             Db.SaveChanges();
+        }
+
+        public List<Beneficio> BeneficiosEmpresa(int IDEmpresa)
+        {
+            return Db.Beneficio.Where(p => p.Ben_Empresa_Emp_ID.Equals(IDEmpresa) && p.Ben_Situation == true).ToList();
         }
 
     }

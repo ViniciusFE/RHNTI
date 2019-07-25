@@ -123,7 +123,9 @@ namespace RH.View.Controllers
 
         [AutorizacaoEmpresa]
         public ActionResult MeusFuncionarios(string Pesquisa="")
-        {
+        { 
+            ViewBag.Pesquisado=null;
+
             int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
             List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
             List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
@@ -131,7 +133,7 @@ namespace RH.View.Controllers
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
 
-            if(Pesquisa!=null)
+            if(Pesquisa!="")
             {
                 Funcionarios = Funcionarios.Where(p => p.Pes_Nome.Contains(Pesquisa)).ToList();
                 ViewBag.Pesquisado = Pesquisa;

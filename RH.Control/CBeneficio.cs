@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +11,12 @@ namespace RH.Control
     public class CBeneficio
     {
         RepositorieBeneficio _C;
+        RepositoriePessoa _RepositoriePessoa;
 
         public CBeneficio()
         {
             _C = new RepositorieBeneficio();
+            _RepositoriePessoa = new RepositoriePessoa();
         }
 
         public void Incluir(Beneficio oBeneficio)
@@ -41,5 +43,12 @@ namespace RH.Control
         {
             return _C.SelecionarTodosBeneficions();
         }
+
+        public Pessoa SelecionarFuncionario(int IDFuncionario)
+        {
+            return _RepositoriePessoa.SelecionarFuncionario(IDFuncionario);
+        }
+
+        
     }
 }

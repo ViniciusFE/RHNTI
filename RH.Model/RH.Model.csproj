@@ -57,7 +57,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Annotations\Aluno.cs" />
+    <Compile Include="Annotations\Beneficio.cs" />
     <Compile Include="Annotations\Cargo.cs" />
+    <Compile Include="Annotations\DadoBancario.cs" />
     <Compile Include="Annotations\DadosDependente.cs" />
     <Compile Include="Annotations\Empresa.cs" />
     <Compile Include="Annotations\Professor.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="Repositories\RepositorieAvaliacao.cs" />
     <Compile Include="Repositories\RepositorieBeneficio.cs" />
     <Compile Include="Repositories\RepositorieCargo.cs" />
+    <Compile Include="Repositories\RepositorieDadosBancarios.cs" />
     <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />

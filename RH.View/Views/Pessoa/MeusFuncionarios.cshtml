@@ -39,59 +39,77 @@
 
 <h2 class="text-center titulo-Lista">Funcionários Cadastrados</h2>
 <hr />
-
-@if (Model.Count() > 0)
+@if (ViewBag.Pesquisado != null && Model.Count() == 0)
 {
-    <div class="container">
-        <div class="row justify-content-center">
-            @foreach (var x in Model)
-            {
-                <div class="card" style="width: 100rem;" id="card-@x.Pes_ID">
-                    <div class="card-header">
-                        <h4>Nome:<span class='textUser'> @x.Pes_Nome</span></h4>
-                    </div>
-
-                    <div class="card-body row">
-                        <div class="col-md-4">
-                            <img src="@Url.Action("GetImagemFuncionario", new { id = x.Pes_ID })" class="imagem-funcionario" />
-                        </div>
-
-                        <div class="col-md-8">
-                            @foreach (var y in ViewBag.Cargos)
-                            {
-                                if (y.Car_ID == x.Pes_Cargo_Car_ID)
-                                {
-                                    <h4>Cargo de ocupação:<span class='textUser'> @y.Car_Nome</span></h4>
-                                }
-                            }
-
-                            <h4>Data de Admissão: <span class='textUser'> @x.Pes_DataCadastro </span></h4>
-                            <h4>Salário:<span class='textUser'> @x.Pes_Salario R$</span></h4>
-                            <h4>Carteira de Trabalho: <span class='textUser'>@x.Pes_CTrabalho</span></h4>
-                            <h4>CPF:<span class='textUser'> @x.Pes_CPF</span></h4>
-                            <h4>Cidade:<span class='textUser'> @x.Pes_Cidade</span></h4>
-                            <h4>Endereço:<span class='textUser'> @x.Pes_Endereco</span></h4>
-                        </div>
-
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
-                        <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                        <a class="btn btn-warning custom" href="@Url.Action("Index","Dependente",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-users"></i> Dependentes</a>
-                        <a class="btn btn-warning custom" href="#"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
-                    </div>
-                </div>
-                <br />
-                <br />
-            }
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>Não foi encontrado nenhum resultado referente a pesquisa '@ViewBag.Pesquisado', verifique o que foi digitado e tente novamente.</h4>
         </div>
     </div>
 }
 
 else
 {
-    <h1 class="text-center">Sua empresa ainda não possui nenhum funcionário cadastrado...</h1>
+    if (Model.Count() > 0)
+    {
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach (var x in Model)
+                {
+                    <div class="card" style="width: 100rem;" id="card-@x.Pes_ID">
+                        <div class="card-header">
+                            <h4>Nome:<span class='textUser'> @x.Pes_Nome</span></h4>
+                        </div>
+
+                        <div class="card-body row">
+                            <div class="col-md-4">
+                                <img src="@Url.Action("GetImagemFuncionario", new { id = x.Pes_ID })" class="imagem-funcionario" />
+                            </div>
+
+                            <div class="col-md-8">
+                                @foreach (var y in ViewBag.Cargos)
+                                {
+                                    if (y.Car_ID == x.Pes_Cargo_Car_ID)
+                                    {
+                                        <h4>Cargo de ocupação:<span class='textUser'> @y.Car_Nome</span></h4>
+                                    }
+                                }
+
+                                <h4>Data de Admissão: <span class='textUser'> @x.Pes_DataCadastro </span></h4>
+                                <h4>Salário:<span class='textUser'> @x.Pes_Salario R$</span></h4>
+                                <h4>Carteira de Trabalho: <span class='textUser'>@x.Pes_CTrabalho</span></h4>
+                                <h4>CPF:<span class='textUser'> @x.Pes_CPF</span></h4>
+                                <h4>Cidade:<span class='textUser'> @x.Pes_Cidade</span></h4>
+                                <h4>Endereço:<span class='textUser'> @x.Pes_Endereco</span></h4>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                            <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index","Dependente",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-users"></i> Dependentes</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index","Beneficio",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-thumbs-up"></i> Benefícios</a>
+                            <a class="btn btn-warning custom" href="#"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                }
+            </div>
+        </div>
+    }
+
+    else
+    {
+        <div class="alert alert-primary">
+            <div class="alert-body">
+                <h4>Sua empresa ainda não possui nenhum funcionário cadastrado...</h4>
+            </div>
+        </div>
+    }
 }
+
+
 
 <hr />
 
