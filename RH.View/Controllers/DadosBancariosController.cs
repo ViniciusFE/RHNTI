@@ -81,10 +81,10 @@ namespace RH.View.Controllers
                 DadoBancarioAlterar.DB_Numero = oDado.DB_Numero;
                 DadoBancarioAlterar.DB_Tipo = oDado.DB_Tipo;
                 _Control.AlterarDadoBancario(DadoBancarioAlterar);
-                return View("Index",new { IDFuncionario=IDFuncionario});
+                return RedirectToAction("Index",new { IDFuncionario=IDFuncionario});
             }
 
-            return View(oDado);
+            return View();
         }
 
         public ActionResult ExcluirDadoBancario(int id)

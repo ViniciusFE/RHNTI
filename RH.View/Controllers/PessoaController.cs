@@ -137,7 +137,7 @@ namespace RH.View.Controllers
 
           
             int qtd=  DbPessoa.BeneficiosEmpresa(IDEmpresa).Count();
-            var beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
+            List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
             ViewBag.Beneficios = beneficios;
             ViewBag.qtdB = qtd;
             ViewBag.IDE = IDEmpresa;

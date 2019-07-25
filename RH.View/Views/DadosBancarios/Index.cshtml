@@ -43,7 +43,7 @@
                                 @Html.DisplayFor(modelItem => item.DB_DataCadastro)
                             </td>
                             <td>
-                                <a class="btn btn-warning custom" href="@Url.Action("AlterarDadoBancario","DadosBancarios",new { IDFuncionario=item.DB_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                                <a class="btn btn-warning custom" href="@Url.Action("AlterarDadoBancario","DadosBancarios",new { IDDadoBancario=item.DB_ID,IDFuncionario=ViewBag.IDFuncionario})"><i class="fas fa-user-edit"></i> Alterar</a>
                                 <button class="btn btn-danger custom AbrirModal" data-id="@item.DB_ID"><i class="fas fa-user-times"></i> Excluir</button>
                             </td>
                         </tr>
@@ -66,6 +66,10 @@
 </div>
 
 <hr />
+
+<div class="back">
+    <a href="~/Pessoa/MeusFuncionarios"><i class="fas fa-arrow-left"></i> Voltar</a>
+</div>
 
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalDadoBancario">
