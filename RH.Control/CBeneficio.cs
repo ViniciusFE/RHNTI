@@ -41,5 +41,10 @@ namespace RH.Control
         {
             return _C.SelecionarTodosBeneficions();
         }
+
+        public List<Beneficio> SelecionarBebeficioEmpresa(int id)
+        {
+            return _C.SelecionarBeneficioporEmpresa(id);
+        }
     }
 }
