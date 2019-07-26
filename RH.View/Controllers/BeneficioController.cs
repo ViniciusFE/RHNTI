@@ -59,7 +59,11 @@ namespace RH.View.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Control.Alterar(oBeneficio);
+                Beneficio AlterarBeneficio = _Control.SelecionarBeneficioID(oBeneficio.Ben_ID);
+                AlterarBeneficio.Ben_Nome = oBeneficio.Ben_Nome;
+                AlterarBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao;
+                AlterarBeneficio.Ben_Custo = oBeneficio.Ben_Custo;
+                _Control.Alterar(AlterarBeneficio);
                 return RedirectToAction("Index");
             }
             return View();
