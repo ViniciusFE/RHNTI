@@ -42,7 +42,9 @@ namespace RH.View.Controllers
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
         {
             oFuncionario.Pes_Situation = true;
-            oFuncionario.Pes_DataCadastro="01/01";
+
+            Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            oFuncionario.Pes_DataCadastro=aEmpresa.Emp_DataAtual;
 
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 

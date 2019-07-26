@@ -35,7 +35,7 @@ namespace RH.Model
         public string Ben_Descricao { get; set; }
         public double Ben_Custo { get; set; }
         public bool Ben_Situation { get; set; }
-        public System.DateTime Ben_DataCadastro { get; set; }
+        public string Ben_DataCadastro { get; set; }
         public int Ben_Empresa_Emp_ID { get; set; }
     
         public virtual Empresa Empresa { get; set; }

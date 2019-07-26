@@ -12,11 +12,13 @@ namespace RH.Control
     {
         RepositorieBeneficio _C;
         RepositoriePessoa _RepositoriePessoa;
+        RepositorieEmpresa _RepositorieEmpresa;
 
         public CBeneficio()
         {
             _C = new RepositorieBeneficio();
             _RepositoriePessoa = new RepositoriePessoa();
+            _RepositorieEmpresa = new RepositorieEmpresa();
         }
 
         public void Incluir(Beneficio oBeneficio)
@@ -47,6 +49,16 @@ namespace RH.Control
         public Pessoa SelecionarFuncionario(int IDFuncionario)
         {
             return _RepositoriePessoa.SelecionarFuncionario(IDFuncionario);
+        }
+
+        public List<Beneficio> SelecionarBeneficiosEmpresa(int IDEmpresa)
+        {
+            return _C.SelecionarBeneficioporEmpresa(IDEmpresa);
+        }
+
+        public Empresa SelecionarEmpresa(int IDEmpresa)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresa(IDEmpresa);
         }
     }
 }

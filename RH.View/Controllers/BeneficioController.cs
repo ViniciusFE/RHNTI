@@ -18,27 +18,29 @@ namespace RH.View.Controllers
         }
 
         // GET: Beneficio
-        public ActionResult Index(int IDFuncionario)
+        public ActionResult Index()
         {
-            Pessoa Funcionario = _Control.SelecionarFuncionario(IDFuncionario);
-            List<Beneficio> b = _Control.SelecionarTodosBeneficios();
-
-            ViewBag.IDFuncionario = IDFuncionario;
-            ViewBag.NomeFuncionario = Funcionario.Pes_Nome;
+            List<Beneficio> b = _Control.SelecionarBeneficiosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
             return View(b);
         }
 
-        public ActionResult CadastrarBenificio()
+        public ActionResult CadastrarBeneficio()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarBenificio(Beneficio oBeneficio)
+        public ActionResult CadastrarBeneficio(Beneficio oBeneficio)
         {
             if(ModelState.IsValid)
             {
+                Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+                oBeneficio.Ben_Empresa_Emp_ID = aEmpresa.Emp_ID;
+                oBeneficio.Ben_DataCadastro = aEmpresa.Emp_DataAtual;
+                oBeneficio.Ben_Situation = true;
                 _Control.Incluir(oBeneficio);
                 return RedirectToAction("Index");
             }
@@ -66,8 +68,9 @@ namespace RH.View.Controllers
         public ActionResult ExcluirBeneficio(int id)
         {
             Beneficio b = _Control.SelecionarBeneficioID(id);
-            _Control.Excluir(b);
-            return RedirectToAction("Index");
+            b.Ben_Situation = false;
+            _Control.Alterar(b);
+            return Json ("Benefício excluído com sucesso!");
         }
 
     }

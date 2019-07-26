@@ -44,7 +44,7 @@ namespace RH.Model.Repositories
 
         public void DesabilitarDadosBancarios(int IDFuncionario)
         {
-            odb.Database.ExecuteSqlCommand("update DadoBancario set DB_Situation=0 where DB_Pessoa_Pes_ID" + IDFuncionario);
+            odb.Database.ExecuteSqlCommand("update DadoBancario set DB_Situation=0 where DB_Pessoa_Pes_ID= " + IDFuncionario);
             odb.SaveChanges();
         }
     }
