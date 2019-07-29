@@ -281,6 +281,8 @@
     <Content Include="Views\DadosBancarios\Index.cshtml" />
     <Content Include="Views\DadosBancarios\CadastrarDadoBancario.cshtml" />
     <Content Include="Views\DadosBancarios\AlterarDadoBancario.cshtml" />
+    <Content Include="Views\Beneficio\CadastrarBeneficio.cshtml" />
+    <Content Include="Views\Beneficio\AlterarBeneficio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

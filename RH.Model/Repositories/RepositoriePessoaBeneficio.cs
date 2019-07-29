@@ -44,7 +44,7 @@ namespace RH.Model.Repositories
 
         public void DesabilitarBeneficiosFuncionario(int IDFuncionario)
         {
-            odb.Database.ExecuteSqlCommand("update PessoaBeneficio set PB_Situation=0 where PB_Pessoa_Pes_ID" + IDFuncionario);
+            odb.Database.ExecuteSqlCommand("update PessoaBeneficio set PB_Situation=0 where PB_Pessoa_Pes_ID= " + IDFuncionario);
             odb.SaveChanges();
         }
     }

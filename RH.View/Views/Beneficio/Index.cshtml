@@ -4,25 +4,21 @@
 
 
 <br />
-<a class="btn btn-success custom" href="@Url.Action("CadastrarDependente","Dependente",new { IDFuncionario=ViewBag.IDFuncionario})"><span class="fas fa-list-ol"></span> Meus benefício</a>
+<a class="btn btn-success custom" href="@Url.Action("CadastrarBeneficio","Beneficio",new { IDFuncionario=ViewBag.IDFuncionario})"><span class="fas fa-plus"></span> Cadastrar Benefício</a>
 <br />
 <hr />
 
 <div class="container my-4">
     <div class="card">
         <div class="card-header">
-            <h2>Benefícios do funcionário @ViewBag.NomeFuncionario</h2>
+            <h2>Benefícios da Empresa @ViewBag.NomeEmpresa</h2>
         </div>
 
         <div class="card-body">
 
-            <button class="btn btn-danger custom float-right"><i class="fas fa-plus"></i> Adicionar benefício</button>
-            <br />
-            <br />
-
             @if (Model.Count() > 0)
             {
-                <table class="table table-bordered text-center">
+                <table class="table table-bordered text-center table-hover">
                     <tr class="custom text-white" style="background-color: rgb(148,72,72);">
                         <th>
                             @Html.DisplayNameFor(model => model.Ben_Nome)
@@ -57,7 +53,7 @@
                             </td>
 
                             <td>
-                                <a class="btn btn-warning custom" href="@Url.Action("AlterarDependente","Dependente",new { id=item.Ben_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                                <a class="btn btn-warning custom" href="@Url.Action("AlterarBeneficio","Beneficio",new { id=item.Ben_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
                                 <button class="btn btn-danger custom AbrirModal" data-id="@item.Ben_ID"><i class="fas fa-user-times"></i> Excluir</button>
                             </td>
                         </tr>
@@ -70,7 +66,7 @@
             {
                 <div class="alert alert-primary" role="alert">
                     <div class="alert-body">
-                        <h4>Este Funcionário não possui nenhum benefício cadastrado</h4>
+                        <h4>Esta empresa ainda não possui nenhum benefício cadastrado</h4>
                     </div>
                 </div>
             }
@@ -84,8 +80,74 @@
 
 <hr />
 
-<div class="back">
-    <a href="~/Pessoa/MeusFuncionarios"><i class="fas fa-arrow-left"></i> Voltar</a>
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluirBeneficio">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Benefício</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="Mensagem">
+                </div>
+                <div id="Carregando" align="center" style="display:none;">
+                    <img src="~/Imagem/833.gif" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success BtnModal" id="ExcluirBeneficio">Sim</button>
+                <button type="button" class="btn btn-danger BtnModal" data-dismiss="modal" id="BtnNao">Não</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            var IDBeneficio;
+
+            $(".AbrirModal").click(function () {
+
+                $("#Mensagem").html("Tem certeza que deseja excluir esse benefício?");
+                IDBeneficio = $(this).attr("data-id");
+                $("#ModalExcluirBeneficio").modal('show');
+                $(".BtnModal").removeAttr('disabled');
+
+            });
+
+            $("#ExcluirBeneficio").click(function () {
+
+                $("#Mensagem").css("display", "none");
+                $("#Carregando").css("display", "block");
+                $(".BtnModal").attr("disabled", "disabled");
+
+                var url = "@Url.Action("ExcluirBeneficio","Beneficio")";
+                $.post(url, { id: IDBeneficio }, Output);
+
+            });
+
+            function Output(resposta) {
+
+                $("#Mensagem").css("display", "block").html(resposta);
+                $("#Carregando").css("display", "none");
+
+                $("#Beneficio-" + IDBeneficio).slideUp('slow');
+            }
+
+
+        });
+
+    </script>
+
+
+    }
+
 
 
