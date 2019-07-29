@@ -148,7 +148,55 @@ else
 </div>
 
 @section Scripts{
+
     <script>
+
+        var clicksAbrirModal = 0;
+
+        console.log("ola")
+
+        document.querySelector("#ModalExcluir").addEventListener('click', () => {
+            console.log(clicksAbrirModal);
+            clicksAbrirModal++;
+        });
+
+
+
+
+        window.addEventListener('click', function (e) {
+            var mouse = {
+                page: {
+                    x: e.pageX,
+                    y: e.pageY
+                },
+                client: {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+            }
+            console.log(mouse.page.y);
+
+
+
+
+
+            if (clicksAbrirModal == 0) {
+                document.querySelector(".modal-dialog").style.marginTop = (mouse.page.y - 120) + "px";
+                console.log(clicksAbrirModal + "um click");
+
+
+            } else {
+                if (document.querySelector("#ModalExcluir").style.display == "none") {
+                    document.querySelector(".modal-dialog").style.marginTop = (mouse.page.y - 100) + "px";
+                    console.log("entrou")
+
+                } else {
+
+                }
+            }
+
+        });
+
     $(document).ready(function () {
 
         var IDCargo;
