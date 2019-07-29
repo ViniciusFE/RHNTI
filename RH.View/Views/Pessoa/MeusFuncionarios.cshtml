@@ -91,19 +91,22 @@ else
                             <a class="btn btn-warning custom" href="@Url.Action("Index","Beneficio",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-thumbs-up"></i> Benefícios</a>
                             <a class="btn btn-warning custom" href="@Url.Action("Index","DadosBancarios",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                             <!-- Button modal Beneficios -->
-                            <button type="button" class="btn btn-warning custom" data-toggle="modal" data-target="#beneficios-func">
+                            <button type="button" class="btn btn-warning custom beneficios-btn" data-toggle="modal" data-target="#beneficios-func">
                                 <i class="fa fa-thumbs-up"></i>  Benefícios
                             </button>
                         </div>
                     </div>
-                   
-                
-                <br />
-                <br />
-            }
+
 
                     <br />
                     <br />
+
+
+
+                }
+
+                <br />
+                <br />
                 }
             </div>
         </div>
@@ -122,11 +125,13 @@ else
 
 
 <hr />
+@foreach (var x in Model)
+{
 
-
-<!-- Modal Beneficios -->
-<div class="modal fade" id="beneficios-func" tabindex="-1" role="dialog" aria-labelledby="beneficios-func" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    
+    <!-- Modal Beneficios -->
+<div class="modal fade beneficios-func" id="beneficios-func" tabindex="-1" role="dialog" aria-labelledby="beneficios-func" aria-hidden="true">
+    <div class="modal-dialog modal-beneficios" role="document">
         <div class="modal-content model-beneficios">
             <div class="modal-header">
                 <h5 class="modal-title" id="beneficios-funcTitle">Benefícios</h5>
@@ -135,20 +140,21 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                @if ( ViewBag.qtdB>0) { 
-                    <form>
-                        @foreach (var x in ViewBag.Beneficios)
-                        {
+                @if (ViewBag.qtdB > 0)
+                {
+                    @*<form>
+                            @foreach (var z in ViewBag.Beneficios)
+                            {
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="@x.Ben_ID">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    @x.Ben_Nome
-                                </label>
-                            </div>
-                            
-                        }
-                    </form>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="@z.Ben_ID">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        @z.Ben_Nome
+                                    </label>
+                                </div>
+
+                            }
+                        </form>*@
                 }
                 else
                 {
@@ -159,25 +165,27 @@ else
                         <h6 class="text-center">Adicione Benefícios</h6>
                         <div class=" col-12 d-flex justify-content-center">
                             <div class=" col-12 d-flex justify-content-center">
-                                <a class="btn btn-warning custom text-center " href="@Url.Action("Index","Beneficio",new { IDFuncionario=ViewBag.IDE})"><i class="fa fa-thumbs-up"></i> Benefícios</a>
+                                <a class="btn btn-warning custom text-center " href="@Url.Action("Index", "Beneficio", new { IDFuncionario = ViewBag.IDE })"><i class="fa fa-thumbs-up"></i> Benefícios</a>
 
                             </div>
 
-
-                            </div>
 
                         </div>
+
+                    </div>
                 }
             </div>
-            
+
         </div>
     </div>
 </div>
 
+}
+
 <!-- Modal Demitir-->
-<div class="modal fade" tabindex="-1" role="dialog" id="ModalDemissao">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-demitir">
+<div class="modal fade " tabindex="-1" role="dialog" id="ModalDemissao">
+    <div class="modal-dialog modal-demitir" role="document">
+        <div class="modal-content ">
             <div class="modal-header">
                 <h5 class="modal-title">Demitir funcionário</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -215,6 +223,21 @@ else
 
 @section Scripts{
     <script>
+     
+        var clicksBeneficios = 0; var clicksDemissao = 0;
+       
+
+       
+        document.querySelector("#ModalDemissao").addEventListener('click', () => {
+            console.log(clicksDemissao);
+            clicksDemissao++;
+        });
+
+
+        document.querySelector('.beneficios-func').addEventListener('click', () => {
+            clicksBeneficios++;
+            console.log(clicksBeneficios + "click funcao");
+        });
 
         window.addEventListener('click', function (e) {
             var mouse = {
@@ -228,24 +251,55 @@ else
                 }
             }
             console.log(mouse.page.y);
-            //beneficios
-            if (document.querySelector("#beneficios-func").style.display == "none") {
-                document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 380) + "px";
 
-            } else {
+
+
+
+                ////beneficios
+            if (clicksBeneficios <= 1) {
                 document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
-
+                console.log("entrou")
             }
-            //demissao
-            if (document.querySelector("#ModalDemissao").style.display == "none") {
-                document.querySelector(".modal-demitir").style.marginTop = (mouse.page.y - 380) + "px";
+            else {
 
-            } else {
-                document.querySelector(".modal-demitir").style.marginTop = (mouse.page.y - 400) + "px";
+                if (document.querySelector("#beneficios-func").style.display == "none") {
+                    document.querySelector(".modal-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
+                    this.console.log("oi")
 
+                } else {
+
+                }
             }
+                
+    
 
-        });
+
+
+                
+
+                //demissao
+
+                if (clicksDemissao == 0) {
+                    document.querySelector(".modal-demitir").style.marginTop = (mouse.page.y - 400) + "px";
+                    console.log(clicksDemissao + "um click");
+
+
+                } else {
+                    if (document.querySelector("#ModalDemissao").style.display == "none") {
+                        document.querySelector(".modal-demitir").style.marginTop = (mouse.page.y - 400) + "px";
+
+                    } else {
+
+                    }
+                }
+
+
+
+
+
+
+
+            });
 
 
     $(document).ready(function () {
