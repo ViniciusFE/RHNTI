@@ -89,12 +89,15 @@ else
                             <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario", "Pessoa", new { id = x.Pes_ID })"><i class="fas fa-user-edit"></i> Alterar</a>
                             <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
                             <a class="btn btn-warning custom" href="@Url.Action("Index", "Dependente", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-users"></i> Dependentes</a>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index", "Beneficio", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-thumbs-up"></i> Benefícios</a>
                             <a class="btn btn-warning custom" href="@Url.Action("Index", "DadosBancarios", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                             <!-- Button modal Beneficios -->
                             <button type="button" class="btn btn-warning custom BtnAbrirModalBeneficios" data-id="@x.Pes_ID"><i class="fa fa-thumbs-up"></i>  Benefícios</button>
                         </div>
                     </div>
+
+
+                    <br />
+                    <br />
 
 
                 <br />
@@ -107,7 +110,7 @@ else
                 <br />
                 
                 
-            </div>
+      </div>
         </div>
     }
 
@@ -125,7 +128,6 @@ else
 
 <hr />
 
-
     
     <!-- Modal Beneficios -->
 <div class="modal fade beneficios-func" id="beneficios-func" tabindex="-1" role="dialog" aria-labelledby="beneficios-func" aria-hidden="true">
@@ -138,16 +140,14 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                @if ( ViewBag.Beneficios.Count>0) { 
-
+                @if (ViewBag.Beneficios.Count > 0)
+                {
+                   
                 <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
                     <tr style="background-color: rgb(148,72,72);" class="text-white">
                         <td>Benefício</td>
                         <td>Ações</td>
                     </tr>
-
-
-
                 </table>
                     
                 }
@@ -174,7 +174,6 @@ else
         </div>
     </div>
 </div>
-
 
 
 <!-- Modal Demitir-->
@@ -251,9 +250,11 @@ else
 
 
                 ////beneficios
-            if (clicksBeneficios <= 1) {
+            if (clicksBeneficios <= 0) {
+               
                 document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
-                console.log("entrou")
+                    console.log("entrou")
+                
             }
             else {
 
