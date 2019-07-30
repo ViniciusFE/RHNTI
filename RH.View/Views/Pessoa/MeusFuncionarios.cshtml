@@ -101,11 +101,11 @@ else
                 <br />
             }
 
-                }
+                
 
                 <br />
                 <br />
-                }
+                
                 
             </div>
         </div>
@@ -327,8 +327,8 @@ else
                                     "<tr>" +
                                         "<td>" + data[i].Nome + "</td>" +
                                         "<td>" +
-                                            "<div>" +
-                                                "<button class='btn btn-success mr-1' onclick='AdicionarBeneficio()'><span class='fa fa-plus'></span></button>" +
+                                    "<div>" +
+                                    "<button class='btn btn-success mr-1' onclick='AdicionarBeneficio(" + data[i].ID + "," + IDFuncionario + ")' id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-plus'></span></button>" +
                                                 "<button class='btn btn-primary mr-1'><span class='fa fa-info-circle'></span></button>"+
                                             "</div>" +
                                         "</td >" +
@@ -344,7 +344,7 @@ else
                                         "<td>" + data[i].Nome + "</td>" +
                                         "<td>" +
                                             "<div>" +
-                                                "<button class='btn btn-danger mr-1' onclick='RemoverBeneficio()'><span class='fa fa-minus'></span></button>" +
+                                                "<button class='btn btn-danger mr-1' onclick='RemoverBeneficio(" + data[i].ID + "," + IDFuncionario + ")' id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-minus'></span></button>" +
                                                 "<button class='btn btn-primary mr-1o'><span class='fa fa-info-circle'></span></button>" +
                                             "</div>" +
                                         "</td >" +
@@ -411,8 +411,29 @@ else
 
     <script>
 
-        function AdicionarBeneficio() {
-            alert("Teste");
+        function AdicionarBeneficio(IDBeneficio, ID) {
+
+            $("#" + IDBeneficio + "-" + ID).attr('disabled', 'disabled');
+
+            var url = "@Url.Action("AdicionarBeneficio","Pessoa")";
+
+            $.post(url, { beneficio: IDBeneficio, funcionario: ID });
+
+
+            $("#" + IDBeneficio + "-" + ID).removeClass().addClass('btn btn-danger mr-1').html("<span class='fa fa-minus'></span>").attr('onclick', 'RemoverBeneficio(' + IDBeneficio + ',' + ID + ')').removeAttr('disabled');
+        }
+
+        function RemoverBeneficio(IDBeneficio,ID) {
+
+              $("#" + IDBeneficio + "-" + ID).attr('disabled', 'disabled');
+
+            var url = "@Url.Action("RemoverBeneficio","Pessoa")";
+
+            $.post(url, { beneficio: IDBeneficio, funcionario: ID });
+
+
+            $("#" + IDBeneficio + "-" + ID).removeClass().addClass('btn btn-success mr-1').html("<span class='fa fa-plus'></span>").attr('onclick', 'AdicionarBeneficio(' + IDBeneficio + ',' + ID + ')').removeAttr('disabled');
+
         }
 
     </script>

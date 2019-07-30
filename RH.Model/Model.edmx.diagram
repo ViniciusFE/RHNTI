@@ -6,25 +6,25 @@
     <edmx:Diagrams>
       <Diagram DiagramId="48b6047cdac74d9cb52d52d94a87e98d" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="36" />
-        <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="45.125" />
+        <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="37.75" />
         <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="9.75" PointY="24.875" />
-        <EntityTypeShape EntityType="RHModel.CadastroTreinamento" Width="1.5" PointX="19.5" PointY="32.875" />
+        <EntityTypeShape EntityType="RHModel.CadastroTreinamento" Width="1.5" PointX="16.5" PointY="30.375" />
         <EntityTypeShape EntityType="RHModel.Cargo" Width="1.5" PointX="12" PointY="39.75" />
         <EntityTypeShape EntityType="RHModel.Curso" Width="1.5" PointX="3" PointY="36.5" />
-        <EntityTypeShape EntityType="RHModel.DadoBancario" Width="1.5" PointX="16.5" PointY="36.75" />
-        <EntityTypeShape EntityType="RHModel.DadoDependente" Width="1.5" PointX="16.5" PointY="52.875" />
-        <EntityTypeShape EntityType="RHModel.Demissao" Width="1.5" PointX="16.5" PointY="40.875" />
+        <EntityTypeShape EntityType="RHModel.DadoBancario" Width="1.5" PointX="16.5" PointY="33.625" />
+        <EntityTypeShape EntityType="RHModel.DadoDependente" Width="1.5" PointX="16.5" PointY="42.625" />
+        <EntityTypeShape EntityType="RHModel.Demissao" Width="1.5" PointX="16.5" PointY="47.625" />
         <EntityTypeShape EntityType="RHModel.Empresa" Width="1.5" PointX="7.5" PointY="35.5" />
-        <EntityTypeShape EntityType="RHModel.Movimentacao" Width="1.5" PointX="16.5" PointY="50" />
-        <EntityTypeShape EntityType="RHModel.Pessoa" Width="1.5" PointX="14.25" PointY="40.375" />
-        <EntityTypeShape EntityType="RHModel.PessoaBeneficio" Width="1.5" PointX="16.5" PointY="30.75" />
+        <EntityTypeShape EntityType="RHModel.Movimentacao" Width="1.5" PointX="16.5" PointY="51.875" />
+        <EntityTypeShape EntityType="RHModel.Pessoa" Width="1.5" PointX="14.25" PointY="37.25" />
+        <EntityTypeShape EntityType="RHModel.PessoaBeneficio" Width="1.5" PointX="19.5" PointY="32.25" />
         <EntityTypeShape EntityType="RHModel.Professor" Width="1.5" PointX="0.75" PointY="36.5" />
-        <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="21.75" PointY="31.625" />
-        <EntityTypeShape EntityType="RHModel.Resposta" Width="1.5" PointX="18.75" PointY="37" />
+        <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="21.75" PointY="28.625" />
+        <EntityTypeShape EntityType="RHModel.Resposta" Width="1.5" PointX="24.75" PointY="30.875" />
         <EntityTypeShape EntityType="RHModel.Setor" Width="1.5" PointX="9.75" PointY="39.875" />
         <EntityTypeShape EntityType="RHModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="RHModel.Treinamento" Width="1.5" PointX="9.75" PointY="21.375" />
-        <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="30.375" />
+        <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="51.5" />
         <AssociationConnector Association="RHModel.FK_Aluno_Curso" />
         <AssociationConnector Association="RHModel.FK_Empresa_Aluno" />
         <AssociationConnector Association="RHModel.FK_Prova_Aluno" />
@@ -126,7 +126,6 @@
         <AssociationConnector Association="RHModel.FK_Resposta_Setor2" />
         <AssociationConnector Association="RHModel.FK_Resposta_Setor3" />
         <AssociationConnector Association="RHModel.FK_Resposta_Setor4" />
-        <EntityTypeShape EntityType="RHModel.VW_MeusBeneficios" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -122,5 +122,15 @@ namespace RH.Control
             return _RepositoriePessoaBeneficio.PossuiBeneficio(IDBeneficio, IDFuncionario);
         }
 
+        public PessoaBeneficio SelecionarBeneficioFuncionario(int IDBeneficio,int IDFuncionario)
+        {
+            return _RepositoriePessoaBeneficio.SelecionarBeneficioFuncionario(IDBeneficio, IDFuncionario);
+        }
+
+        public void ExcluirBeneficioFuncionario(PessoaBeneficio oBeneficio)
+        {
+            _RepositoriePessoaBeneficio.ExcluirBeneficioFuncionario(oBeneficio);
+        }
+
     }
 }

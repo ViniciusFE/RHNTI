@@ -60,5 +60,17 @@ namespace RH.Model.Repositories
 
             return false;
         }
+
+        public PessoaBeneficio SelecionarBeneficioFuncionario(int IDBeneficio,int IDFuncionario)
+        {
+            return odb.PessoaBeneficio.Where(p => p.PB_Beneficio_Ben_ID.Equals(IDBeneficio) && p.PB_Pessoa_Pes_ID.Equals(IDFuncionario)).FirstOrDefault();
+        }
+
+        public void ExcluirBeneficioFuncionario(PessoaBeneficio oBeneficio)
+        {
+            odb.Entry(oBeneficio).State = System.Data.Entity.EntityState.Deleted;
+            odb.SaveChanges();
+        }
+
     }
 }

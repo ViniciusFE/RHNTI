@@ -32,7 +32,7 @@ namespace RH.Model
         public int PB_ID { get; set; }
         public int PB_Pessoa_Pes_ID { get; set; }
         public int PB_Beneficio_Ben_ID { get; set; }
-        public System.DateTime PB_DataCadastro { get; set; }
+        public string PB_DataCadastro { get; set; }
         public bool PB_Situation { get; set; }
     
         public virtual Beneficio Beneficio { get; set; }

@@ -136,7 +136,9 @@ namespace RH.View.Controllers
             List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
             List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
-
+          
+            List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
+            ViewBag.Beneficios = beneficios;
 
 
             ViewBag.Setores = Setores;
@@ -230,7 +232,30 @@ namespace RH.View.Controllers
             return Json(Beneficios, JsonRequestBehavior.AllowGet);
         }
 
-       
+       public ActionResult AdicionarBeneficio(int beneficio,int funcionario)
+        {
+            Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            PessoaBeneficio Beneficio = new PessoaBeneficio()
+            {
+                PB_Beneficio_Ben_ID=beneficio,
+                PB_DataCadastro=aEmpresa.Emp_DataAtual,
+                PB_Pessoa_Pes_ID=funcionario,
+                PB_Situation=true
+            };
+
+            DbPessoa.CadastrarBeneficioFuncionario(Beneficio);
+            return new EmptyResult();
+        }
+
+        public ActionResult RemoverBeneficio(int beneficio,int funcionario)
+        {
+            PessoaBeneficio Beneficio = DbPessoa.SelecionarBeneficioFuncionario(beneficio, funcionario);
+
+            DbPessoa.ExcluirBeneficioFuncionario(Beneficio);
+
+            return new EmptyResult();
+        }
 
     }
 

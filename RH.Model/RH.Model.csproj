@@ -150,9 +150,6 @@
     <Compile Include="Vaga.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="VW_MeusBeneficios.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
