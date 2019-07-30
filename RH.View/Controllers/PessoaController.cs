@@ -137,9 +137,7 @@ namespace RH.View.Controllers
             List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
 
-          
-            List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
-            ViewBag.Beneficios = beneficios;
+
 
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
