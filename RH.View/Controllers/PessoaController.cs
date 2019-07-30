@@ -138,14 +138,22 @@ namespace RH.View.Controllers
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
 
 
+<<<<<<< HEAD
             int qtd =DbPessoa.BeneficiosEmpresa(IDEmpresa).Count();
             List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
             ViewBag.Beneficios = beneficios;
             ViewBag.qtdB = qtd;
             ViewBag.IDE = IDEmpresa;
+=======
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
 
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
+
+            List<PessoaBeneficio> BeneficiosFuncionarios = DbPessoa.BeneficiosFuncionariosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.BeneficiosFuncionarios = BeneficiosFuncionarios;
+
+            ViewBag.IDFuncionarioBeneficio = 0;
 
             if(Pesquisa!="")
             {
@@ -197,6 +205,40 @@ namespace RH.View.Controllers
 
             return Json("O funcionário foi demitido com sucesso!");
         }
+
+        public ActionResult PopularBeneficiosFuncionario(int id)
+        {
+            List<Beneficio> BeneficiosEmpresa = DbPessoa.BeneficiosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            List<object> Beneficios = new List<object>();
+
+            foreach (var x in BeneficiosEmpresa)
+            {
+                string status;
+                if (DbPessoa.PossuiBeneficio(x.Ben_ID, id))
+                {
+                    status = "Possui";
+                }
+
+                else
+                {
+                    status = "Não possui";
+                }
+
+                Beneficios.Add(
+                    new
+                    {
+                        ID = x.Ben_ID,
+                        Nome = x.Ben_Nome,
+                        Status = status
+                    }
+                    );
+            }
+
+            return Json(Beneficios, JsonRequestBehavior.AllowGet);
+        }
+
+       
 
     }
 

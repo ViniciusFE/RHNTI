@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "MeusFuncionarios";
+
 }
 @Styles.Render("~/Content/Pages/css")
 
@@ -85,23 +86,27 @@ else
 
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario", "Pessoa", new { id = x.Pes_ID })"><i class="fas fa-user-edit"></i> Alterar</a>
                             <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index","Dependente",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-users"></i> Dependentes</a>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index","Beneficio",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-thumbs-up"></i> Benefícios</a>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index","DadosBancarios",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "Dependente", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-users"></i> Dependentes</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "Beneficio", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-thumbs-up"></i> Benefícios</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "DadosBancarios", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                             <!-- Button modal Beneficios -->
-                            <button type="button" class="btn btn-warning custom beneficios-btn" data-toggle="modal" data-target="#beneficios-func">
-                                <i class="fa fa-thumbs-up"></i>  Benefícios
-                            </button>
+                            <button type="button" class="btn btn-warning custom BtnAbrirModalBeneficios" data-id="@x.Pes_ID"><i class="fa fa-thumbs-up"></i>  Benefícios</button>
                         </div>
                     </div>
 
 
+<<<<<<< HEAD
                     <br />
                     <br />
 
 
+=======
+                <br />
+                <br />
+            }
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
 
                 }
 
@@ -109,7 +114,10 @@ else
                 <br />
                 }
                 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
             </div>
         </div>
     }
@@ -127,6 +135,10 @@ else
 
 
 <hr />
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
 
     
     <!-- Modal Beneficios -->
@@ -140,21 +152,31 @@ else
                 </button>
             </div>
             <div class="modal-body">
+<<<<<<< HEAD
                 @if (ViewBag.qtdB > 0)
                 {
                     <form>
                             @foreach (var z in ViewBag.Beneficios)
                             {
+=======
+                @if ( ViewBag.Beneficios.Count>0) { 
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="@z.Ben_ID">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        @z.Ben_Nome
-                                    </label>
-                                </div>
+                <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
+                    <tr style="background-color: rgb(148,72,72);" class="text-white">
+                        <td>Benefício</td>
+                        <td>Ações</td>
+                    </tr>
 
+<<<<<<< HEAD
                             }
                         </form>
+=======
+
+
+                </table>
+                    
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
                 }
                 else
                 {
@@ -180,6 +202,10 @@ else
     </div>
 </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5854128676d49fadb3663b05a306f16c19367be
 
 <!-- Modal Demitir-->
 <div class="modal fade " tabindex="-1" role="dialog" id="ModalDemissao">
@@ -303,10 +329,74 @@ else
             });
 
 
-    $(document).ready(function () {
-        var IDFuncionario;
+        $(document).ready(function () {
+            var IDFuncionario;
 
-        var motivo;
+
+            var motivo;
+
+            $(".BtnAbrirModalBeneficios").click(function () {
+
+                IDFuncionario = $(this).attr("data-id");
+
+                $("#TabelaBeneficiosFuncionario").html(" <tr style='background-color: rgb(148, 72, 72); ' class='text-white'>" +
+                    "<td>Benefício</td >" +
+                    "<td>Ações</td>" +
+                    "</tr >");
+
+                $.ajax({
+                    method: "post",
+                    dataType: "json",
+                    url: "@Url.Action("PopularBeneficiosFuncionario","Pessoa")",
+                    data: { id: IDFuncionario },
+                    success: function (data) {
+
+                        $(data).each(function (i) {
+
+                            if (data[i].Status == "Não possui") {
+                                $("#TabelaBeneficiosFuncionario").append(
+
+                                    "<tr>" +
+                                        "<td>" + data[i].Nome + "</td>" +
+                                        "<td>" +
+                                            "<div>" +
+                                                "<button class='btn btn-success mr-1' onclick='AdicionarBeneficio()'><span class='fa fa-plus'></span></button>" +
+                                                "<button class='btn btn-primary mr-1'><span class='fa fa-info-circle'></span></button>"+
+                                            "</div>" +
+                                        "</td >" +
+                                    "</tr>"
+
+                                );
+                            }
+
+                            else {
+                                $("#TabelaBeneficiosFuncionario").append(
+
+                                    "<tr>" +
+                                        "<td>" + data[i].Nome + "</td>" +
+                                        "<td>" +
+                                            "<div>" +
+                                                "<button class='btn btn-danger mr-1' onclick='RemoverBeneficio()'><span class='fa fa-minus'></span></button>" +
+                                                "<button class='btn btn-primary mr-1o'><span class='fa fa-info-circle'></span></button>" +
+                                            "</div>" +
+                                        "</td >" +
+                                    "</tr>"
+
+                                );
+                            }
+                            
+
+                        });
+
+                    },
+                    Error: function () {
+                        $("#TabelaBeneficiosFuncionario").html("<p>Não foi possível carregar os dados desse funcionário, por favor tente novamente...</p>")
+                    }
+                });
+
+                $("#beneficios-func").modal('show');
+        });
+
 
         $(".motivodemissao").prop("checked", true);
 
@@ -347,7 +437,16 @@ else
             $("#MensagemRetorno").html(retorno);
             $("#Carregando").css("display", "none");
             $("#card-" + IDFuncionario + "").slideUp("slow");
-        }
+        }   
     });
     </script>
+
+    <script>
+
+        function AdicionarBeneficio() {
+            alert("Teste");
+        }
+
+    </script>
+
 }

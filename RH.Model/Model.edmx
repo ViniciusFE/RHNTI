@@ -312,6 +312,18 @@
           <Property Name="Vag_DataTermino" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Vag_Situation" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RH.dbo.VW_MeusBeneficios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_MeusBeneficios">
+          <Key>
+            <PropertyRef Name="CodigoBeneficio" />
+            <PropertyRef Name="NomeBeneficio" />
+            <PropertyRef Name="Situacao" />
+          </Key>
+          <Property Name="CodigoBeneficio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeBeneficio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Situacao" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Aluno_Curso">
           <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
           <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
@@ -1545,6 +1557,13 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treinamento" EntityType="Self.Treinamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vaga" EntityType="Self.Vaga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_MeusBeneficios" EntityType="Self.VW_MeusBeneficios" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_MeusBeneficios].[CodigoBeneficio] AS [CodigoBeneficio], 
+    [VW_MeusBeneficios].[NomeBeneficio] AS [NomeBeneficio], 
+    [VW_MeusBeneficios].[Situacao] AS [Situacao]
+    FROM [dbo].[VW_MeusBeneficios] AS [VW_MeusBeneficios]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Aluno_Curso" Association="Self.FK_Aluno_Curso">
             <End Role="Curso" EntitySet="Curso" />
             <End Role="Aluno" EntitySet="Aluno" />
@@ -2379,6 +2398,7 @@
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Resposta" EntitySet="Resposta" />
           </AssociationSet>
+          <EntitySet Name="VW_MeusBeneficios" EntityType="RHModel.VW_MeusBeneficios" />
         </EntityContainer>
         <EntityType Name="Aluno">
           <Key>
@@ -4101,6 +4121,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VW_MeusBeneficios">
+          <Key>
+            <PropertyRef Name="CodigoBeneficio" />
+            <PropertyRef Name="NomeBeneficio" />
+            <PropertyRef Name="Situacao" />
+          </Key>
+          <Property Name="CodigoBeneficio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeBeneficio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Situacao" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4431,6 +4461,15 @@
                 <ScalarProperty Name="Vag_Descricao" ColumnName="Vag_Descricao" />
                 <ScalarProperty Name="Vag_Cargo_Car_ID" ColumnName="Vag_Cargo_Car_ID" />
                 <ScalarProperty Name="Vag_ID" ColumnName="Vag_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_MeusBeneficios">
+            <EntityTypeMapping TypeName="RHModel.VW_MeusBeneficios">
+              <MappingFragment StoreEntitySet="VW_MeusBeneficios">
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+                <ScalarProperty Name="NomeBeneficio" ColumnName="NomeBeneficio" />
+                <ScalarProperty Name="CodigoBeneficio" ColumnName="CodigoBeneficio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

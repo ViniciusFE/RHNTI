@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="48b6047cdac74d9cb52d52d94a87e98d" Name="Diagram1">
+      <Diagram DiagramId="48b6047cdac74d9cb52d52d94a87e98d" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="36" />
         <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="45.125" />
         <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="9.75" PointY="24.875" />
@@ -126,6 +126,7 @@
         <AssociationConnector Association="RHModel.FK_Resposta_Setor2" />
         <AssociationConnector Association="RHModel.FK_Resposta_Setor3" />
         <AssociationConnector Association="RHModel.FK_Resposta_Setor4" />
+        <EntityTypeShape EntityType="RHModel.VW_MeusBeneficios" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
