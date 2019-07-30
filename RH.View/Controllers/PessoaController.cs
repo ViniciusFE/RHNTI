@@ -138,14 +138,12 @@ namespace RH.View.Controllers
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
 
 
-<<<<<<< HEAD
             int qtd =DbPessoa.BeneficiosEmpresa(IDEmpresa).Count();
             List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
             ViewBag.Beneficios = beneficios;
             ViewBag.qtdB = qtd;
             ViewBag.IDE = IDEmpresa;
-=======
->>>>>>> c5854128676d49fadb3663b05a306f16c19367be
+
 
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
