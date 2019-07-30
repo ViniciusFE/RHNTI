@@ -20,10 +20,7 @@ namespace RH.Model.Repositories
             odb = _odb;
         }
 
-        public List<PessoaBeneficio> BeneficiosFuncionario(int id)
-        {
-            return odb.PessoaBeneficio.Where(p => p.PB_Pessoa_Pes_ID.Equals(id) && p.PB_Situation == true).ToList();
-        }
+        
 
         public PessoaBeneficio SelecionarBeneficio(int id)
         {
@@ -46,6 +43,22 @@ namespace RH.Model.Repositories
         {
             odb.Database.ExecuteSqlCommand("update PessoaBeneficio set PB_Situation=0 where PB_Pessoa_Pes_ID= " + IDFuncionario);
             odb.SaveChanges();
+        }
+
+        public List<PessoaBeneficio> BeneficiosFuncionariosEmpresa(int IDEmpresa)
+        {
+            return odb.PessoaBeneficio.Join(odb.Beneficio.Where(b => b.Ben_Empresa_Emp_ID.Equals(IDEmpresa)), p => p.PB_Beneficio_Ben_ID, b => b.Ben_ID, (p, b) => p).ToList();
+        }
+
+        public bool PossuiBeneficio(int IDBeneficio,int IDFuncionario)
+        {
+            PessoaBeneficio Beneficio = odb.PessoaBeneficio.Where(p => p.PB_Pessoa_Pes_ID.Equals(IDFuncionario) && p.PB_Beneficio_Ben_ID.Equals(IDBeneficio) && p.PB_Situation == true).FirstOrDefault();
+            if(Beneficio!=null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
