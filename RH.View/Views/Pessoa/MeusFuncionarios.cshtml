@@ -100,7 +100,6 @@ else
 
                     <br />
                     <br />
-<<<<<<< HEAD
 
 
 
@@ -109,9 +108,8 @@ else
                 <br />
                 <br />
                 }
-=======
                 
->>>>>>> bb88ad8a33847631920633a9e5590447f1df5031
+
             </div>
         </div>
     }
@@ -129,8 +127,6 @@ else
 
 
 <hr />
-@foreach (var x in Model)
-{
 
     
     <!-- Modal Beneficios -->
@@ -146,7 +142,7 @@ else
             <div class="modal-body">
                 @if (ViewBag.qtdB > 0)
                 {
-                    @*<form>
+                    <form>
                             @foreach (var z in ViewBag.Beneficios)
                             {
 
@@ -158,7 +154,7 @@ else
                                 </div>
 
                             }
-                        </form>*@
+                        </form>
                 }
                 else
                 {
@@ -184,7 +180,6 @@ else
     </div>
 </div>
 
-}
 
 <!-- Modal Demitir-->
 <div class="modal fade " tabindex="-1" role="dialog" id="ModalDemissao">
@@ -260,9 +255,11 @@ else
 
 
                 ////beneficios
-            if (clicksBeneficios <= 1) {
+            if (clicksBeneficios <= 0) {
+               
                 document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
-                console.log("entrou")
+                    console.log("entrou")
+                
             }
             else {
 
