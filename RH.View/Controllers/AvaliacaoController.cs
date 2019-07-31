@@ -24,35 +24,36 @@ namespace RH.View.Controllers
             return View(Chefes);
         }
 
-        public ActionResult MeusFuncionarios(int id)
+        public ActionResult MeusFuncionarios(int IDChefe)
         {
-            Pessoa aPessoa = _Control.SelecionarPessoa(id);
-            List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(aPessoa.Pes_Cargo_Car_ID).OrderBy(p => p.Pes_Cargo_Car_ID).ToList();
-            int quantidade = MeusFuncionarios.Count;
-            string[,] Dados = new string[quantidade, quantidade * 3];
-            int posicao = 0;
-            foreach (var x in MeusFuncionarios)
+            Pessoa ChefeSetor = _Control.SelecionarPessoa(IDChefe);
+            Cargo CargoChefe = _Control.SelecionarCargo(ChefeSetor.Pes_Cargo_Car_ID);
+            List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(CargoChefe.Car_Setor_Set_ID, ChefeSetor.Pes_ID);
+
+            List<object> DadosFuncionarios = new List<object>();
+
+            foreach(var x in MeusFuncionarios)
             {
-                for (var y = 0; y < 3; y++)
-                {
-                    if (y == 0)
+                Cargo oCargo = _Control.SelecionarCargo(x.Pes_Cargo_Car_ID);
+                Setor oSetor = _Control.SelecionarSetor(oCargo.Car_Setor_Set_ID);
+                DadosFuncionarios.Add(
+                    new
                     {
-                        Dados[posicao, y] = x.Pes_Nome;
+                        ID=x.Pes_ID,
+                        Nome=x.Pes_Nome,
+                        CargoOcupacao=oCargo.Car_Nome,
+                        Salario=x.Pes_Salario,
+                        Setor=oSetor.Set_Nome,
+                        CPF=x.Pes_CPF,
+                        CarteiraTrabalho=x.Pes_CTrabalho,
+                        DataAdmissao=x.Pes_DataCadastro,
+                        Cidade=x.Pes_Cidade,
+                        Endereco=x.Pes_Endereco
                     }
-
-                    else if (y == 1)
-                    {
-                        Cargo oCargo = _Control.SelecionarCargo(x.Pes_Cargo_Car_ID);
-                        Dados[posicao, y] = oCargo.Car_Nome;
-                    }
-
-                    else
-                    {
-                        Dados[posicao, y] = x.Pes_ID.ToString();
-                    }
-                }
+                );
             }
-            return Json(Dados);
+
+            return Json(DadosFuncionarios,JsonRequestBehavior.AllowGet);
         }
 
         public FileContentResult GetImagemUsuario(int id)

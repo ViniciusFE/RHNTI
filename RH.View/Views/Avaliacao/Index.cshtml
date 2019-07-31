@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RH.Model.Pessoa>
+@model IEnumerable<RH.Model.Pessoa>
 
 @{
     /**/
@@ -19,7 +19,7 @@
         <h1 class="text-center">Avaliação de Funcionários</h1>
         <br />
         <div class="form-group">
-            @Html.Label("Chefes de Setores", "Chefes", htmlAttributes: new { @class = "control-label" })
+            @Html.Label("Chefes de Setores", "Chefes de Setor", htmlAttributes: new { @class = "control-label" })
             @Html.DropDownList("Pes_Nome", null, "Por favor selecione um chefe de setor", htmlAttributes: new { @class = "form-control", @id = "Chefes" })
         </div>
     </div>
@@ -57,20 +57,74 @@
 
 @section Scripts
 {
-<script>
+    <script>
         var IdFuncionario;
 
         $(document).ready(function () {
 
-            $(".Abrir").click(function () {
-                alert("Teste");
+            $("#Chefes").change(function () {
+                $("#Funcionarios").html("");
+
+                var id = $(this).val();
+
+                 $.ajax({
+                    method: "post",
+                    dataType: "json",
+                    url: "@Url.Action("MeusFuncionarios","Avaliacao")",
+                    data: { IDChefe: id },
+                     success: function (data) {
+
+                         if (data == "") {
+                             $("#Funcionarios").append(
+                                 "<div class='alert alert-primary' role='alert'>" +
+                                    "<div class='alert-body'>"+
+                                        "<h4>Não ´foi encontrado nenhum funcionário que responda a este Chefe de Setor</h4>" +
+                                    "</div>"+
+                                 "</div>"
+                             );
+                         }
+
+                         else {
+                             $(data).each(function (i) {
+
+                                $("#Funcionarios").append(
+
+                                    "<div class='container my-4'>" +
+                                    "<div class='card'>" +
+                                    "<div class='card-header'> <h1>" + data[i].Nome + "</h1> </div>" +
+                                    "<div class='card-body row'>" +
+                                    "<div class='col-md-4'>" +
+                                    "<img src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + data[i].ID + "' class='imagem-funcionario'/>" +
+                                    "</div>" +
+                                    "<div class='col-md-8'>" +
+                                    "<h4>Cargo de Ocupação: <span class='textUser'> " + data[i].CargoOcupacao + "</span></h4>" +
+                                    "<h4>Data de Admissão: <span class='textUser'> " + data[i].DataAdmissao + "</span></h4>" +
+                                    "<h4>Salário:<span class='textUser'> " + data[i].Salario + " R$</span></h4>" +
+                                    "<h4>Carteira de Trabalho: <span class='textUser'> " + data[i].CarteiraTrabalho + "</span></h4>" +
+                                    "<h4>CPF:<span class='textUser'> " + data[i].CPF + "</span></h4>" +
+                                    "<h4>Cidade:<span class='textUser'> " + data[i].Cidade + "</span></h4>" +
+                                    "<h4>Endereço:<span class='textUser'> " + data[i].Endereco + "</span></h4>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "<div class='card-footer'>" +
+                                    "<button onclick='Abrir(" + data[i].ID + ")' class='btn btn-danger custom'><span class='fa fa-star'></span> Avaliar</button>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "</div>"
+
+                                );
+                        });
+                         }
+
+                        
+                    },
+                    Error: function () {
+                        $("#Funcionarios").html("<p>Não foi possível carregar os dados desse funcionário, por favor tente novamente...</p>")
+                    }
+                });
             });
 
-            $("#Chefes").change(function () {
-                var id = $(this).val();
-                var url = "@Url.Action("MeusFuncionarios","Avaliacao")";
-                $.post(url, { id: id }, resposta);
-            });
+
 
             $("#TextBox").keyup(function () {
                 var texto = $(this).val();
@@ -101,35 +155,6 @@
                 $("BtnAvaliar").attr("disabled", "disabled");
             }
 
-            function resposta(Funcionarios) {
-                var quantidade = Funcionarios.length;
-                var result = quantidade / 3;
-                for (var x = 0; x < result; x++) {
-                    $("#Funcionarios").append(
-                    "<h3 class='text-center'>Funcionários</h3>"+
-                    "<div class='card'>"+
-                    "<div class= 'card-body'>" +
-                    "<div class='row'>"+
-                        "<div class='col-4'>" +
-                        "<img class='imagem-funcionario' src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + Funcionarios[x, 2] + "' class=''/>" +
-                    "</div>"+
-                        "<div class='col-6 dados-funcionario'>" +
-                        "<h4>Nome do funcionário: <span class='textUser'>" + Funcionarios[x, 0] + "</span></h4>" +
-                        "<h4>Cargo ocupado: <span class='textUser'> " + Funcionarios[x, 1] + "</span></h4>" +
-                        "</div>" +
-                        "<div class='col-2'>" +
-                        "<button onclick='Abrir("+Funcionarios[x,2]+")' class='btn btn-outline-success Abrir Funcionario-avaliacao'><spam class='fa fa-star'></spam> Dar Avaliacao</button>"+
-                        "</div>"+
-            "</div >"+
-                    "</div >" +
-                    "</div>"
-                    );
-                }
-
-            }
-
-
-
         });
 
         function Abrir(id) {
@@ -137,6 +162,5 @@
             $("#ModalAvaliar").modal('show');
         }
 
-</script>
+    </script>
 }
-

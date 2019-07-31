@@ -224,7 +224,9 @@ namespace RH.View.Controllers
                     {
                         ID = x.Ben_ID,
                         Nome = x.Ben_Nome,
-                        Status = status
+                        Status = status,
+                        Descricao=x.Ben_Descricao,
+                        Custo=x.Ben_Custo
                     }
                     );
             }

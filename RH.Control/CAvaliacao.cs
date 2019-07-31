@@ -13,12 +13,14 @@ namespace RH.Control
         private RepositorieAvaliacao _RepositorieAvaliacao;
         private RepositoriePessoa _RepositoriePessoa;
         private RepositorieCargo _RepositorieCargo;
+        private RepositorieSetor _RepositorieSetor;
 
         public CAvaliacao()
         {
             _RepositorieAvaliacao = new RepositorieAvaliacao();
             _RepositoriePessoa = new RepositoriePessoa();
             _RepositorieCargo = new RepositorieCargo();
+            _RepositorieSetor = new RepositorieSetor();
         }
 
         public void CadastrarAvaliacao(Avaliacao aAvaliacao)
@@ -31,9 +33,9 @@ namespace RH.Control
             return _RepositoriePessoa.SelecionarTodosChefes();
         }
 
-        public List<Pessoa> SelecionarTodosMeusFuncionarios(int id)
+        public List<Pessoa> SelecionarTodosMeusFuncionarios(int IDSetor,int IDFuncionario)
         {
-            return _RepositoriePessoa.SelcionarTodosMeusFuncionarios(id);
+            return _RepositoriePessoa.SelcionarTodosMeusFuncionarios(IDSetor,IDFuncionario);
         }
 
         public List<Cargo> SelecionarTodosCargosFuncionarios(int id)
@@ -49,6 +51,11 @@ namespace RH.Control
         public Cargo SelecionarCargo(int id)
         {
             return _RepositorieCargo.SelecionarCargo(id);
+        }
+
+        public Setor SelecionarSetor(int IDSetor)
+        {
+            return _RepositorieSetor.SelecionarSetor(IDSetor);
         }
     }
 }

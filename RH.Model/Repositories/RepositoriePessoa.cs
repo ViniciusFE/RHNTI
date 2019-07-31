@@ -58,14 +58,14 @@ namespace RH.Model.Repositories
             }
         }
 
-        public List<Pessoa> SelcionarTodosMeusFuncionarios(int id)
+        public List<Pessoa> SelcionarTodosMeusFuncionarios(int IDSetor,int IDChefe)
         {
-            return Db.Pessoa.SqlQuery("select * from Pessoa inner join Cargo on Pes_Cargo_Car_ID = Car_ID where Car_Cargo_Car_ID = " + id + " and Car_Situation = 1 and Pes_Situation = 1").ToList();
+            return Db.Pessoa.Join(Db.Cargo.Join(Db.Setor.Where(s => s.Set_Setor_Set_ID.Equals(IDSetor)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), p => p.Pes_Cargo_Car_ID, c => c.Car_ID, (p, c) => p).Where(p => p.Pes_ID != IDChefe).ToList();
         }
 
         public List<Pessoa> SelecionarTodosChefes()
         {
-            return Db.Pessoa.SqlQuery("select * from Pessoa inner join Cargo on Pessoa.Pes_Cargo_Car_ID = Car_ID where Car_Cargo_Car_ID is null and Car_Situation = 1 and Pes_Situation = 1").ToList();
+            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID and c.Car_Chefe = 1 and p.Pes_Situation = 1").ToList();
         }
 
         public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
