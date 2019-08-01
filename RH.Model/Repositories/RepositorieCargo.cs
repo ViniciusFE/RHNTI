@@ -101,5 +101,11 @@ namespace RH.Model.Repositories
             return false;
         }
 
+
+        public int QuantidadeCargosEmpresa(int IDEmpresa)
+        {
+            return odb.Cargo.SqlQuery("select * from Cargo c inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID where s.Set_Empresa_Emp_ID = " + IDEmpresa).Count();
+        }
+
     }
 }

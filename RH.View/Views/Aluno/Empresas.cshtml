@@ -1,0 +1,61 @@
+@model IEnumerable<RH.Model.Empresa>
+
+@{
+    ViewBag.Title = "Empresas";
+    Layout = "~/Views/Shared/_Layout_Professor.cshtml";
+}
+
+@Styles.Render("~/Content/Pages/css")
+
+<div class="container my-4">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Empresas do Aluno/a @ViewBag.NomeAluno</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img src="@Url.Action("GetImagemEmpresa", new { id = item.Emp_ID })" class="card-img-top">
+
+                                    <div class="card-body">
+                                        <h5 class="text-center">@item.Emp_Nome</h5>
+                                        <br />
+                                        <a class="btn btn-danger custom" href="@Url.Action("Empresa",new { IDEmpresa=item.Emp_ID})">
+                                            <span class="fa fa-eye"></span>
+                                            Visualizar Empresa
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                }
+            }
+
+            else
+            {
+                <div class="alert alert-primary" role="alert">
+                    <div class="alert-body">
+                        <h4>Este aluno não possui nenhuma empresa</h4>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+

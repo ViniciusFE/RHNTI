@@ -1,0 +1,112 @@
+@model IEnumerable<RH.Model.Aluno>
+
+@{
+    ViewBag.Title = "Alunos Cadastrados";
+    Layout = "~/Views/Shared/_Layout_Professor.cshtml";
+}
+
+@Styles.Render("~/Content/Pages/css")
+
+<div class="container my-4">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">Alunos Cadastrados</h1>
+
+            <select class="form-control float-right col-md-2">
+                <option value="2018">2018</option>
+            </select>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover text-center">
+
+                <tr  style="background-color: rgb(148,72,72);" class="text-white">
+
+                    <td>Nome do Aluno</td>
+                    <td>Matrícula</td>
+                    <td>Série</td>
+                    <td>Ações</td>
+
+                </tr>
+
+                @foreach(var x in Model)
+                {
+                    <tr>
+
+                        <td>@x.Alu_Nome</td>
+                        <td>@x.Alu_Matricula</td>
+                        <td>@x.Alu_Serie º Ano</td>
+
+                        <td>
+
+                            <a class="btn btn-danger custom" href="@Url.Action("Empresas",new { IDAluno=x.Alu_ID})"><span class="fa fa-building"></span> Empresas</a>
+                            <button class="btn btn-primary Informacao" data-nome="@x.Alu_Nome" data-matricula="@x.Alu_Matricula" data-serie="@x.Alu_Serie" data-email="@x.Alu_Email" data-senha="@x.Alu_Senha"><span class="fa fa-info"></span> Informações</button>
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalInformacoes">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Informações do Aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <p>Nome: <span id="Nome"></span></p>
+                <p>Matrícula: <span id="Matricula"></span></p>
+                <p>Série: <span id="Serie"></span></p>
+                <p>Email: <span id="Email"></span></p>
+                <p>Senha: <span id="Senha"></span></p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger custom" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".Informacao").click(function () {
+
+                var Nome = $(this).attr("data-nome");
+                var Matricula = $(this).attr("data-matricula");
+                var Serie = $(this).attr("data-serie");
+                var Email = $(this).attr("data-email");
+                var Senha = $(this).attr("data-senha");
+
+                $("#Nome").html(Nome);
+                $("#Matricula").html(Matricula);
+                $("#Serie").html(Serie);
+                $("#Email").html(Email);
+                $("#Senha").html(Senha);
+
+                $("#ModalInformacoes").modal('show');
+
+            });
+
+        });
+
+    </script>
+
+
+    }

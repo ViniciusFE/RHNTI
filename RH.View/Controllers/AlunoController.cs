@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,30 +19,47 @@ namespace RH.View.Controllers
         }
 
         // GET: Aluno
-        public ActionResult Index()
+        public ActionResult Index(int ano = 0)
         {
-            return View();
-        }
+            List<Aluno> Alunos = new List<Aluno>();
 
-        public ActionResult CadasrarAluno()
-        {
-
-            List<Curso> cursos = (from p in x.Curso where p.Cur_Situation == true select p).ToList();
-            ViewBag.Alu_Curso_Cur_ID = new SelectList(cursos, "Cur_ID", "Cur_Nome");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CadasrarAluno(Aluno oAluno)
-        {
-            if (ModelState.IsValid)
+            if (ano == 0)
             {
-                oAluno.Alu_Situation = true;
-                oAluno.Alu_DataCadastro = DateTime.Now;
-                _Control.CadastrarAluno(oAluno);
+                Alunos = _Control.SelecionarTodosAlunos(DateTime.Now.Year);
             }
-            return RedirectToAction("Index", "Home");
+
+            else
+            {
+                Alunos = _Control.SelecionarTodosAlunos(ano);
+            }
+
+            return View(Alunos.OrderBy(p => p.Alu_Nome));
+        }
+
+        public ActionResult Empresas(int IDAluno)
+        {
+            Aluno oAluno = _Control.SelecionarAluno(IDAluno);
+            ViewBag.NomeAluno = oAluno.Alu_Nome;
+            List<Empresa> MinhasEmpresas = _Control.SelecionarEmpresasAluno(IDAluno);
+            return View(MinhasEmpresas);
+        }
+
+        public ActionResult GetImagemEmpresa(int id)
+        {
+            Empresa aEmpresa = _Control.SelecionarEmpresa(id);
+            return File(aEmpresa.Emp_Logo, aEmpresa.Emp_Logo.GetType().ToString());
+        }
+
+        public ActionResult Empresa(int IDEmpresa)
+        {
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDEmpresa);
+
+            ViewBag.IDEmpresa = aEmpresa.Emp_ID;
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+            ViewBag.Setores = _Control.QuantidadeSetor(IDEmpresa);
+            ViewBag.Cargos = _Control.QuantidadeCargo(IDEmpresa);
+
+            return View();
         }
     }
 }

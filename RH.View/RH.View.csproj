@@ -243,8 +243,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Empresa\MinhasEmpresas.cshtml" />
     <Content Include="Views\Empresa\CadastrarEmpresa.cshtml" />
@@ -270,7 +268,6 @@
     <Content Include="Views\Setor\AlterarSetor.cshtml" />
     <Content Include="Views\Cargo\AlterarCargo.cshtml" />
     <Content Include="Views\Empresa\EditarEmpresa.cshtml" />
-    <Content Include="Views\Aluno\CadasrarAluno.cshtml" />
     <Content Include="Views\Pessoa\AlterarFuncionario.cshtml" />
     <Content Include="Views\Professor\CadastrarProfessor.cshtml" />
     <Content Include="Views\Cargo\CadastrarCargo.cshtml" />
@@ -283,6 +280,11 @@
     <Content Include="Views\DadosBancarios\AlterarDadoBancario.cshtml" />
     <Content Include="Views\Beneficio\CadastrarBeneficio.cshtml" />
     <Content Include="Views\Beneficio\AlterarBeneficio.cshtml" />
+    <Content Include="Views\Shared\_Layout_Professor.cshtml" />
+    <Content Include="Views\Home\Professor.cshtml" />
+    <Content Include="Views\Aluno\Index.cshtml" />
+    <Content Include="Views\Aluno\Empresas.cshtml" />
+    <Content Include="Views\Aluno\Empresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

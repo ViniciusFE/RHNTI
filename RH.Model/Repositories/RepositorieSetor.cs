@@ -75,5 +75,10 @@ namespace RH.Model.Repositories
 
             return false;
         }
+
+        public int QuantidadeDeSetoresEmpresa(int IDEmpresa)
+        {
+            return odb.Setor.Where(p => p.Set_Empresa_Emp_ID.Equals(IDEmpresa)).Count();
+        }
     }
 }

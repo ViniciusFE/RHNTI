@@ -10,7 +10,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Style/css")
 
-    
+
 
 </head>
 <body>
@@ -19,7 +19,7 @@
     <header class=" bounce ">
         <nav class="navbar navbar-expand-lg navbar-light bg-light ">
             <div class="col-2">
-                <a class="navbar-brand" href="~/Empresa/MinhasEmpresas">RH</a>
+                <a class="navbar-brand" href="~/Home/Index">RH</a>
             </div>
 
 
@@ -33,69 +33,24 @@
 
                         <li class="nav-item">
 
-                            <a class="nav-link" href="#">
-                                <div class="col text-center"> <i class="fas fa-list-ol"></i> </div>
-                                Parâmetros/Regras
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="~/Setor/Index">
+                            <a class="nav-link" href="~/Aluno/Index">
                                 <div class="col text-center">
-                                    <i class="fas fa-business-time"></i>
+                                    <i class="fas fa-user-graduate"></i>
                                 </div>
-                                Setores
+                                Alunos
                             </a>
                         </li>
 
                         <li class="nav-item">
-
-                            <a class="nav-link" href="~/Cargo/Index"> <div class="col text-center"><i class="fas fa-sitemap"></i></div>Cargos</a>
-                        </li>
-
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="~/Beneficio">
-                                <div class="col text-center"><i class="fas fa-briefcase-medical"></i> </div>
-                                Beneficios
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="~/Pessoa/MeusFuncionarios">
-                                <div class="col text-center"> <i class="fas fa-user-tie"></i> </div>
-                                Funcionários
-                            </a>
-                        </li>
-
-
-
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="~/Avaliacao/Index">
-                                <div class="col text-center"> <i class="fas fa-book-reader"></i> </div>
-                                Avaliação
-                            </a>
+                            <a class="nav-link" href="~/Cargo/Index"> <div class="col text-center"><i class="fas fa-sitemap"></i></div>Avaliações</a>
                         </li>
 
                         <li class="nav-item">
-
                             <a class="nav-link" href="#">
                                 <div class="col text-center"> <i class="fas fa-copy"></i> </div>
                                 Relatórios
                             </a>
                         </li>
-
-
-
-
-
-
 
                     </ul>
                 </div>
@@ -112,12 +67,9 @@
 
                         <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="col text-center"> <i class="fas fa-building "></i></div>
-                            @Session["NomeEmpresa"]<span class="sr-only">(current)</span>
+                            @Session["User"]<span class="sr-only">(current)</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="~/Empresa/EditarEmpresa">Editar Empresa</a>
-                            <a class="dropdown-item" href="~/Empresa/MinhasEmpresas">Todas as Empresas</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-center" href="@Url.Action("Logout","Login")">Logout</a>
 
                         </div>
