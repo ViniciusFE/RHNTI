@@ -285,6 +285,7 @@
     <Content Include="Views\Aluno\Index.cshtml" />
     <Content Include="Views\Aluno\Empresas.cshtml" />
     <Content Include="Views\Aluno\Empresa.cshtml" />
+    <Content Include="Views\Aluno\Setores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

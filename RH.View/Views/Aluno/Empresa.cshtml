@@ -4,6 +4,16 @@
     Layout = "~/Views/Shared/_Layout_Professor.cshtml";
 }
 
+<style>
+
+    .Item:hover{
+        -webkit-box-shadow:-1px 9px 40px -12px rgba(0,0,0,0,75);
+        -moz-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+        box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+    }
+
+</style>
+
 <div class="container my-4">
 
     <div class="card">
@@ -15,20 +25,28 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card hvr-glow hvr-float" style="cursor:pointer;">
-                        <div class="card-header text-white" style="background-color: rgb(148,72,72);">
-                            <h3 class="text-center"><span class="fas fa-business-time align-content-center fa-2x"></span> Setores</h3>
+
+                <a href="@Url.Action("Setores", new { IDEmpresa=ViewBag.IDEmpresa })" class="col-md-4 mt-4 text-dark">
+                    <div >
+                        <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
+                            <div class="card-header text-white" style="background-color: rgb(148,72,72);">
+                                <h3 class="text-center">
+                                    <span class="fas fa-business-time align-content-center fa-2x"></span> Setores
+                                </h3>
+                                <div class="card-img-overlay">
+
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4>Quantidade: @ViewBag.Setores</h4>
+                            </div>
                         </div>
-                        <div class="card-body text-center">
-                            <h4>Quantidade: @ViewBag.Setores</h4>
-                        </div>
+
                     </div>
+                </a>
 
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card hvr-glow hvr-float" style="cursor:pointer;">
+                <div class="col-md-4 mt-4">
+                    <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
                         <div class="card-header text-white" style="background-color: rgb(148,72,72);">
                             <h3 class="text-center"><span class="fas fa-sitemap align-content-center fa-2x"></span> Cargos</h3>
                         </div>
@@ -38,13 +56,25 @@
                     </div>
 
                 </div>
-                <div class="col-md-4">
-                    <div class="card hvr-glow hvr-float" style="cursor:pointer;">
+                <div class="col-md-4 mt-4">
+                    <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
                         <div class="card-header text-white" style="background-color: rgb(148,72,72);">
                             <h3 class="text-center"><span class="fas fa-user-tie align-content-center fa-2x"></span> Funcionários</h3>
                         </div>
                         <div class="card-body text-center">
-                            <h4>Quantidade: @ViewBag.Cargos</h4>
+                            <h4>Quantidade: @ViewBag.Funcionarios</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mt-4">
+                    <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
+                        <div class="card-header text-white" style="background-color: rgb(148,72,72);">
+                            <h3 class="text-center"><span class="fas fa-briefcase-medical align-content-center fa-2x"></span> Benefícios</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4>Quantidade: @ViewBag.Beneficios</h4>
                         </div>
                     </div>
 

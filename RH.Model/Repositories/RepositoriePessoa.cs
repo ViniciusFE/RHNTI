@@ -75,7 +75,12 @@ namespace RH.Model.Repositories
 
         public Pessoa SelecionarPessoaCargo(int IDCargo)
         {
-            return Db.Pessoa.Where(p => p.Pes_Cargo_Car_ID.Equals(IDCargo) && p.Pes_Situation==true).FirstOrDefault();
+            return Db.Pessoa.Where(p => p.Pes_Cargo_Car_ID.Equals(IDCargo) && p.Pes_Situation == true).FirstOrDefault();
+        }
+
+        public int QuantidadeFuncionariosEmpresa(int IDEmpresa)
+        {
+            return Db.Pessoa.SqlQuery("select *  from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID=c.Car_ID inner join Setor s on c.Car_Setor_Set_ID=s.Set_ID and s.Set_Empresa_Emp_ID="+IDEmpresa+" and p.Pes_Situation=1").Count();
         }
     }
 }

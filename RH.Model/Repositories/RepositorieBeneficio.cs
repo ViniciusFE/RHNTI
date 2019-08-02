@@ -54,6 +54,11 @@ namespace RH.Model.Repositories
             return Db.Beneficio.Where(p => p.Ben_Empresa_Emp_ID.Equals(IDEmpresa) && p.Ben_Situation == true).ToList();
         }
 
+        public int QuantidadeBeneficiosEmpresa(int IDEmpresa)
+        {
+            return Db.Beneficio.Where(p => p.Ben_Empresa_Emp_ID.Equals(IDEmpresa) && p.Ben_Situation == true).Count();
+        }
+
 
 
 

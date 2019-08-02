@@ -14,7 +14,8 @@ namespace RH.Control
         private RepositorieEmpresa _RepositorieEmpresa = new RepositorieEmpresa();
         private RepositorieSetor _RepositorieSetor = new RepositorieSetor();
         private RepositorieCargo _RepositorieCargo = new RepositorieCargo();
-
+        private RepositoriePessoa _RepositoriePessoa = new RepositoriePessoa();
+        private RepositorieBeneficio _RepositorieBeneficio = new RepositorieBeneficio();
 
         public Aluno FazerLogin(string email, string senha)
         {
@@ -66,5 +67,19 @@ namespace RH.Control
             return _RepositorieCargo.QuantidadeCargosEmpresa(IDEmpresa);
         }
 
+        public int QuantidadeFuncioanarios(int IDEmpresa)
+        {
+            return _RepositoriePessoa.QuantidadeFuncionariosEmpresa(IDEmpresa);
+        }
+
+        public int QuantidadeBeneficiosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.QuantidadeBeneficiosEmpresa(IDEmpresa);
+        }
+
+        public List<Setor> SelecionarSetorEmpresa(int IDEmpresa)
+        {
+            return _RepositorieSetor.SelecionarSetorEmpresa(IDEmpresa);
+        }
     }
 }

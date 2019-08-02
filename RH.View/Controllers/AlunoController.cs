@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
+using PagedList;
 
 namespace RH.View.Controllers
 {
@@ -58,8 +59,36 @@ namespace RH.View.Controllers
             ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
             ViewBag.Setores = _Control.QuantidadeSetor(IDEmpresa);
             ViewBag.Cargos = _Control.QuantidadeCargo(IDEmpresa);
+            ViewBag.Funcionarios = _Control.QuantidadeFuncioanarios(IDEmpresa);
+            ViewBag.Beneficios = _Control.QuantidadeBeneficiosEmpresa(IDEmpresa);
 
             return View();
+        }
+
+        public ActionResult Setores(int IDEmpresa,int? pagina, string Pesquisa = "Pesquisar setores")
+        {
+            ViewBag.Pesquisa = null;
+            ViewBag.Pesquisado = Pesquisa;
+            ViewBag.Setores = _Control.SelecionarSetorEmpresa(IDEmpresa);
+            ViewBag.IDEmpresa = IDEmpresa;
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDEmpresa);
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+
+            List<Setor> _setores = _Control.SelecionarSetorEmpresa(IDEmpresa);
+
+            if (Pesquisa != "Pesquisar setores")
+            {
+                _setores = _setores.Where(p => p.Set_Nome.Contains(Pesquisa)).ToList();
+                if (_setores.Count() == 0)
+                {
+                    ViewBag.Pesquisa = "Não foi encontrado nenhum resultado referente a pesquisa '" + Pesquisa + "', verifique o que foi digitado e tente novamente.";
+                }
+            }
+
+            int paginaTamanho = 4;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(_setores.ToPagedList(paginaNumero, paginaTamanho));
         }
     }
 }
