@@ -16,6 +16,9 @@ namespace RH.Control
         private RepositorieCargo _RepositorieCargo = new RepositorieCargo();
         private RepositoriePessoa _RepositoriePessoa = new RepositoriePessoa();
         private RepositorieBeneficio _RepositorieBeneficio = new RepositorieBeneficio();
+        private RepositorieDependente _RepositorieDependentes = new RepositorieDependente();
+        private RepositorieDadosBancarios _RepositorieDadosBancarios = new RepositorieDadosBancarios();
+        private RepositoriePessoaBeneficio _RepositoriePessoaBeneficio = new RepositoriePessoaBeneficio();
 
         public Aluno FazerLogin(string email, string senha)
         {
@@ -80,6 +83,46 @@ namespace RH.Control
         public List<Setor> SelecionarSetorEmpresa(int IDEmpresa)
         {
             return _RepositorieSetor.SelecionarSetorEmpresa(IDEmpresa);
+        }
+
+        public List<Cargo> SelecionarTodosCargosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieCargo.SelecionarTodosCargosEmpresa(IDEmpresa);
+        }
+
+        public List<Pessoa> SelecionarFuncionariosEmpresa(int IDEmpresa)
+        {
+            return _RepositoriePessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
+        }
+
+        public List<Beneficio> SelecionarBeneficiosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.SelecionarBeneficioporEmpresa(IDEmpresa);
+        }
+
+        public Pessoa SelecionarFuncionario(int IDFuncionario)
+        {
+            return _RepositoriePessoa.SelecionarFuncionario(IDFuncionario);
+        }
+
+        public List<DadoDependente> SelecionarDependentesFuncionario(int IDFuncionario)
+        {
+            return _RepositorieDependentes.SelecionarDependentesFuncionario(IDFuncionario);
+        }
+
+        public List<DadoBancario> SelecionarDadosBancariosFuncionario(int IDFuncionario)
+        {
+            return _RepositorieDadosBancarios.DadosBancariosFuncionario(IDFuncionario);
+        }
+
+        public List<Beneficio> BeneficiosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.BeneficiosEmpresa(IDEmpresa);
+        }
+
+        public bool PossuiBeneficio(int IDBeneficio,int IDFuncionario)
+        {
+            return _RepositoriePessoaBeneficio.PossuiBeneficio(IDBeneficio, IDFuncionario);
         }
     }
 }

@@ -45,28 +45,34 @@
                     </div>
                 </a>
 
-                <div class="col-md-4 mt-4">
-                    <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
-                        <div class="card-header text-white" style="background-color: rgb(148,72,72);">
-                            <h3 class="text-center"><span class="fas fa-sitemap align-content-center fa-2x"></span> Cargos</h3>
+                <a href="@Url.Action("Cargos",new { IDEmpresa=ViewBag.IDEmpresa})" class="col-md-4 mt-4 text-dark">
+                    <div>
+                        <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
+                            <div class="card-header text-white" style="background-color: rgb(148,72,72);">
+                                <h3 class="text-center"><span class="fas fa-sitemap align-content-center fa-2x"></span> Cargos</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4>Quantidade: @ViewBag.Cargos</h4>
+                            </div>
                         </div>
-                        <div class="card-body text-center">
-                            <h4>Quantidade: @ViewBag.Cargos</h4>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="col-md-4 mt-4">
-                    <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
-                        <div class="card-header text-white" style="background-color: rgb(148,72,72);">
-                            <h3 class="text-center"><span class="fas fa-user-tie align-content-center fa-2x"></span> Funcionários</h3>
-                        </div>
-                        <div class="card-body text-center">
-                            <h4>Quantidade: @ViewBag.Funcionarios</h4>
-                        </div>
                     </div>
+                </a>
 
-                </div>
+                <a href="@Url.Action("Funcionarios",new { IDEmpresa=ViewBag.IDEmpresa})" class="col-md-4 mt-4 text-dark">
+                    <div>
+                        <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
+                            <div class="card-header text-white" style="background-color: rgb(148,72,72);">
+                                <h3 class="text-center"><span class="fas fa-user-tie align-content-center fa-2x"></span> Funcionários</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4>Quantidade: @ViewBag.Funcionarios</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+                
 
                 <div class="col-md-4 mt-4">
                     <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">

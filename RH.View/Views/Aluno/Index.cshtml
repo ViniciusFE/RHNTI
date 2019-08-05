@@ -22,7 +22,7 @@
 
             <table class="table table-bordered table-hover text-center">
 
-                <tr  style="background-color: rgb(148,72,72);" class="text-white">
+                <tr style="background-color: rgb(148,72,72);" class="text-white">
 
                     <td>Nome do Aluno</td>
                     <td>Matrícula</td>
@@ -41,7 +41,7 @@
 
                         <td>
 
-                            <a class="btn btn-danger custom" href="@Url.Action("Empresas",new { IDAluno=x.Alu_ID})"><span class="fa fa-building"></span> Empresas</a>
+                            <a class="btn btn-danger custom" href="@Url.Action("Empresas",new { IDAluno=x.Alu_ID})" style="background-color: rgb(148,72,72);"><span class="fa fa-building"></span> Empresas</a>
                             <button class="btn btn-primary Informacao" data-nome="@x.Alu_Nome" data-matricula="@x.Alu_Matricula" data-serie="@x.Alu_Serie" data-email="@x.Alu_Email" data-senha="@x.Alu_Senha"><span class="fa fa-info"></span> Informações</button>
                         </td>
 

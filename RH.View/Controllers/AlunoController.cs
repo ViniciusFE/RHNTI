@@ -90,5 +90,121 @@ namespace RH.View.Controllers
 
             return View(_setores.ToPagedList(paginaNumero, paginaTamanho));
         }
+
+        public ActionResult Cargos(int IDEmpresa,int? pagina, string Pesquisa = "")
+        {
+            ViewBag.Pesquisado = null;
+            List<Cargo> _cargos = _Control.SelecionarTodosCargosEmpresa(IDEmpresa);
+
+            if (!string.IsNullOrEmpty(Pesquisa))
+            {
+                _cargos = _cargos.Where(p => p.Car_Nome.Contains(Pesquisa)).ToList();
+                ViewBag.Pesquisado = Pesquisa;
+            }
+
+            int paginaTamanho = 4;
+            int paginaNumero = (pagina ?? 1);
+
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDEmpresa);
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+            ViewBag.IDEmpresa = aEmpresa.Emp_ID;
+
+            return View(_cargos.ToPagedList(paginaNumero, paginaTamanho));
+        }
+
+        public ActionResult Funcionarios(int IDEmpresa,string Pesquisa = "")
+        {
+            ViewBag.Pesquisado = null;
+
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDEmpresa);
+            ViewBag.IDEmpresa = aEmpresa.Emp_ID;
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+
+            List<Beneficio> Beneficios = _Control.SelecionarBeneficiosEmpresa(IDEmpresa);
+            ViewBag.Beneficios = Beneficios;
+
+
+            List<Pessoa> Funcionarios = _Control.SelecionarFuncionariosEmpresa(IDEmpresa);
+            List<Setor> Setores = _Control.SelecionarSetorEmpresa(IDEmpresa);
+            List<Cargo> Cargos = _Control.SelecionarTodosCargosEmpresa(IDEmpresa);
+
+
+
+            ViewBag.Setores = Setores;
+            ViewBag.Cargos = Cargos;
+
+
+
+            ViewBag.IDFuncionarioBeneficio = 0;
+
+            if (Pesquisa != "")
+            {
+                Funcionarios = Funcionarios.Where(p => p.Pes_Nome.Contains(Pesquisa)).ToList();
+                ViewBag.Pesquisado = Pesquisa;
+            }
+
+            return View(Funcionarios);
+        }
+
+        public ActionResult GetImagemFuncionario(int IDFuncionario)
+        {
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            return File(aPessoa.Pes_Imagem, aPessoa.Pes_Imagem.GetType().ToString());
+        }
+
+        public ActionResult Dependentes(int IDFuncionario,int IDEmpresa)
+        {
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            ViewBag.IDFuncionario = IDFuncionario;
+            ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
+
+            ViewBag.IDEmpresa = IDEmpresa;
+
+            return View(_Control.SelecionarDependentesFuncionario(IDFuncionario));
+        }
+
+        public ActionResult DadosBancarios(int IDFuncionario,int IDEmpresa)
+        {
+            List<DadoBancario> Dados = _Control.SelecionarDadosBancariosFuncionario(IDFuncionario);
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            ViewBag.IDFuncionario = IDFuncionario;
+            ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
+            ViewBag.IDEmpresa = IDEmpresa;
+            return View(Dados);
+        }
+
+        public ActionResult PopularBeneficiosFuncionario(int id,int IDEmpresa)
+        {
+            List<Beneficio> BeneficiosEmpresa = _Control.BeneficiosEmpresa(IDEmpresa);
+
+            List<object> Beneficios = new List<object>();
+
+            foreach (var x in BeneficiosEmpresa)
+            {
+                string status;
+                if (_Control.PossuiBeneficio(x.Ben_ID, id))
+                {
+                    status = "Possui";
+                }
+
+                else
+                {
+                    status = "Não possui";
+                }
+
+                Beneficios.Add(
+                    new
+                    {
+                        ID = x.Ben_ID,
+                        Nome = x.Ben_Nome,
+                        Status = status,
+                        Descricao = x.Ben_Descricao,
+                        Custo = x.Ben_Custo
+                    }
+                    );
+            }
+
+            return Json(Beneficios, JsonRequestBehavior.AllowGet);
+        }
     }
 }
