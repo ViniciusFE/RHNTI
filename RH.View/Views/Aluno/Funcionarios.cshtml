@@ -314,22 +314,22 @@ else
                     "</tr >");
 
                 $.ajax({
-                    method: "post",
+                    method: "get",
                     dataType: "json",
                     url: "@Url.Action("PopularBeneficiosFuncionario","Aluno")",
                     data: { id: IDFuncionario,IDEmpresa:@ViewBag.IDEmpresa },
                     success: function (data) {
 
                         $(data).each(function (i) {
-
-                            if (data[i].Status == "Não possui") {
+                            
+                            if (data[i].Status == "Possui") {
                                 $("#TabelaBeneficiosFuncionario").append(
 
                                     "<tr>" +
-                                        "<td>" + data[i].Nome + "</td>" +
+                                    "<td>" + data[i].Nome + "</td>" +
                                         "<td>" +
                                     "<div>" +
-                                    "<button class='btn btn-success mr-1' id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-plus'></span></button>" +
+                                    "<button class='btn btn-danger mr-1' id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-minus'></span></button>" +
                                     "<button class='btn btn-primary mr-1' data-toggle='tooltip' data-placement='right' title='Descrição do Benefício:\n"+data[i].Descricao+"\nCusto do Benefício:\n"+data[i].Custo+" R$'><span class='fa fa-info-circle'></span></button>"+
                                             "</div>" +
                                         "</td >" +
@@ -342,10 +342,10 @@ else
                                 $("#TabelaBeneficiosFuncionario").append(
 
                                     "<tr>" +
-                                        "<td>" + data[i].Nome + "</td>" +
+                                    "<td>" + data[i].Nome + "</td>" +
                                         "<td>" +
                                             "<div>" +
-                                                "<button class='btn btn-danger mr-1'  id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-minus'></span></button>" +
+                                                "<button class='btn btn-success mr-1'  id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-plus'></span></button>" +
                                     "<button class='btn btn-primary mr-1' data-toggle='tooltip' data-placement='right' title='Descrição do Benefício:\n" + data[i].Descricao + "\nCusto do Benefício:\n" + data[i].Custo + " R$'><span class='fa fa-info-circle'></span></button>" +
                                             "</div>" +
                                         "</td >" +
