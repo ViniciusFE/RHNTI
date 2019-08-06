@@ -61,6 +61,7 @@ namespace RH.View.Controllers
             ViewBag.Cargos = _Control.QuantidadeCargo(IDEmpresa);
             ViewBag.Funcionarios = _Control.QuantidadeFuncioanarios(IDEmpresa);
             ViewBag.Beneficios = _Control.QuantidadeBeneficiosEmpresa(IDEmpresa);
+            ViewBag.Avaliacoes = _Control.SelecionarAvaliacoesEmpresa(IDEmpresa, "").Count();
 
             return View();
         }
@@ -205,6 +206,22 @@ namespace RH.View.Controllers
             }
 
             return Json(Beneficios, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AvaliacaoFuncionarios(int IDEmpresa,string Pesquisado="")
+        {
+            List<Avaliacao> Avaliacoes = _Control.SelecionarAvaliacoesEmpresa(IDEmpresa,Pesquisado);
+            ViewBag.IDEmpresa = IDEmpresa;
+
+            if(!string.IsNullOrEmpty(Pesquisado))
+            {
+                ViewBag.Pesquisado = Pesquisado;
+            }
+
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDEmpresa);
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+
+            return View(Avaliacoes);
         }
     }
 }

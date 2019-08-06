@@ -31,7 +31,7 @@ namespace RH.Model
     
         public int Ava_ID { get; set; }
         public int Ava_Pessoa_Pes_ID { get; set; }
-        public System.DateTime Ava_DataCadastro { get; set; }
+        public string Ava_DataCadastro { get; set; }
         public bool Ava_Situation { get; set; }
         public string Ava_Avaliacao { get; set; }
     

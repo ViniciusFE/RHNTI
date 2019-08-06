@@ -41,5 +41,10 @@ namespace RH.Model.Repositories
             odb.Entry(aAvaliacao).State = System.Data.Entity.EntityState.Added;
             odb.SaveChanges();
         }
+
+        public List<Avaliacao> SelecionarAAvaliacoesEmpresa(int IDEmpresa,string Pesquisado)
+        {
+            return odb.Avaliacao.SqlQuery("select * from Avaliacao a inner join Pessoa p on a.Ava_Pessoa_Pes_ID = p.Pes_ID and p.Pes_Situation = 1 and p.Pes_Nome like '"+Pesquisado+"%' inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID =" + IDEmpresa).ToList();
+        }
     }
 }

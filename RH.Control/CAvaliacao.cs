@@ -14,6 +14,7 @@ namespace RH.Control
         private RepositoriePessoa _RepositoriePessoa;
         private RepositorieCargo _RepositorieCargo;
         private RepositorieSetor _RepositorieSetor;
+        private RepositorieEmpresa _RepositorieEmpresa;
 
         public CAvaliacao()
         {
@@ -21,6 +22,7 @@ namespace RH.Control
             _RepositoriePessoa = new RepositoriePessoa();
             _RepositorieCargo = new RepositorieCargo();
             _RepositorieSetor = new RepositorieSetor();
+            _RepositorieEmpresa = new RepositorieEmpresa();
         }
 
         public void CadastrarAvaliacao(Avaliacao aAvaliacao)
@@ -56,6 +58,16 @@ namespace RH.Control
         public Setor SelecionarSetor(int IDSetor)
         {
             return _RepositorieSetor.SelecionarSetor(IDSetor);
+        }
+
+        public Empresa SelecionarEmpresa(int IDEmpresa)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresa(IDEmpresa);
+        }
+
+        public List<Avaliacao> SelecionarAvaliacoesEmpresa(int IDEmpresa,string Pesquisado)
+        {
+            return _RepositorieAvaliacao.SelecionarAAvaliacoesEmpresa(IDEmpresa, Pesquisado);
         }
     }
 }

@@ -25,7 +25,7 @@
           </Key>
           <Property Name="Ava_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ava_Pessoa_Pes_ID" Type="int" Nullable="false" />
-          <Property Name="Ava_DataCadastro" Type="date" Nullable="false" />
+          <Property Name="Ava_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Ava_Situation" Type="bit" Nullable="false" />
           <Property Name="Ava_Avaliacao" Type="varchar(max)" Nullable="false" />
         </EntityType>
@@ -2403,7 +2403,7 @@
           </Key>
           <Property Name="Ava_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ava_Pessoa_Pes_ID" Type="Int32" Nullable="false" />
-          <Property Name="Ava_DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ava_DataCadastro" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="Ava_Situation" Type="Boolean" Nullable="false" />
           <Property Name="Ava_Avaliacao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Pessoa" Relationship="RHModel.FK_Avaliacao_Pessoa" FromRole="Avaliacao" ToRole="Pessoa" />

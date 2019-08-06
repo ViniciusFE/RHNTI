@@ -16,8 +16,24 @@ namespace RH.View.Controllers
         {
             _Control = new CAvaliacao();
         }
-        // GET: Avaliacao
-        public ActionResult Index()
+
+        public ActionResult Index(string Pesquisado="")
+        {
+            List<Avaliacao> Avaliacoes = _Control.SelecionarAvaliacoesEmpresa(Convert.ToInt32(Session["IDEmpresa"]), Pesquisado);
+            ViewBag.IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
+
+            if (!string.IsNullOrEmpty(Pesquisado))
+            {
+                ViewBag.Pesquisado = Pesquisado;
+            }
+
+            Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+
+            return View(Avaliacoes);
+        }
+
+        public ActionResult Avaliacao()
         {
             List<Pessoa> Chefes = _Control.SelecionarTodosChefes();
             ViewBag.Pes_Nome = new SelectList(Chefes, "Pes_ID", "Pes_Nome");
@@ -64,10 +80,11 @@ namespace RH.View.Controllers
 
         public ActionResult AvaliacaoFuncionario(int id,string Avaliacao)
         {
+            Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             Avaliacao aAvaliacao = new Avaliacao()
             {
                 Ava_Pessoa_Pes_ID = id,
-                Ava_DataCadastro = DateTime.Now,
+                Ava_DataCadastro =aEmpresa.Emp_DataAtual,
                 Ava_Situation = true,
             };
             _Control.CadastrarAvaliacao(aAvaliacao);

@@ -2,16 +2,13 @@
 
 @{
     ViewBag.Title = "Avaliação dos Funcionários";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_Professor.cshtml";
 }
 @Styles.Render("~/Content/Pages/css")
-
-<br />
-<a class="btn btn-success custom" href="@Url.Action("Avaliacao")"><i class="fas fa-user-plus"></i> Cadastrar Avaliação</a>
 <br />
 <br />
 
-@using (Html.BeginForm("Index", "Avaliacao", FormMethod.Post))
+@using (Html.BeginForm("AvaliacaoFuncionarios", "Aluno", new { IDEmpresa = ViewBag.IDEmpresa }, FormMethod.Post))
 {
     <div class="input-group col-md-4 float-right">
 
@@ -49,7 +46,7 @@ else
                     </div>
                     <div class="card-body row">
                         <div class="col-md-4">
-                            <img src="@Url.Action("GetImagemUsuario", new {id= x.Ava_Pessoa_Pes_ID })" class="imagem-funcionario" />
+                            <img src="@Url.Action("GetImagemFuncionario", new {IDFuncionario= x.Ava_Pessoa_Pes_ID })" class="imagem-funcionario" />
                         </div>
 
                         <div class="col-md-8">
@@ -58,10 +55,7 @@ else
                         </div>
 
                     </div>
-                    <div class="card-footer">
-                        <button class="btn btn-warning custom" id="Alterar" data-avaliacao='@x.Ava_Avaliacao' data-id="@x.Ava_ID"><i class="fas fa-user-edit"></i> Alterar</button>
-                        <button class="btn btn-danger custom demitir" data-id="@x.Ava_ID"><i class="fas fa-user-times"></i> Excluir</button>
-                    </div>
+                    
 
                 </div>
             </div>
@@ -74,9 +68,9 @@ else
     else
     {
         <div class="alert alert-primary">
-        <div class="alert-body">
-            <h4>Sua empresa ainda não possui nenhuma avaliação...</h4>
-        </div>
+            <div class="alert-body">
+                <h4>Sua empresa ainda não possui nenhuma avaliação...</h4>
+            </div>
         </div>
     }
 }

@@ -19,6 +19,7 @@ namespace RH.Control
         private RepositorieDependente _RepositorieDependentes = new RepositorieDependente();
         private RepositorieDadosBancarios _RepositorieDadosBancarios = new RepositorieDadosBancarios();
         private RepositoriePessoaBeneficio _RepositoriePessoaBeneficio = new RepositoriePessoaBeneficio();
+        private RepositorieAvaliacao _RepositorieAvaliacao = new RepositorieAvaliacao();
 
         public Aluno FazerLogin(string email, string senha)
         {
@@ -123,6 +124,11 @@ namespace RH.Control
         public bool PossuiBeneficio(int IDBeneficio,int IDFuncionario)
         {
             return _RepositoriePessoaBeneficio.PossuiBeneficio(IDBeneficio, IDFuncionario);
+        }
+
+        public List<Avaliacao> SelecionarAvaliacoesEmpresa(int IDEmpresa,string Pesquisado)
+        {
+            return _RepositorieAvaliacao.SelecionarAAvaliacoesEmpresa(IDEmpresa,Pesquisado);
         }
     }
 }

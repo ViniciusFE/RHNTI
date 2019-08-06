@@ -264,7 +264,7 @@
     <Content Include="Views\Pessoa\CadastrarFuncionario.cshtml" />
     <Content Include="Views\Pessoa\MeusFuncionarios.cshtml" />
     <Content Include="Views\Login\IndexLogin.cshtml" />
-    <Content Include="Views\Avaliacao\Index.cshtml" />
+    <Content Include="Views\Avaliacao\Avaliacao.cshtml" />
     <Content Include="Views\Setor\AlterarSetor.cshtml" />
     <Content Include="Views\Cargo\AlterarCargo.cshtml" />
     <Content Include="Views\Empresa\EditarEmpresa.cshtml" />
@@ -290,6 +290,9 @@
     <Content Include="Views\Aluno\Funcionarios.cshtml" />
     <Content Include="Views\Aluno\Dependentes.cshtml" />
     <Content Include="Views\Aluno\DadosBancarios.cshtml" />
+    <Content Include="Views\Avaliação.cshtml" />
+    <Content Include="Views\Aluno\AvaliacaoFuncionarios.cshtml" />
+    <Content Include="Views\Avaliacao\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
