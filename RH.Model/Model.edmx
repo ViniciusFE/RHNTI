@@ -123,6 +123,16 @@
           <Property Name="Emp_Logo" Type="image" Nullable="false" />
           <Property Name="Emp_Avaliativa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Erro">
+          <Key>
+            <PropertyRef Name="Err_ID" />
+          </Key>
+          <Property Name="Err_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Err_Prova_Pro_ID" Type="int" Nullable="false" />
+          <Property Name="Err_Aluno_Alu_ID" Type="int" Nullable="false" />
+          <Property Name="Err_RespostaCerta" Type="varchar(max)" Nullable="false" />
+          <Property Name="Err_RespostaAluno" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Movimentacao">
           <Key>
             <PropertyRef Name="Mov_ID" />
@@ -132,6 +142,15 @@
           <Property Name="Mov_Mudanca" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Mov_Data" Type="date" Nullable="false" />
           <Property Name="Mov_Situation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nota">
+          <Key>
+            <PropertyRef Name="Not_ID" />
+          </Key>
+          <Property Name="Not_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Not_Prova_Pro_ID" Type="int" Nullable="false" />
+          <Property Name="Not_Nota" Type="int" Nullable="false" />
+          <Property Name="Not_DataCadastro" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Pessoa">
           <Key>
@@ -213,60 +232,21 @@
           <Property Name="Pro_BeneficioFuncionario3" Type="int" Nullable="false" />
           <Property Name="Pro_BeneficioFuncionario4" Type="int" Nullable="false" />
           <Property Name="Pro_BeneficioFuncionario5" Type="int" Nullable="false" />
+          <Property Name="Pro_BenefcioFuncionario6" Type="int" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario7" Type="int" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario9" Type="int" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario8" Type="int" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario10" Type="int" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario1" Type="int" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario2" Type="int" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario3" Type="int" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario4" Type="int" Nullable="false" />
-          <Property Name="Pro_AvaliacaoFuncionario5" Type="int" Nullable="false" />
           <Property Name="Pro_Demissao1" Type="int" Nullable="false" />
           <Property Name="Pro_Demissao2" Type="int" Nullable="false" />
           <Property Name="Pro_Demissao3" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Resposta">
-          <Key>
-            <PropertyRef Name="Res_Aluno_Alu_ID" />
-          </Key>
-          <Property Name="Res_ID" Type="int" Nullable="false" />
-          <Property Name="Res_Aluno_Alu_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Res_DataEntrega" Type="date" Nullable="false" />
-          <Property Name="Res_Setor1" Type="int" Nullable="false" />
-          <Property Name="Res_Setor2" Type="int" Nullable="false" />
-          <Property Name="Res_Setor3" Type="int" Nullable="false" />
-          <Property Name="Res_Setor4" Type="int" Nullable="false" />
-          <Property Name="Res_Setor5" Type="int" Nullable="false" />
-          <Property Name="Res_Cargo1" Type="int" Nullable="false" />
-          <Property Name="Res_Cargo2" Type="int" Nullable="false" />
-          <Property Name="Res_Cargo3" Type="int" Nullable="false" />
-          <Property Name="Res_Cargo4" Type="int" Nullable="false" />
-          <Property Name="Res_Cargo5" Type="int" Nullable="false" />
-          <Property Name="Res_Pessoa1" Type="int" Nullable="false" />
-          <Property Name="Res_Pessoa2" Type="int" Nullable="false" />
-          <Property Name="Res_Pessoa3" Type="int" Nullable="false" />
-          <Property Name="Res_Pessoa4" Type="int" Nullable="false" />
-          <Property Name="Res_Pessoa5" Type="int" Nullable="false" />
-          <Property Name="Res_DadoDependente1" Type="int" Nullable="false" />
-          <Property Name="Res_DadoDependente2" Type="int" Nullable="false" />
-          <Property Name="Res_DadoDependente3" Type="int" Nullable="false" />
-          <Property Name="Res_DadoDependente4" Type="int" Nullable="false" />
-          <Property Name="Res_DadoDependente5" Type="int" Nullable="false" />
-          <Property Name="Res_Benefício1" Type="int" Nullable="false" />
-          <Property Name="Res_Beneficio2" Type="int" Nullable="false" />
-          <Property Name="Res_Beneficio3" Type="int" Nullable="false" />
-          <Property Name="Res_Beneficio4" Type="int" Nullable="false" />
-          <Property Name="Res_Beneficio5" Type="int" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario1" Type="int" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario2" Type="int" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario3" Type="int" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario4" Type="int" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario5" Type="int" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario1" Type="int" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario2" Type="int" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario3" Type="int" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario4" Type="int" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario5" Type="int" Nullable="false" />
-          <Property Name="Res_Demissao1" Type="int" Nullable="false" />
-          <Property Name="Res_Demissao2" Type="int" Nullable="false" />
-          <Property Name="Res_Demissao3" Type="int" Nullable="false" />
+          <Property Name="Pro_Codigo" Type="int" Nullable="false" />
+          <Property Name="Pro_Situation" Type="bit" Nullable="false" />
+          <Property Name="Pro_Entregue" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Setor">
           <Key>
@@ -444,6 +424,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Erro_Aluno">
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="1" />
+          <End Role="Erro" Type="Self.Erro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="Alu_ID" />
+            </Principal>
+            <Dependent Role="Erro">
+              <PropertyRef Name="Err_Aluno_Alu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Erro_Prova">
+          <End Role="Prova" Type="Self.Prova" Multiplicity="1" />
+          <End Role="Erro" Type="Self.Erro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prova">
+              <PropertyRef Name="Pro_ID" />
+            </Principal>
+            <Dependent Role="Erro">
+              <PropertyRef Name="Err_Prova_Pro_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Movimentacao_Pessoa">
           <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
           <End Role="Movimentacao" Type="Self.Movimentacao" Multiplicity="*" />
@@ -453,6 +457,18 @@
             </Principal>
             <Dependent Role="Movimentacao">
               <PropertyRef Name="Mov_Pessoa_Pes_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Prova">
+          <End Role="Prova" Type="Self.Prova" Multiplicity="1" />
+          <End Role="Nota" Type="Self.Nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prova">
+              <PropertyRef Name="Pro_ID" />
+            </Principal>
+            <Dependent Role="Nota">
+              <PropertyRef Name="Not_Prova_Pro_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,18 +565,6 @@
             </Principal>
             <Dependent Role="Prova">
               <PropertyRef Name="Pro_AvaliacaoFuncionario4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Prova_Avaliacao4">
-          <End Role="Avaliacao" Type="Self.Avaliacao" Multiplicity="1" />
-          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Prova">
-              <PropertyRef Name="Pro_AvaliacaoFuncionario5" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -960,6 +964,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_PessoaBeneficio5">
+          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PessoaBeneficio">
+              <PropertyRef Name="PB_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BenefcioFuncionario6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_PessoaBeneficio6">
+          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PessoaBeneficio">
+              <PropertyRef Name="PB_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario7" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_PessoaBeneficio7">
+          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PessoaBeneficio">
+              <PropertyRef Name="PB_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario8" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_PessoaBeneficio8">
+          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PessoaBeneficio">
+              <PropertyRef Name="PB_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario9" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_PessoaBeneficio9">
+          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PessoaBeneficio">
+              <PropertyRef Name="PB_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario10" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Prova_Professor">
           <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
           <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
@@ -1032,462 +1096,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_Avaliacao">
-          <End Role="Avaliacao" Type="Self.Avaliacao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao1">
-          <End Role="Avaliacao" Type="Self.Avaliacao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao2">
-          <End Role="Avaliacao" Type="Self.Avaliacao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao3">
-          <End Role="Avaliacao" Type="Self.Avaliacao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao4">
-          <End Role="Avaliacao" Type="Self.Avaliacao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio">
-          <End Role="Beneficio" Type="Self.Beneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Benefício1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio1">
-          <End Role="Beneficio" Type="Self.Beneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio2">
-          <End Role="Beneficio" Type="Self.Beneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio3">
-          <End Role="Beneficio" Type="Self.Beneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio4">
-          <End Role="Beneficio" Type="Self.Beneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo1">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo2">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo3">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo4">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente">
-          <End Role="DadoDependente" Type="Self.DadoDependente" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente1">
-          <End Role="DadoDependente" Type="Self.DadoDependente" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente2">
-          <End Role="DadoDependente" Type="Self.DadoDependente" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente3">
-          <End Role="DadoDependente" Type="Self.DadoDependente" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente4">
-          <End Role="DadoDependente" Type="Self.DadoDependente" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Demissao">
-          <End Role="Demissao" Type="Self.Demissao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Demissao">
-              <PropertyRef Name="Dem_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Demissao1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Demissao1">
-          <End Role="Demissao" Type="Self.Demissao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Demissao">
-              <PropertyRef Name="Dem_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Demissao2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Demissao2">
-          <End Role="Demissao" Type="Self.Demissao" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Demissao">
-              <PropertyRef Name="Dem_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Demissao3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa">
-          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa1">
-          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa2">
-          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa3">
-          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa4">
-          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio">
-          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PessoaBeneficio">
-              <PropertyRef Name="PB_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio1">
-          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PessoaBeneficio">
-              <PropertyRef Name="PB_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio2">
-          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PessoaBeneficio">
-              <PropertyRef Name="PB_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio3">
-          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PessoaBeneficio">
-              <PropertyRef Name="PB_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio4">
-          <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PessoaBeneficio">
-              <PropertyRef Name="PB_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor">
-          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor1">
-          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor2">
-          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor3">
-          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor4">
-          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
-          <End Role="Resposta" Type="Self.Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Setor_Empresa">
           <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
           <End Role="Setor" Type="Self.Setor" Multiplicity="*" />
@@ -1535,12 +1143,13 @@
           <EntitySet Name="DadoDependente" EntityType="Self.DadoDependente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Demissao" EntityType="Self.Demissao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Erro" EntityType="Self.Erro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movimentacao" EntityType="Self.Movimentacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nota" EntityType="Self.Nota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PessoaBeneficio" EntityType="Self.PessoaBeneficio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prova" EntityType="Self.Prova" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Resposta" EntityType="Self.Resposta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setor" EntityType="Self.Setor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treinamento" EntityType="Self.Treinamento" Schema="dbo" store:Type="Tables" />
@@ -1589,9 +1198,21 @@
             <End Role="Aluno" EntitySet="Aluno" />
             <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
+          <AssociationSet Name="FK_Erro_Aluno" Association="Self.FK_Erro_Aluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="Erro" EntitySet="Erro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Erro_Prova" Association="Self.FK_Erro_Prova">
+            <End Role="Prova" EntitySet="Prova" />
+            <End Role="Erro" EntitySet="Erro" />
+          </AssociationSet>
           <AssociationSet Name="FK_Movimentacao_Pessoa" Association="Self.FK_Movimentacao_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="Movimentacao" EntitySet="Movimentacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Prova" Association="Self.FK_Nota_Prova">
+            <End Role="Prova" EntitySet="Prova" />
+            <End Role="Nota" EntitySet="Nota" />
           </AssociationSet>
           <AssociationSet Name="FK_Pessoa_Cargo" Association="Self.FK_Pessoa_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
@@ -1622,10 +1243,6 @@
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Avaliacao3" Association="Self.FK_Prova_Avaliacao3">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Prova_Avaliacao4" Association="Self.FK_Prova_Avaliacao4">
             <End Role="Avaliacao" EntitySet="Avaliacao" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
@@ -1761,6 +1378,26 @@
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
+          <AssociationSet Name="FK_Prova_PessoaBeneficio5" Association="Self.FK_Prova_PessoaBeneficio5">
+            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_PessoaBeneficio6" Association="Self.FK_Prova_PessoaBeneficio6">
+            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_PessoaBeneficio7" Association="Self.FK_Prova_PessoaBeneficio7">
+            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_PessoaBeneficio8" Association="Self.FK_Prova_PessoaBeneficio8">
+            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_PessoaBeneficio9" Association="Self.FK_Prova_PessoaBeneficio9">
+            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
           <AssociationSet Name="FK_Prova_Professor" Association="Self.FK_Prova_Professor">
             <End Role="Professor" EntitySet="Professor" />
             <End Role="Prova" EntitySet="Prova" />
@@ -1784,158 +1421,6 @@
           <AssociationSet Name="FK_Prova_Setor4" Association="Self.FK_Prova_Setor4">
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao" Association="Self.FK_Resposta_Avaliacao">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao1" Association="Self.FK_Resposta_Avaliacao1">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao2" Association="Self.FK_Resposta_Avaliacao2">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao3" Association="Self.FK_Resposta_Avaliacao3">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao4" Association="Self.FK_Resposta_Avaliacao4">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio" Association="Self.FK_Resposta_Beneficio">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio1" Association="Self.FK_Resposta_Beneficio1">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio2" Association="Self.FK_Resposta_Beneficio2">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio3" Association="Self.FK_Resposta_Beneficio3">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio4" Association="Self.FK_Resposta_Beneficio4">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo" Association="Self.FK_Resposta_Cargo">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo1" Association="Self.FK_Resposta_Cargo1">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo2" Association="Self.FK_Resposta_Cargo2">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo3" Association="Self.FK_Resposta_Cargo3">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo4" Association="Self.FK_Resposta_Cargo4">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente" Association="Self.FK_Resposta_DadoDependente">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente1" Association="Self.FK_Resposta_DadoDependente1">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente2" Association="Self.FK_Resposta_DadoDependente2">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente3" Association="Self.FK_Resposta_DadoDependente3">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente4" Association="Self.FK_Resposta_DadoDependente4">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Demissao" Association="Self.FK_Resposta_Demissao">
-            <End Role="Demissao" EntitySet="Demissao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Demissao1" Association="Self.FK_Resposta_Demissao1">
-            <End Role="Demissao" EntitySet="Demissao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Demissao2" Association="Self.FK_Resposta_Demissao2">
-            <End Role="Demissao" EntitySet="Demissao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa" Association="Self.FK_Resposta_Pessoa">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa1" Association="Self.FK_Resposta_Pessoa1">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa2" Association="Self.FK_Resposta_Pessoa2">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa3" Association="Self.FK_Resposta_Pessoa3">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa4" Association="Self.FK_Resposta_Pessoa4">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio" Association="Self.FK_Resposta_PessoaBeneficio">
-            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio1" Association="Self.FK_Resposta_PessoaBeneficio1">
-            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio2" Association="Self.FK_Resposta_PessoaBeneficio2">
-            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio3" Association="Self.FK_Resposta_PessoaBeneficio3">
-            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio4" Association="Self.FK_Resposta_PessoaBeneficio4">
-            <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor" Association="Self.FK_Resposta_Setor">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor1" Association="Self.FK_Resposta_Setor1">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor2" Association="Self.FK_Resposta_Setor2">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor3" Association="Self.FK_Resposta_Setor3">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor4" Association="Self.FK_Resposta_Setor4">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
           </AssociationSet>
           <AssociationSet Name="FK_Setor_Empresa" Association="Self.FK_Setor_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
@@ -1965,12 +1450,13 @@
           <EntitySet Name="DadoDependente" EntityType="RHModel.DadoDependente" />
           <EntitySet Name="Demissao" EntityType="RHModel.Demissao" />
           <EntitySet Name="Empresa" EntityType="RHModel.Empresa" />
+          <EntitySet Name="Erro" EntityType="RHModel.Erro" />
           <EntitySet Name="Movimentacao" EntityType="RHModel.Movimentacao" />
+          <EntitySet Name="Nota" EntityType="RHModel.Nota" />
           <EntitySet Name="Pessoa" EntityType="RHModel.Pessoa" />
           <EntitySet Name="PessoaBeneficio" EntityType="RHModel.PessoaBeneficio" />
           <EntitySet Name="Professor" EntityType="RHModel.Professor" />
           <EntitySet Name="Prova" EntityType="RHModel.Prova" />
-          <EntitySet Name="Resposta" EntityType="RHModel.Resposta" />
           <EntitySet Name="Setor" EntityType="RHModel.Setor" />
           <EntitySet Name="sysdiagrams" EntityType="RHModel.sysdiagrams" />
           <EntitySet Name="Treinamento" EntityType="RHModel.Treinamento" />
@@ -1982,6 +1468,10 @@
           <AssociationSet Name="FK_Empresa_Aluno" Association="RHModel.FK_Empresa_Aluno">
             <End Role="Aluno" EntitySet="Aluno" />
             <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Erro_Aluno" Association="RHModel.FK_Erro_Aluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="Erro" EntitySet="Erro" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Aluno" Association="RHModel.FK_Prova_Aluno">
             <End Role="Aluno" EntitySet="Aluno" />
@@ -2006,30 +1496,6 @@
           <AssociationSet Name="FK_Prova_Avaliacao3" Association="RHModel.FK_Prova_Avaliacao3">
             <End Role="Avaliacao" EntitySet="Avaliacao" />
             <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Prova_Avaliacao4" Association="RHModel.FK_Prova_Avaliacao4">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao" Association="RHModel.FK_Resposta_Avaliacao">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao1" Association="RHModel.FK_Resposta_Avaliacao1">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao2" Association="RHModel.FK_Resposta_Avaliacao2">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao3" Association="RHModel.FK_Resposta_Avaliacao3">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Avaliacao4" Association="RHModel.FK_Resposta_Avaliacao4">
-            <End Role="Avaliacao" EntitySet="Avaliacao" />
-            <End Role="Resposta" EntitySet="Resposta" />
           </AssociationSet>
           <AssociationSet Name="FK_Beneficio_Empresa" Association="RHModel.FK_Beneficio_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
@@ -2058,26 +1524,6 @@
           <AssociationSet Name="FK_Prova_Beneficio4" Association="RHModel.FK_Prova_Beneficio4">
             <End Role="Beneficio" EntitySet="Beneficio" />
             <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio" Association="RHModel.FK_Resposta_Beneficio">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio1" Association="RHModel.FK_Resposta_Beneficio1">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio2" Association="RHModel.FK_Resposta_Beneficio2">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio3" Association="RHModel.FK_Resposta_Beneficio3">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Beneficio4" Association="RHModel.FK_Resposta_Beneficio4">
-            <End Role="Beneficio" EntitySet="Beneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
           </AssociationSet>
           <AssociationSet Name="FK_CadastroTreinamento_Pessoa" Association="RHModel.FK_CadastroTreinamento_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
@@ -2114,26 +1560,6 @@
           <AssociationSet Name="FK_Prova_Cargo4" Association="RHModel.FK_Prova_Cargo4">
             <End Role="Cargo" EntitySet="Cargo" />
             <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo" Association="RHModel.FK_Resposta_Cargo">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo1" Association="RHModel.FK_Resposta_Cargo1">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo2" Association="RHModel.FK_Resposta_Cargo2">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo3" Association="RHModel.FK_Resposta_Cargo3">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Cargo4" Association="RHModel.FK_Resposta_Cargo4">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Resposta" EntitySet="Resposta" />
           </AssociationSet>
           <AssociationSet Name="FK_Vaga_Cargo" Association="RHModel.FK_Vaga_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
@@ -2191,26 +1617,6 @@
             <End Role="DadoDependente" EntitySet="DadoDependente" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente" Association="RHModel.FK_Resposta_DadoDependente">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente1" Association="RHModel.FK_Resposta_DadoDependente1">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente2" Association="RHModel.FK_Resposta_DadoDependente2">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente3" Association="RHModel.FK_Resposta_DadoDependente3">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_DadoDependente4" Association="RHModel.FK_Resposta_DadoDependente4">
-            <End Role="DadoDependente" EntitySet="DadoDependente" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
           <AssociationSet Name="FK_Demissao_Pessoa" Association="RHModel.FK_Demissao_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="Demissao" EntitySet="Demissao" />
@@ -2227,18 +1633,6 @@
             <End Role="Demissao" EntitySet="Demissao" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Demissao" Association="RHModel.FK_Resposta_Demissao">
-            <End Role="Demissao" EntitySet="Demissao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Demissao1" Association="RHModel.FK_Resposta_Demissao1">
-            <End Role="Demissao" EntitySet="Demissao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Demissao2" Association="RHModel.FK_Resposta_Demissao2">
-            <End Role="Demissao" EntitySet="Demissao" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
           <AssociationSet Name="FK_Setor_Empresa" Association="RHModel.FK_Setor_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Setor" EntitySet="Setor" />
@@ -2247,9 +1641,17 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Treinamento" EntitySet="Treinamento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Erro_Prova" Association="RHModel.FK_Erro_Prova">
+            <End Role="Prova" EntitySet="Prova" />
+            <End Role="Erro" EntitySet="Erro" />
+          </AssociationSet>
           <AssociationSet Name="FK_Movimentacao_Pessoa" Association="RHModel.FK_Movimentacao_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="Movimentacao" EntitySet="Movimentacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nota_Prova" Association="RHModel.FK_Nota_Prova">
+            <End Role="Prova" EntitySet="Prova" />
+            <End Role="Nota" EntitySet="Nota" />
           </AssociationSet>
           <AssociationSet Name="FK_PessoaBeneficio_Pessoa" Association="RHModel.FK_PessoaBeneficio_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
@@ -2275,26 +1677,6 @@
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa" Association="RHModel.FK_Resposta_Pessoa">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa1" Association="RHModel.FK_Resposta_Pessoa1">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa2" Association="RHModel.FK_Resposta_Pessoa2">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa3" Association="RHModel.FK_Resposta_Pessoa3">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Pessoa4" Association="RHModel.FK_Resposta_Pessoa4">
-            <End Role="Pessoa" EntitySet="Pessoa" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
           <AssociationSet Name="FK_Prova_PessoaBeneficio" Association="RHModel.FK_Prova_PessoaBeneficio">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
             <End Role="Prova" EntitySet="Prova" />
@@ -2315,25 +1697,25 @@
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio" Association="RHModel.FK_Resposta_PessoaBeneficio">
+          <AssociationSet Name="FK_Prova_PessoaBeneficio5" Association="RHModel.FK_Prova_PessoaBeneficio5">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
+            <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio1" Association="RHModel.FK_Resposta_PessoaBeneficio1">
+          <AssociationSet Name="FK_Prova_PessoaBeneficio6" Association="RHModel.FK_Prova_PessoaBeneficio6">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
+            <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio2" Association="RHModel.FK_Resposta_PessoaBeneficio2">
+          <AssociationSet Name="FK_Prova_PessoaBeneficio7" Association="RHModel.FK_Prova_PessoaBeneficio7">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
+            <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio3" Association="RHModel.FK_Resposta_PessoaBeneficio3">
+          <AssociationSet Name="FK_Prova_PessoaBeneficio8" Association="RHModel.FK_Prova_PessoaBeneficio8">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
+            <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_PessoaBeneficio4" Association="RHModel.FK_Resposta_PessoaBeneficio4">
+          <AssociationSet Name="FK_Prova_PessoaBeneficio9" Association="RHModel.FK_Prova_PessoaBeneficio9">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
-            <End Role="Resposta" EntitySet="Resposta" />
+            <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Professor" Association="RHModel.FK_Prova_Professor">
             <End Role="Professor" EntitySet="Professor" />
@@ -2359,26 +1741,6 @@
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor" Association="RHModel.FK_Resposta_Setor">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor1" Association="RHModel.FK_Resposta_Setor1">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor2" Association="RHModel.FK_Resposta_Setor2">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor3" Association="RHModel.FK_Resposta_Setor3">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resposta_Setor4" Association="RHModel.FK_Resposta_Setor4">
-            <End Role="Setor" EntitySet="Setor" />
-            <End Role="Resposta" EntitySet="Resposta" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Aluno">
           <Key>
@@ -2395,6 +1757,7 @@
           <Property Name="Alu_Situation" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Curso" Relationship="RHModel.FK_Aluno_Curso" FromRole="Aluno" ToRole="Curso" />
           <NavigationProperty Name="Empresa" Relationship="RHModel.FK_Empresa_Aluno" FromRole="Aluno" ToRole="Empresa" />
+          <NavigationProperty Name="Erro" Relationship="RHModel.FK_Erro_Aluno" FromRole="Aluno" ToRole="Erro" />
           <NavigationProperty Name="Prova" Relationship="RHModel.FK_Prova_Aluno" FromRole="Aluno" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Avaliacao">
@@ -2411,12 +1774,6 @@
           <NavigationProperty Name="Prova1" Relationship="RHModel.FK_Prova_Avaliacao1" FromRole="Avaliacao" ToRole="Prova" />
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_Avaliacao2" FromRole="Avaliacao" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_Avaliacao3" FromRole="Avaliacao" ToRole="Prova" />
-          <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_Avaliacao4" FromRole="Avaliacao" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_Avaliacao" FromRole="Avaliacao" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_Avaliacao1" FromRole="Avaliacao" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_Avaliacao2" FromRole="Avaliacao" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_Avaliacao3" FromRole="Avaliacao" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_Avaliacao4" FromRole="Avaliacao" ToRole="Resposta" />
         </EntityType>
         <EntityType Name="Beneficio">
           <Key>
@@ -2436,11 +1793,6 @@
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_Beneficio2" FromRole="Beneficio" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_Beneficio3" FromRole="Beneficio" ToRole="Prova" />
           <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_Beneficio4" FromRole="Beneficio" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_Beneficio" FromRole="Beneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_Beneficio1" FromRole="Beneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_Beneficio2" FromRole="Beneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_Beneficio3" FromRole="Beneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_Beneficio4" FromRole="Beneficio" ToRole="Resposta" />
         </EntityType>
         <EntityType Name="CadastroTreinamento">
           <Key>
@@ -2472,11 +1824,6 @@
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_Cargo2" FromRole="Cargo" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_Cargo3" FromRole="Cargo" ToRole="Prova" />
           <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_Cargo4" FromRole="Cargo" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_Cargo" FromRole="Cargo" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_Cargo1" FromRole="Cargo" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_Cargo2" FromRole="Cargo" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_Cargo3" FromRole="Cargo" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_Cargo4" FromRole="Cargo" ToRole="Resposta" />
           <NavigationProperty Name="Vaga" Relationship="RHModel.FK_Vaga_Cargo" FromRole="Cargo" ToRole="Vaga" />
         </EntityType>
         <EntityType Name="Curso">
@@ -2523,11 +1870,6 @@
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_DadoDependente2" FromRole="DadoDependente" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_DadoDependente3" FromRole="DadoDependente" ToRole="Prova" />
           <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_DadoDependente4" FromRole="DadoDependente" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_DadoDependente" FromRole="DadoDependente" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_DadoDependente1" FromRole="DadoDependente" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_DadoDependente2" FromRole="DadoDependente" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_DadoDependente3" FromRole="DadoDependente" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_DadoDependente4" FromRole="DadoDependente" ToRole="Resposta" />
         </EntityType>
         <EntityType Name="Demissao">
           <Key>
@@ -2543,9 +1885,6 @@
           <NavigationProperty Name="Prova" Relationship="RHModel.FK_Prova_Demissao" FromRole="Demissao" ToRole="Prova" />
           <NavigationProperty Name="Prova1" Relationship="RHModel.FK_Prova_Demissao1" FromRole="Demissao" ToRole="Prova" />
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_Demissao2" FromRole="Demissao" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_Demissao" FromRole="Demissao" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_Demissao1" FromRole="Demissao" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_Demissao2" FromRole="Demissao" ToRole="Resposta" />
         </EntityType>
         <EntityType Name="Empresa">
           <Key>
@@ -2569,6 +1908,18 @@
           <NavigationProperty Name="Setor" Relationship="RHModel.FK_Setor_Empresa" FromRole="Empresa" ToRole="Setor" />
           <NavigationProperty Name="Treinamento" Relationship="RHModel.FK_Treinamento_Empresa" FromRole="Empresa" ToRole="Treinamento" />
         </EntityType>
+        <EntityType Name="Erro">
+          <Key>
+            <PropertyRef Name="Err_ID" />
+          </Key>
+          <Property Name="Err_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Err_Prova_Pro_ID" Type="Int32" Nullable="false" />
+          <Property Name="Err_Aluno_Alu_ID" Type="Int32" Nullable="false" />
+          <Property Name="Err_RespostaCerta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Err_RespostaAluno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Aluno" Relationship="RHModel.FK_Erro_Aluno" FromRole="Erro" ToRole="Aluno" />
+          <NavigationProperty Name="Prova" Relationship="RHModel.FK_Erro_Prova" FromRole="Erro" ToRole="Prova" />
+        </EntityType>
         <EntityType Name="Movimentacao">
           <Key>
             <PropertyRef Name="Mov_ID" />
@@ -2579,6 +1930,16 @@
           <Property Name="Mov_Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Mov_Situation" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Pessoa" Relationship="RHModel.FK_Movimentacao_Pessoa" FromRole="Movimentacao" ToRole="Pessoa" />
+        </EntityType>
+        <EntityType Name="Nota">
+          <Key>
+            <PropertyRef Name="Not_ID" />
+          </Key>
+          <Property Name="Not_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Not_Prova_Pro_ID" Type="Int32" Nullable="false" />
+          <Property Name="Not_Nota" Type="Int32" Nullable="false" />
+          <Property Name="Not_DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Prova" Relationship="RHModel.FK_Nota_Prova" FromRole="Nota" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Pessoa">
           <Key>
@@ -2608,11 +1969,6 @@
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_Pessoa2" FromRole="Pessoa" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_Pessoa3" FromRole="Pessoa" ToRole="Prova" />
           <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_Pessoa4" FromRole="Pessoa" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_Pessoa" FromRole="Pessoa" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_Pessoa1" FromRole="Pessoa" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_Pessoa2" FromRole="Pessoa" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_Pessoa3" FromRole="Pessoa" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_Pessoa4" FromRole="Pessoa" ToRole="Resposta" />
         </EntityType>
         <EntityType Name="PessoaBeneficio">
           <Key>
@@ -2630,11 +1986,11 @@
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_PessoaBeneficio2" FromRole="PessoaBeneficio" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_PessoaBeneficio3" FromRole="PessoaBeneficio" ToRole="Prova" />
           <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_PessoaBeneficio4" FromRole="PessoaBeneficio" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_PessoaBeneficio" FromRole="PessoaBeneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_PessoaBeneficio1" FromRole="PessoaBeneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_PessoaBeneficio2" FromRole="PessoaBeneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_PessoaBeneficio3" FromRole="PessoaBeneficio" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_PessoaBeneficio4" FromRole="PessoaBeneficio" ToRole="Resposta" />
+          <NavigationProperty Name="Prova5" Relationship="RHModel.FK_Prova_PessoaBeneficio5" FromRole="PessoaBeneficio" ToRole="Prova" />
+          <NavigationProperty Name="Prova6" Relationship="RHModel.FK_Prova_PessoaBeneficio6" FromRole="PessoaBeneficio" ToRole="Prova" />
+          <NavigationProperty Name="Prova7" Relationship="RHModel.FK_Prova_PessoaBeneficio7" FromRole="PessoaBeneficio" ToRole="Prova" />
+          <NavigationProperty Name="Prova8" Relationship="RHModel.FK_Prova_PessoaBeneficio8" FromRole="PessoaBeneficio" ToRole="Prova" />
+          <NavigationProperty Name="Prova9" Relationship="RHModel.FK_Prova_PessoaBeneficio9" FromRole="PessoaBeneficio" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Professor">
           <Key>
@@ -2692,20 +2048,26 @@
           <Property Name="Pro_BeneficioFuncionario3" Type="Int32" Nullable="false" />
           <Property Name="Pro_BeneficioFuncionario4" Type="Int32" Nullable="false" />
           <Property Name="Pro_BeneficioFuncionario5" Type="Int32" Nullable="false" />
+          <Property Name="Pro_BenefcioFuncionario6" Type="Int32" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario7" Type="Int32" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario9" Type="Int32" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario8" Type="Int32" Nullable="false" />
+          <Property Name="Pro_BeneficioFuncionario10" Type="Int32" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario1" Type="Int32" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario2" Type="Int32" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario3" Type="Int32" Nullable="false" />
           <Property Name="Pro_AvaliacaoFuncionario4" Type="Int32" Nullable="false" />
-          <Property Name="Pro_AvaliacaoFuncionario5" Type="Int32" Nullable="false" />
           <Property Name="Pro_Demissao1" Type="Int32" Nullable="false" />
           <Property Name="Pro_Demissao2" Type="Int32" Nullable="false" />
           <Property Name="Pro_Demissao3" Type="Int32" Nullable="false" />
+          <Property Name="Pro_Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Pro_Situation" Type="Boolean" Nullable="false" />
+          <Property Name="Pro_Entregue" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Aluno" Relationship="RHModel.FK_Prova_Aluno" FromRole="Prova" ToRole="Aluno" />
           <NavigationProperty Name="Avaliacao" Relationship="RHModel.FK_Prova_Avaliacao" FromRole="Prova" ToRole="Avaliacao" />
           <NavigationProperty Name="Avaliacao1" Relationship="RHModel.FK_Prova_Avaliacao1" FromRole="Prova" ToRole="Avaliacao" />
           <NavigationProperty Name="Avaliacao2" Relationship="RHModel.FK_Prova_Avaliacao2" FromRole="Prova" ToRole="Avaliacao" />
           <NavigationProperty Name="Avaliacao3" Relationship="RHModel.FK_Prova_Avaliacao3" FromRole="Prova" ToRole="Avaliacao" />
-          <NavigationProperty Name="Avaliacao4" Relationship="RHModel.FK_Prova_Avaliacao4" FromRole="Prova" ToRole="Avaliacao" />
           <NavigationProperty Name="Beneficio" Relationship="RHModel.FK_Prova_Beneficio" FromRole="Prova" ToRole="Beneficio" />
           <NavigationProperty Name="Beneficio1" Relationship="RHModel.FK_Prova_Beneficio1" FromRole="Prova" ToRole="Beneficio" />
           <NavigationProperty Name="Beneficio2" Relationship="RHModel.FK_Prova_Beneficio2" FromRole="Prova" ToRole="Beneficio" />
@@ -2729,6 +2091,8 @@
           <NavigationProperty Name="Demissao" Relationship="RHModel.FK_Prova_Demissao" FromRole="Prova" ToRole="Demissao" />
           <NavigationProperty Name="Demissao1" Relationship="RHModel.FK_Prova_Demissao1" FromRole="Prova" ToRole="Demissao" />
           <NavigationProperty Name="Demissao2" Relationship="RHModel.FK_Prova_Demissao2" FromRole="Prova" ToRole="Demissao" />
+          <NavigationProperty Name="Erro" Relationship="RHModel.FK_Erro_Prova" FromRole="Prova" ToRole="Erro" />
+          <NavigationProperty Name="Nota" Relationship="RHModel.FK_Nota_Prova" FromRole="Prova" ToRole="Nota" />
           <NavigationProperty Name="Pessoa" Relationship="RHModel.FK_Prova_Pessoa" FromRole="Prova" ToRole="Pessoa" />
           <NavigationProperty Name="Pessoa1" Relationship="RHModel.FK_Prova_Pessoa1" FromRole="Prova" ToRole="Pessoa" />
           <NavigationProperty Name="Pessoa2" Relationship="RHModel.FK_Prova_Pessoa2" FromRole="Prova" ToRole="Pessoa" />
@@ -2739,96 +2103,17 @@
           <NavigationProperty Name="PessoaBeneficio2" Relationship="RHModel.FK_Prova_PessoaBeneficio2" FromRole="Prova" ToRole="PessoaBeneficio" />
           <NavigationProperty Name="PessoaBeneficio3" Relationship="RHModel.FK_Prova_PessoaBeneficio3" FromRole="Prova" ToRole="PessoaBeneficio" />
           <NavigationProperty Name="PessoaBeneficio4" Relationship="RHModel.FK_Prova_PessoaBeneficio4" FromRole="Prova" ToRole="PessoaBeneficio" />
+          <NavigationProperty Name="PessoaBeneficio5" Relationship="RHModel.FK_Prova_PessoaBeneficio5" FromRole="Prova" ToRole="PessoaBeneficio" />
+          <NavigationProperty Name="PessoaBeneficio6" Relationship="RHModel.FK_Prova_PessoaBeneficio6" FromRole="Prova" ToRole="PessoaBeneficio" />
+          <NavigationProperty Name="PessoaBeneficio7" Relationship="RHModel.FK_Prova_PessoaBeneficio7" FromRole="Prova" ToRole="PessoaBeneficio" />
+          <NavigationProperty Name="PessoaBeneficio8" Relationship="RHModel.FK_Prova_PessoaBeneficio8" FromRole="Prova" ToRole="PessoaBeneficio" />
+          <NavigationProperty Name="PessoaBeneficio9" Relationship="RHModel.FK_Prova_PessoaBeneficio9" FromRole="Prova" ToRole="PessoaBeneficio" />
           <NavigationProperty Name="Professor" Relationship="RHModel.FK_Prova_Professor" FromRole="Prova" ToRole="Professor" />
           <NavigationProperty Name="Setor" Relationship="RHModel.FK_Prova_Setor" FromRole="Prova" ToRole="Setor" />
           <NavigationProperty Name="Setor1" Relationship="RHModel.FK_Prova_Setor1" FromRole="Prova" ToRole="Setor" />
           <NavigationProperty Name="Setor2" Relationship="RHModel.FK_Prova_Setor2" FromRole="Prova" ToRole="Setor" />
           <NavigationProperty Name="Setor3" Relationship="RHModel.FK_Prova_Setor3" FromRole="Prova" ToRole="Setor" />
           <NavigationProperty Name="Setor4" Relationship="RHModel.FK_Prova_Setor4" FromRole="Prova" ToRole="Setor" />
-        </EntityType>
-        <EntityType Name="Resposta">
-          <Key>
-            <PropertyRef Name="Res_Aluno_Alu_ID" />
-          </Key>
-          <Property Name="Res_ID" Type="Int32" Nullable="false" />
-          <Property Name="Res_Aluno_Alu_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Res_DataEntrega" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Res_Setor1" Type="Int32" Nullable="false" />
-          <Property Name="Res_Setor2" Type="Int32" Nullable="false" />
-          <Property Name="Res_Setor3" Type="Int32" Nullable="false" />
-          <Property Name="Res_Setor4" Type="Int32" Nullable="false" />
-          <Property Name="Res_Setor5" Type="Int32" Nullable="false" />
-          <Property Name="Res_Cargo1" Type="Int32" Nullable="false" />
-          <Property Name="Res_Cargo2" Type="Int32" Nullable="false" />
-          <Property Name="Res_Cargo3" Type="Int32" Nullable="false" />
-          <Property Name="Res_Cargo4" Type="Int32" Nullable="false" />
-          <Property Name="Res_Cargo5" Type="Int32" Nullable="false" />
-          <Property Name="Res_Pessoa1" Type="Int32" Nullable="false" />
-          <Property Name="Res_Pessoa2" Type="Int32" Nullable="false" />
-          <Property Name="Res_Pessoa3" Type="Int32" Nullable="false" />
-          <Property Name="Res_Pessoa4" Type="Int32" Nullable="false" />
-          <Property Name="Res_Pessoa5" Type="Int32" Nullable="false" />
-          <Property Name="Res_DadoDependente1" Type="Int32" Nullable="false" />
-          <Property Name="Res_DadoDependente2" Type="Int32" Nullable="false" />
-          <Property Name="Res_DadoDependente3" Type="Int32" Nullable="false" />
-          <Property Name="Res_DadoDependente4" Type="Int32" Nullable="false" />
-          <Property Name="Res_DadoDependente5" Type="Int32" Nullable="false" />
-          <Property Name="Res_Benefício1" Type="Int32" Nullable="false" />
-          <Property Name="Res_Beneficio2" Type="Int32" Nullable="false" />
-          <Property Name="Res_Beneficio3" Type="Int32" Nullable="false" />
-          <Property Name="Res_Beneficio4" Type="Int32" Nullable="false" />
-          <Property Name="Res_Beneficio5" Type="Int32" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario1" Type="Int32" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario2" Type="Int32" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario3" Type="Int32" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario4" Type="Int32" Nullable="false" />
-          <Property Name="Res_BeneficioFuncionario5" Type="Int32" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario1" Type="Int32" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario2" Type="Int32" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario3" Type="Int32" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario4" Type="Int32" Nullable="false" />
-          <Property Name="Res_AvaliacaoFuncionario5" Type="Int32" Nullable="false" />
-          <Property Name="Res_Demissao1" Type="Int32" Nullable="false" />
-          <Property Name="Res_Demissao2" Type="Int32" Nullable="false" />
-          <Property Name="Res_Demissao3" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Avaliacao" Relationship="RHModel.FK_Resposta_Avaliacao" FromRole="Resposta" ToRole="Avaliacao" />
-          <NavigationProperty Name="Avaliacao1" Relationship="RHModel.FK_Resposta_Avaliacao1" FromRole="Resposta" ToRole="Avaliacao" />
-          <NavigationProperty Name="Avaliacao2" Relationship="RHModel.FK_Resposta_Avaliacao2" FromRole="Resposta" ToRole="Avaliacao" />
-          <NavigationProperty Name="Avaliacao3" Relationship="RHModel.FK_Resposta_Avaliacao3" FromRole="Resposta" ToRole="Avaliacao" />
-          <NavigationProperty Name="Avaliacao4" Relationship="RHModel.FK_Resposta_Avaliacao4" FromRole="Resposta" ToRole="Avaliacao" />
-          <NavigationProperty Name="Beneficio" Relationship="RHModel.FK_Resposta_Beneficio" FromRole="Resposta" ToRole="Beneficio" />
-          <NavigationProperty Name="Beneficio1" Relationship="RHModel.FK_Resposta_Beneficio1" FromRole="Resposta" ToRole="Beneficio" />
-          <NavigationProperty Name="Beneficio2" Relationship="RHModel.FK_Resposta_Beneficio2" FromRole="Resposta" ToRole="Beneficio" />
-          <NavigationProperty Name="Beneficio3" Relationship="RHModel.FK_Resposta_Beneficio3" FromRole="Resposta" ToRole="Beneficio" />
-          <NavigationProperty Name="Beneficio4" Relationship="RHModel.FK_Resposta_Beneficio4" FromRole="Resposta" ToRole="Beneficio" />
-          <NavigationProperty Name="Cargo" Relationship="RHModel.FK_Resposta_Cargo" FromRole="Resposta" ToRole="Cargo" />
-          <NavigationProperty Name="Cargo1" Relationship="RHModel.FK_Resposta_Cargo1" FromRole="Resposta" ToRole="Cargo" />
-          <NavigationProperty Name="Cargo2" Relationship="RHModel.FK_Resposta_Cargo2" FromRole="Resposta" ToRole="Cargo" />
-          <NavigationProperty Name="Cargo3" Relationship="RHModel.FK_Resposta_Cargo3" FromRole="Resposta" ToRole="Cargo" />
-          <NavigationProperty Name="Cargo4" Relationship="RHModel.FK_Resposta_Cargo4" FromRole="Resposta" ToRole="Cargo" />
-          <NavigationProperty Name="DadoDependente" Relationship="RHModel.FK_Resposta_DadoDependente" FromRole="Resposta" ToRole="DadoDependente" />
-          <NavigationProperty Name="DadoDependente1" Relationship="RHModel.FK_Resposta_DadoDependente1" FromRole="Resposta" ToRole="DadoDependente" />
-          <NavigationProperty Name="DadoDependente2" Relationship="RHModel.FK_Resposta_DadoDependente2" FromRole="Resposta" ToRole="DadoDependente" />
-          <NavigationProperty Name="DadoDependente3" Relationship="RHModel.FK_Resposta_DadoDependente3" FromRole="Resposta" ToRole="DadoDependente" />
-          <NavigationProperty Name="DadoDependente4" Relationship="RHModel.FK_Resposta_DadoDependente4" FromRole="Resposta" ToRole="DadoDependente" />
-          <NavigationProperty Name="Demissao" Relationship="RHModel.FK_Resposta_Demissao" FromRole="Resposta" ToRole="Demissao" />
-          <NavigationProperty Name="Demissao1" Relationship="RHModel.FK_Resposta_Demissao1" FromRole="Resposta" ToRole="Demissao" />
-          <NavigationProperty Name="Demissao2" Relationship="RHModel.FK_Resposta_Demissao2" FromRole="Resposta" ToRole="Demissao" />
-          <NavigationProperty Name="Pessoa" Relationship="RHModel.FK_Resposta_Pessoa" FromRole="Resposta" ToRole="Pessoa" />
-          <NavigationProperty Name="Pessoa1" Relationship="RHModel.FK_Resposta_Pessoa1" FromRole="Resposta" ToRole="Pessoa" />
-          <NavigationProperty Name="Pessoa2" Relationship="RHModel.FK_Resposta_Pessoa2" FromRole="Resposta" ToRole="Pessoa" />
-          <NavigationProperty Name="Pessoa3" Relationship="RHModel.FK_Resposta_Pessoa3" FromRole="Resposta" ToRole="Pessoa" />
-          <NavigationProperty Name="Pessoa4" Relationship="RHModel.FK_Resposta_Pessoa4" FromRole="Resposta" ToRole="Pessoa" />
-          <NavigationProperty Name="PessoaBeneficio" Relationship="RHModel.FK_Resposta_PessoaBeneficio" FromRole="Resposta" ToRole="PessoaBeneficio" />
-          <NavigationProperty Name="PessoaBeneficio1" Relationship="RHModel.FK_Resposta_PessoaBeneficio1" FromRole="Resposta" ToRole="PessoaBeneficio" />
-          <NavigationProperty Name="PessoaBeneficio2" Relationship="RHModel.FK_Resposta_PessoaBeneficio2" FromRole="Resposta" ToRole="PessoaBeneficio" />
-          <NavigationProperty Name="PessoaBeneficio3" Relationship="RHModel.FK_Resposta_PessoaBeneficio3" FromRole="Resposta" ToRole="PessoaBeneficio" />
-          <NavigationProperty Name="PessoaBeneficio4" Relationship="RHModel.FK_Resposta_PessoaBeneficio4" FromRole="Resposta" ToRole="PessoaBeneficio" />
-          <NavigationProperty Name="Setor" Relationship="RHModel.FK_Resposta_Setor" FromRole="Resposta" ToRole="Setor" />
-          <NavigationProperty Name="Setor1" Relationship="RHModel.FK_Resposta_Setor1" FromRole="Resposta" ToRole="Setor" />
-          <NavigationProperty Name="Setor2" Relationship="RHModel.FK_Resposta_Setor2" FromRole="Resposta" ToRole="Setor" />
-          <NavigationProperty Name="Setor3" Relationship="RHModel.FK_Resposta_Setor3" FromRole="Resposta" ToRole="Setor" />
-          <NavigationProperty Name="Setor4" Relationship="RHModel.FK_Resposta_Setor4" FromRole="Resposta" ToRole="Setor" />
         </EntityType>
         <EntityType Name="Setor">
           <Key>
@@ -2847,11 +2132,6 @@
           <NavigationProperty Name="Prova2" Relationship="RHModel.FK_Prova_Setor2" FromRole="Setor" ToRole="Prova" />
           <NavigationProperty Name="Prova3" Relationship="RHModel.FK_Prova_Setor3" FromRole="Setor" ToRole="Prova" />
           <NavigationProperty Name="Prova4" Relationship="RHModel.FK_Prova_Setor4" FromRole="Setor" ToRole="Prova" />
-          <NavigationProperty Name="Resposta" Relationship="RHModel.FK_Resposta_Setor" FromRole="Setor" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta1" Relationship="RHModel.FK_Resposta_Setor1" FromRole="Setor" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta2" Relationship="RHModel.FK_Resposta_Setor2" FromRole="Setor" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta3" Relationship="RHModel.FK_Resposta_Setor3" FromRole="Setor" ToRole="Resposta" />
-          <NavigationProperty Name="Resposta4" Relationship="RHModel.FK_Resposta_Setor4" FromRole="Setor" ToRole="Resposta" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2910,6 +2190,18 @@
             </Principal>
             <Dependent Role="Empresa">
               <PropertyRef Name="Emp_Aluno_Alu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Erro_Aluno">
+          <End Type="RHModel.Aluno" Role="Aluno" Multiplicity="1" />
+          <End Type="RHModel.Erro" Role="Erro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="Alu_ID" />
+            </Principal>
+            <Dependent Role="Erro">
+              <PropertyRef Name="Err_Aluno_Alu_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2982,78 +2274,6 @@
             </Principal>
             <Dependent Role="Prova">
               <PropertyRef Name="Pro_AvaliacaoFuncionario4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Prova_Avaliacao4">
-          <End Type="RHModel.Avaliacao" Role="Avaliacao" Multiplicity="1" />
-          <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Prova">
-              <PropertyRef Name="Pro_AvaliacaoFuncionario5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao">
-          <End Type="RHModel.Avaliacao" Role="Avaliacao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao1">
-          <End Type="RHModel.Avaliacao" Role="Avaliacao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao2">
-          <End Type="RHModel.Avaliacao" Role="Avaliacao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao3">
-          <End Type="RHModel.Avaliacao" Role="Avaliacao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Avaliacao4">
-          <End Type="RHModel.Avaliacao" Role="Avaliacao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avaliacao">
-              <PropertyRef Name="Ava_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_AvaliacaoFuncionario5" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3138,66 +2358,6 @@
             </Principal>
             <Dependent Role="Prova">
               <PropertyRef Name="Pro_Beneficio5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio">
-          <End Type="RHModel.Beneficio" Role="Beneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Benefício1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio1">
-          <End Type="RHModel.Beneficio" Role="Beneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio2">
-          <End Type="RHModel.Beneficio" Role="Beneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio3">
-          <End Type="RHModel.Beneficio" Role="Beneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Beneficio4">
-          <End Type="RHModel.Beneficio" Role="Beneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficio">
-              <PropertyRef Name="Ben_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Beneficio5" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3306,66 +2466,6 @@
             </Principal>
             <Dependent Role="Prova">
               <PropertyRef Name="Pro_Cargo5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo">
-          <End Type="RHModel.Cargo" Role="Cargo" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo1">
-          <End Type="RHModel.Cargo" Role="Cargo" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo2">
-          <End Type="RHModel.Cargo" Role="Cargo" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo3">
-          <End Type="RHModel.Cargo" Role="Cargo" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Cargo4">
-          <End Type="RHModel.Cargo" Role="Cargo" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Cargo5" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3537,66 +2637,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_DadoDependente">
-          <End Type="RHModel.DadoDependente" Role="DadoDependente" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente1">
-          <End Type="RHModel.DadoDependente" Role="DadoDependente" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente2">
-          <End Type="RHModel.DadoDependente" Role="DadoDependente" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente3">
-          <End Type="RHModel.DadoDependente" Role="DadoDependente" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_DadoDependente4">
-          <End Type="RHModel.DadoDependente" Role="DadoDependente" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DadoDependente">
-              <PropertyRef Name="DP_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_DadoDependente5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Demissao_Pessoa">
           <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
           <End Type="RHModel.Demissao" Role="Demissao" Multiplicity="*" />
@@ -3645,42 +2685,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_Demissao">
-          <End Type="RHModel.Demissao" Role="Demissao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Demissao">
-              <PropertyRef Name="Dem_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Demissao1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Demissao1">
-          <End Type="RHModel.Demissao" Role="Demissao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Demissao">
-              <PropertyRef Name="Dem_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Demissao2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Demissao2">
-          <End Type="RHModel.Demissao" Role="Demissao" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Demissao">
-              <PropertyRef Name="Dem_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Demissao3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Setor_Empresa">
           <End Type="RHModel.Empresa" Role="Empresa" Multiplicity="1" />
           <End Type="RHModel.Setor" Role="Setor" Multiplicity="*" />
@@ -3705,6 +2709,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Erro_Prova">
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="1" />
+          <End Type="RHModel.Erro" Role="Erro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prova">
+              <PropertyRef Name="Pro_ID" />
+            </Principal>
+            <Dependent Role="Erro">
+              <PropertyRef Name="Err_Prova_Pro_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Movimentacao_Pessoa">
           <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
           <End Type="RHModel.Movimentacao" Role="Movimentacao" Multiplicity="*" />
@@ -3714,6 +2730,18 @@
             </Principal>
             <Dependent Role="Movimentacao">
               <PropertyRef Name="Mov_Pessoa_Pes_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nota_Prova">
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="1" />
+          <End Type="RHModel.Nota" Role="Nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prova">
+              <PropertyRef Name="Pro_ID" />
+            </Principal>
+            <Dependent Role="Nota">
+              <PropertyRef Name="Not_Prova_Pro_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3789,66 +2817,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_Pessoa">
-          <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa1">
-          <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa2">
-          <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa3">
-          <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Pessoa4">
-          <End Type="RHModel.Pessoa" Role="Pessoa" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pessoa">
-              <PropertyRef Name="Pes_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Pessoa5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Prova_PessoaBeneficio">
           <End Type="RHModel.PessoaBeneficio" Role="PessoaBeneficio" Multiplicity="1" />
           <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
@@ -3909,63 +2877,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio">
+        <Association Name="FK_Prova_PessoaBeneficio5">
           <End Type="RHModel.PessoaBeneficio" Role="PessoaBeneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PessoaBeneficio">
               <PropertyRef Name="PB_ID" />
             </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario1" />
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BenefcioFuncionario6" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio1">
+        <Association Name="FK_Prova_PessoaBeneficio6">
           <End Type="RHModel.PessoaBeneficio" Role="PessoaBeneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PessoaBeneficio">
               <PropertyRef Name="PB_ID" />
             </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario2" />
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario7" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio2">
+        <Association Name="FK_Prova_PessoaBeneficio7">
           <End Type="RHModel.PessoaBeneficio" Role="PessoaBeneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PessoaBeneficio">
               <PropertyRef Name="PB_ID" />
             </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario3" />
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario8" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio3">
+        <Association Name="FK_Prova_PessoaBeneficio8">
           <End Type="RHModel.PessoaBeneficio" Role="PessoaBeneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PessoaBeneficio">
               <PropertyRef Name="PB_ID" />
             </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario4" />
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario9" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resposta_PessoaBeneficio4">
+        <Association Name="FK_Prova_PessoaBeneficio9">
           <End Type="RHModel.PessoaBeneficio" Role="PessoaBeneficio" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
+          <End Type="RHModel.Prova" Role="Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PessoaBeneficio">
               <PropertyRef Name="PB_ID" />
             </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_BeneficioFuncionario5" />
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_BeneficioFuncionario10" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4038,66 +3006,6 @@
             </Principal>
             <Dependent Role="Prova">
               <PropertyRef Name="Pro_Setor5" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor">
-          <End Type="RHModel.Setor" Role="Setor" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor1">
-          <End Type="RHModel.Setor" Role="Setor" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor2">
-          <End Type="RHModel.Setor" Role="Setor" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor3">
-          <End Type="RHModel.Setor" Role="Setor" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor4" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resposta_Setor4">
-          <End Type="RHModel.Setor" Role="Setor" Multiplicity="1" />
-          <End Type="RHModel.Resposta" Role="Resposta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setor">
-              <PropertyRef Name="Set_ID" />
-            </Principal>
-            <Dependent Role="Resposta">
-              <PropertyRef Name="Res_Setor5" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4235,6 +3143,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Erro">
+            <EntityTypeMapping TypeName="RHModel.Erro">
+              <MappingFragment StoreEntitySet="Erro">
+                <ScalarProperty Name="Err_RespostaAluno" ColumnName="Err_RespostaAluno" />
+                <ScalarProperty Name="Err_RespostaCerta" ColumnName="Err_RespostaCerta" />
+                <ScalarProperty Name="Err_Aluno_Alu_ID" ColumnName="Err_Aluno_Alu_ID" />
+                <ScalarProperty Name="Err_Prova_Pro_ID" ColumnName="Err_Prova_Pro_ID" />
+                <ScalarProperty Name="Err_ID" ColumnName="Err_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Movimentacao">
             <EntityTypeMapping TypeName="RHModel.Movimentacao">
               <MappingFragment StoreEntitySet="Movimentacao">
@@ -4243,6 +3162,16 @@
                 <ScalarProperty Name="Mov_Mudanca" ColumnName="Mov_Mudanca" />
                 <ScalarProperty Name="Mov_Pessoa_Pes_ID" ColumnName="Mov_Pessoa_Pes_ID" />
                 <ScalarProperty Name="Mov_ID" ColumnName="Mov_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nota">
+            <EntityTypeMapping TypeName="RHModel.Nota">
+              <MappingFragment StoreEntitySet="Nota">
+                <ScalarProperty Name="Not_DataCadastro" ColumnName="Not_DataCadastro" />
+                <ScalarProperty Name="Not_Nota" ColumnName="Not_Nota" />
+                <ScalarProperty Name="Not_Prova_Pro_ID" ColumnName="Not_Prova_Pro_ID" />
+                <ScalarProperty Name="Not_ID" ColumnName="Not_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4288,14 +3217,21 @@
           <EntitySetMapping Name="Prova">
             <EntityTypeMapping TypeName="RHModel.Prova">
               <MappingFragment StoreEntitySet="Prova">
+                <ScalarProperty Name="Pro_Entregue" ColumnName="Pro_Entregue" />
+                <ScalarProperty Name="Pro_Situation" ColumnName="Pro_Situation" />
+                <ScalarProperty Name="Pro_Codigo" ColumnName="Pro_Codigo" />
                 <ScalarProperty Name="Pro_Demissao3" ColumnName="Pro_Demissao3" />
                 <ScalarProperty Name="Pro_Demissao2" ColumnName="Pro_Demissao2" />
                 <ScalarProperty Name="Pro_Demissao1" ColumnName="Pro_Demissao1" />
-                <ScalarProperty Name="Pro_AvaliacaoFuncionario5" ColumnName="Pro_AvaliacaoFuncionario5" />
                 <ScalarProperty Name="Pro_AvaliacaoFuncionario4" ColumnName="Pro_AvaliacaoFuncionario4" />
                 <ScalarProperty Name="Pro_AvaliacaoFuncionario3" ColumnName="Pro_AvaliacaoFuncionario3" />
                 <ScalarProperty Name="Pro_AvaliacaoFuncionario2" ColumnName="Pro_AvaliacaoFuncionario2" />
                 <ScalarProperty Name="Pro_AvaliacaoFuncionario1" ColumnName="Pro_AvaliacaoFuncionario1" />
+                <ScalarProperty Name="Pro_BeneficioFuncionario10" ColumnName="Pro_BeneficioFuncionario10" />
+                <ScalarProperty Name="Pro_BeneficioFuncionario8" ColumnName="Pro_BeneficioFuncionario8" />
+                <ScalarProperty Name="Pro_BeneficioFuncionario9" ColumnName="Pro_BeneficioFuncionario9" />
+                <ScalarProperty Name="Pro_BeneficioFuncionario7" ColumnName="Pro_BeneficioFuncionario7" />
+                <ScalarProperty Name="Pro_BenefcioFuncionario6" ColumnName="Pro_BenefcioFuncionario6" />
                 <ScalarProperty Name="Pro_BeneficioFuncionario5" ColumnName="Pro_BeneficioFuncionario5" />
                 <ScalarProperty Name="Pro_BeneficioFuncionario4" ColumnName="Pro_BeneficioFuncionario4" />
                 <ScalarProperty Name="Pro_BeneficioFuncionario3" ColumnName="Pro_BeneficioFuncionario3" />
@@ -4336,53 +3272,6 @@
                 <ScalarProperty Name="Pro_Aluno_Alu_ID" ColumnName="Pro_Aluno_Alu_ID" />
                 <ScalarProperty Name="Pro_Professor_Pro_ID" ColumnName="Pro_Professor_Pro_ID" />
                 <ScalarProperty Name="Pro_ID" ColumnName="Pro_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Resposta">
-            <EntityTypeMapping TypeName="RHModel.Resposta">
-              <MappingFragment StoreEntitySet="Resposta">
-                <ScalarProperty Name="Res_Demissao3" ColumnName="Res_Demissao3" />
-                <ScalarProperty Name="Res_Demissao2" ColumnName="Res_Demissao2" />
-                <ScalarProperty Name="Res_Demissao1" ColumnName="Res_Demissao1" />
-                <ScalarProperty Name="Res_AvaliacaoFuncionario5" ColumnName="Res_AvaliacaoFuncionario5" />
-                <ScalarProperty Name="Res_AvaliacaoFuncionario4" ColumnName="Res_AvaliacaoFuncionario4" />
-                <ScalarProperty Name="Res_AvaliacaoFuncionario3" ColumnName="Res_AvaliacaoFuncionario3" />
-                <ScalarProperty Name="Res_AvaliacaoFuncionario2" ColumnName="Res_AvaliacaoFuncionario2" />
-                <ScalarProperty Name="Res_AvaliacaoFuncionario1" ColumnName="Res_AvaliacaoFuncionario1" />
-                <ScalarProperty Name="Res_BeneficioFuncionario5" ColumnName="Res_BeneficioFuncionario5" />
-                <ScalarProperty Name="Res_BeneficioFuncionario4" ColumnName="Res_BeneficioFuncionario4" />
-                <ScalarProperty Name="Res_BeneficioFuncionario3" ColumnName="Res_BeneficioFuncionario3" />
-                <ScalarProperty Name="Res_BeneficioFuncionario2" ColumnName="Res_BeneficioFuncionario2" />
-                <ScalarProperty Name="Res_BeneficioFuncionario1" ColumnName="Res_BeneficioFuncionario1" />
-                <ScalarProperty Name="Res_Beneficio5" ColumnName="Res_Beneficio5" />
-                <ScalarProperty Name="Res_Beneficio4" ColumnName="Res_Beneficio4" />
-                <ScalarProperty Name="Res_Beneficio3" ColumnName="Res_Beneficio3" />
-                <ScalarProperty Name="Res_Beneficio2" ColumnName="Res_Beneficio2" />
-                <ScalarProperty Name="Res_Benefício1" ColumnName="Res_Benefício1" />
-                <ScalarProperty Name="Res_DadoDependente5" ColumnName="Res_DadoDependente5" />
-                <ScalarProperty Name="Res_DadoDependente4" ColumnName="Res_DadoDependente4" />
-                <ScalarProperty Name="Res_DadoDependente3" ColumnName="Res_DadoDependente3" />
-                <ScalarProperty Name="Res_DadoDependente2" ColumnName="Res_DadoDependente2" />
-                <ScalarProperty Name="Res_DadoDependente1" ColumnName="Res_DadoDependente1" />
-                <ScalarProperty Name="Res_Pessoa5" ColumnName="Res_Pessoa5" />
-                <ScalarProperty Name="Res_Pessoa4" ColumnName="Res_Pessoa4" />
-                <ScalarProperty Name="Res_Pessoa3" ColumnName="Res_Pessoa3" />
-                <ScalarProperty Name="Res_Pessoa2" ColumnName="Res_Pessoa2" />
-                <ScalarProperty Name="Res_Pessoa1" ColumnName="Res_Pessoa1" />
-                <ScalarProperty Name="Res_Cargo5" ColumnName="Res_Cargo5" />
-                <ScalarProperty Name="Res_Cargo4" ColumnName="Res_Cargo4" />
-                <ScalarProperty Name="Res_Cargo3" ColumnName="Res_Cargo3" />
-                <ScalarProperty Name="Res_Cargo2" ColumnName="Res_Cargo2" />
-                <ScalarProperty Name="Res_Cargo1" ColumnName="Res_Cargo1" />
-                <ScalarProperty Name="Res_Setor5" ColumnName="Res_Setor5" />
-                <ScalarProperty Name="Res_Setor4" ColumnName="Res_Setor4" />
-                <ScalarProperty Name="Res_Setor3" ColumnName="Res_Setor3" />
-                <ScalarProperty Name="Res_Setor2" ColumnName="Res_Setor2" />
-                <ScalarProperty Name="Res_Setor1" ColumnName="Res_Setor1" />
-                <ScalarProperty Name="Res_DataEntrega" ColumnName="Res_DataEntrega" />
-                <ScalarProperty Name="Res_Aluno_Alu_ID" ColumnName="Res_Aluno_Alu_ID" />
-                <ScalarProperty Name="Res_ID" ColumnName="Res_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

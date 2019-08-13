@@ -113,7 +113,7 @@ namespace RH.View.Controllers
             return View(_cargos.ToPagedList(paginaNumero, paginaTamanho));
         }
 
-        public ActionResult Funcionarios(int IDEmpresa,string Pesquisa = "")
+        public ActionResult Funcionarios(int? pagina,int IDEmpresa,string Pesquisa = "")
         {
             ViewBag.Pesquisado = null;
 
@@ -144,7 +144,11 @@ namespace RH.View.Controllers
                 ViewBag.Pesquisado = Pesquisa;
             }
 
-            return View(Funcionarios);
+            int paginaTamanho = 5;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(Funcionarios.ToPagedList(paginaNumero, paginaTamanho));
+
         }
 
         public ActionResult GetImagemFuncionario(int IDFuncionario)
@@ -222,6 +226,14 @@ namespace RH.View.Controllers
             ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
 
             return View(Avaliacoes);
+        }
+
+        public ActionResult Beneficios(int IDEmpresa)
+        {
+            List<Beneficio> b = _Control.SelecionarBeneficiosEmpresa(IDEmpresa);
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDEmpresa);
+            ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
+            return View(b);
         }
     }
 }

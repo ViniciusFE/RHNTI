@@ -160,6 +160,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\ProfessorController.cs" />
+    <Compile Include="Controllers\ProvaController.cs" />
     <Compile Include="Controllers\SetorController.cs" />
     <Compile Include="Filtro\Autorizacao.cs" />
     <Compile Include="Filtro\AutorizacaoEmpresa.cs" />
@@ -188,6 +189,7 @@
     <Content Include="Imagem\833.gif" />
     <Content Include="Imagem\logo1.png" />
     <Content Include="Content\sass\Login.scss" />
+    <Content Include="Imagem\sem-imagem-avatar.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -293,6 +295,8 @@
     <Content Include="Views\Avaliação.cshtml" />
     <Content Include="Views\Aluno\AvaliacaoFuncionarios.cshtml" />
     <Content Include="Views\Avaliacao\Index.cshtml" />
+    <Content Include="Views\Aluno\Beneficios.cshtml" />
+    <Content Include="Views\Prova\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

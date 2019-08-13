@@ -45,9 +45,9 @@ namespace RH.View.Controllers
 
                 else
                 {
-                    if (email=="professor" && senha=="123")
+                    if (oProfessor!=null)
                     {
-                        Session["User"] = "Professor";
+                        Session["User"] = oProfessor;
                         Session["TypeUser"] = "Professor";
                         return RedirectToAction("Professor", "Home");
                     }

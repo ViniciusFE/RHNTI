@@ -61,6 +61,7 @@
     <Compile Include="CEmpresa.cs" />
     <Compile Include="CPessoa.cs" />
     <Compile Include="CProfessor.cs" />
+    <Compile Include="CProva.cs" />
     <Compile Include="CSetor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

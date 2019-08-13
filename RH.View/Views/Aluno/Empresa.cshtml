@@ -71,17 +71,20 @@
                     </div>
                 </a>
 
-                <div class="col-md-4 mt-4">
-                    <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
-                        <div class="card-header text-white" style="background-color: rgb(148,72,72);">
-                            <h3 class="text-center"><span class="fas fa-briefcase-medical align-content-center fa-2x"></span> Benefícios</h3>
+                <a href="@Url.Action("Beneficios",new { IDEmpresa=ViewBag.IDEmpresa})" class="col-md-4 mt-4 text-dark">
+                    <div>
+                        <div class="card hvr-glow hvr-float Item" style="cursor:pointer;">
+                            <div class="card-header text-white" style="background-color: rgb(148,72,72);">
+                                <h3 class="text-center"><span class="fas fa-briefcase-medical align-content-center fa-2x"></span> Benefícios</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4>Quantidade: @ViewBag.Beneficios</h4>
+                            </div>
                         </div>
-                        <div class="card-body text-center">
-                            <h4>Quantidade: @ViewBag.Beneficios</h4>
-                        </div>
-                    </div>
 
-                </div>
+                    </div>
+                </a>
+                
 
                 <a href="@Url.Action("AvaliacaoFuncionarios",new { IDEmpresa=ViewBag.IDEmpresa})" class="col-md-4 mt-4 text-dark">
                     <div>

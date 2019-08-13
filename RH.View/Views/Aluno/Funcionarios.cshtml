@@ -1,4 +1,4 @@
-@model IEnumerable<RH.Model.Pessoa>
+@model PagedList.IPagedList<RH.Model.Pessoa>
 
 @{
     ViewBag.Title = "MeusFuncionarios";
@@ -6,6 +6,8 @@
 
 }
 @Styles.Render("~/Content/Pages/css")
+@using PagedList.Mvc
+
 
 <style>
 </style>
@@ -14,7 +16,7 @@
 <br />
 <br />
 
-@using (Html.BeginForm("Funcionarios", "Aluno",new { IDEmpresa=ViewBag.IDEmpresa}, FormMethod.Post))
+@using (Html.BeginForm("Funcionarios", "Aluno", new { IDEmpresa = ViewBag.IDEmpresa }, FormMethod.Post))
 {
     <div class="input-group col-md-4 float-right">
 
@@ -85,7 +87,7 @@ else
 
                         </div>
                         <div class="card-footer">
-                            
+
                             <a class="btn btn-warning custom" href="@Url.Action("Dependentes", "Aluno", new { IDFuncionario = x.Pes_ID,IDEmpresa=ViewBag.IDEmpresa })"><i class="fa fa-users"></i> Dependentes</a>
                             <a class="btn btn-warning custom" href="@Url.Action("DadosBancarios", "Aluno", new { IDFuncionario = x.Pes_ID,IDEmpresa=ViewBag.IDEmpresa })"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                             <!-- Button modal Beneficios -->
@@ -110,6 +112,14 @@ else
 
             </div>
         </div>
+
+        <nav aria-label="Page navigation example " class="paginacao">
+            <ul class="pagination">
+                <li class="page-item">
+                    @Html.PagedListPager(Model, page => Url.Action("MeusFuncionarios", new { pagina = page }))
+                </li>
+            </ul>
+        </nav>
     }
 
     else
@@ -321,7 +331,7 @@ else
                     success: function (data) {
 
                         $(data).each(function (i) {
-                            
+
                             if (data[i].Status == "Possui") {
                                 $("#TabelaBeneficiosFuncionario").append(
 

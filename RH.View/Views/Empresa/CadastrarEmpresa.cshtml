@@ -6,6 +6,13 @@
 
 @{
     ViewBag.Title = "CadastrarEmpresa";
+
+    bool Possui = false;
+
+    if(ViewBag.DataTermino!=null)
+    {
+        Possui = true;
+    }
 }
 
 <h2 class="text-center">Cadastrar Empresa</h2>
@@ -58,7 +65,7 @@
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.Emp_Endereco, htmlAttributes: new { @class = "control-label" })
                 <div class="">
-                    @Html.EditorFor(model => model.Emp_Endereco, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Endere�o da Empresa" } })
+                    @Html.EditorFor(model => model.Emp_Endereco, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Endereço da Empresa" } })
                     @Html.ValidationMessageFor(model => model.Emp_Endereco, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -78,6 +85,16 @@
                     @Html.ValidationMessageFor(model => model.Emp_RegistroEstadual, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            @if (Possui)
+            {
+            <div class="form-group col-md-12" align="center">
+                <label class="control-label">Está empresa é uma Empresa Avaliativa?</label>
+                <br />
+                <label class='mr-4'><input type='radio' name='Avaliativa' value='true' id='Avaliativa' /> Sim</label>
+                <label class='mr-4'><input type='radio' name='Avaliativa' value='false' id='demitido' checked/> Não</label>
+            </div>
+            }
 
             <div class="from-group col-md-12">
                 <div class="form-group col-md-6 ">

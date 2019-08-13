@@ -1,0 +1,151 @@
+@model IEnumerable<RH.Model.Prova>
+
+@{
+                /**/
+
+                ViewBag.Title = "Provas";
+                Layout = "~/Views/Shared/_Layout_Professor.cshtml";
+}
+@*<style>
+        .modal {
+            text-align: center;
+        }
+
+            .modal:before {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+                margin-right: -4px;
+            }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>*@
+
+@Styles.Render("~/Content/Pages/css")
+
+<br />
+<br />
+<button class="btn btn-success custom" id="AbrirModal"><i class="fas fa-user-plus"></i> Cadastrar Prova</button>
+<br />
+<h2 class="text-center">Provas Cadastradas</h2>
+<hr />
+
+@if (Model.Count() > 0)
+{
+    foreach (var x in Model)
+    {
+        <div class="container my-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Código da Prova: @x.Pro_Codigo</h2>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+else
+{
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>Não existem provas cadastradas...</h4>
+        </div>
+    </div>
+}
+
+<hr>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalCadastrarProva">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Prova</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="Mensagem">
+                    <h4 class="text-center">Atenção</h4>
+                    <p>Ao clicar em "Cadastrar Provas", o sistem a irá gerar o total de @ViewBag.QuantidadeAlunos provas, isso poderá demorar um pouco, então por favor não feche ou reinicie a página enquanto o processo estiver em execução.</p>
+                    <div align="center">
+                        <h4>Selecione a data de termino da prova</h4>
+                        <input type="date" id="DataFim" class="align-content-center form-control col-md-5" />
+                    </div>
+
+                </div>
+
+                <div id="Carregando" align="center" style="display:none;">
+                    <img src="~/Imagem/833.gif" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success BtnModal" id="CadastrarProva" disabled="disabled"><span class="fa fa-plus"></span> Cadastrar Provas</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $("#AbrirModal").click(function () {
+
+                $("#ModalCadastrarProva").modal('show');
+
+            });
+
+            $("#DataFim").change(function () {
+
+                if ($(this).val() != "") {
+                    $("#CadastrarProva").removeAttr('disabled');
+                }
+
+                else {
+                    $("#CadastrarProva").attr('disabled', 'disabled');
+                }
+
+            });
+
+            $("#CadastrarProva").click(function () {
+                $("#Mensagem").css("display", "none");
+                $("#Carregando").css("display", "block");
+                var url = "@Url.Action("CadastrarProva","Prova")";
+                var Data = $("#DataFim").val();
+                $.post(url, { DataTermino: Data }, function (resposta) {
+
+                    $("#Mensagem").css("display", "block");
+                    $("#Carregando").css("display", "none");
+
+                    if (resposta == "0") {
+                        $("#Mensagem").html("<p class='text-center'>A Data de Termino não pode terminar no dia de hoje</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
+                    }
+
+                    else if (resposta == "1") {
+                        $("#Mensagem").html("<p class='text-center'>A Data de Termino não pode ser um dia que já passou</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
+                    }
+
+                    else {
+                        $("#Mensagem").html("<p class='text-center'>Provas Cadastrar com sucesso!</p>");
+                    }
+
+
+                });
+            });
+
+
+
+        })
+
+    </script>
+}

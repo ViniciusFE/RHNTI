@@ -11,10 +11,12 @@ namespace RH.Control
     public class CEmpresa
     {
         private RepositorieEmpresa _RepositorieEmpresa;
+        private RepositorieProva _RepositorieProva;
 
         public CEmpresa()
         {
             _RepositorieEmpresa = new RepositorieEmpresa();
+            _RepositorieProva = new RepositorieProva();
         }
 
         public List<Empresa> SelecionarTodasEmpresa()
@@ -40,6 +42,11 @@ namespace RH.Control
         public Empresa SelecionarEmpresa(int id)
         {
             return _RepositorieEmpresa.SelecionarEmpresa(id);
+        }
+
+        public Prova ProvaAluno(int IDAluno)
+        {
+            return _RepositorieProva.SelecionarProvaAluno(IDAluno);
         }
     }
 }

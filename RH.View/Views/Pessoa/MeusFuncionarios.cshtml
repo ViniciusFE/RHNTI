@@ -1,10 +1,13 @@
-@model IEnumerable<RH.Model.Pessoa>
+@model PagedList.IPagedList<RH.Model.Pessoa>
 
 @{
     ViewBag.Title = "MeusFuncionarios";
 
 }
+
 @Styles.Render("~/Content/Pages/css")
+
+@using PagedList.Mvc
 
 <style>
 </style>
@@ -100,18 +103,26 @@ else
                     <br />
 
 
-                <br />
-                <br />
-            }
+                    <br />
+                    <br />
+                }
 
-                
+
 
                 <br />
                 <br />
-                
-                
-      </div>
+
+
+            </div>
         </div>
+
+        <nav aria-label="Page navigation example " class="paginacao">
+            <ul class="pagination">
+                <li class="page-item">
+                    @Html.PagedListPager(Model, page => Url.Action("MeusFuncionarios", new { pagina = page }))
+                </li>
+            </ul>
+        </nav>
     }
 
     else
@@ -128,8 +139,8 @@ else
 
 <hr />
 
-    
-    <!-- Modal Beneficios -->
+
+<!-- Modal Beneficios -->
 <div class="modal fade beneficios-func" id="beneficios-func" tabindex="-1" role="dialog" aria-labelledby="beneficios-func" aria-hidden="true">
     <div class="modal-dialog modal-beneficios" role="document">
         <div class="modal-content model-beneficios">
@@ -142,14 +153,14 @@ else
             <div class="modal-body">
                 @if (ViewBag.Beneficios.Count > 0)
                 {
-                   
-                <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
-                    <tr style="background-color: rgb(148,72,72);" class="text-white">
-                        <td>Benefício</td>
-                        <td>Ações</td>
-                    </tr>
-                </table>
-                    
+
+                    <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
+                        <tr style="background-color: rgb(148,72,72);" class="text-white">
+                            <td>Benefício</td>
+                            <td>Ações</td>
+                        </tr>
+                    </table>
+
                 }
                 else
                 {
@@ -217,11 +228,11 @@ else
 
 @section Scripts{
     <script>
-     
-        var clicksBeneficios = 0; var clicksDemissao = 0;
-       
 
-       
+        var clicksBeneficios = 0; var clicksDemissao = 0;
+
+
+
         document.querySelector("#ModalDemissao").addEventListener('click', () => {
             console.log(clicksDemissao);
             clicksDemissao++;
@@ -251,10 +262,10 @@ else
 
                 ////beneficios
             if (clicksBeneficios <= 0) {
-               
+
                 document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
                     console.log("entrou")
-                
+
             }
             else {
 
@@ -266,12 +277,12 @@ else
 
                 }
             }
-                
-    
 
 
 
-                
+
+
+
 
                 //demissao
 
@@ -355,7 +366,7 @@ else
 
                                 );
                             }
-                            
+
 
                         });
 
@@ -408,7 +419,7 @@ else
             $("#MensagemRetorno").html(retorno);
             $("#Carregando").css("display", "none");
             $("#card-" + IDFuncionario + "").slideUp("slow");
-        }   
+        }
     });
     </script>
 
