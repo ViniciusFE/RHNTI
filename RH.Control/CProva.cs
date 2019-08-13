@@ -136,5 +136,10 @@ namespace RH.Control
         {
             return _RepositorieCargo.SelecionarCargoDiaCadastro(DiaCadastro, IDEmpresa);
         }
+
+        public Pessoa SelecionarPessoaDiaCadastro(string DiaCadastro,int IDEmpresa)
+        {
+            return _RepositoriePessoa.SelecionarPessoaDiaCadastro(DiaCadastro, IDEmpresa);
+        }
     }
 }

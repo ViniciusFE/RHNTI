@@ -718,8 +718,161 @@ namespace RH.View.Controllers
                 //Cargo 1
                 Cargo CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo1);
                 Cargo CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
-                if()
+               
+               
+                if(CargoAluno!=null)
+                {
+                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
+                    if(CargoAluno.Car_Nome.Trim()==CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe==CargoProva.Car_Chefe && SetorProva.Set_Nome==SetorAluno.Set_Nome)
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Cargo 2
+                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo2);
+                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+                if (CargoAluno != null)
+                {
+                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Cargo 3
+                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo3);
+                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+                if (CargoAluno != null)
+                {
+                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Cargo 4
+                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo4);
+                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+                if (CargoAluno != null)
+                {
+                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Cargo 5
+                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo5);
+                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+                if (CargoAluno != null)
+                {
+                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Verificar Funcionarios
+
+                //Funcionario 1
+                Pessoa PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa1);
+                Pessoa PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+                if(PessoaAluno!=null)
+                {
+                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                    if(PessoaAluno.Pes_Nome.Trim()==PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim()==PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim()==PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim()==PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario==PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim()==CargoAluno.Car_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Funcionario 2
+                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa2);
+                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+                if (PessoaAluno != null)
+                {
+                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Funcionario 3
+                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa3);
+                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+                if (PessoaAluno != null)
+                {
+                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Funcionário 4
+                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa4);
+                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+                if (PessoaAluno != null)
+                {
+                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Funcionário 5
+                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa5);
+                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+                if (PessoaAluno != null)
+                {
+                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Verifica Dependentes
 
 
             }
