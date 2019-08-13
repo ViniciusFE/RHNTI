@@ -107,5 +107,10 @@ namespace RH.Model.Repositories
             return odb.Cargo.SqlQuery("select * from Cargo c inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID where s.Set_Empresa_Emp_ID = " + IDEmpresa+" and c.Car_Situation=1").Count();
         }
 
+        public Cargo SelecionarCargoDiaCadastro(string DiaCadastro,int IDEmpresa)
+        {
+            return odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c).Where(c => c.Car_DataCadastro.Equals(DiaCadastro) && c.Car_Situation == true).FirstOrDefault();
+        }
+
     }
 }

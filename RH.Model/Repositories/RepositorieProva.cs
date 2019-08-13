@@ -46,5 +46,11 @@ namespace RH.Model.Repositories
         {
             return odb.Prova.ToList().Count();
         }
+
+        public void AlterarProva(Prova aProva)
+        {
+            odb.Entry(aProva).State = System.Data.Entity.EntityState.Modified;
+            odb.SaveChanges();
+        }
     }
 }

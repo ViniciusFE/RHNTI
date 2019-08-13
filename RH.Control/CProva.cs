@@ -18,6 +18,9 @@ namespace RH.Control
         RepositoriePessoaBeneficio _RepositoriePessoaBeneficio;
         RepositorieAvaliacao _RepositorieAvaliacao;
         RepositorieDemissao _RepositorieDemissao;
+        RepositorieEmpresa _RepositorieEmpresa;
+        RepositorieSetor _RepositorieSetor;
+        RepositorieCargo _RepositorieCargo;
 
         public CProva()
         {
@@ -29,6 +32,9 @@ namespace RH.Control
             _RepositoriePessoaBeneficio = new RepositoriePessoaBeneficio();
             _RepositorieAvaliacao = new RepositorieAvaliacao();
             _RepositorieDemissao = new RepositorieDemissao();
+            _RepositorieEmpresa = new RepositorieEmpresa();
+            _RepositorieSetor = new RepositorieSetor();
+            _RepositorieCargo = new RepositorieCargo();
         }
 
         public void CadastrarProva(Prova aProva)
@@ -84,6 +90,51 @@ namespace RH.Control
         public List<Prova> SelecionarTodasProva()
         {
             return _RepositorieProva.SelecionarProvas();
+        }
+
+        public Prova SelecionarProvaAluno(int IDAluno)
+        {
+            return _RepositorieProva.SelecionarProvaAluno(IDAluno);
+        }
+
+        public Aluno SelecionarAluno(int id)
+        {
+            return _RepositorieAluno.SelecionarAluno(id);
+        }
+
+        public Empresa SelecionarEmpresaAvaliativaAluno(int IDAluno)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresaAvaliativaAluno(IDAluno);
+        }
+
+        public void AlterarProva(Prova aProva)
+        {
+            _RepositorieProva.AlterarProva(aProva);
+        }
+
+        public void AlterarEmpresa(Empresa aEmpresa)
+        {
+            _RepositorieEmpresa.AlterarEmpresa(aEmpresa);
+        }
+
+        public Setor SelecionarSetor(int id)
+        {
+            return _RepositorieSetor.SelecionarSetor(id);
+        }
+
+        public Setor SelecionarSetorDiaCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return _RepositorieSetor.SelecionarSetorDiaCadastro(DataCadastro, IDEmpresa);
+        }
+
+        public Cargo SelecionarCargo(int id)
+        {
+            return _RepositorieCargo.SelecionarCargo(id);
+        }
+
+        public Cargo SelecionarCargoDiaCadastro(string DiaCadastro,int IDEmpresa)
+        {
+            return _RepositorieCargo.SelecionarCargoDiaCadastro(DiaCadastro, IDEmpresa);
         }
     }
 }

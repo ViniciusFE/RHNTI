@@ -623,5 +623,108 @@ namespace RH.View.Controllers
 
             return Json("2");
         }
+
+        public ActionResult EntregarProva()
+        {
+            Aluno oAluno = (Aluno)Session["User"];
+            Prova aProva = _Control.SelecionarProvaAluno(oAluno.Alu_ID);
+            aProva.Pro_Entregue = true;
+            _Control.AlterarProva(aProva);
+
+            Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(oAluno.Alu_ID);
+            aEmpresa.Emp_Situation = false;
+            _Control.AlterarEmpresa(aEmpresa);  
+
+
+            return Json("Sua prova foi entregada, a próxima vez que acessar a plataforma você terá acesso a sua nota");
+        }
+
+        public ActionResult CalcularNotas()
+        {
+            List<Aluno> Alunos = _Control.SelecionarTodosAlunos();
+
+            foreach(var x in Alunos)
+            {
+                Prova aProva = _Control.SelecionarProvaAluno(x.Alu_ID);
+                Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(x.Alu_ID);
+
+                double Nota = 0;
+
+                Nota aNota = new Nota();
+                aNota.Not_DataCadastro = DateTime.Now;
+                aNota.Not_Prova_Pro_ID = aProva.Pro_ID;
+
+                //Verifica os Setores
+
+                //Setor 1
+                Setor SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor1);
+                Setor SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+
+                if(SetorAluno!=null)
+                {
+                    if(SetorAluno.Set_Nome.Trim()==SetorProva.Set_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Setor 2
+                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor2);
+                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+                if (SetorAluno != null)
+                {
+                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Setor 3
+                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor3);
+                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+                if (SetorAluno != null)
+                {
+                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Setor 4
+                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor4);
+                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+                if (SetorAluno != null)
+                {
+                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Setor 5
+                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor5);
+                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+                if (SetorAluno != null)
+                {
+                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+
+                //Verifica Cargos
+
+                //Cargo 1
+                Cargo CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo1);
+                Cargo CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+                if()
+
+
+
+            }
+
+            return Json("Todas as notas foram calculadas com sucesso!");
+        }
     }
 }

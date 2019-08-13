@@ -10,7 +10,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Style/css")
 
-    
+
 
 </head>
 <body>
@@ -53,7 +53,6 @@
 
                             <a class="nav-link" href="~/Cargo/Index"> <div class="col text-center"><i class="fas fa-sitemap"></i></div>Cargos</a>
                         </li>
-
 
                         <li class="nav-item">
 
@@ -117,6 +116,11 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="~/Empresa/EditarEmpresa">Editar Empresa</a>
                             <a class="dropdown-item" href="~/Empresa/MinhasEmpresas">Todas as Empresas</a>
+                            @if (Convert.ToBoolean(Session["Avaliativa"]))
+                            {
+                                <a class="dropdown-item" data-toggle="modal" href="#" data-target="#ModalEntregarProva">Entregar Prova</a>
+                            }
+
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-center" href="@Url.Action("Logout","Login")">Logout</a>
 
@@ -131,6 +135,7 @@
         </nav>
     </header>
 
+
     <section>
         <div class="container">
             <div class="content">
@@ -144,6 +149,72 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+
 </body>
 </html>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalEntregarProva">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Entregar Prova</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Tem certeza que deseja entregar sua prova? Você não poderá acessar essa empresa novamente.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success Btns" data-dismiss="modal" id="EntregarProva">Sim</button>
+                <button type="button" class="btn btn-danger Btns" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalEntregue">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sua prova foi entregue com sucesso</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 id="Mensagem"></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success Btns" data-dismiss="modal">Sim</button>
+                <button type="button" class="btn btn-danger Btns" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+        $(document).ready(function () {
+            $("#EntregarProva").click(function () {
+                alert("Teste de merda");
+                var url = "@Url.Action("EntregarProva","Prova")";
+                $.post(url, function (resposta) {
+                    $("#ModalEntregarProva").modal('hide');
+                    $("#Mensagem").html(resposta);
+                    $("#ModalEntregue").modal('show');
+                });
+
+            });
+
+            $('#ModalEntregue').on('hide', function () {
+                window.location.href = '~/Empresa/MinhasEmpresas';
+            })
+
+        });
+
+</script>
 
