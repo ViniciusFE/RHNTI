@@ -141,5 +141,15 @@ namespace RH.Control
         {
             return _RepositoriePessoa.SelecionarPessoaDiaCadastro(DiaCadastro, IDEmpresa);
         }
+
+        public DadoDependente SelecionarDependente(int id)
+        {
+            return _RepositorieDependente.SelecionarDadoDependente(id);
+        }
+
+        public DadoDependente SelecionarDependenteDiaCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return _RepositorieDependente.SelecionarDependenteDataCadastro(DataCadastro, IDEmpresa);
+        }
     }
 }

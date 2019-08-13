@@ -874,6 +874,8 @@ namespace RH.View.Controllers
 
                 //Verifica Dependentes
 
+                //Dependente 1
+                DadoDependente DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente1);
 
             }
 
