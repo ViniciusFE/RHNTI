@@ -21,6 +21,8 @@ namespace RH.Control
         RepositorieEmpresa _RepositorieEmpresa;
         RepositorieSetor _RepositorieSetor;
         RepositorieCargo _RepositorieCargo;
+        RepositorieBeneficio _RepositorieBeneficio;
+        
 
         public CProva()
         {
@@ -35,6 +37,7 @@ namespace RH.Control
             _RepositorieEmpresa = new RepositorieEmpresa();
             _RepositorieSetor = new RepositorieSetor();
             _RepositorieCargo = new RepositorieCargo();
+            _RepositorieBeneficio = new RepositorieBeneficio();
         }
 
         public void CadastrarProva(Prova aProva)
@@ -150,6 +153,36 @@ namespace RH.Control
         public DadoDependente SelecionarDependenteDiaCadastro(string DataCadastro,int IDEmpresa)
         {
             return _RepositorieDependente.SelecionarDependenteDataCadastro(DataCadastro, IDEmpresa);
+        }
+
+        public DadoBancario SelecionarDadoBancario(int id)
+        {
+            return _RepositorieDadoBancario.SelecionarDadoBancario(id);
+        }
+
+        public DadoBancario SelecionarDadoBancarioDataCadastro(string DataCadastro, int IDEmpresa)
+        {
+            return _RepositorieDadoBancario.SelecionarDadoBancarioDataCadastro(DataCadastro, IDEmpresa);
+        }
+
+        public Beneficio SelecionarBeneficio(int id)
+        {
+            return _RepositorieBeneficio.SelecionarBeneficioporID(id);
+        }
+
+        public List<Beneficio> SelecionarBeneficiosAluno(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.SelecionarBeneficioporEmpresa(IDEmpresa);
+        }
+
+        public PessoaBeneficio SelecionarBeneficioFuncionario(int IDBeneficio)
+        {
+            return _RepositoriePessoaBeneficio.SelecionarBeneficio(IDBeneficio);
+        }
+
+        public List<PessoaBeneficio> SelecionarBeneficiosFuncionariosEmpresa(int IDEmpresa)
+        {
+            return _RepositoriePessoaBeneficio.SelecionarBeneficiosFuncionariosEmpresa(IDEmpresa);
         }
     }
 }
