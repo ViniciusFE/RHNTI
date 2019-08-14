@@ -184,5 +184,25 @@ namespace RH.Control
         {
             return _RepositoriePessoaBeneficio.SelecionarBeneficiosFuncionariosEmpresa(IDEmpresa);
         }
+
+        public Avaliacao SelecionarAvaliacao(int id)
+        {
+            return _RepositorieAvaliacao.SelecionarAvaliacao(id);
+        }
+
+        public Avaliacao SelecionarAvaliacaoDiaCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return _RepositorieAvaliacao.SelecionarAvaliacaoDiaCadastro(DataCadastro, IDEmpresa);
+        }
+
+        public Demissao SelecionarDemissao(int id)
+        {
+            return _RepositorieDemissao.SelecionarDemissao(id);
+        }
+
+        public Demissao SelecionarDemissaoDataCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return _RepositorieDemissao.SelecionarDemissaoDataCadastro(DataCadastro, IDEmpresa);
+        }
     }
 }

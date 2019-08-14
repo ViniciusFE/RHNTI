@@ -46,5 +46,10 @@ namespace RH.Model.Repositories
         {
             return odb.Avaliacao.SqlQuery("select * from Avaliacao a inner join Pessoa p on a.Ava_Pessoa_Pes_ID = p.Pes_ID and p.Pes_Situation = 1 and p.Pes_Nome like '"+Pesquisado+"%' inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID =" + IDEmpresa).ToList();
         }
+
+        public Avaliacao SelecionarAvaliacaoDiaCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return odb.Avaliacao.SqlQuery("select * from Avaliacao a inner join Pessoa p on a.Ava_Pessoa_Pes_ID = p.Pes_ID and p.Pes_Situation = 1 inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+ " where a.Ava_Situation = 1 and a.Ava_DataCadastro='"+DataCadastro+"'").FirstOrDefault();
+        }
     }
 }

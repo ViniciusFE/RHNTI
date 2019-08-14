@@ -960,7 +960,7 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                     PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
 
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo==DadoBancarioProva.DB_Tipo && PessoaProva.Pes_Nome==PessoaAluno.Pes_Nome)
+                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim()==DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -975,7 +975,7 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                     PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
 
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo == DadoBancarioProva.DB_Tipo && PessoaProva.Pes_Nome == PessoaAluno.Pes_Nome)
+                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -990,7 +990,7 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                     PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
 
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo == DadoBancarioProva.DB_Tipo && PessoaProva.Pes_Nome == PessoaAluno.Pes_Nome)
+                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1005,7 +1005,7 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                     PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
 
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo == DadoBancarioProva.DB_Tipo && PessoaProva.Pes_Nome == PessoaAluno.Pes_Nome)
+                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1020,7 +1020,7 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                     PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
 
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo == DadoBancarioProva.DB_Tipo && PessoaProva.Pes_Nome == PessoaAluno.Pes_Nome)
+                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1035,7 +1035,7 @@ namespace RH.View.Controllers
 
                 foreach(var y in BeneficiosAluno)
                 {
-                    if(y.Ben_Custo==BeneficioProva.Ben_Custo && y.Ben_DataCadastro=="01/01" && y.Ben_Descricao==BeneficioProva.Ben_Descricao && y.Ben_Nome==BeneficioProva.Ben_Nome)
+                    if(y.Ben_Custo==BeneficioProva.Ben_Custo && y.Ben_DataCadastro=="01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                         break;
@@ -1047,7 +1047,7 @@ namespace RH.View.Controllers
 
                 foreach (var y in BeneficiosAluno)
                 {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao == BeneficioProva.Ben_Descricao && y.Ben_Nome == BeneficioProva.Ben_Nome)
+                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                         break;
@@ -1059,7 +1059,7 @@ namespace RH.View.Controllers
 
                 foreach (var y in BeneficiosAluno)
                 {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao == BeneficioProva.Ben_Descricao && y.Ben_Nome == BeneficioProva.Ben_Nome)
+                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                         break;
@@ -1071,7 +1071,7 @@ namespace RH.View.Controllers
 
                 foreach (var y in BeneficiosAluno)
                 {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao == BeneficioProva.Ben_Descricao && y.Ben_Nome == BeneficioProva.Ben_Nome)
+                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro.Trim() == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                         break;
@@ -1083,7 +1083,7 @@ namespace RH.View.Controllers
 
                 foreach (var y in BeneficiosAluno)
                 {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao == BeneficioProva.Ben_Descricao && y.Ben_Nome == BeneficioProva.Ben_Nome)
+                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                         break;
@@ -1105,7 +1105,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if(y.PB_DataCadastro==BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome==BeneficioAluno.Ben_Nome)
+                    if(y.PB_DataCadastro==BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1122,7 +1122,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1139,7 +1139,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1156,7 +1156,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1173,7 +1173,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1190,7 +1190,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1207,7 +1207,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1224,7 +1224,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1241,7 +1241,7 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
@@ -1258,11 +1258,121 @@ namespace RH.View.Controllers
                     PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
 
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome == BeneficioAluno.Ben_Nome)
+                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
                     {
                         Nota = Nota + 0.2;
                     }
                 }
+
+                //Verifica Avaliações dos Funcionários
+
+                //Avaliação 1
+                Avaliacao AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario1);
+                Avaliacao AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+                if(AvaliacaoAluno!=null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                    if(AvaliacaoAluno.Ava_Avaliacao.Trim()==AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim()==PessoaAluno.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Avaliação 2
+                AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario2);
+                AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+                if (AvaliacaoAluno != null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                    if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.4;
+                    }
+                }
+
+                //Avaliação 3
+                AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario3);
+                AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+                if (AvaliacaoAluno != null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                    if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.4;
+                    }
+                }
+
+                //Avaliação 4
+                AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario4);
+                AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+                if (AvaliacaoAluno != null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                    if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.4;
+                    }
+                }
+
+                //Verifica Demissão
+
+                //Demissao 1
+                Demissao DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao1);
+                Demissao DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
+
+                if(DemissaoAluno!=null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                    if(DemissaoAluno.Dem_Motivo.Trim()==DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario==DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim()==PessoaProva.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Demissao 2
+                DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao2);
+                DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
+
+                if (DemissaoAluno != null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                    if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
+                //Demissao 3
+                DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao3);
+                DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
+
+                if (DemissaoAluno != null)
+                {
+                    PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                    if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                    }
+                }
+
             }
 
             return Json("Todas as notas foram calculadas com sucesso!");
