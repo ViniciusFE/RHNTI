@@ -33,7 +33,7 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarBeneficio(Beneficio oBeneficio)
+        public ActionResult CadastrarBeneficio(Beneficio oBeneficio,float Preco=-1)
         {
             if(Convert.ToBoolean(Session["Avaliativa"]))
             {
@@ -43,15 +43,25 @@ namespace RH.View.Controllers
                 }
             }
 
-            if(ModelState.IsValid)
+            if (Preco == -1)
             {
+                ModelState.AddModelError("Ben_Custo", "Digite o custo desse benefício");
+            }
+
+            if (ModelState.IsValid)
+            {
+                
                 Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
                 oBeneficio.Ben_Empresa_Emp_ID = aEmpresa.Emp_ID;
                 oBeneficio.Ben_DataCadastro = aEmpresa.Emp_DataAtual;
                 oBeneficio.Ben_Situation = true;
+                oBeneficio.Ben_Custo = Math.Round(Preco, 2);
                 _Control.Incluir(oBeneficio);
                 return RedirectToAction("Index");
             }
+
+            
+
             return View();
         }
 
