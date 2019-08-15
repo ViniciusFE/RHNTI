@@ -1,99 +1,121 @@
 @model RH.Model.Empresa
 
-@{ 
+@{
     Layout = "~/Views/Shared/LayoutSemMenu.cshtml";
 }
 
 @{
     ViewBag.Title = "CadastrarEmpresa";
+
+    bool Possui = false;
+
+    if (ViewBag.DataTermino != null)
+    {
+        Possui = true;
+    }
 }
 
 <h2 class="text-center">Cadastrar Empresa</h2>
 
 
-@using (Html.BeginForm("CadastrarEmpresa", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data"  }))
+@using (Html.BeginForm("CadastrarEmpresa", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
+
+    <h4 class="col-12 text-center">Empresa</h4>
+    <hr />
+
    
-        <h4 class="col-12 text-center">Empresa</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
-        <div class="form-row">
-            <div class="custom-file col-md-12">
-                <input type="file" class="custom-file-input" id="customFile" name="imagem">
-                <label class="custom-file-label" for="customFile">Escolha a Logo Para sua Empresa</label>
-                @Html.ValidationMessage("Imagem", "", new { @class = "text-danger" })
 
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            </div>
-            <br />  <br />  <br />
+    <div class="form-row">
+        <div class="custom-file col-md-12">
+            <input type="file" class="custom-file-input" id="customFile" name="imagem">
+            <label class="custom-file-label" for="customFile">Escolha a Logo Para sua Empresa</label>
+            @Html.ValidationMessage("Imagem", "", new { @class = "text-danger" })
 
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Emp_Nome, htmlAttributes: new { })
-
-                @Html.EditorFor(model => model.Emp_Nome, new { htmlAttributes = new { @class = "form-control ", @type = "text", @placeholder = "Digite o Nome da Empresa" } })
-                @Html.ValidationMessageFor(model => model.Emp_Nome, "", new { @class = "text-danger" })
-
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Emp_Estado, htmlAttributes: new { @class = "control-label " })
-
-                @Html.EditorFor(model => model.Emp_Estado, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Estado da Empresa" } })
-                @Html.ValidationMessageFor(model => model.Emp_Estado, "", new { @class = "text-danger" })
-
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Emp_Cidade, htmlAttributes: new { @class = "control-label" })
-                <div class="">
-                    @Html.EditorFor(model => model.Emp_Cidade, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite a Cidade da Empresa" } })
-                    @Html.ValidationMessageFor(model => model.Emp_Cidade, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Emp_Endereco, htmlAttributes: new { @class = "control-label" })
-                <div class="">
-                    @Html.EditorFor(model => model.Emp_Endereco, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Endere�o da Empresa" } })
-                    @Html.ValidationMessageFor(model => model.Emp_Endereco, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Emp_CNPJ, htmlAttributes: new { @class = "control-label " })
-                <div class="">
-                    @Html.EditorFor(model => model.Emp_CNPJ, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CNPJ da Empresa" } })
-                    @Html.ValidationMessageFor(model => model.Emp_CNPJ, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Emp_RegistroEstadual, htmlAttributes: new { @class = "control-label " })
-                <div class="">
-                    @Html.EditorFor(model => model.Emp_RegistroEstadual, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Registro Estadual da Empresa" } })
-                    @Html.ValidationMessageFor(model => model.Emp_RegistroEstadual, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="from-group col-md-12">
-                <div class="form-group col-md-6 ">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Criar" class="btn btn-outline-secondary" />
-                    </div>
-                </div>
-            </div>
 
         </div>
-       
+        <br />  <br />  <br />
+
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Emp_Nome, htmlAttributes: new { })
+
+            @Html.EditorFor(model => model.Emp_Nome, new { htmlAttributes = new { @class = "form-control ", @type = "text", @placeholder = "Digite o Nome da Empresa" } })
+            @Html.ValidationMessageFor(model => model.Emp_Nome, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Emp_Estado, htmlAttributes: new { @class = "control-label " })
+
+            @Html.EditorFor(model => model.Emp_Estado, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Estado da Empresa" } })
+            @Html.ValidationMessageFor(model => model.Emp_Estado, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Emp_Cidade, htmlAttributes: new { @class = "control-label" })
+            <div class="">
+                @Html.EditorFor(model => model.Emp_Cidade, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite a Cidade da Empresa" } })
+                @Html.ValidationMessageFor(model => model.Emp_Cidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Emp_Endereco, htmlAttributes: new { @class = "control-label" })
+            <div class="">
+                @Html.EditorFor(model => model.Emp_Endereco, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Endereço da Empresa" } })
+                @Html.ValidationMessageFor(model => model.Emp_Endereco, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Emp_CNPJ, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.Emp_CNPJ, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CNPJ da Empresa" } })
+                @Html.ValidationMessageFor(model => model.Emp_CNPJ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Emp_RegistroEstadual, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.Emp_RegistroEstadual, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Registro Estadual da Empresa" } })
+                @Html.ValidationMessageFor(model => model.Emp_RegistroEstadual, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Possui)
+        {
+        <div class="form-group col-md-12" align="center">
+            <label class="control-label">Está empresa é uma Empresa Avaliativa?</label>
+            <br />
+            <label class='mr-4'><input type='radio' name='Avaliativa' value='true' id='Avaliativa' /> Sim</label>
+            <label class='mr-4'><input type='radio' name='Avaliativa' value='false' id='demitido' checked /> Não</label>
+            <br />
+            @Html.ValidationMessage("EmpresaAvaliativa", "", new { @class = "text-danger" })
+        </div>
+        }
+
+        <div class="from-group col-md-12">
+            <div class="form-group col-md-6 ">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Criar" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 }
 
 <div class="back">
     <a href="~/Empresa/MinhasEmpresas"><i class="fas fa-arrow-left"></i> Voltar</a>
-  
+
 </div>
 
 @section Scripts

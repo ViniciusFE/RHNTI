@@ -22,17 +22,17 @@ namespace RH.Model
             this.Prova2 = new HashSet<Prova>();
             this.Prova3 = new HashSet<Prova>();
             this.Prova4 = new HashSet<Prova>();
-            this.Resposta = new HashSet<Resposta>();
-            this.Resposta1 = new HashSet<Resposta>();
-            this.Resposta2 = new HashSet<Resposta>();
-            this.Resposta3 = new HashSet<Resposta>();
-            this.Resposta4 = new HashSet<Resposta>();
+            this.Prova5 = new HashSet<Prova>();
+            this.Prova6 = new HashSet<Prova>();
+            this.Prova7 = new HashSet<Prova>();
+            this.Prova8 = new HashSet<Prova>();
+            this.Prova9 = new HashSet<Prova>();
         }
     
         public int PB_ID { get; set; }
         public int PB_Pessoa_Pes_ID { get; set; }
         public int PB_Beneficio_Ben_ID { get; set; }
-        public System.DateTime PB_DataCadastro { get; set; }
+        public string PB_DataCadastro { get; set; }
         public bool PB_Situation { get; set; }
     
         public virtual Beneficio Beneficio { get; set; }
@@ -48,14 +48,14 @@ namespace RH.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prova> Prova4 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resposta> Resposta { get; set; }
+        public virtual ICollection<Prova> Prova5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resposta> Resposta1 { get; set; }
+        public virtual ICollection<Prova> Prova6 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resposta> Resposta2 { get; set; }
+        public virtual ICollection<Prova> Prova7 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resposta> Resposta3 { get; set; }
+        public virtual ICollection<Prova> Prova8 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resposta> Resposta4 { get; set; }
+        public virtual ICollection<Prova> Prova9 { get; set; }
     }
 }

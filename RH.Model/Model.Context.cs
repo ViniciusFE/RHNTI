@@ -35,15 +35,17 @@ namespace RH.Model
         public virtual DbSet<DadoDependente> DadoDependente { get; set; }
         public virtual DbSet<Demissao> Demissao { get; set; }
         public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Erro> Erro { get; set; }
         public virtual DbSet<Movimentacao> Movimentacao { get; set; }
+        public virtual DbSet<Nota> Nota { get; set; }
         public virtual DbSet<Pessoa> Pessoa { get; set; }
         public virtual DbSet<PessoaBeneficio> PessoaBeneficio { get; set; }
         public virtual DbSet<Professor> Professor { get; set; }
         public virtual DbSet<Prova> Prova { get; set; }
-        public virtual DbSet<Resposta> Resposta { get; set; }
         public virtual DbSet<Setor> Setor { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Treinamento> Treinamento { get; set; }
         public virtual DbSet<Vaga> Vaga { get; set; }
+        public virtual DbSet<VW_Provas> VW_Provas { get; set; }
     }
 }

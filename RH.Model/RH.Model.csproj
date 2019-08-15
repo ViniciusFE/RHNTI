@@ -91,6 +91,9 @@
     <Compile Include="Empresa.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Erro.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Helper\Connection.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -108,6 +111,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Movimentacao.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Nota.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Pessoa.cs">
@@ -131,13 +137,12 @@
     <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
+    <Compile Include="Repositories\RepositorieNota.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
     <Compile Include="Repositories\RepositoriePessoaBeneficio.cs" />
     <Compile Include="Repositories\RepositorieProfessor.cs" />
+    <Compile Include="Repositories\RepositorieProva.cs" />
     <Compile Include="Repositories\RepositorieSetor.cs" />
-    <Compile Include="Resposta.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Setor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -148,6 +153,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Vaga.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_Provas.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
   </ItemGroup>

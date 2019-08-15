@@ -1,9 +1,13 @@
-﻿@model IEnumerable<RH.Model.Pessoa>
+@model PagedList.IPagedList<RH.Model.Pessoa>
 
 @{
     ViewBag.Title = "MeusFuncionarios";
+
 }
+
 @Styles.Render("~/Content/Pages/css")
+
+@using PagedList.Mvc
 
 <style>
 </style>
@@ -85,15 +89,12 @@ else
 
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario","Pessoa",new { id=x.Pes_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario", "Pessoa", new { id = x.Pes_ID })"><i class="fas fa-user-edit"></i> Alterar</a>
                             <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index","Dependente",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-users"></i> Dependentes</a>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index","Beneficio",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-thumbs-up"></i> Benefícios</a>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index","DadosBancarios",new { IDFuncionario=x.Pes_ID})"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "Dependente", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-users"></i> Dependentes</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "DadosBancarios", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                             <!-- Button modal Beneficios -->
-                            <button type="button" class="btn btn-warning custom beneficios-btn" data-toggle="modal" data-target="#beneficios-func">
-                                <i class="fa fa-thumbs-up"></i>  Benefícios
-                            </button>
+                            <button type="button" class="btn btn-warning custom BtnAbrirModalBeneficios" data-id="@x.Pes_ID"><i class="fa fa-thumbs-up"></i>  Benefícios</button>
                         </div>
                     </div>
 
@@ -102,16 +103,26 @@ else
                     <br />
 
 
-
-
+                    <br />
+                    <br />
                 }
+
+
 
                 <br />
                 <br />
-                }
-                
+
+
             </div>
         </div>
+
+        <nav aria-label="Page navigation example " class="paginacao">
+            <ul class="pagination">
+                <li class="page-item">
+                    @Html.PagedListPager(Model, page => Url.Action("MeusFuncionarios", new { pagina = page }))
+                </li>
+            </ul>
+        </nav>
     }
 
     else
@@ -129,8 +140,7 @@ else
 <hr />
 
 
-    
-    <!-- Modal Beneficios -->
+<!-- Modal Beneficios -->
 <div class="modal fade beneficios-func" id="beneficios-func" tabindex="-1" role="dialog" aria-labelledby="beneficios-func" aria-hidden="true">
     <div class="modal-dialog modal-beneficios" role="document">
         <div class="modal-content model-beneficios">
@@ -141,21 +151,16 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                @if (ViewBag.qtdB > 0)
+                @if (ViewBag.Beneficios.Count > 0)
                 {
-                    <form>
-                            @foreach (var z in ViewBag.Beneficios)
-                            {
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="@z.Ben_ID">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        @z.Ben_Nome
-                                    </label>
-                                </div>
+                    <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
+                        <tr style="background-color: rgb(148,72,72);" class="text-white">
+                            <td>Benefício</td>
+                            <td>Ações</td>
+                        </tr>
+                    </table>
 
-                            }
-                        </form>
                 }
                 else
                 {
@@ -180,7 +185,6 @@ else
         </div>
     </div>
 </div>
-
 
 
 <!-- Modal Demitir-->
@@ -224,11 +228,11 @@ else
 
 @section Scripts{
     <script>
-     
-        var clicksBeneficios = 0; var clicksDemissao = 0;
-       
 
-       
+        var clicksBeneficios = 0; var clicksDemissao = 0;
+
+
+
         document.querySelector("#ModalDemissao").addEventListener('click', () => {
             console.log(clicksDemissao);
             clicksDemissao++;
@@ -257,9 +261,11 @@ else
 
 
                 ////beneficios
-            if (clicksBeneficios <= 1) {
+            if (clicksBeneficios <= 0) {
+
                 document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
-                console.log("entrou")
+                    console.log("entrou")
+
             }
             else {
 
@@ -271,12 +277,12 @@ else
 
                 }
             }
-                
-    
 
 
 
-                
+
+
+
 
                 //demissao
 
@@ -303,10 +309,76 @@ else
             });
 
 
-    $(document).ready(function () {
-        var IDFuncionario;
+        $(document).ready(function () {
+            var IDFuncionario;
 
-        var motivo;
+
+            var motivo;
+
+
+
+            $(".BtnAbrirModalBeneficios").click(function () {
+
+                IDFuncionario = $(this).attr("data-id");
+
+                $("#TabelaBeneficiosFuncionario").html(" <tr style='background-color: rgb(148, 72, 72); ' class='text-white'>" +
+                    "<td>Benefício</td >" +
+                    "<td>Ações</td>" +
+                    "</tr >");
+
+                $.ajax({
+                    method: "post",
+                    dataType: "json",
+                    url: "@Url.Action("PopularBeneficiosFuncionario","Pessoa")",
+                    data: { id: IDFuncionario },
+                    success: function (data) {
+
+                        $(data).each(function (i) {
+
+                            if (data[i].Status == "Não possui") {
+                                $("#TabelaBeneficiosFuncionario").append(
+
+                                    "<tr>" +
+                                        "<td>" + data[i].Nome + "</td>" +
+                                        "<td>" +
+                                    "<div>" +
+                                    "<button class='btn btn-success mr-1' onclick='AdicionarBeneficio(" + data[i].ID + "," + IDFuncionario + ")' id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-plus'></span></button>" +
+                                    "<button class='btn btn-primary mr-1' data-toggle='tooltip' data-placement='right' title='Descrição do Benefício:\n"+data[i].Descricao+"\nCusto do Benefício:\n"+data[i].Custo+" R$'><span class='fa fa-info-circle'></span></button>"+
+                                            "</div>" +
+                                        "</td >" +
+                                    "</tr>"
+
+                                );
+                            }
+
+                            else {
+                                $("#TabelaBeneficiosFuncionario").append(
+
+                                    "<tr>" +
+                                        "<td>" + data[i].Nome + "</td>" +
+                                        "<td>" +
+                                            "<div>" +
+                                                "<button class='btn btn-danger mr-1' onclick='RemoverBeneficio(" + data[i].ID + "," + IDFuncionario + ")' id='" + data[i].ID + "-" + IDFuncionario + "'><span class='fa fa-minus'></span></button>" +
+                                    "<button class='btn btn-primary mr-1' data-toggle='tooltip' data-placement='right' title='Descrição do Benefício:\n" + data[i].Descricao + "\nCusto do Benefício:\n" + data[i].Custo + " R$'><span class='fa fa-info-circle'></span></button>" +
+                                            "</div>" +
+                                        "</td >" +
+                                    "</tr>"
+
+                                );
+                            }
+
+
+                        });
+
+                    },
+                    Error: function () {
+                        $("#TabelaBeneficiosFuncionario").html("<p>Não foi possível carregar os dados desse funcionário, por favor tente novamente...</p>")
+                    }
+                });
+
+                $("#beneficios-func").modal('show');
+        });
+
 
         $(".motivodemissao").prop("checked", true);
 
@@ -350,4 +422,38 @@ else
         }
     });
     </script>
+
+    <script>
+
+        function AdicionarBeneficio(IDBeneficio, ID) {
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+
+            $("#" + IDBeneficio + "-" + ID).attr('disabled', 'disabled');
+
+            var url = "@Url.Action("AdicionarBeneficio","Pessoa")";
+
+            $.post(url, { beneficio: IDBeneficio, funcionario: ID });
+
+
+            $("#" + IDBeneficio + "-" + ID).removeClass().addClass('btn btn-danger mr-1').html("<span class='fa fa-minus'></span>").attr('onclick', 'RemoverBeneficio(' + IDBeneficio + ',' + ID + ')').removeAttr('disabled');
+        }
+
+        function RemoverBeneficio(IDBeneficio,ID) {
+
+              $("#" + IDBeneficio + "-" + ID).attr('disabled', 'disabled');
+
+            var url = "@Url.Action("RemoverBeneficio","Pessoa")";
+
+            $.post(url, { beneficio: IDBeneficio, funcionario: ID });
+
+
+            $("#" + IDBeneficio + "-" + ID).removeClass().addClass('btn btn-success mr-1').html("<span class='fa fa-plus'></span>").attr('onclick', 'AdicionarBeneficio(' + IDBeneficio + ',' + ID + ')').removeAttr('disabled');
+
+        }
+
+    </script>
+
 }

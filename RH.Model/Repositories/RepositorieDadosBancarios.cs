@@ -47,5 +47,10 @@ namespace RH.Model.Repositories
             odb.Database.ExecuteSqlCommand("update DadoBancario set DB_Situation=0 where DB_Pessoa_Pes_ID= " + IDFuncionario);
             odb.SaveChanges();
         }
+
+        public DadoBancario SelecionarDadoBancarioDataCadastro(string DataCadastro, int IDEmpresa)
+        {
+            return odb.DadoBancario.SqlQuery("select distinct d.DB_ID,d.DB_DataCadastro,d.DB_Numero,d.DB_Pessoa_Pes_ID,d.DB_Situation,d.DB_Tipo from DadoBancario d inner join Pessoa p on d.DB_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_Setor_Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where d.DB_Situation = 1 and d.DB_DataCadastro = '"+DataCadastro+"'").FirstOrDefault();
+        }
     }
 }

@@ -21,12 +21,8 @@ namespace RH.Model
             public string Ben_Nome { get; set; }
 
             [DisplayName("Descrição")]
-            [Required(ErrorMessage =("Digite a descrição do benefício"))]
-            public string Ben_Descricao { get; set; }
-
-            [DisplayName("Custo")]
-            [Required(ErrorMessage =("Informe o custo do benefício"))]
-            public double Ben_Custo { get; set; }
+            [Required(ErrorMessage = ("Digite a descrição do benefício"))]
+            public string Ben_Descricao { get; set; }  
 
             [DisplayName("Situação")]
             public bool Ben_Situation { get; set; }

@@ -1,5 +1,9 @@
 @model IEnumerable<RH.Model.Beneficio>
 
+@{
+    ViewBag.Title = "Meus Benefícios";
+}
+
 @Styles.Render("~/Content/Pages/css")
 
 
@@ -25,7 +29,7 @@
                         </th>
 
                         <th>
-                            @Html.DisplayNameFor(model => model.Ben_Custo)
+                            Custo
                         </th>
 
                         <th>
@@ -66,7 +70,7 @@
             {
                 <div class="alert alert-primary" role="alert">
                     <div class="alert-body">
-                        <h4>Esta empresa ainda não possui nenhum benefício cadastrado</h4>
+                        <h4>Esta empresa ainda não possui nenhum benefício cadastrados</h4>
                     </div>
                 </div>
             }

@@ -60,5 +60,10 @@ namespace RH.Control
         {
             return _RepositorieEmpresa.SelecionarEmpresa(IDEmpresa);
         }
+
+        public bool LimiteBeneficiosEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _C.LimiteBeneficiosEmpresa(IDEmpresa);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using PagedList;
 using RH.Control;
 using RH.Model;
 using RH.View.Filtro;
@@ -128,7 +129,7 @@ namespace RH.View.Controllers
         [AutorizacaoEmpresa]
       
             
-        public ActionResult MeusFuncionarios(string Pesquisa="")
+        public ActionResult MeusFuncionarios(int? pagina,string Pesquisa="")
         { 
             ViewBag.Pesquisado=null;
 
@@ -136,16 +137,18 @@ namespace RH.View.Controllers
             List<Pessoa> Funcionarios = DbPessoa.SelecionarTodosFuncionariosEmpresa(IDEmpresa);
             List<Setor> Setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
             List<Cargo> Cargos = DbPessoa.SelecionarCargosEmpresa(IDEmpresa);
+          
+            List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
+            ViewBag.Beneficios = beneficios;
 
-
-            int qtd = 0;  //DbPessoa.BeneficiosEmpresa(IDEmpresa).Count();
-            //List<Beneficio> beneficios = DbPessoa.BeneficiosEmpresa(IDEmpresa);
-            //ViewBag.Beneficios = beneficios;
-            ViewBag.qtdB = qtd;
-            //ViewBag.IDE = IDEmpresa;
 
             ViewBag.Setores = Setores;
             ViewBag.Cargos = Cargos;
+
+            List<PessoaBeneficio> BeneficiosFuncionarios = DbPessoa.BeneficiosFuncionariosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+            ViewBag.BeneficiosFuncionarios = BeneficiosFuncionarios;
+
+            ViewBag.IDFuncionarioBeneficio = 0;
 
             if(Pesquisa!="")
             {
@@ -153,7 +156,10 @@ namespace RH.View.Controllers
                 ViewBag.Pesquisado = Pesquisa;
             }
 
-            return View(Funcionarios);
+            int paginaTamanho = 5;
+            int paginaNumero = (pagina ?? 1);
+
+            return View(Funcionarios.ToPagedList(paginaNumero, paginaTamanho));
         }
         
         public ActionResult SelecionarBeneficios(int id )
@@ -196,6 +202,65 @@ namespace RH.View.Controllers
             DbPessoa.DesabilitarDependentesFuncionario(id);
 
             return Json("O funcionário foi demitido com sucesso!");
+        }
+
+        public ActionResult PopularBeneficiosFuncionario(int id)
+        {
+            List<Beneficio> BeneficiosEmpresa = DbPessoa.BeneficiosEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            List<object> Beneficios = new List<object>();
+
+            foreach (var x in BeneficiosEmpresa)
+            {
+                string status;
+                if (DbPessoa.PossuiBeneficio(x.Ben_ID, id))
+                {
+                    status = "Possui";
+                }
+
+                else
+                {
+                    status = "Não possui";
+                }
+
+                Beneficios.Add(
+                    new
+                    {
+                        ID = x.Ben_ID,
+                        Nome = x.Ben_Nome,
+                        Status = status,
+                        Descricao=x.Ben_Descricao,
+                        Custo=x.Ben_Custo
+                    }
+                    );
+            }
+
+            return Json(Beneficios, JsonRequestBehavior.AllowGet);
+        }
+
+       public ActionResult AdicionarBeneficio(int beneficio,int funcionario)
+        {
+            Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
+
+            PessoaBeneficio Beneficio = new PessoaBeneficio()
+            {
+                PB_Beneficio_Ben_ID=beneficio,
+                PB_DataCadastro=aEmpresa.Emp_DataAtual,
+                PB_Pessoa_Pes_ID=funcionario,
+                PB_Situation=true
+            };
+
+            DbPessoa.CadastrarBeneficioFuncionario(Beneficio);
+            return new EmptyResult();
+        }
+
+        public ActionResult RemoverBeneficio(int beneficio,int funcionario)
+        {
+            PessoaBeneficio Beneficio = DbPessoa.SelecionarBeneficioFuncionario(beneficio, funcionario);
+
+            DbPessoa.ExcluirBeneficioFuncionario(Beneficio);
+
+            return new EmptyResult();
         }
 
     }

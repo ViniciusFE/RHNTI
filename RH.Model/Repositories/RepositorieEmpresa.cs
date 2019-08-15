@@ -57,5 +57,22 @@ namespace RH.Model.Repositories
             odb.Entry(aEmpresa).State = System.Data.Entity.EntityState.Deleted;
             odb.SaveChanges();
         }
+
+        public Empresa SelecionarEmpresaAvaliativaAluno(int IDAluno)
+        {
+            return odb.Empresa.Where(p => p.Emp_Aluno_Alu_ID.Equals(IDAluno) && p.Emp_Avaliativa == true).FirstOrDefault();
+        }
+
+        public bool EmpresaAvaliativaAtiva(int IDUsuario)
+        {
+            Empresa aEmpresa=odb.Empresa.Where(p => p.Emp_Aluno_Alu_ID.Equals(IDUsuario) && p.Emp_Situation == true && p.Emp_Avaliativa == true).FirstOrDefault();
+
+            if(aEmpresa!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

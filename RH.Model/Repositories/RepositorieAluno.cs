@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -18,9 +18,9 @@ namespace RH.Model.Repositories
         }
 
 
-        public List<Aluno> SelecionarTodosAlunos()
+        public List<Aluno> SelecionarTodosAlunos(int ano)
         {
-            return Db.Aluno.Where(i => i.Alu_Situation == true).ToList();
+            return Db.Aluno.Where(p => p.Alu_DataCadastro.Year == ano && p.Alu_Situation == true).ToList();
         }
 
         public Aluno SelecionarAluno(int IDAluno)

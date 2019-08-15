@@ -45,11 +45,11 @@ namespace RH.View.Controllers
 
                 else
                 {
-                    if (oProfessor != null)
+                    if (oProfessor!=null)
                     {
                         Session["User"] = oProfessor;
                         Session["TypeUser"] = "Professor";
-                        return RedirectToAction("MinhasEmpresas", "Empresa");
+                        return RedirectToAction("Professor", "Home");
                     }
                 }
 

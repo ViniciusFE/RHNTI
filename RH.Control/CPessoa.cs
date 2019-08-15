@@ -80,10 +80,7 @@ namespace RH.Control
             _RepositorieDadoBancario.DesabilitarDadosBancarios(IDFuncionario);
         }
 
-        public List<PessoaBeneficio> BeneficiosFuncionario(int IDFuncionario)
-        {
-            return _RepositoriePessoaBeneficio.BeneficiosFuncionario(IDFuncionario);
-        }
+        
 
         public PessoaBeneficio SelecionarBeneficioFuncionario(int IDFuncionario)
         {
@@ -113,6 +110,26 @@ namespace RH.Control
         public Empresa SelecionarEmpresa(int IDEmpresa)
         {
             return _RepositorieEmpresa.SelecionarEmpresa(IDEmpresa);
+        }
+
+        public List<PessoaBeneficio> BeneficiosFuncionariosEmpresa(int IDEmpresa)
+        {
+            return _RepositoriePessoaBeneficio.BeneficiosFuncionariosEmpresa(IDEmpresa);
+        }
+
+        public bool PossuiBeneficio(int IDBeneficio,int IDFuncionario)
+        {
+            return _RepositoriePessoaBeneficio.PossuiBeneficio(IDBeneficio, IDFuncionario);
+        }
+
+        public PessoaBeneficio SelecionarBeneficioFuncionario(int IDBeneficio,int IDFuncionario)
+        {
+            return _RepositoriePessoaBeneficio.SelecionarBeneficioFuncionario(IDBeneficio, IDFuncionario);
+        }
+
+        public void ExcluirBeneficioFuncionario(PessoaBeneficio oBeneficio)
+        {
+            _RepositoriePessoaBeneficio.ExcluirBeneficioFuncionario(oBeneficio);
         }
 
     }

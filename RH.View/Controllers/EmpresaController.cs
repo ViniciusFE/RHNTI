@@ -34,18 +34,52 @@ namespace RH.View.Controllers
             int paginaNumero = (pagina ?? 1);
             Aluno oAluno = (Aluno)Session["User"];
             List<Empresa> MinhasEmpresas = _Control.SelecionarTodasEmpresasAluno(oAluno.Alu_ID);
+
+            Prova aProva = _Control.ProvaAluno(oAluno.Alu_ID);
+
+            if(aProva!=null)
+            {
+                ViewBag.DataTermino = aProva.Pro_DataTermino;
+            }
+
             return View(MinhasEmpresas.ToPagedList(paginaNumero, paginaTamanho));
         }
 
         public ActionResult CadastrarEmpresa()
         {
+            Aluno oAluno = (Aluno)Session["User"];
+            Prova aProva = _Control.ProvaAluno(oAluno.Alu_ID);
+
+            if (aProva != null)
+            {
+                ViewBag.DataTermino = aProva.Pro_DataTermino;
+            }
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarEmpresa(Empresa aEmpresa, HttpPostedFileBase Imagem)
+        public ActionResult CadastrarEmpresa(Empresa aEmpresa, HttpPostedFileBase Imagem,bool Avaliativa=false)
         {
+            Aluno oAluno = (Aluno)Session["User"];
+
+            Prova aProva = _Control.ProvaAluno(oAluno.Alu_ID);
+
+            if (aProva != null)
+            {
+                ViewBag.DataTermino = aProva.Pro_DataTermino;
+            }
+
+            if (Avaliativa)
+            {
+                if (_Control.EmpresaAvaliativaAtiva(oAluno.Alu_ID))
+                {
+                    ModelState.AddModelError("EmpresaAvaliativa", "Você já possui uma empresa avaliativa, você não pode ter duas empresas avaliativas cadastradas ao mesmo tempo.");
+                    return View();
+                }
+            }
+            
             if (Imagem != null)
             {
                 byte[] Arquivo = new byte[Imagem.ContentLength];
@@ -63,10 +97,9 @@ namespace RH.View.Controllers
             {
                 aEmpresa.Emp_DataCadastro = DateTime.Now;
                 aEmpresa.Emp_DataAtual = "01/01";
-                aEmpresa.Emp_Situation = true;
-                Aluno oAluno = (Aluno)Session["User"];
+                aEmpresa.Emp_Situation = true;               
                 aEmpresa.Emp_Aluno_Alu_ID = Convert.ToInt32(oAluno.Alu_ID);
-                aEmpresa.Emp_Avaliativa = false;
+                aEmpresa.Emp_Avaliativa = Avaliativa;
                 _Control.CadastrarEmpresa(aEmpresa);
                 return RedirectToAction("MinhasEmpresas");
             }

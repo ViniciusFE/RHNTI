@@ -1,0 +1,315 @@
+﻿@model IEnumerable<RH.Model.Prova>
+
+@{
+    ViewBag.Title = "Avaliação";
+}
+
+<h2>Avaliação</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pro_DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pro_DataTermino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pro_Beneficio1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aluno.Alu_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avaliacao.Ava_Avaliacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avaliacao1.Ava_Avaliacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avaliacao2.Ava_Avaliacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avaliacao3.Ava_Avaliacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avaliacao4.Ava_Avaliacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beneficio.Ben_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beneficio1.Ben_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beneficio2.Ben_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beneficio3.Ben_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beneficio4.Ben_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo.Car_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo1.Car_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo2.Car_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo3.Car_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo4.Car_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoBancario.DB_Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoBancario1.DB_Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoBancario2.DB_Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoBancario3.DB_Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoBancario4.DB_Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoDependente.DP_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoDependente1.DP_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoDependente2.DP_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoDependente3.DP_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DadoDependente4.DP_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Demissao.Dem_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Demissao1.Dem_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Demissao2.Dem_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pessoa.Pes_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pessoa1.Pes_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pessoa2.Pes_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pessoa3.Pes_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pessoa4.Pes_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PessoaBeneficio.PB_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PessoaBeneficio1.PB_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PessoaBeneficio2.PB_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PessoaBeneficio3.PB_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PessoaBeneficio4.PB_DataCadastro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Professor.Pro_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Setor.Set_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Setor1.Set_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Setor2.Set_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Setor3.Set_Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Setor4.Set_Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pro_DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pro_DataTermino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pro_Beneficio1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aluno.Alu_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avaliacao.Ava_Avaliacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avaliacao1.Ava_Avaliacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avaliacao2.Ava_Avaliacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avaliacao3.Ava_Avaliacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avaliacao4.Ava_Avaliacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beneficio.Ben_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beneficio1.Ben_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beneficio2.Ben_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beneficio3.Ben_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beneficio4.Ben_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo.Car_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo1.Car_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo2.Car_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo3.Car_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo4.Car_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoBancario.DB_Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoBancario1.DB_Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoBancario2.DB_Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoBancario3.DB_Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoBancario4.DB_Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoDependente.DP_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoDependente1.DP_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoDependente2.DP_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoDependente3.DP_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DadoDependente4.DP_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Demissao.Dem_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Demissao1.Dem_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Demissao2.Dem_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoa.Pes_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoa1.Pes_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoa2.Pes_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoa3.Pes_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pessoa4.Pes_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PessoaBeneficio.PB_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PessoaBeneficio1.PB_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PessoaBeneficio2.PB_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PessoaBeneficio3.PB_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PessoaBeneficio4.PB_DataCadastro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Professor.Pro_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Setor.Set_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Setor1.Set_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Setor2.Set_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Setor3.Set_Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Setor4.Set_Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Pro_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Pro_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Pro_ID })
+        </td>
+    </tr>
+}
+
+</table>

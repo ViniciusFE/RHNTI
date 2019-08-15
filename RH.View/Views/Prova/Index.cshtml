@@ -1,0 +1,178 @@
+@model IEnumerable<RH.Model.VW_Provas>
+
+@{
+                /**/
+
+                ViewBag.Title = "Provas";
+                Layout = "~/Views/Shared/_Layout_Professor.cshtml";
+}
+@*<style>
+        .modal {
+            text-align: center;
+        }
+
+            .modal:before {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+                margin-right: -4px;
+            }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>*@
+
+@Styles.Render("~/Content/Pages/css")
+
+<br />
+<br />
+<button class="btn btn-success custom" id="AbrirModal"><i class="fas fa-user-plus"></i> Cadastrar Prova</button>
+<br />
+<h2 class="text-center">Provas Cadastradas</h2>
+<hr />
+
+@if (Model.Count() > 0)
+{
+    foreach (var x in Model)
+    {
+        <div class="container my-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Código da Prova: @x.CodigoProva</h2>
+                </div>
+
+                <div class="card-body">
+                    <h2>Data de Cadastro: @x.DataCadastro.Day/@if (x.DataCadastro.Month.ToString().Count() == 1) {<span>0</span>}@x.DataCadastro.Month/@x.DataCadastro.Year</h2>
+                    <h2>Data de Termino: @x.DataTermino.Date</h2>
+                    <h2>Quantidade de Provas Geradas: @x.QuantidadeProvas</h2>
+                </div>
+
+                @if (DateTime.Compare(x.DataTermino, DateTime.Now.Date) < 0)
+                {
+                    <div class="card-footer">
+                        <button class="btn btn-danger custom"><span class="fa fa-eye"></span> Visualizar Notas</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+}
+
+else
+{
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>Não existem provas cadastradas...</h4>
+        </div>
+    </div>
+}
+
+<hr>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalCadastrarProva">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Prova</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="Mensagem">
+                    <h4 class="text-center">Atenção</h4>
+                    <p>Ao clicar em "Cadastrar Provas", o sistem a irá gerar o total de @ViewBag.QuantidadeAlunos provas, isso poderá demorar um pouco, então por favor não feche ou reinicie a página enquanto o processo estiver em execução.</p>
+                    <div align="center">
+                        <h4>Selecione a data de termino da prova</h4>
+                        <input type="date" id="DataFim" class="align-content-center form-control col-md-5" />
+                    </div>
+
+                </div>
+
+                <div id="Resposta">
+
+                </div>
+
+                <div id="Carregando" align="center" style="display:none;">
+                    <img src="~/Imagem/833.gif" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success BtnModal" id="CadastrarProva" disabled="disabled"><span class="fa fa-plus"></span> Cadastrar Provas</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $("#AbrirModal").click(function () {
+
+                $("#ModalCadastrarProva").modal('show');
+
+                $("#Resposta").css("display", "none");
+                $("#Mensagem").css("display", "block");
+                $("#DataFim").val("");
+                $("#CadastrarProva").attr("disabled", "disabled");
+            });
+
+            $("#DataFim").change(function () {
+
+                if ($(this).val() != "") {
+                    $("#CadastrarProva").removeAttr('disabled');
+                }
+
+                else {
+                    $("#CadastrarProva").attr('disabled', 'disabled');
+                }
+
+            });
+
+            $("#CadastrarProva").click(function () {
+                $("#Carregando").css("display", "block");
+                var url = "@Url.Action("CadastrarProva","Prova")";
+                var Data = $("#DataFim").val();
+                $.post(url, { DataTermino: Data }, function (resposta) {
+
+                    $("#Mensagem").css("display", "none");
+                    $("#Carregando").css("display", "none");
+                    $("#Resposta").css("display", "block");
+
+                    if (resposta == "3") {
+                        $("#Resposta").html("<p class='text-center'>Você não pode cadastrar outra prova enquanto outra prova estiver ativa.</p>")
+                    }
+
+                    else if (resposta == "0") {
+                        $("#Resposta").html("<p class='text-center'>A Data de Termino não pode terminar no dia de hoje</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
+                    }
+
+                    else if (resposta == "1") {
+                        $("#Resposta").html("<p class='text-center'>A Data de Termino não pode ser um dia que já passou</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
+                    }
+
+                    else {
+                        $("#Resposta").html("<p class='text-center'>Provas Cadastradas com sucesso!</p>");
+                    }
+
+                    $("#CadastrarProva").attr("disabled", "disabled");
+
+
+                });
+            });
+
+
+
+        })
+
+    </script>
+}

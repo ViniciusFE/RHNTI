@@ -75,5 +75,27 @@ namespace RH.Model.Repositories
 
             return false;
         }
+
+        public int QuantidadeDeSetoresEmpresa(int IDEmpresa)
+        {
+            return odb.Setor.Where(p => p.Set_Empresa_Emp_ID.Equals(IDEmpresa) && p.Set_Situation==true).Count();
+        }
+
+        public Setor SelecionarSetorDiaCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return odb.Setor.Where(p => p.Set_DataCadastro.Equals(DataCadastro) && p.Set_Empresa_Emp_ID.Equals(IDEmpresa) && p.Set_Situation==true).FirstOrDefault();
+        }
+
+        public bool LimiteSetoresEmpresaAvaliativa(int IDEmpresa)
+        {
+            int QuantidadeSetores = SelecionarSetorEmpresa(IDEmpresa).Count();
+
+            if(QuantidadeSetores==5)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

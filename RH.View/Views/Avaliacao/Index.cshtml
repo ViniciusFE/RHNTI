@@ -1,142 +1,91 @@
-﻿@model IEnumerable<RH.Model.Pessoa>
+@model IEnumerable<RH.Model.Avaliacao>
 
 @{
-    /**/
-
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Avaliação dos Funcionários";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/Pages/css")
 
-<style>
-</style>
-
-
-
+<br />
+<a class="btn btn-success custom" href="@Url.Action("Avaliacao")"><i class="fas fa-user-plus"></i> Cadastrar Avaliação</a>
 <br />
 <br />
-<div class="card">
-    <div class="card-header">
-        <h1 class="text-center">Avaliação de Funcionários</h1>
-        <br />
-        <div class="form-group">
-            @Html.Label("Chefes de Setores", "Chefes", htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownList("Pes_Nome", null, "Por favor selecione um chefe de setor", htmlAttributes: new { @class = "form-control", @id = "Chefes" })
+
+@using (Html.BeginForm("Index", "Avaliacao", FormMethod.Post))
+{
+    <div class="input-group col-md-4 float-right">
+
+        <input type="text" class="form-control" name="Pesquisado" value="@ViewBag.Pesquisado" placeholder="Pesquisar funcionários">
+
+        <div class="input-group-append">
+            <button class="btn btn-success custom" type="submit"><span class="fa fa-search"></span></button>
         </div>
     </div>
-    <div class="card-body" id="Funcionarios">
+    <br />
+    <br />
+}
 
+<h2 class="text-center">Avaliações da Empresa @ViewBag.NomeEmpresa</h2>
+<hr />
+@if (ViewBag.Pesquisado != null && Model.Count() == 0)
+{
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>Não foi encontrado nenhum resultado referente a pesquisa '@ViewBag.Pesquisado', verifique o que foi digitado e tente novamente.</h4>
+        </div>
     </div>
-</div>
+}
 
-<div class="modal fade" tabindex="-1" role="dialog" id="ModalAvaliar">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Avaliação de funcionário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h4>Por favor digite a avaliação do funcionário</h4>
-                @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
-                <br />
-                <div align="center">
-                    <br />
-                    <img id="Carregando" src="~/Imagem/805.gif" style="width:60px; height:60px; display:none;" />
-                    <br />
+else
+{
+    if (Model.Count() > 0)
+    {
+        foreach (var x in Model)
+        {
+            <div class="container my-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><strong>Funcionários: </strong>@x.Pessoa.Pes_Nome</h4>
+                    </div>
+                    <div class="card-body row">
+                        <div class="col-md-4">
+                            <img src="@Url.Action("GetImagemUsuario", new {id= x.Ava_Pessoa_Pes_ID })" class="imagem-funcionario" />
+                        </div>
+
+                        <div class="col-md-8">
+                            <h4>Data Avaliacao: @x.Ava_DataCadastro</h4>
+                            <h4>Avaliação: @x.Ava_Avaliacao</h4>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-warning custom" id="Alterar" data-avaliacao='@x.Ava_Avaliacao' data-id="@x.Ava_ID"><i class="fas fa-user-edit"></i> Alterar</button>
+                        <button class="btn btn-danger custom demitir" data-id="@x.Ava_ID"><i class="fas fa-user-times"></i> Excluir</button>
+                    </div>
+
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar Avaliação</button>
-                <button type="button" class="btn btn-outline-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section Scripts
-{
-<script>
-        var IdFuncionario;
-
-        $(document).ready(function () {
-
-            $(".Abrir").click(function () {
-                alert("Teste");
-            });
-
-            $("#Chefes").change(function () {
-                var id = $(this).val();
-                var url = "@Url.Action("MeusFuncionarios","Avaliacao")";
-                $.post(url, { id: id }, resposta);
-            });
-
-            $("#TextBox").keyup(function () {
-                var texto = $(this).val();
-
-                if (texto != "") {
-                    $("#BtnAvaliar").removeAttr("disabled");
-                }
-
-                else {
-                    $("#BtnAvaliar").attr("disabled", "disabled");
-                }
-            });
-
-            $("#BtnAvaliar").click(function () {
-                var avaliacao = $("#TextBox").val();
-                alert(IdFuncionario);
-                alert(avaliacao);
-                var url = "@Url.Action("AvaliacaoFuncionario","Avaliacao")";
-                $("#TextBox").attr("disabled", "disabed");
-                $.post(url, { id: IdFuncionario, Avaliacao: avaliacao }, RespostaAvaliacao);
-                $(this).attr("disabled", "disabled");
-                $("#Carregando").css("display", "inline");
-            });
-
-            function RespostaAvaliacao(resposta) {
-                $("#Carregando").css("display", "none");
-                $("modal-body").html("<h4>" + resposta + "</h4>");
-                $("BtnAvaliar").attr("disabled", "disabled");
-            }
-
-            function resposta(Funcionarios) {
-                var quantidade = Funcionarios.length;
-                var result = quantidade / 3;
-                for (var x = 0; x < result; x++) {
-                    $("#Funcionarios").append(
-                    "<h3 class='text-center'>Funcionários</h3>"+
-                    "<div class='card'>"+
-                    "<div class= 'card-body'>" +
-                    "<div class='row'>"+
-                        "<div class='col-4'>" +
-                        "<img class='imagem-funcionario' src='@Url.Action("GetImagemUsuario","Avaliacao")?id=" + Funcionarios[x, 2] + "' class=''/>" +
-                    "</div>"+
-                        "<div class='col-6 dados-funcionario'>" +
-                        "<h4>Nome do funcionário: <span class='textUser'>" + Funcionarios[x, 0] + "</span></h4>" +
-                        "<h4>Cargo ocupado: <span class='textUser'> " + Funcionarios[x, 1] + "</span></h4>" +
-                        "</div>" +
-                        "<div class='col-2'>" +
-                        "<button onclick='Abrir("+Funcionarios[x,2]+")' class='btn btn-outline-success Abrir Funcionario-avaliacao'><spam class='fa fa-star'></spam> Dar Avaliacao</button>"+
-                        "</div>"+
-            "</div >"+
-                    "</div >" +
-                    "</div>"
-                    );
-                }
-
-            }
-
-
-
-        });
-
-        function Abrir(id) {
-            IdFuncionario = id;
-            $("#ModalAvaliar").modal('show');
         }
 
-</script>
+
+
+    }
+
+    else
+    {
+        <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>Sua empresa ainda não possui nenhuma avaliação...</h4>
+        </div>
+        </div>
+    }
 }
+
+
+
+
+<hr />
+
+
+
 

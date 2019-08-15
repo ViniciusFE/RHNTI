@@ -26,6 +26,9 @@
                 <h1>Cadastrar Cargo</h1>
             </div>
             <div class="card-body">
+                <div align="center">
+                    @Html.ValidationMessage("Limite", "", new { @class = "text-danger" })
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Car_Nome, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-12">

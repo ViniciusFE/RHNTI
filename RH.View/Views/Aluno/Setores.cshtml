@@ -1,0 +1,236 @@
+@model PagedList.IPagedList<RH.Model.Setor>
+
+@{
+    /**/
+
+    ViewBag.Title = "Setores";
+    Layout = "~/Views/Shared/_Layout_Professor.cshtml";
+}
+
+@using PagedList.Mvc
+
+@Styles.Render("~/Content/Pages/css")
+
+<style>
+
+
+    #Load {
+        display: none;
+    }
+</style>
+
+<br />
+@if (Model.Count() > 0 || ViewBag.Pesquisa != null)
+{
+    using (Html.BeginForm("Setores", "Aluno",new { IDEmpresa=ViewBag.IDEmpresa }, FormMethod.Post))
+    {
+        <div class="input-group col-md-4 float-right">
+            @if (ViewBag.Pesquisado != "Pesquisar setores")
+            {
+                <input type="text" class="form-control" placeholder="Pesquisar setores" name="Pesquisa" value="@ViewBag.Pesquisado">
+            }
+
+            else
+            {
+                <input type="text" class="form-control" placeholder="Pesquisar setores" name="Pesquisa">
+            }
+
+            <div class="input-group-append">
+                <button class="btn btn-success custom" type="submit"><span class="fa fa-search"></span></button>
+            </div>
+        </div>
+    }
+
+    <br />
+    <br />
+}
+
+<br />
+<h2 class="text-center titulo-Lista">Setores da Empresa @ViewBag.NomeEmpresa</h2>
+<hr />
+
+@if (ViewBag.Pesquisa != null)
+{
+    <div class="alert alert-primary">
+        <div class="alert-body">
+            <h4>@ViewBag.Pesquisa</h4>
+        </div>
+    </div>
+}
+
+else
+{
+    if (Model.Count() > 0)
+    {
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach (var x in Model)
+                {
+                    <div class="card" style="width: 100rem;" id="card-@x.Set_ID">
+                        <div class="card-header">
+                            <h4>Nome do Setor:<span class='textUser'> @x.Set_Nome</span></h4>
+                        </div>
+
+                        <div class="card-body row">
+                            <div class="col-md-9">
+                                <h4>Data de Cadastro: @x.Set_DataCadastro</h4>
+                                @if (x.Set_ID == x.Set_Setor_Set_ID)
+                                {
+                                    <h4>Este setor responde a si mesmo</h4>
+                                }
+
+                                else
+                                {
+                                    foreach (var y in ViewBag.Setores)
+                                    {
+                                        if (y.Set_ID == x.Set_Setor_Set_ID)
+                                        {
+                                            <h4>Setor Respondente: @y.Set_Nome</h4>
+                                        }
+                                    }
+                                }
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+
+        <nav aria-label="Page navigation example " class="paginacao">
+            <ul class="pagination">
+                <li class="page-item">
+                    @Html.PagedListPager(Model, page => Url.Action("index", new { pagina = page }))
+
+                </li>
+            </ul>
+        </nav>
+    }
+
+    else
+    {
+        <div class="alert alert-primary">
+            <div class="alert-body">
+                <h4>Esta empresa ainda não possui nenhum setor cadastrado...</h4>
+            </div>
+        </div>
+    }
+
+    <hr />
+}
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluirSetor">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Setor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="Mensagem">
+                    Tem certeza que deseja excluir esse setor?
+                </div>
+                <div align="center" id="Load">
+                    <img src='~/Imagem/833.gif' />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning custom requisicao" id="ExcluirSetor">Sim</button>
+                <button type="button" class="btn btn-danger custom requisicao" data-dismiss="modal" id="BtnNao">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+
+        var clicksAbrirModal = 0;
+
+        console.log("ola")
+
+        document.querySelector("#ModalExcluirSetor").addEventListener('click', () => {
+            console.log(clicksAbrirModal);
+            clicksAbrirModal++;
+        });
+
+
+
+
+        window.addEventListener('click', function (e) {
+            var mouse = {
+                page: {
+                    x: e.pageX,
+                    y: e.pageY
+                },
+                client: {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+            }
+            console.log(mouse.page.y);
+
+
+
+
+
+            if (clicksAbrirModal == 0) {
+                document.querySelector(".modal-dialog").style.marginTop = (mouse.page.y - 50) + "px";
+                console.log(clicksAbrirModal + "um click");
+
+
+            } else {
+                if (document.querySelector("#ModalExcluir").style.display == "none") {
+                    document.querySelector(".modal-dialog").style.marginTop = (mouse.page.y - 50) + "px";
+                    console.log("entrou")
+
+                } else {
+
+                }
+            }
+
+        });
+
+
+        $(document).ready(function () {
+
+            var IDSetor;
+
+            $(".excluir").click(function () {
+                $(".requisicao").removeAttr("disabled");
+                $("#ModalExcluirSetor").modal('show');
+                $("#Mensagem").html("Tem certeza que deseja excluir esse setor?");
+                IDSetor = $(this).attr("data-id");
+
+            });
+
+
+
+            $("#ExcluirSetor").click(function () {
+                $(".requisicao").attr("disabled", "disabled");
+                $("#Mensagem").css("display", "none");
+                $("#Load").css("display", "block");
+                var url = "@Url.Action("ExcluirSetor", "Setor")";
+                $.post(url, { id: IDSetor }, Output);
+            });
+
+            function Output(resposta) {
+                $("#Mensagem").css("display", "block");
+                $("#Load").css("display", "none");
+                $("#Mensagem").html(resposta[0]);
+
+                if (resposta[1] == "Excluido") {
+                    $("#card-" + IDSetor).slideUp('slow');
+                }
+            }
+
+        });
+
+    </script>
+}
+
