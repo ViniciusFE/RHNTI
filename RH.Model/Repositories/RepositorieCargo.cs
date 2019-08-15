@@ -112,5 +112,17 @@ namespace RH.Model.Repositories
             return odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c).Where(c => c.Car_DataCadastro.Equals(DiaCadastro) && c.Car_Situation == true).FirstOrDefault();
         }
 
+        public bool LimiteCargosEmpresaAvaliativa(int IDEmpresa)
+        {
+            int QuantidadeCargos = SelecionarTodosCargosEmpresa(IDEmpresa).Count();
+
+            if(QuantidadeCargos==5)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

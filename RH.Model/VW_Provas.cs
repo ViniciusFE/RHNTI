@@ -12,13 +12,11 @@ namespace RH.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Nota
+    public partial class VW_Provas
     {
-        public int Not_ID { get; set; }
-        public int Not_Prova_Pro_ID { get; set; }
-        public double Not_Nota { get; set; }
-        public System.DateTime Not_DataCadastro { get; set; }
-    
-        public virtual Prova Prova { get; set; }
+        public int CodigoProva { get; set; }
+        public Nullable<int> QuantidadeProvas { get; set; }
+        public System.DateTime DataCadastro { get; set; }
+        public System.DateTime DataTermino { get; set; }
     }
 }

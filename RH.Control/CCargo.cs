@@ -107,5 +107,10 @@ namespace RH.Control
         {
             return _RepositorieCargo.CargosComMesmoNome(NomeCargo, IDSetor);
         }
+
+        public bool LimiteCargosEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositorieCargo.LimiteCargosEmpresaAvaliativa(IDEmpresa);
+        }
     }
 }

@@ -53,7 +53,17 @@ namespace RH.View.Controllers
             List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome");
 
-            if(ChefeSetor)
+            bool EmpresaAvaliativa = Convert.ToBoolean(Session["Avaliativa"]);
+
+            if (EmpresaAvaliativa)
+            {
+                if (_Control.LimiteCargosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de cargos nessa Empresa Avaliativa foi atingido. (Limite de Cargos = 5)");
+                }
+            }
+
+                if (ChefeSetor)
             {
                 bool StatusChefe = _Control.SelecionarChefeSetor(oCargo.Car_Setor_Set_ID);
                 if (StatusChefe)

@@ -60,6 +60,19 @@ namespace RH.View.Controllers
         {
             ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
 
+            bool EmpresaAvaliativa = Convert.ToBoolean(Session["Avaliativa"]);
+
+            if(EmpresaAvaliativa)
+            {
+                if(_Control.LimiteSetoresEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de setores nessa Empresa Avaliativa foi atingido. (Limite de Setores = 5)");
+                    return View();
+                }
+            }
+                
+            
+
             if (ModelState.IsValid)
             {
                 Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));

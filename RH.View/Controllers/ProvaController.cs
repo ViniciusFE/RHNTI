@@ -232,12 +232,18 @@ namespace RH.View.Controllers
             List<Aluno> Alunos = _Control.SelecionarTodosAlunos();
             ViewBag.QuantidadeAlunos = Alunos.Count();
 
-            List<Prova> Provas = _Control.SelecionarTodasProva();
+            List<VW_Provas> Provas = _Control.SelecionarTodasProva();
             return View(Provas);
         }
 
         public ActionResult CadastrarProva(string DataTermino)
         {
+            bool ProvaAtiva = _Control.ProvaAtiva();
+            if(ProvaAtiva)
+            {
+                return Json("3");
+            }
+
             DateTime Data = Convert.ToDateTime(DataTermino);
 
             if (DateTime.Compare(DateTime.Now.Date, Data) == 0)
@@ -631,751 +637,750 @@ namespace RH.View.Controllers
             aProva.Pro_Entregue = true;
             _Control.AlterarProva(aProva);
 
+            CalcularNota(oAluno.Alu_ID);
+
             Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(oAluno.Alu_ID);
             aEmpresa.Emp_Situation = false;
             _Control.AlterarEmpresa(aEmpresa);  
 
 
-            return Json("Sua prova foi entregada, a próxima vez que acessar a plataforma você terá acesso a sua nota");
+            return Json("Sua prova foi entregue e sua nota foi calculada, após o vencimento do dia prova a próxima vez que acessar a plataforma terá a acesso a sua nota.");
         }
 
-        public ActionResult CalcularNotas()
+        public void CalcularNota(int IDAluno)
         {
             List<Aluno> Alunos = _Control.SelecionarTodosAlunos();
 
-            foreach(var x in Alunos)
+            Prova aProva = _Control.SelecionarProvaAluno(IDAluno);
+            Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(IDAluno);
+
+            double Nota = 0;
+
+            Nota aNota = new Nota();
+            aNota.Not_DataCadastro = DateTime.Now;
+            aNota.Not_Prova_Pro_ID = aProva.Pro_ID;
+
+            //Verifica os Setores
+
+            //Setor 1
+            Setor SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor1);
+            Setor SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+
+            if (SetorAluno != null)
             {
-                Prova aProva = _Control.SelecionarProvaAluno(x.Alu_ID);
-                Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(x.Alu_ID);
-
-                double Nota = 0;
-
-                Nota aNota = new Nota();
-                aNota.Not_DataCadastro = DateTime.Now;
-                aNota.Not_Prova_Pro_ID = aProva.Pro_ID;
-
-                //Verifica os Setores
-
-                //Setor 1
-                Setor SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor1);
-                Setor SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
-
-                if(SetorAluno!=null)
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
                 {
-                    if(SetorAluno.Set_Nome.Trim()==SetorProva.Set_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
+                    Nota = Nota + 0.2;
                 }
-
-                //Setor 2
-                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor2);
-                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
-                if (SetorAluno != null)
-                {
-                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Setor 3
-                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor3);
-                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
-                if (SetorAluno != null)
-                {
-                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Setor 4
-                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor4);
-                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
-                if (SetorAluno != null)
-                {
-                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Setor 5
-                SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor5);
-                SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
-                if (SetorAluno != null)
-                {
-                    if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-
-                //Verifica Cargos
-
-                //Cargo 1
-                Cargo CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo1);
-                Cargo CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
-               
-               
-                if(CargoAluno!=null)
-                {
-                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
-                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
-
-                    if(CargoAluno.Car_Nome.Trim()==CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe==CargoProva.Car_Chefe && SetorProva.Set_Nome==SetorAluno.Set_Nome)
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Cargo 2
-                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo2);
-                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
-
-
-                if (CargoAluno != null)
-                {
-                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
-                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
-
-                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Cargo 3
-                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo3);
-                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
-
-
-                if (CargoAluno != null)
-                {
-                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
-                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
-
-                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Cargo 4
-                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo4);
-                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
-
-
-                if (CargoAluno != null)
-                {
-                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
-                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
-
-                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Cargo 5
-                CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo5);
-                CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
-
-
-                if (CargoAluno != null)
-                {
-                    SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
-                    SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
-
-                    if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Verificar Funcionarios
-
-                //Funcionario 1
-                Pessoa PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa1);
-                Pessoa PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
-
-                if(PessoaAluno!=null)
-                {
-                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
-
-                    if(PessoaAluno.Pes_Nome.Trim()==PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim()==PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim()==PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim()==PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario==PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim()==CargoAluno.Car_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Funcionario 2
-                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa2);
-                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
-
-                if (PessoaAluno != null)
-                {
-                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
-
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Funcionario 3
-                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa3);
-                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
-
-                if (PessoaAluno != null)
-                {
-                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
-
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Funcionário 4
-                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa4);
-                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
-
-                if (PessoaAluno != null)
-                {
-                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
-
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Funcionário 5
-                PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa5);
-                PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
-
-                if (PessoaAluno != null)
-                {
-                    CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                    CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
-
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Verifica Dependentes
-
-                //Dependente 1
-                DadoDependente DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente1);
-                DadoDependente DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
-
-                if(DependenteAluno!=null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
-
-                    if(DependenteAluno.DP_Nome.Trim()==DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim()==DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim()==PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dependente 2
-                DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente2);
-                DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DependenteAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
-
-                    if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dependente 3
-                DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente3);
-                DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DependenteAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
-
-                    if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dependente 4
-                DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependete4);
-                DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DependenteAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
-
-                    if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dependente 5
-                DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependete5);
-                DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DependenteAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
-
-                    if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Verifica Dados Bancários
-
-                //Dado Bancário 1
-                DadoBancario DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario1);
-                DadoBancario DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
-
-                if(DadoBancarioAluno!=null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
-
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim()==DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dado Bancário 2
-                DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario2);
-                DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DadoBancarioAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
-
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dado Bancário 3
-                DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario3);
-                DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DadoBancarioAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
-
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dado Bancário 4
-                DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario4);
-                DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DadoBancarioAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
-
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Dado Bancário 5
-                DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario5);
-                DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DadoBancarioAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
-
-                    if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Verifica Benefícios
-
-                List<Beneficio> BeneficiosAluno = _Control.SelecionarBeneficiosAluno(aEmpresa.Emp_ID);
-
-                //Verifica Benefício 1
-                Beneficio BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
-
-                foreach(var y in BeneficiosAluno)
-                {
-                    if(y.Ben_Custo==BeneficioProva.Ben_Custo && y.Ben_DataCadastro=="01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                        break;
-                    }
-                }
-
-                //Verifica Benefício 2
-                BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio2);
-
-                foreach (var y in BeneficiosAluno)
-                {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                        break;
-                    }
-                }
-
-                //Verifica Benefício 3
-                BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio3);
-
-                foreach (var y in BeneficiosAluno)
-                {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                        break;
-                    }
-                }
-
-                //Verifica Benefício 4
-                BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio4);
-
-                foreach (var y in BeneficiosAluno)
-                {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro.Trim() == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                        break;
-                    }
-                }
-
-                //Verifica Benefício 5
-                BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio5);
-
-                foreach (var y in BeneficiosAluno)
-                {
-                    if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                        break;
-                    }
-                }
-
-                //Verifica Benefícios do Funcionário
-                List<PessoaBeneficio> BeneficiosFuncionarioEmpresa = _Control.SelecionarBeneficiosFuncionariosEmpresa(aEmpresa.Emp_ID);
-
-                //Beneficio 1
-                PessoaBeneficio BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario1);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-                Beneficio BeneficioAluno;
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-                    
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if(y.PB_DataCadastro==BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 2
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario2);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 3
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario3);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 4
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario4);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 5
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario5);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 6
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BenefcioFuncionario6);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 7
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario7);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 8
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario8);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 9 
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario9);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Beneficio 10
-                BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario10);
-                PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
-                BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
-
-                foreach (var y in BeneficiosFuncionarioEmpresa)
-                {
-
-                    PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
-                    BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
-
-                    if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Verifica Avaliações dos Funcionários
-
-                //Avaliação 1
-                Avaliacao AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario1);
-                Avaliacao AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
-
-                if(AvaliacaoAluno!=null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
-
-                    if(AvaliacaoAluno.Ava_Avaliacao.Trim()==AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim()==PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Avaliação 2
-                AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario2);
-                AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
-
-                if (AvaliacaoAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
-
-                    if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.4;
-                    }
-                }
-
-                //Avaliação 3
-                AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario3);
-                AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
-
-                if (AvaliacaoAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
-
-                    if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.4;
-                    }
-                }
-
-                //Avaliação 4
-                AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario4);
-                AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
-
-                if (AvaliacaoAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
-
-                    if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.4;
-                    }
-                }
-
-                //Verifica Demissão
-
-                //Demissao 1
-                Demissao DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao1);
-                Demissao DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
-
-                if(DemissaoAluno!=null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
-
-                    if(DemissaoAluno.Dem_Motivo.Trim()==DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario==DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim()==PessoaProva.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Demissao 2
-                DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao2);
-                DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DemissaoAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
-
-                    if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
-                //Demissao 3
-                DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao3);
-                DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
-
-                if (DemissaoAluno != null)
-                {
-                    PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
-                    PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
-
-                    if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
-                    {
-                        Nota = Nota + 0.2;
-                    }
-                }
-
             }
 
-            return Json("Todas as notas foram calculadas com sucesso!");
+            //Setor 2
+            SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor2);
+            SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+            if (SetorAluno != null)
+            {
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Setor 3
+            SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor3);
+            SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+            if (SetorAluno != null)
+            {
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Setor 4
+            SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor4);
+            SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+            if (SetorAluno != null)
+            {
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Setor 5
+            SetorProva = _Control.SelecionarSetor(aProva.Pro_Setor5);
+            SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
+            if (SetorAluno != null)
+            {
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+
+            //Verifica Cargos
+
+            //Cargo 1
+            Cargo CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo1);
+            Cargo CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+            if (CargoAluno != null)
+            {
+                SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Cargo 2
+            CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo2);
+            CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+            if (CargoAluno != null)
+            {
+                SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Cargo 3
+            CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo3);
+            CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+            if (CargoAluno != null)
+            {
+                SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Cargo 4
+            CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo4);
+            CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+            if (CargoAluno != null)
+            {
+                SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Cargo 5
+            CargoProva = _Control.SelecionarCargo(aProva.Pro_Cargo5);
+            CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
+
+
+            if (CargoAluno != null)
+            {
+                SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
+                SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Verificar Funcionarios
+
+            //Funcionario 1
+            Pessoa PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa1);
+            Pessoa PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+            if (PessoaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Funcionario 2
+            PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa2);
+            PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+            if (PessoaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Funcionario 3
+            PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa3);
+            PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+            if (PessoaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Funcionário 4
+            PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa4);
+            PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+            if (PessoaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Funcionário 5
+            PessoaProva = _Control.SelecionarFuncionario(aProva.Pro_Pessoa5);
+            PessoaAluno = _Control.SelecionarPessoaDiaCadastro(PessoaProva.Pes_DataCadastro, aEmpresa.Emp_ID);
+
+            if (PessoaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Verifica Dependentes
+
+            //Dependente 1
+            DadoDependente DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente1);
+            DadoDependente DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DependenteAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dependente 2
+            DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente2);
+            DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DependenteAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dependente 3
+            DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependente3);
+            DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DependenteAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dependente 4
+            DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependete4);
+            DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DependenteAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dependente 5
+            DependenteProva = _Control.SelecionarDependente(aProva.Pro_DadoDependete5);
+            DependenteAluno = _Control.SelecionarDependenteDiaCadastro(DependenteProva.DP_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DependenteAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Verifica Dados Bancários
+
+            //Dado Bancário 1
+            DadoBancario DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario1);
+            DadoBancario DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DadoBancarioAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dado Bancário 2
+            DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario2);
+            DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DadoBancarioAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dado Bancário 3
+            DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario3);
+            DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DadoBancarioAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dado Bancário 4
+            DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario4);
+            DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DadoBancarioAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Dado Bancário 5
+            DadoBancarioProva = _Control.SelecionarDadoBancario(aProva.Pro_DadoBancario5);
+            DadoBancarioAluno = _Control.SelecionarDadoBancarioDataCadastro(DadoBancarioProva.DB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DadoBancarioAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Verifica Benefícios
+
+            List<Beneficio> BeneficiosAluno = _Control.SelecionarBeneficiosAluno(aEmpresa.Emp_ID);
+
+            //Verifica Benefício 1
+            Beneficio BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+
+            foreach (var y in BeneficiosAluno)
+            {
+                if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                    break;
+                }
+            }
+
+            //Verifica Benefício 2
+            BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio2);
+
+            foreach (var y in BeneficiosAluno)
+            {
+                if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                    break;
+                }
+            }
+
+            //Verifica Benefício 3
+            BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio3);
+
+            foreach (var y in BeneficiosAluno)
+            {
+                if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                    break;
+                }
+            }
+
+            //Verifica Benefício 4
+            BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio4);
+
+            foreach (var y in BeneficiosAluno)
+            {
+                if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro.Trim() == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                    break;
+                }
+            }
+
+            //Verifica Benefício 5
+            BeneficioProva = _Control.SelecionarBeneficio(aProva.Pro_Beneficio5);
+
+            foreach (var y in BeneficiosAluno)
+            {
+                if (y.Ben_Custo == BeneficioProva.Ben_Custo && y.Ben_DataCadastro == "01/01" && y.Ben_Descricao.Trim() == BeneficioProva.Ben_Descricao.Trim() && y.Ben_Nome.Trim() == BeneficioProva.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                    break;
+                }
+            }
+
+            //Verifica Benefícios do Funcionário
+            List<PessoaBeneficio> BeneficiosFuncionarioEmpresa = _Control.SelecionarBeneficiosFuncionariosEmpresa(aEmpresa.Emp_ID);
+
+            //Beneficio 1
+            PessoaBeneficio BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario1);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+            Beneficio BeneficioAluno;
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 2
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario2);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 3
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario3);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 4
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario4);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 5
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario5);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 6
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BenefcioFuncionario6);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 7
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario7);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 8
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario8);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 9 
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario9);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Beneficio 10
+            BeneficioFuncionarioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario10);
+            PessoaProva = _Control.SelecionarFuncionario(BeneficioFuncionarioProva.PB_Pessoa_Pes_ID);
+            BeneficioProva = _Control.SelecionarBeneficio(BeneficioFuncionarioProva.PB_Beneficio_Ben_ID);
+
+            foreach (var y in BeneficiosFuncionarioEmpresa)
+            {
+
+                PessoaAluno = _Control.SelecionarFuncionario(y.PB_Pessoa_Pes_ID);
+                BeneficioAluno = _Control.SelecionarBeneficio(y.PB_Beneficio_Ben_ID);
+
+                if (y.PB_DataCadastro == BeneficioFuncionarioProva.PB_DataCadastro && BeneficioProva.Ben_Nome.Trim() == BeneficioAluno.Ben_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Verifica Avaliações dos Funcionários
+
+            //Avaliação 1
+            Avaliacao AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario1);
+            Avaliacao AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+            if (AvaliacaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Avaliação 2
+            AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario2);
+            AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+            if (AvaliacaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.4;
+                }
+            }
+
+            //Avaliação 3
+            AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario3);
+            AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+            if (AvaliacaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.4;
+                }
+            }
+
+            //Avaliação 4
+            AvaliacaoProva = _Control.SelecionarAvaliacao(aProva.Pro_AvaliacaoFuncionario4);
+            AvaliacaoAluno = _Control.SelecionarAvaliacaoDiaCadastro(AvaliacaoProva.Ava_DataCadastro, aEmpresa.Emp_ID);
+
+            if (AvaliacaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.4;
+                }
+            }
+
+            //Verifica Demissão
+
+            //Demissao 1
+            Demissao DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao1);
+            Demissao DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DemissaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Demissao 2
+            DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao2);
+            DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DemissaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            //Demissao 3
+            DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao3);
+            DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
+
+            if (DemissaoAluno != null)
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                {
+                    Nota = Nota + 0.2;
+                }
+            }
+
+            aNota.Not_Nota = Nota;
+            _Control.CadastrarNota(aNota);
         }
     }
 }

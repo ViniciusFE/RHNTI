@@ -60,7 +60,17 @@ namespace RH.Model.Repositories
         }
 
 
+        public bool LimiteBeneficiosEmpresa(int IDEmpresa)
+        {
+            int QuantidadeBeneficios = BeneficiosEmpresa(IDEmpresa).Count();
 
+            if(QuantidadeBeneficios==10)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
 
     }

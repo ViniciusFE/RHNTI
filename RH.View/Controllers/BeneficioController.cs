@@ -35,6 +35,14 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarBeneficio(Beneficio oBeneficio)
         {
+            if(Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if(_Control.LimiteBeneficiosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de benefícios nessa Empresa Avaliativa foi atingido. (Limite de Benefícios = 10)");
+                }
+            }
+
             if(ModelState.IsValid)
             {
                 Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));

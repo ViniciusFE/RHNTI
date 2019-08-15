@@ -29,7 +29,9 @@
                 </div>
 
                 <div class="card-body">
-
+                    <div align="center">
+                        @Html.ValidationMessage("Limite", "", new { @class = "text-danger" })
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Ben_Nome, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-12">
@@ -41,7 +43,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Ben_Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-12">
-                            @Html.TextAreaFor(model => model.Ben_Descricao, new { rows = "6",@class="form-control",@id="Descricao" })
+                            @Html.TextAreaFor(model => model.Ben_Descricao, new { rows = "6", @class = "form-control", @id = "Descricao" })
                             @Html.ValidationMessageFor(model => model.Ben_Descricao, "", new { @class = "text-danger" })
                         </div>
                     </div>

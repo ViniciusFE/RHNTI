@@ -22,6 +22,7 @@ namespace RH.Control
         RepositorieSetor _RepositorieSetor;
         RepositorieCargo _RepositorieCargo;
         RepositorieBeneficio _RepositorieBeneficio;
+        RepositorieNota _RepositorieNota;
         
 
         public CProva()
@@ -38,6 +39,7 @@ namespace RH.Control
             _RepositorieSetor = new RepositorieSetor();
             _RepositorieCargo = new RepositorieCargo();
             _RepositorieBeneficio = new RepositorieBeneficio();
+            _RepositorieNota = new RepositorieNota();
         }
 
         public void CadastrarProva(Prova aProva)
@@ -90,7 +92,7 @@ namespace RH.Control
             return _RepositorieProva.QuantidadeProvas();
         }
 
-        public List<Prova> SelecionarTodasProva()
+        public List<VW_Provas> SelecionarTodasProva()
         {
             return _RepositorieProva.SelecionarProvas();
         }
@@ -203,6 +205,21 @@ namespace RH.Control
         public Demissao SelecionarDemissaoDataCadastro(string DataCadastro,int IDEmpresa)
         {
             return _RepositorieDemissao.SelecionarDemissaoDataCadastro(DataCadastro, IDEmpresa);
+        }
+
+        public void CadastrarNota(Nota aNota)
+        {
+            _RepositorieNota.CadastrarNota(aNota);
+        }
+
+        public bool ProvaAtiva()
+        {
+            return _RepositorieProva.ProvaAtiva();
+        }
+
+        public bool EmpresaAvaliativaAtiva(int IDUsuario)
+        {
+            return _RepositorieEmpresa.EmpresaAvaliativaAtiva(IDUsuario);
         }
     }
 }

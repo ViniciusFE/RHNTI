@@ -46,5 +46,6 @@ namespace RH.Model
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Treinamento> Treinamento { get; set; }
         public virtual DbSet<Vaga> Vaga { get; set; }
+        public virtual DbSet<VW_Provas> VW_Provas { get; set; }
     }
 }

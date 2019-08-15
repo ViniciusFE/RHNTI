@@ -63,5 +63,10 @@ namespace RH.Control
         {
             return _RepositorieSetor.PossuiSetores(IDSetor);
         }
+
+        public bool LimiteSetoresEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositorieSetor.LimiteSetoresEmpresaAvaliativa(IDEmpresa);
+        }
     }
 }

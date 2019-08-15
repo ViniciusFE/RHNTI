@@ -62,6 +62,24 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarEmpresa(Empresa aEmpresa, HttpPostedFileBase Imagem,bool Avaliativa=false)
         {
+            Aluno oAluno = (Aluno)Session["User"];
+
+            Prova aProva = _Control.ProvaAluno(oAluno.Alu_ID);
+
+            if (aProva != null)
+            {
+                ViewBag.DataTermino = aProva.Pro_DataTermino;
+            }
+
+            if (Avaliativa)
+            {
+                if (_Control.EmpresaAvaliativaAtiva(oAluno.Alu_ID))
+                {
+                    ModelState.AddModelError("EmpresaAvaliativa", "Você já possui uma empresa avaliativa, você não pode ter duas empresas avaliativas cadastradas ao mesmo tempo.");
+                    return View();
+                }
+            }
+            
             if (Imagem != null)
             {
                 byte[] Arquivo = new byte[Imagem.ContentLength];
@@ -79,8 +97,7 @@ namespace RH.View.Controllers
             {
                 aEmpresa.Emp_DataCadastro = DateTime.Now;
                 aEmpresa.Emp_DataAtual = "01/01";
-                aEmpresa.Emp_Situation = true;
-                Aluno oAluno = (Aluno)Session["User"];
+                aEmpresa.Emp_Situation = true;               
                 aEmpresa.Emp_Aluno_Alu_ID = Convert.ToInt32(oAluno.Alu_ID);
                 aEmpresa.Emp_Avaliativa = Avaliativa;
                 _Control.CadastrarEmpresa(aEmpresa);

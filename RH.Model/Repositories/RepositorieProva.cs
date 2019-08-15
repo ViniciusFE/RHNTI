@@ -20,9 +20,9 @@ namespace RH.Model.Repositories
             odb = _odb;
         }
 
-        public List<Prova> SelecionarProvas()
+        public List<VW_Provas> SelecionarProvas()
         {
-            return odb.Prova.ToList();
+            return odb.VW_Provas.ToList();
         }
 
         public Prova SelecionarProvaAluno(int IDAluno)
@@ -52,5 +52,19 @@ namespace RH.Model.Repositories
             odb.Entry(aProva).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
         }
+
+        public bool ProvaAtiva()
+        {
+            Prova aProva=odb.Prova.Where(p => p.Pro_Situation == true).FirstOrDefault();
+
+            if(aProva!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+       
     }
 }

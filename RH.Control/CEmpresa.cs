@@ -48,5 +48,10 @@ namespace RH.Control
         {
             return _RepositorieProva.SelecionarProvaAluno(IDAluno);
         }
+
+        public bool EmpresaAvaliativaAtiva(int IDUsuario)
+        {
+            return _RepositorieEmpresa.EmpresaAvaliativaAtiva(IDUsuario);
+        }
     }
 }

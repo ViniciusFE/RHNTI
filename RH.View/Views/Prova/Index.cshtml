@@ -1,4 +1,4 @@
-@model IEnumerable<RH.Model.Prova>
+@model IEnumerable<RH.Model.VW_Provas>
 
 @{
                 /**/
@@ -42,8 +42,21 @@
         <div class="container my-4">
             <div class="card">
                 <div class="card-header">
-                    <h2>Código da Prova: @x.Pro_Codigo</h2>
+                    <h2>Código da Prova: @x.CodigoProva</h2>
                 </div>
+
+                <div class="card-body">
+                    <h2>Data de Cadastro: @x.DataCadastro.Day/@if (x.DataCadastro.Month.ToString().Count() == 1) {<span>0</span>}@x.DataCadastro.Month/@x.DataCadastro.Year</h2>
+                    <h2>Data de Termino: @x.DataTermino.Date</h2>
+                    <h2>Quantidade de Provas Geradas: @x.QuantidadeProvas</h2>
+                </div>
+
+                @if (DateTime.Compare(x.DataTermino, DateTime.Now.Date) < 0)
+                {
+                    <div class="card-footer">
+                        <button class="btn btn-danger custom"><span class="fa fa-eye"></span> Visualizar Notas</button>
+                    </div>
+                }
 
             </div>
         </div>
@@ -82,6 +95,10 @@ else
 
                 </div>
 
+                <div id="Resposta">
+
+                </div>
+
                 <div id="Carregando" align="center" style="display:none;">
                     <img src="~/Imagem/833.gif" />
                 </div>
@@ -103,6 +120,10 @@ else
 
                 $("#ModalCadastrarProva").modal('show');
 
+                $("#Resposta").css("display", "none");
+                $("#Mensagem").css("display", "block");
+                $("#DataFim").val("");
+                $("#CadastrarProva").attr("disabled", "disabled");
             });
 
             $("#DataFim").change(function () {
@@ -118,26 +139,32 @@ else
             });
 
             $("#CadastrarProva").click(function () {
-                $("#Mensagem").css("display", "none");
                 $("#Carregando").css("display", "block");
                 var url = "@Url.Action("CadastrarProva","Prova")";
                 var Data = $("#DataFim").val();
                 $.post(url, { DataTermino: Data }, function (resposta) {
 
-                    $("#Mensagem").css("display", "block");
+                    $("#Mensagem").css("display", "none");
                     $("#Carregando").css("display", "none");
+                    $("#Resposta").css("display", "block");
 
-                    if (resposta == "0") {
-                        $("#Mensagem").html("<p class='text-center'>A Data de Termino não pode terminar no dia de hoje</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
+                    if (resposta == "3") {
+                        $("#Resposta").html("<p class='text-center'>Você não pode cadastrar outra prova enquanto outra prova estiver ativa.</p>")
+                    }
+
+                    else if (resposta == "0") {
+                        $("#Resposta").html("<p class='text-center'>A Data de Termino não pode terminar no dia de hoje</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
                     }
 
                     else if (resposta == "1") {
-                        $("#Mensagem").html("<p class='text-center'>A Data de Termino não pode ser um dia que já passou</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
+                        $("#Resposta").html("<p class='text-center'>A Data de Termino não pode ser um dia que já passou</p> <div align='center'> <input type='date' id='DataFim' class='align-content-center form-control col-md-5'/></div>");
                     }
 
                     else {
-                        $("#Mensagem").html("<p class='text-center'>Provas Cadastrar com sucesso!</p>");
+                        $("#Resposta").html("<p class='text-center'>Provas Cadastradas com sucesso!</p>");
                     }
+
+                    $("#CadastrarProva").attr("disabled", "disabled");
 
 
                 });
