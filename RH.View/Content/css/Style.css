@@ -30,3 +30,26 @@ body {
 .dropdown-menu.show, body header nav.navbar.navbar-expand-lg.navbar-light.bg-light a:hover {
     background-color: #944848;
 }
+
+
+a.btn.btn-warning.custom, a.btn.btn-warning.custom:active, button.btn.btn-warning.custom, button.btn.btn-warning.custom:active {
+    color: #944848 !important;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+button.btn.btn-danger.custom, button.btn.btn-danger.custom:active {
+    color: #fff;
+    background-color: #944848;
+    border-color: #944848;
+}
+
+a.btn.btn-success.custom, a.btn.btn-success.custom:active, button.btn.btn-success.custom, button.btn.btn-success.custom:active {
+    color: #fff;
+    background-color: #adb5bd;
+    border-color: #dee2e6;
+}
+
+.card-body.bg-light {
+    background: white !important;
+}
