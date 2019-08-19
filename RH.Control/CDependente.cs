@@ -55,5 +55,10 @@ namespace RH.Control
         {
             return _RepositorieDependente.VerificarParentesco(IDFuncionario,Parentesco);
         }
+
+        public bool LimiteDependentesEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositorieDependente.LimiteDependentesEmpresaAvaliativa(IDEmpresa);
+        }
     }
 }

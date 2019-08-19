@@ -62,6 +62,7 @@
     <Compile Include="Annotations\DadoBancario.cs" />
     <Compile Include="Annotations\DadosDependente.cs" />
     <Compile Include="Annotations\Empresa.cs" />
+    <Compile Include="Annotations\Pessoa.cs" />
     <Compile Include="Annotations\Professor.cs" />
     <Compile Include="Annotations\Setor.cs" />
     <Compile Include="Avaliacao.cs">

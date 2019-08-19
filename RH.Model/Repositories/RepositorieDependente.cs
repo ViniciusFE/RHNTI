@@ -61,5 +61,17 @@ namespace RH.Model.Repositories
         {
             return odb.DadoDependente.SqlQuery("select * from DadoDependente d inner join Pessoa p on d.DP_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = " + IDEmpresa + " where d.DP_DataCadastro ='" + DataCadastro + "' and d.DP_Situation = 1").FirstOrDefault();
         }
+
+        public bool LimiteDependentesEmpresaAvaliativa(int IDEmpresa)
+        {
+            int QuantidadeDependentes = odb.DadoDependente.SqlQuery("select * from DadoDependente dp inner join Pessoa p on dp.DP_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = C.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where dp.DP_Situation = 1").Count();
+
+            if(QuantidadeDependentes==5)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

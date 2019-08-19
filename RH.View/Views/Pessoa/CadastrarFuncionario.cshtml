@@ -1,7 +1,7 @@
 @model RH.Model.Pessoa
 
 @{
-    ViewBag.Title = "CadastrarFuncionario";
+    ViewBag.Title = "Cadastrar Funcionário";
 
     if (ViewBag.Cargos == null)
     {
@@ -16,7 +16,6 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Pes_ID)
 
     <div class="form-row">
         <div class="container my-4">
@@ -25,14 +24,16 @@
                     <h1>Cadastrar Funcionário</h1>
                 </div>
                 <div class="card-body row">
-                    <div class="custom-file col-md-12">
+                    <div align="center" class="col-md-12 form-group">
+                        @Html.ValidationMessage("Limite", "", new { @class = "text-danger" })
+                    </div>
 
-                        <input type="file" class="custom-file-input" id="customFile" name="imagem">
-                        <label class="custom-file-label" for="customFile">Escolha a Foto do Seu Funcionário</label>
+                    <div class="col-md-12 form-group">
+
+                        <input type="file" name="Imagem" id="Imagem" data-preview-file-type="text" data-msg-placeholder="Selecione uma foto do funcionário" />
                         @Html.ValidationMessage("Imagem", "", new { @class = "text-danger" })
 
                     </div>
-                    <br /><br /><br />
 
                     <div class="form-group col-md-6">
                         @Html.Label("Nome", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -45,7 +46,7 @@
                     <div class="form-group col-md-6">
                         @Html.Label("CPF", htmlAttributes: new { @class = "control-label col-md-12" })
 
-                        @Html.EditorFor(model => model.Pes_CPF, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CPF do Funcionario" } })
+                        @Html.EditorFor(model => model.Pes_CPF, new { htmlAttributes = new { @class = "form-control cpf", @type = "text", @placeholder = "Digite o CPF do Funcionario" } })
                         @Html.ValidationMessageFor(model => model.Pes_CPF, "", new { @class = "text-danger" })
 
                     </div>
@@ -59,9 +60,9 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        @Html.Label("Salario", htmlAttributes: new { @class = "control-label col-md-12" })
+                        @Html.Label("Salário", htmlAttributes: new { @class = "control-label col-md-12" })
                         <div class="">
-                            @Html.EditorFor(model => model.Pes_Salario, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Salario do Funcionario" } })
+                            <input class="form-control preco" type="text" placeholder="Digite o salário do funcionário" name="Salario"/>
                             @Html.ValidationMessageFor(model => model.Pes_Salario, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -88,6 +89,7 @@
                         <div class="">
                             @Html.DropDownList("Pes_Cargo_Car_ID", null, "Selecione o cargo do funcionário", htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Pes_Cargo_Car_ID, "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("CargoChefe", "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -131,10 +133,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.mask.js"></script>
     <script>
 
     $(document).ready(function () {
-
+        $('.preco').mask('#.##0,00', { reverse: true });
+        $("#Imagem").fileinput({ language: "pt-BR", 'showUpload': false, 'previewFileType': 'any' });
+        $('.cpf').mask('000.000.000-00', { reverse: true });
         $("#ModalCargo").on('hide.bs.modal', function () {
             $(location).attr("href", "@Url.Action("CadastrarCargo","Cargo")");
         });

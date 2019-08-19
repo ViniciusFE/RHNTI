@@ -70,7 +70,7 @@ namespace RH.Model.Repositories
 
         public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
         {
-            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = 1 and p.Pes_Situation = "+IDEmpresa+" and c.Car_Situation=1 and s.Set_Situation=1").ToList();
+            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" and p.Pes_Situation = 1 and c.Car_Situation=1 and s.Set_Situation=1").ToList();
         }
 
         public Pessoa SelecionarPessoaCargo(int IDCargo)
@@ -88,6 +88,28 @@ namespace RH.Model.Repositories
             return Db.Pessoa.Join(Db.Cargo.Join(Db.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), p => p.Pes_Cargo_Car_ID, c => c.Car_ID, (p, c) => p).Where(p => p.Pes_DataCadastro.Equals(DataCadastro) && p.Pes_Situation == true).FirstOrDefault();
         }
 
-        
+        public bool LimiteFuncionariosEmpresaAvaliativa(int IDEmpresa)
+        {
+            int QuantidadeFuncionarios = Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = C.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where p.Pes_Situation = 1").Count();
+
+            if(QuantidadeFuncionarios==5)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CargoOcupado(int IDCargo)
+        {
+            Pessoa aPessoa = Db.Pessoa.Where(p => p.Pes_Cargo_Car_ID.Equals(IDCargo)).FirstOrDefault();
+
+            if(aPessoa!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

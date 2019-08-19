@@ -132,5 +132,19 @@ namespace RH.Control
             _RepositoriePessoaBeneficio.ExcluirBeneficioFuncionario(oBeneficio);
         }
 
+        public bool LimiteFuncionariosEmpresaAvaliativa(int IDEmpresa)
+        {
+            return RepFuncionario.LimiteFuncionariosEmpresaAvaliativa(IDEmpresa);
+        }
+
+        public Cargo SelecionarCargo(int IDCargo)
+        {
+            return _RepositorieCargo.SelecionarCargo(IDCargo);
+        }
+
+        public bool CargoOcupado(int IDCargo)
+        {
+            return RepFuncionario.CargoOcupado(IDCargo);
+        }
     }
 }

@@ -105,7 +105,16 @@ namespace RH.View.Controllers
             ViewBag.DP_Parentesco = new SelectList(Parentescos(), "Valor", "Nome");
             ViewBag.IDFuncionario = IDFuncionario;
 
-            if(oDependente.DP_Parentesco=="Pai" || oDependente.DP_Parentesco=="Mãe")
+
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (_Control.LimiteDependentesEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de dependentes nessa Empresa Avaliativa foi atingido. (Limite de Dependentes = 5)");
+                }
+            }
+
+            if (oDependente.DP_Parentesco=="Pai" || oDependente.DP_Parentesco=="Mãe")
             {
                 if (_Control.VerificarParentesco(IDFuncionario,oDependente.DP_Parentesco))
                 {
