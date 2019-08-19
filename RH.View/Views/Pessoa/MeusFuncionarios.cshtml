@@ -415,7 +415,14 @@ else
             $.post(url, { id: IDFuncionario, Motivo: motivo }, RespostaServidor);
         });
 
-        function RespostaServidor(retorno) {
+            function RespostaServidor(retorno) {
+
+                if (retorno == "1") {
+                    $("#MensagemRetorno").html("O limite de funcionários demitidos nessa Empresa Avaliativa foi atingido. (Limite de Demissões = 3)");
+                    $("#MensagemRetorno").css("display", "block");
+                    $("#Carregando").css("display", "none");
+                    return;
+                }
             $("#MensagemRetorno").css("display", "block");
             $("#MensagemRetorno").html(retorno);
             $("#Carregando").css("display", "none");

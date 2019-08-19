@@ -46,7 +46,7 @@ namespace RH.Model.Repositories
         {
             int QuantidadeDemissoes = odb.Demissao.SqlQuery("select * from Demissao d inner join Pessoa p on d.Dem_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = C.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where d.Dem_Situation = 1").Count();
 
-            if(QuantidadeDemissoes==3)
+            if(QuantidadeDemissoes>=3)
             {
                 return true;
             }

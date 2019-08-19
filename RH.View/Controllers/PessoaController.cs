@@ -220,7 +220,7 @@ namespace RH.View.Controllers
             {
                 if (DbPessoa.LimiteDemissoesEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
                 {
-                    ModelState.AddModelError("Limite", "O limite de funcionários demitidos nessa Empresa Avaliativa foi atingido. (Limite de Demissões = 3)");
+                    return Json("1");
                 }
             }
 

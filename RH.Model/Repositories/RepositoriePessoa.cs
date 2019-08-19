@@ -102,7 +102,7 @@ namespace RH.Model.Repositories
 
         public bool CargoOcupado(int IDCargo)
         {
-            Pessoa aPessoa = Db.Pessoa.Where(p => p.Pes_Cargo_Car_ID.Equals(IDCargo)).FirstOrDefault();
+            Pessoa aPessoa = Db.Pessoa.Where(p => p.Pes_Cargo_Car_ID.Equals(IDCargo) && p.Pes_Situation==true).FirstOrDefault();
 
             if(aPessoa!=null)
             {
