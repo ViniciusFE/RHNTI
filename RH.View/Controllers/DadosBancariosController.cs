@@ -44,7 +44,15 @@ namespace RH.View.Controllers
             ViewBag.IDFuncionario = IDFuncionario;
             ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
 
-            if(ModelState.IsValid)
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (_Control.LimiteDadosBancariosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de dados bancários nessa Empresa Avaliativa foi atingido. (Limite de Dados Bancários = 5)");
+                }
+            }
+
+            if (ModelState.IsValid)
             {
                 Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
                 oDado.DB_DataCadastro = aEmpresa.Emp_DataAtual;

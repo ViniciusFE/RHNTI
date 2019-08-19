@@ -216,6 +216,14 @@ namespace RH.View.Controllers
 
         public ActionResult Demitir(int id,string Motivo)
         {
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (DbPessoa.LimiteDemissoesEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de funcionários demitidos nessa Empresa Avaliativa foi atingido. (Limite de Demissões = 3)");
+                }
+            }
+
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
             aPessoa.Pes_Situation = false;
             DbPessoa.AlterarFuncionario(aPessoa);

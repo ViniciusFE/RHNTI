@@ -39,7 +39,7 @@ namespace RH.View.Controllers
             {
                 if(_Control.LimiteBeneficiosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
                 {
-                    ModelState.AddModelError("Limite", "O limite de benefícios nessa Empresa Avaliativa foi atingido. (Limite de Benefícios = 10)");
+                    ModelState.AddModelError("Limite", "O limite de benefícios nessa Empresa Avaliativa foi atingido. (Limite de Benefícios = 5)");
                 }
             }
 

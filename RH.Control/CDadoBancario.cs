@@ -50,5 +50,10 @@ namespace RH.Control
         {
             return _RepositorieEmpresa.SelecionarEmpresa(IDEmpresa);
         }
+
+        public bool LimiteDadosBancariosEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositorieDadoBancario.LimiteDadosBancariosEmpresaAvaliativa(IDEmpresa);
+        }
     }
 }

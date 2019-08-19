@@ -146,5 +146,10 @@ namespace RH.Control
         {
             return RepFuncionario.CargoOcupado(IDCargo);
         }
+
+        public bool LimiteDemissoesEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositorieDemissao.LimiteDemissoesEmpresaAvaliativa(IDEmpresa);
+        }
     }
 }
