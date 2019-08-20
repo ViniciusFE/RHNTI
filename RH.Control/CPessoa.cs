@@ -19,6 +19,7 @@ namespace RH.Control
         private RepositoriePessoaBeneficio _RepositoriePessoaBeneficio = new RepositoriePessoaBeneficio();
         private RepositorieDependente _RepositorieDependente = new RepositorieDependente();
         private RepositorieEmpresa _RepositorieEmpresa = new RepositorieEmpresa();
+        private RepositorieAvaliacao _RepositorieAvaliacao = new RepositorieAvaliacao();
 
         public void CadastrarFuncionario(Pessoa oFuncionario)
         {
@@ -150,6 +151,16 @@ namespace RH.Control
         public bool LimiteDemissoesEmpresaAvaliativa(int IDEmpresa)
         {
             return _RepositorieDemissao.LimiteDemissoesEmpresaAvaliativa(IDEmpresa);
+        }
+
+        public void DesabilitarAvaliacoes(int IDPessoa)
+        {
+            _RepositorieAvaliacao.DesabilitarAvaliacoes(IDPessoa);
+        }
+
+        public bool LimiteBeneficiosFuncionariosEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositoriePessoaBeneficio.LimiteBeneficiosFuncionariosEmpresaAvaliativa(IDEmpresa);
         }
     }
 }

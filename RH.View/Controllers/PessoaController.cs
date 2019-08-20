@@ -251,6 +251,7 @@ namespace RH.View.Controllers
             DbPessoa.DesabilitarDadosBancarios(id);
             DbPessoa.DesabilitarBeneficiosFuncionario(id);
             DbPessoa.DesabilitarDependentesFuncionario(id);
+            DbPessoa.DesabilitarAvaliacoes(id);
 
             return Json("O funcionário foi demitido com sucesso!");
         }
@@ -291,6 +292,14 @@ namespace RH.View.Controllers
 
        public ActionResult AdicionarBeneficio(int beneficio,int funcionario)
         {
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (DbPessoa.LimiteBeneficiosFuncionariosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    return Json("1");
+                }
+            }
+
             Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
 
             PessoaBeneficio Beneficio = new PessoaBeneficio()

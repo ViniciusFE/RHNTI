@@ -43,7 +43,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Ben_Custo, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-12">
-                            @Html.EditorFor(model => model.Ben_Custo, new { htmlAttributes = new { @class = "form-control" } })
+                            <input type="text" class="form-control preco" name="Preco" value="@Model.Ben_Custo" />
                             @Html.ValidationMessageFor(model => model.Ben_Custo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -69,5 +69,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.mask.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('.preco').mask('#.##0,00', { reverse: true });
+
+        });
+    </script>
 }
 

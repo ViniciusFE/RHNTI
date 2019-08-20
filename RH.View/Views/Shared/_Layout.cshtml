@@ -24,6 +24,12 @@
 </head>
 <body>
 
+    @{
+        string[] Data = Session["DataAtual"].ToString().Split('/');
+        string Dia = Data[0];
+        string Mes = Data[1];
+    }
+
     <!-- menu -->
     <header class=" bounce ">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -108,15 +114,15 @@
 
                             <a class="nav-link dropdown-toggle " href="#" id="dataDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="col text-center"> <i class="fas fa-clock"></i></div>
-                                Data<span class="sr-only">(current)</span>
+                                @Session["DataAtual"]<span class="sr-only">(current)</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dataDropdown">
                                 <form>
                                     <div class="form-group">
-                                        <input type="date" name="dataRh" id="dataRh" min="2019-01-01" max="2019-12-31" />
+                                        <input type="date" id="dataRh" min="@DateTime.Now.Year-01-01" max="@DateTime.Now.Year-12-31" value="@DateTime.Now.Year-@Mes-@Dia" />
                                         <div class="dropdown-divider"></div>
                                         <div class="col-12">
-                                            <button type="submit" style="background:white;" class=" btn btn-success-custum d-flex align-content-center">Selecionar Data</button>
+                                            <button type="button" style="background:white;" class=" btn btn-success-custum d-flex align-content-center" id="SelecionarData">Selecionar Data</button>
                                         </div>
                                     </div>
                                 </form>
@@ -241,6 +247,26 @@
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalMudarData">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tem certeza que deseja alterar a data atual da sua empresa?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 id="MensagemData">Mudando a data atual da sua empresa você não poderá mais voltar os dias.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success Btns" id="MudarData">Sim</button>
+                <button type="button" class="btn btn-danger Btns" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
 
@@ -258,7 +284,22 @@
 
             $('#ModalEntregue').on('hide', function () {
                 window.location.href = '~/Empresa/MinhasEmpresas';
-            })
+            });
+
+            $("#SelecionarData").click(function () {
+                $("#MensagemData").html("Mudando a data atual da sua empresa você não poderá mais voltar os dias.");
+                $(".Btns").removeAttr("disabled");
+                $("#ModalMudarData").modal('show');
+            });
+
+            $("#MudarData").click(function () {
+                var DataSelecionada = $("#dataRh").val();
+                var url = "@Url.Action("MudarDataEmpresa","Home")";
+                $.post(url, { Data: DataSelecionada }, function (resposta) {
+                    $("#MensagemData").html(resposta);
+                    $(".Btns").attr("disabled", "disabled");
+                });
+            });
 
         });
 

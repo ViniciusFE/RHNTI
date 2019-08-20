@@ -33,7 +33,7 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarBeneficio(Beneficio oBeneficio,float Preco=-1)
+        public ActionResult CadastrarBeneficio(Beneficio oBeneficio,string Preco="")
         {
             if(Convert.ToBoolean(Session["Avaliativa"]))
             {
@@ -43,7 +43,7 @@ namespace RH.View.Controllers
                 }
             }
 
-            if (Preco == -1)
+            if (Preco == "")
             {
                 ModelState.AddModelError("Ben_Custo", "Digite o custo desse benefício");
             }
@@ -55,7 +55,7 @@ namespace RH.View.Controllers
                 oBeneficio.Ben_Empresa_Emp_ID = aEmpresa.Emp_ID;
                 oBeneficio.Ben_DataCadastro = aEmpresa.Emp_DataAtual;
                 oBeneficio.Ben_Situation = true;
-                oBeneficio.Ben_Custo = Math.Round(Preco, 2);
+                oBeneficio.Ben_Custo = Math.Round(Convert.ToDouble(Preco), 2);
                 _Control.Incluir(oBeneficio);
                 return RedirectToAction("Index");
             }
@@ -73,14 +73,19 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AlterarBeneficio(Beneficio oBeneficio)
+        public ActionResult AlterarBeneficio(Beneficio oBeneficio,string Preco="")
         {
+            if (Preco == "")
+            {
+                ModelState.AddModelError("Ben_Custo", "Digite o custo desse benefício");
+            }
+
             if (ModelState.IsValid)
             {
                 Beneficio AlterarBeneficio = _Control.SelecionarBeneficioID(oBeneficio.Ben_ID);
                 AlterarBeneficio.Ben_Nome = oBeneficio.Ben_Nome;
                 AlterarBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao;
-                AlterarBeneficio.Ben_Custo = oBeneficio.Ben_Custo;
+                AlterarBeneficio.Ben_Custo = Math.Round(Convert.ToDouble(Preco),2);
                 _Control.Alterar(AlterarBeneficio);
                 return RedirectToAction("Index");
             }

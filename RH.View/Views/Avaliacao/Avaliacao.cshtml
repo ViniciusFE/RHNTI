@@ -38,8 +38,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h4>Por favor digite a avaliação do funcionário</h4>
-                @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
+                <div id="FormAvaliacao">
+                    <h4>Por favor digite a avaliação do funcionário</h4>
+                    @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
+                </div>
+
+                <div id="Mensagem">
+
+                </div>
+                
                 <br />
                 <div align="center">
                     <br />
@@ -48,8 +55,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar Avaliação</button>
-                <button type="button" class="btn btn-outline-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar Avaliação</button>
+                <button type="button" class="btn btn-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
             </div>
         </div>
     </div>
@@ -78,7 +85,7 @@
                              $("#Funcionarios").append(
                                  "<div class='alert alert-primary' role='alert'>" +
                                     "<div class='alert-body'>"+
-                                        "<h4>Não ´foi encontrado nenhum funcionário que responda a este Chefe de Setor</h4>" +
+                                        "<h4>Não foi encontrado nenhum funcionário que responda a este Chefe de Setor</h4>" +
                                     "</div>"+
                                  "</div>"
                              );
@@ -140,8 +147,7 @@
 
             $("#BtnAvaliar").click(function () {
                 var avaliacao = $("#TextBox").val();
-                alert(IdFuncionario);
-                alert(avaliacao);
+               
                 var url = "@Url.Action("AvaliacaoFuncionario","Avaliacao")";
                 $("#TextBox").attr("disabled", "disabed");
                 $.post(url, { id: IdFuncionario, Avaliacao: avaliacao }, RespostaAvaliacao);
@@ -151,7 +157,9 @@
 
             function RespostaAvaliacao(resposta) {
                 $("#Carregando").css("display", "none");
-                $("modal-body").html("<h4>" + resposta + "</h4>");
+                $("#FormAvaliacao").css("display", "none");
+                $("#Mensagem").css("display", "block");
+                $("#Mensagem").html("<h4>" + resposta + "</h4>");
                 $("BtnAvaliar").attr("disabled", "disabled");
             }
 
@@ -159,7 +167,11 @@
 
         function Abrir(id) {
             IdFuncionario = id;
+            $("#FormAvaliacao").css("display", "block");
+            $("#Mensagem").css("display", "none");
             $("#ModalAvaliar").modal('show');
+            $("#TextBox").removeAttr("disabled");
+            $("#TextBox").val("");
         }
 
     </script>

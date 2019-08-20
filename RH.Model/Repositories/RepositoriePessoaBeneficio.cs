@@ -77,5 +77,16 @@ namespace RH.Model.Repositories
             return odb.PessoaBeneficio.SqlQuery("select * from PessoaBeneficio bp inner join Beneficio b on bp.PB_Beneficio_Ben_ID = b.Ben_ID and b.Ben_Empresa_Emp_ID = " + IDEmpresa + " where bp.PB_Situation = 1").ToList();
         }
 
+        public bool LimiteBeneficiosFuncionariosEmpresaAvaliativa(int IDEmpresa)
+        {
+            int QuantidadeBeneficiosFuncionarios = odb.PessoaBeneficio.SqlQuery("select * from PessoaBeneficio a inner join Pessoa p on a.PB_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where a.PB_Situation = 1").Count();
+
+            if(QuantidadeBeneficiosFuncionarios==10)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
