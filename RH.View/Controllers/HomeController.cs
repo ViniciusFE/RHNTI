@@ -52,7 +52,7 @@ namespace RH.View.Controllers
 
             if(DateTime.Compare(Convert.ToDateTime(Data),Convert.ToDateTime(ComparaData))<0)
             {
-                return Json("A data atual selecionada para alteração da data de sua empresa foi um dia que já passou!\nLembre-se que você só pode selecionar uma data futura.");
+                return Json("A data selecionada para alteração da data de sua empresa foi um dia que já passou!\nLembre-se que você só pode selecionar uma data futura.");
             }
 
             else if(DateTime.Compare(Convert.ToDateTime(Data), Convert.ToDateTime(ComparaData)) == 0)
@@ -60,10 +60,33 @@ namespace RH.View.Controllers
                 return Json("Sua empresa já se encontra na data selecionada");
             }
 
-            aEmpresa.Emp_DataAtual = Convert.ToDateTime(Data).Day.ToString() + "/" + Convert.ToDateTime(Data).Month;
+            string Dia="";
+            string Mes="";
+
+            if(Convert.ToDateTime(Data).Day.ToString().Count()==1)
+            {
+                Dia = 0 + Convert.ToDateTime(Data).Day.ToString();
+            }
+
+            else
+            {
+                Dia= Convert.ToDateTime(Data).Day.ToString();
+            }
+
+            if (Convert.ToDateTime(Data).Month.ToString().Count()==1)
+            {
+                Mes = 0 + Convert.ToDateTime(Data).Month.ToString();
+            }
+
+            else
+            {
+                Mes = Convert.ToDateTime(Data).Month.ToString();
+            }
+
+            aEmpresa.Emp_DataAtual =  Dia+ "/" +Mes;
             _Control.AlterarEmpresa(aEmpresa);
             Session["DataAtual"] = aEmpresa.Emp_DataAtual;
-            return Json("A data atual de sua empresa foi alterada com sucesso, lembre-se que não é possível ir para uma data anterior a está.");
+            return Json("1");
         }
 
     }

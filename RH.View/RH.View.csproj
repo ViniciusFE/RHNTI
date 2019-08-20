@@ -183,9 +183,11 @@
     <Content Include="Imagem\833.gif" />
     <Content Include="Imagem\Capturar.jpeg" />
     <Content Include="Imagem\Capturar.png" />
+    <Content Include="Imagem\EntregarProva.jpg" />
     <Content Include="Imagem\logo1.png" />
     <Content Include="Content\sass\Login.scss" />
     <Content Include="Imagem\sem-imagem-avatar.png" />
+    <Content Include="Imagem\VisualizarProva.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

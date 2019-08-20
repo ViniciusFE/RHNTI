@@ -112,9 +112,9 @@
                         <li class="nav-item dropdown   ">
 
 
-                            <a class="nav-link dropdown-toggle " href="#" id="dataDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#" id="dataDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <div class="col text-center"> <i class="fas fa-clock"></i></div>
-                                @Session["DataAtual"]<span class="sr-only">(current)</span>
+                                <span id="DataAtualEmpresa">@Session["DataAtual"]</span><span class="sr-only">(current)</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dataDropdown">
                                 <form>
@@ -162,6 +162,7 @@
                             <a class="dropdown-item" href="~/Empresa/MinhasEmpresas">Todas as Empresas</a>
                             @if (Convert.ToBoolean(Session["Avaliativa"]))
                             {
+                                <a class="dropdown-item" data-toggle="modal" href="#">Visualizar Prova</a>
                                 <a class="dropdown-item" data-toggle="modal" href="#" data-target="#ModalEntregarProva">Entregar Prova</a>
                             }
 
@@ -296,6 +297,14 @@
                 var DataSelecionada = $("#dataRh").val();
                 var url = "@Url.Action("MudarDataEmpresa","Home")";
                 $.post(url, { Data: DataSelecionada }, function (resposta) {
+                    if (resposta == "1") {
+                        var data = DataSelecionada.split('-');
+                        var dia = data[2];
+                        var mes = data[1];
+                        resposta = "A data atual de sua empresa foi alterada com sucesso, lembre-se que não é possível ir para uma data anterior a está.";
+                        $("#DataAtualEmpresa").html(dia+"/"+mes);
+                    }
+
                     $("#MensagemData").html(resposta);
                     $(".Btns").attr("disabled", "disabled");
                 });
