@@ -158,11 +158,11 @@
                             @Session["NomeEmpresa"]<span class="sr-only">(current)</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="~/Empresa/EditarEmpresa">Editar Empresa</a>
+                            <a class="dropdown-item" href="@Url.Action("EditarEmpresa","Empresa",new { id=Convert.ToInt32(Session["IDEmpresa"])})">Editar Empresa</a>
                             <a class="dropdown-item" href="~/Empresa/MinhasEmpresas">Todas as Empresas</a>
                             @if (Convert.ToBoolean(Session["Avaliativa"]))
                             {
-                                <a class="dropdown-item" data-toggle="modal" href="#">Visualizar Prova</a>
+                                <a class="dropdown-item" href="~/Home/VisualizarProva/">Visualizar Prova</a>
                                 <a class="dropdown-item" data-toggle="modal" href="#" data-target="#ModalEntregarProva">Entregar Prova</a>
                             }
 

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
+using SelectPdf;
 
 namespace RH.View.Controllers
 {
@@ -87,6 +88,44 @@ namespace RH.View.Controllers
             _Control.AlterarEmpresa(aEmpresa);
             Session["DataAtual"] = aEmpresa.Emp_DataAtual;
             return Json("1");
+        }
+
+        public ActionResult GerarProva(int id)
+        {
+            Aluno oAluno = _Control.SelecionarAluno(id);
+            Prova aProva = _Control.SelecionarProvaAluno(oAluno.Alu_ID);
+            Curso oCurso = _Control.SelecionarCurso(oAluno.Alu_Curso_Cur_ID);
+
+            //Identificação do Aluno
+            ViewBag.CodigoProva = aProva.Pro_ID;
+            ViewBag.DataTermino = aProva.Pro_DataTermino;
+            ViewBag.NomeAluno = oAluno.Alu_Nome;
+            ViewBag.Curso = oCurso.Cur_Nome + " - " + oAluno.Alu_Serie+"º ano";
+
+            //Setores
+
+            return View();
+        }
+
+        public ActionResult VisualizarProva()
+        {
+            Aluno oAluno = (Aluno)Session["User"];
+
+            // instantiate a html to pdf converter object 
+            HtmlToPdf converter = new HtmlToPdf();
+            // create a new pdf document converting an url 
+            PdfDocument doc = converter.ConvertUrl("http://localhost:52257/Home/GerarProva/"+oAluno.Alu_ID);
+
+            // save pdf document 
+            byte[] pdf = doc.Save();
+
+            // close pdf document 
+            doc.Close();
+
+            // return resulted pdf document 
+            FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+            fileResult.FileDownloadName = "PROVA - "+oAluno.Alu_Nome+".pdf";
+            return fileResult;
         }
 
     }

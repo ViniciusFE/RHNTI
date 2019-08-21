@@ -40,6 +40,9 @@
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="Select.HtmlToPdf, Version=19.1.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.HtmlToPdf.19.1.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -134,6 +137,7 @@
     <Compile Include="Repositories\RepositorieAvaliacao.cs" />
     <Compile Include="Repositories\RepositorieBeneficio.cs" />
     <Compile Include="Repositories\RepositorieCargo.cs" />
+    <Compile Include="Repositories\RepositorieCurso.cs" />
     <Compile Include="Repositories\RepositorieDadosBancarios.cs" />
     <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieDependente.cs" />

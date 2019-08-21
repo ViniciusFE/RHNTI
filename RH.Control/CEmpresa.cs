@@ -12,11 +12,19 @@ namespace RH.Control
     {
         private RepositorieEmpresa _RepositorieEmpresa;
         private RepositorieProva _RepositorieProva;
+        private RepositorieAluno _RepositorieAluno;
+        private RepositorieCurso _RepositorieCurso;
+        private RepositorieSetor _RepositorieSetor;
+        private RepositorieCargo _RepositorieCargo;
 
         public CEmpresa()
         {
             _RepositorieEmpresa = new RepositorieEmpresa();
             _RepositorieProva = new RepositorieProva();
+            _RepositorieAluno = new RepositorieAluno();
+            _RepositorieCurso = new RepositorieCurso();
+            _RepositorieSetor = new RepositorieSetor();
+            _RepositorieCargo = new RepositorieCargo();
         }
 
         public List<Empresa> SelecionarTodasEmpresa()
@@ -52,6 +60,21 @@ namespace RH.Control
         public bool EmpresaAvaliativaAtiva(int IDUsuario)
         {
             return _RepositorieEmpresa.EmpresaAvaliativaAtiva(IDUsuario);
+        }
+
+        public Prova SelecionarProvaAluno(int IDAluno)
+        {
+            return _RepositorieProva.SelecionarProvaAluno(IDAluno);
+        }
+
+        public Aluno SelecionarAluno(int id)
+        {
+            return _RepositorieAluno.SelecionarAluno(id);
+        }
+
+        public Curso SelecionarCurso(int id)
+        {
+            return _RepositorieCurso.SelecionarCurso(id);
         }
     }
 }
