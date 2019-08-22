@@ -160,6 +160,12 @@
     <Compile Include="Vaga.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="VW_BeneficiosFuncionario.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_MeusBeneficios.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="VW_Provas.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
