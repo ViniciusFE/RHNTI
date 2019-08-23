@@ -301,6 +301,7 @@
     <Content Include="Views\Aluno\Beneficios.cshtml" />
     <Content Include="Views\Prova\Index.cshtml" />
     <Content Include="Views\Home\GerarProva.cshtml" />
+    <Content Include="Views\Prova\Notas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

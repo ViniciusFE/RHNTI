@@ -1382,6 +1382,13 @@ namespace RH.View.Controllers
             aNota.Not_Nota = Nota;
             _Control.CadastrarNota(aNota);
         }
+
+        public ActionResult Notas(int CodigoProva)
+        {
+            ViewBag.Alunos = _Control.SelecionarAlunosProva(CodigoProva);
+            ViewBag.Notas = _Control.SelecionarNotasProva(CodigoProva);
+            return View();
+        }
     }
 }
 

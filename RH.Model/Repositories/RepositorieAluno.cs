@@ -45,5 +45,10 @@ namespace RH.Model.Repositories
         {
             Db.Entry(oAluno).State = System.Data.Entity.EntityState.Deleted;
         }
+
+        public List<Aluno> SelecionarAlunosProva(int CodigoProva)
+        {
+            return Db.Aluno.Join(Db.Prova.Where(p => p.Pro_Codigo.Equals(CodigoProva) && p.Pro_Situation == true), a => a.Alu_ID, p => p.Pro_Aluno_Alu_ID, (a, p) => a).ToList();
+        }
     }
 }

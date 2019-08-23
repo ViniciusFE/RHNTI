@@ -1,0 +1,47 @@
+@model IEnumerable<RH.Model.Nota>
+
+@{
+    ViewBag.Title = "Notas da Prova";
+}
+
+<div class="container my-4">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">Notas da Prova</h1>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover text-center">
+
+                <tr style="background-color: rgb(148,72,72);" class="text-white">
+
+                    <td>Nome do Aluno</td>
+                    <td>Matrícula</td>
+                    <td>Série</td>
+                    <td>Código da Prova</td>
+                    <td>Data de Entrega</td>
+                    <td>Nota</td>
+
+                </tr>
+
+                @foreach (var x in ViewBag.Alunos)
+                {
+                    <tr>
+
+                        <td>@x.Alu_Nome</td>
+                        <td>@x.Alu_Matricula</td>
+                        <td>@x.Alu_Serie º Ano</td>
+
+                       @foreach(var y in ViewBag.Notas)
+
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+

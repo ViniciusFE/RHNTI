@@ -221,5 +221,20 @@ namespace RH.Control
         {
             return _RepositorieEmpresa.EmpresaAvaliativaAtiva(IDUsuario);
         }
+
+        public List<Nota> SelecionarNotas(int CodigoProva)
+        {
+            return _RepositorieNota.SelecionarTodasNotasProva(CodigoProva);
+        }
+
+        public List<Nota> SelecionarNotasProva(int CodigoProva)
+        {
+            return _RepositorieNota.SelecionarNotasProva(CodigoProva);
+        }
+
+        public List<Aluno> SelecionarAlunosProva(int CodigoProva)
+        {
+            return _RepositorieAluno.SelecionarAlunosProva(CodigoProva);
+        }
     }
 }

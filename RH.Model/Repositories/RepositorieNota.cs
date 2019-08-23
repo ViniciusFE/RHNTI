@@ -41,5 +41,10 @@ namespace RH.Model.Repositories
             odb.Entry(aNota).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
         }
+
+        public List<Nota> SelecionarNotasProva(int CodigoProva)
+        {
+            return odb.Nota.Join(odb.Prova.Where(p => p.Pro_Situation == true && p.Pro_Codigo.Equals(CodigoProva)), n => n.Not_Prova_Pro_ID, p => p.Pro_ID, (n, p) => n).ToList();
+        }
     }
 }
