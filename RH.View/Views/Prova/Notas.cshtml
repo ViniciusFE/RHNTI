@@ -25,18 +25,21 @@
 
                 </tr>
 
-                @foreach (var x in ViewBag.Alunos)
-                {
-                    <tr>
-
-                        <td>@x.Alu_Nome</td>
-                        <td>@x.Alu_Matricula</td>
-                        <td>@x.Alu_Serie º Ano</td>
-
-                       @foreach(var y in ViewBag.Notas)
-
-                    </tr>
-                }
+                <tr>
+                    @foreach (var x in ViewBag.Provas)
+                    {
+                        foreach (var y in ViewBag.Alunos)
+                        {
+                            if (x.Pro_Aluno_Alu_ID == y.Alu_ID)
+                            {
+                                <td>y.Alu_Nome</td>
+                                <td>y.Alu_Matricula</td>
+                                <td></td>
+                            }
+                        }
+                    }
+                </tr>
+               
 
             </table>
 

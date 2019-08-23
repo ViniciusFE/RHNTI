@@ -236,5 +236,10 @@ namespace RH.Control
         {
             return _RepositorieAluno.SelecionarAlunosProva(CodigoProva);
         }
+
+        public List<Prova> SelecionarProvaPeloCodigo(int CodigoProva)
+        {
+            return _RepositorieProva.SelecionarProvasPeloCodigo(CodigoProva);
+        }
     }
 }

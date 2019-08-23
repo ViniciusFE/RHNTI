@@ -1387,6 +1387,7 @@ namespace RH.View.Controllers
         {
             ViewBag.Alunos = _Control.SelecionarAlunosProva(CodigoProva);
             ViewBag.Notas = _Control.SelecionarNotasProva(CodigoProva);
+            ViewBag.Provas = _Control.SelecionarProvaPeloCodigo(CodigoProva);
             return View();
         }
     }

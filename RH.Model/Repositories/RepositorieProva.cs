@@ -69,6 +69,11 @@ namespace RH.Model.Repositories
         {
             return odb.Prova.Where(p => p.Pro_Codigo.Equals(CodigoProva) && p.Pro_Situation == true).ToList();
         }
+
+        public List<Prova> SelecionarProvasPeloCodigo(int CodigoProva)
+        {
+            return odb.Prova.Where(p => p.Pro_Codigo.Equals(CodigoProva) && p.Pro_Situation == true).ToList();
+        }
        
     }
 }
