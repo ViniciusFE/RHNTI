@@ -32,9 +32,21 @@
                         {
                             if (x.Pro_Aluno_Alu_ID == y.Alu_ID)
                             {
-                                <td>y.Alu_Nome</td>
-                                <td>y.Alu_Matricula</td>
-                                <td></td>
+                                <td>@y.Alu_Nome</td>
+                                <td>@y.Alu_Matricula</td>
+                                <td>@y.Alu_Serie</td>
+                                break;
+                            }
+                        }
+
+                        <td>x.Pro_Codigo</td>
+
+                        foreach(var z in ViewBag.Notas)
+                        {
+                            if(z.Not_Prova_Pro_ID==x.Pro_ID)
+                            {
+                                <td>@z.Not_DataCadastro</td>
+                                <td>@z.Not_Nota</td>
                             }
                         }
                     }
