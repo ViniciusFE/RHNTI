@@ -130,5 +130,10 @@ namespace RH.Control
         {
             return _RepositorieAvaliacao.SelecionarAAvaliacoesEmpresa(IDEmpresa,Pesquisado);
         }
+
+        public List<VW_Notas> SelecionarNotasProva(int CodigoProva)
+        {
+            return RepAluno.SelecionarNotasProva(CodigoProva);
+        }
     }
 }

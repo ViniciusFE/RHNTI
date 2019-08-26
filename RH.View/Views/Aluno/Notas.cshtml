@@ -1,0 +1,102 @@
+@model IEnumerable<RH.Model.VW_Notas>
+
+@{
+    ViewBag.Title = "Notas da Prova";
+}
+
+<hr />
+
+<div class="container my-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>Notas dos Alunos</h2>
+        </div>
+
+        <div class="card-body">
+
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-bordered text-center table-hover">
+                    <tr class="custom text-white" style="background-color: rgb(148,72,72);">
+                        <th>
+                            Matrícula
+                        </th>
+
+                        <th>
+                            Nome
+                        </th>
+
+                        <th>
+                            Curso
+                        </th>
+
+                        <th>
+                            Série
+                        </th>
+
+                        <th>
+                            Código da Prova
+                        </th>
+
+                        <th>
+                            Situação
+                        </th>
+
+                        <th>
+                            Nota
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MatriculaAluno)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NomeAluno)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Curso)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem=>item.SerieAluno)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem=>item.CodigoProva)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem=>item.Entregou)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(itemModel=>item.NotaProva)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+
+            else
+            {
+                <div class="alert alert-primary" role="alert">
+                    <div class="alert-body">
+                        <h4>Esta empresa ainda não possui nenhum benefício cadastrados</h4>
+                    </div>
+                </div>
+            }
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<hr />

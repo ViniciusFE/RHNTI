@@ -50,5 +50,10 @@ namespace RH.Model.Repositories
         {
             return Db.Aluno.Join(Db.Prova.Where(p => p.Pro_Codigo.Equals(CodigoProva) && p.Pro_Situation == true), a => a.Alu_ID, p => p.Pro_Aluno_Alu_ID, (a, p) => a).ToList();
         }
+
+        public List<VW_Notas> SelecionarNotasProva(int CodigoProva)
+        {
+            return Db.VW_Notas.Where(p => p.CodigoProva.Equals(CodigoProva)).ToList();
+        }
     }
 }

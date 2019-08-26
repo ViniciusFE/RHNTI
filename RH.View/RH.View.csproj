@@ -302,6 +302,7 @@
     <Content Include="Views\Prova\Index.cshtml" />
     <Content Include="Views\Home\GerarProva.cshtml" />
     <Content Include="Views\Prova\Notas.cshtml" />
+    <Content Include="Views\Aluno\Notas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

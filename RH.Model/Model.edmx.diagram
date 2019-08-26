@@ -99,6 +99,7 @@
         <AssociationConnector Association="RHModel.FK_Prova_Setor2" />
         <AssociationConnector Association="RHModel.FK_Prova_Setor3" />
         <AssociationConnector Association="RHModel.FK_Prova_Setor4" />
+        <EntityTypeShape EntityType="RHModel.VW_Notas" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
