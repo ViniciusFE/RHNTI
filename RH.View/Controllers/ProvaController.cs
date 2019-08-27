@@ -668,9 +668,45 @@ namespace RH.View.Controllers
 
             if (SetorAluno != null)
             {
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                string SetorRespondenteProva = oSetor.Set_Nome;
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno==SetorRespondenteProva)
                 {
                     Nota = Nota + 0.2;
+                }
+
+                else
+                {                    
+                    if(SetorAluno.Set_Setor_Set_ID==SetorAluno.Set_ID)
+                    {
+                        SetorRespondenteAluno = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    if(SetorProva.Set_Setor_Set_ID==SetorProva.Set_ID)
+                    {
+                        SetorRespondenteProva = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: "+SetorAluno.Set_Nome+"</br>Data de Cadastro: "+SetorAluno.Set_DataCadastro+"</br>Setor Respondente: "+SetorRespondenteAluno;
+                    oErro.Err_RespostaCerta= "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                    _Control.CadastrarErro(oErro);
                 }
             }
 
@@ -679,9 +715,45 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                string SetorRespondenteProva = oSetor.Set_Nome;
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
                 {
                     Nota = Nota + 0.2;
+                }
+
+                else
+                {
+                    if (SetorAluno.Set_Setor_Set_ID == SetorAluno.Set_ID)
+                    {
+                        SetorRespondenteAluno = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    if (SetorProva.Set_Setor_Set_ID == SetorProva.Set_ID)
+                    {
+                        SetorRespondenteProva = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
+                    oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                    _Control.CadastrarErro(oErro);
                 }
             }
 
@@ -690,9 +762,45 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
-                {
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                string SetorRespondenteProva = oSetor.Set_Nome;
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
+                {                    
                     Nota = Nota + 0.2;
+                }
+
+                else
+                {
+                    if (SetorAluno.Set_Setor_Set_ID == SetorAluno.Set_ID)
+                    {
+                        SetorRespondenteAluno = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    if (SetorProva.Set_Setor_Set_ID == SetorProva.Set_ID)
+                    {
+                        SetorRespondenteProva = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
+                    oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                    _Control.CadastrarErro(oErro);
                 }
             }
 
@@ -701,9 +809,45 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                string SetorRespondenteProva = oSetor.Set_Nome;
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
                 {
                     Nota = Nota + 0.2;
+                }
+
+                else
+                {
+                    if (SetorAluno.Set_Setor_Set_ID == SetorAluno.Set_ID)
+                    {
+                        SetorRespondenteAluno = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    if (SetorProva.Set_Setor_Set_ID == SetorProva.Set_ID)
+                    {
+                        SetorRespondenteProva = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
+                    oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                    _Control.CadastrarErro(oErro);
                 }
             }
 
@@ -712,9 +856,45 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim())
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                string SetorRespondenteProva = oSetor.Set_Nome;
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
                 {
                     Nota = Nota + 0.2;
+                }
+
+                else
+                {
+                    if (SetorAluno.Set_Setor_Set_ID == SetorAluno.Set_ID)
+                    {
+                        SetorRespondenteAluno = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    if (SetorProva.Set_Setor_Set_ID == SetorProva.Set_ID)
+                    {
+                        SetorRespondenteProva = "Este setor responde a si mesmo";
+                    }
+
+                    else
+                    {
+                        oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
+                        SetorRespondenteAluno = oSetor.Set_Nome;
+                    }
+
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
+                    oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                    _Control.CadastrarErro(oErro);
                 }
             }
 
@@ -734,6 +914,39 @@ namespace RH.View.Controllers
                 if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
                 {
                     Nota = Nota + 0.2;
+                }
+
+                else
+                {
+                    string ChefeAluno;
+
+                    if(CargoAluno.Car_Chefe)
+                    {
+                        ChefeAluno = "Chefe do Setor";
+                    }
+
+                    else
+                    {
+                        ChefeAluno = "Este cargo não é chefe do Setor";
+                    }
+
+                    string ChefeProva;
+
+                    if (CargoProva.Car_Chefe)
+                    {
+                        ChefeProva = "Chefe do Setor";
+                    }
+
+                    else
+                    {
+                        ChefeProva = "Este cargo não é chefe do Setor";
+                    }
+
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Cargo:</br>Nome do Cargo: " + CargoAluno.Car_Nome + "</br>Setor do Cargo: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeAluno;
+                    oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
+                    _Control.CadastrarErro(oErro);
                 }
             }
 

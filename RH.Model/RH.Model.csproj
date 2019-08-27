@@ -142,6 +142,7 @@
     <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
+    <Compile Include="Repositories\RepositorieErro.cs" />
     <Compile Include="Repositories\RepositorieNota.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
     <Compile Include="Repositories\RepositoriePessoaBeneficio.cs" />

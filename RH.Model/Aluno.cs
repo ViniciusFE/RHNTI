@@ -18,7 +18,6 @@ namespace RH.Model
         public Aluno()
         {
             this.Empresa = new HashSet<Empresa>();
-            this.Erro = new HashSet<Erro>();
             this.Prova = new HashSet<Prova>();
         }
     
@@ -35,8 +34,6 @@ namespace RH.Model
         public virtual Curso Curso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empresa> Empresa { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Erro> Erro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prova> Prova { get; set; }
     }

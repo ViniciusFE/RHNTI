@@ -36,7 +36,6 @@ namespace RH.View.Controllers
             }
 
             Session["DataAtual"] = aEmpresa.Emp_DataAtual;
-            
             return View();
         }
 

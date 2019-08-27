@@ -23,6 +23,7 @@ namespace RH.Control
         RepositorieCargo _RepositorieCargo;
         RepositorieBeneficio _RepositorieBeneficio;
         RepositorieNota _RepositorieNota;
+        RepositorieErro _RepositorieErro;
         
 
         public CProva()
@@ -40,6 +41,7 @@ namespace RH.Control
             _RepositorieCargo = new RepositorieCargo();
             _RepositorieBeneficio = new RepositorieBeneficio();
             _RepositorieNota = new RepositorieNota();
+            _RepositorieErro = new RepositorieErro();
         }
 
         public void CadastrarProva(Prova aProva)
@@ -240,6 +242,11 @@ namespace RH.Control
         public List<Prova> SelecionarProvaPeloCodigo(int CodigoProva)
         {
             return _RepositorieProva.SelecionarProvasPeloCodigo(CodigoProva);
+        }
+
+        public void CadastrarErro(Erro oErro)
+        {
+            _RepositorieErro.CadastrarErro(oErro);
         }
     }
 }
