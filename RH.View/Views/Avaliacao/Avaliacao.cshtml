@@ -8,6 +8,36 @@
 @Styles.Render("~/Content/Pages/css")
 
 <style>
+    #mask {
+        position: absolute;
+        z-index: 9000;
+        background-color: #000;
+        display: none;
+        top: 0px;
+        left: 0px;
+    }
+
+    .window {
+        position: fixed;
+        width: 440px;
+        height: 200px;
+        display: none;
+        z-index: 9090;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    #dialog {
+        width: 375px;
+        height: 203px;
+        border: 5px solid #d32d2d;
+    }
+
+    .close {
+        display: block;
+        text-align: right;
+    }
+
 </style>
 
 

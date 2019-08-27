@@ -112,5 +112,10 @@ namespace RH.Control
         {
             return _RepositorieCargo.LimiteCargosEmpresaAvaliativa(IDEmpresa);
         }
+
+        public Setor SelecionarSetor(int id)
+        {
+            return _RepositorieSetor.SelecionarSetor(id);
+        }
     }
 }
