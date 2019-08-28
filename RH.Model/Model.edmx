@@ -1530,7 +1530,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySet Name="Vaga" EntityType="RHModel.Vaga" />
           <EntitySet Name="VW_BeneficiosFuncionario" EntityType="RHModel.VW_BeneficiosFuncionario" />
           <EntitySet Name="VW_MeusBeneficios" EntityType="RHModel.VW_MeusBeneficios" />
-          <EntitySet Name="VW_Notas" EntityType="RHModel.VW_Notas" />
           <EntitySet Name="VW_Provas" EntityType="RHModel.VW_Provas" />
           <AssociationSet Name="FK_Aluno_Curso" Association="RHModel.FK_Aluno_Curso">
             <End Role="Curso" EntitySet="Curso" />
@@ -1808,6 +1807,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
+          <EntitySet Name="VW_Notas" EntityType="RHModel.VW_Notas" />
         </EntityContainer>
         <EntityType Name="Aluno">
           <Key>
@@ -2250,21 +2250,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="CodigoBeneficio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NomeBeneficio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Situacao" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VW_Notas">
-          <Key>
-            <PropertyRef Name="NomeAluno" />
-            <PropertyRef Name="MatriculaAluno" />
-            <PropertyRef Name="SerieAluno" />
-            <PropertyRef Name="NotaProva" />
-          </Key>
-          <Property Name="NomeAluno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MatriculaAluno" Type="Int32" Nullable="false" />
-          <Property Name="Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SerieAluno" Type="Int32" Nullable="false" />
-          <Property Name="CodigoProva" Type="Int32" />
-          <Property Name="Entregou" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="NotaProva" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="VW_Provas">
           <Key>
@@ -3105,6 +3090,21 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VW_Notas">
+          <Key>
+            <PropertyRef Name="NomeAluno" />
+            <PropertyRef Name="MatriculaAluno" />
+            <PropertyRef Name="SerieAluno" />
+            <PropertyRef Name="NotaProva" />
+          </Key>
+          <Property Name="NomeAluno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MatriculaAluno" Type="Int32" Nullable="false" />
+          <Property Name="Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SerieAluno" Type="Int32" Nullable="false" />
+          <Property Name="CodigoProva" Type="Int32" />
+          <Property Name="Entregou" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NotaProva" Type="Double" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3435,6 +3435,16 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VW_Provas">
+            <EntityTypeMapping TypeName="RHModel.VW_Provas">
+              <MappingFragment StoreEntitySet="VW_Provas">
+                <ScalarProperty Name="QuantidadeProvas" ColumnName="QuantidadeProvas" />
+                <ScalarProperty Name="DataTermino" ColumnName="DataTermino" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+                <ScalarProperty Name="CodigoProva" ColumnName="CodigoProva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VW_Notas">
             <EntityTypeMapping TypeName="RHModel.VW_Notas">
               <MappingFragment StoreEntitySet="VW_Notas">
@@ -3445,16 +3455,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
                 <ScalarProperty Name="Curso" ColumnName="Curso" />
                 <ScalarProperty Name="MatriculaAluno" ColumnName="MatriculaAluno" />
                 <ScalarProperty Name="NomeAluno" ColumnName="NomeAluno" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VW_Provas">
-            <EntityTypeMapping TypeName="RHModel.VW_Provas">
-              <MappingFragment StoreEntitySet="VW_Provas">
-                <ScalarProperty Name="QuantidadeProvas" ColumnName="QuantidadeProvas" />
-                <ScalarProperty Name="DataTermino" ColumnName="DataTermino" />
-                <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
-                <ScalarProperty Name="CodigoProva" ColumnName="CodigoProva" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

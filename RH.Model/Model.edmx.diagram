@@ -28,7 +28,6 @@
         <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="13.875" />
         <EntityTypeShape EntityType="RHModel.VW_BeneficiosFuncionario" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="RHModel.VW_MeusBeneficios" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="RHModel.VW_Notas" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="RHModel.VW_Provas" Width="1.5" PointX="4.75" PointY="0.75" />
         <AssociationConnector Association="RHModel.FK_Aluno_Curso" />
         <AssociationConnector Association="RHModel.FK_Empresa_Aluno" />
@@ -99,6 +98,7 @@
         <AssociationConnector Association="RHModel.FK_Prova_Setor2" />
         <AssociationConnector Association="RHModel.FK_Prova_Setor3" />
         <AssociationConnector Association="RHModel.FK_Prova_Setor4" />
+        <EntityTypeShape EntityType="RHModel.VW_Notas" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -56,7 +56,7 @@
                     @if (DateTime.Compare(x.DataTermino, DateTime.Now.Date) < 0)
                     {
                         <div class="card-footer">
-                            <button class="btn btn-danger custom"><span class="fa fa-eye"></span> Visualizar Notas</button>
+                            <a class="btn btn-danger custom" href="@Url.Action("Notas","Prova",new { CodigoProva=x.CodigoProva})"><span class="fa fa-eye"></span> Visualizar Notas</a>
                         </div>
                     }
 

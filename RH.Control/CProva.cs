@@ -229,9 +229,9 @@ namespace RH.Control
             return _RepositorieNota.SelecionarTodasNotasProva(CodigoProva);
         }
 
-        public List<Nota> SelecionarNotasProva(int CodigoProva)
+        public List<VW_Notas> SelecionarNotasProva()
         {
-            return _RepositorieNota.SelecionarNotasProva(CodigoProva);
+            return _RepositorieNota.SelecionarNotasProva();
         }
 
         public List<Aluno> SelecionarAlunosProva(int CodigoProva)

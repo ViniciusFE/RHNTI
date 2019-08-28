@@ -42,9 +42,9 @@ namespace RH.Model.Repositories
             odb.SaveChanges();
         }
 
-        public List<Nota> SelecionarNotasProva(int CodigoProva)
+        public List<VW_Notas> SelecionarNotasProva()
         {
-            return odb.Nota.Join(odb.Prova.Where(p => p.Pro_Situation == true && p.Pro_Codigo.Equals(CodigoProva)), n => n.Not_Prova_Pro_ID, p => p.Pro_ID, (n, p) => n).ToList();
+            return odb.VW_Notas.ToList();
         }
     }
 }

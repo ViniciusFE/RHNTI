@@ -1,62 +1,77 @@
-@model IEnumerable<RH.Model.Nota>
+@model IEnumerable<RH.Model.VW_Notas>
 
 @{
     ViewBag.Title = "Notas da Prova";
+    Layout = "~/Views/Shared/_Layout_Professor.cshtml";
 }
 
 <div class="container my-4">
     <div class="card">
         <div class="card-header">
-            <h1 class="text-center">Notas da Prova</h1>
+            <h3>Notas da prova da turma de @Model.Select(p=>p.Curso).First() - @Model.Select(p=>p.SerieAluno).First()º Ano</h3>
         </div>
-
         <div class="card-body">
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-bordered text-center">
+                    <tr style="background-color: rgb(148,72,72);" class="text-white">
+                        <th>
+                            Código
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Matrícula
+                        </th>
+                        <th>
+                            Curso
+                        </th>
+                        <th>
+                            Série
+                        </th>
+                        <th>
+                            Status da Prova
+                        </th>
+                        <th>
+                            Nota da Prova
+                        </th>
+                    </tr>
 
-            <table class="table table-bordered table-hover text-center">
-
-                <tr style="background-color: rgb(148,72,72);" class="text-white">
-
-                    <td>Nome do Aluno</td>
-                    <td>Matrícula</td>
-                    <td>Série</td>
-                    <td>Código da Prova</td>
-                    <td>Data de Entrega</td>
-                    <td>Nota</td>
-
-                </tr>
-
-                <tr>
-                    @foreach (var x in ViewBag.Provas)
+                    @foreach (var item in Model)
                     {
-                        foreach (var y in ViewBag.Alunos)
-                        {
-                            if (x.Pro_Aluno_Alu_ID == y.Alu_ID)
-                            {
-                                <td>@y.Alu_Nome</td>
-                                <td>@y.Alu_Matricula</td>
-                                <td>@y.Alu_Serie</td>
-                                break;
-                            }
-                        }
-
-                        <td>x.Pro_Codigo</td>
-
-                        foreach(var z in ViewBag.Notas)
-                        {
-                            if(z.Not_Prova_Pro_ID==x.Pro_ID)
-                            {
-                                <td>@z.Not_DataCadastro</td>
-                                <td>@z.Not_Nota</td>
-                            }
-                        }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodigoProva)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NomeAluno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MatriculaAluno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Curso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SerieAluno) º Ano
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Entregou)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NotaProva)
+                        </td>
+                    </tr>
                     }
-                </tr>
-               
 
-            </table>
+                </table>
+            }
 
         </div>
-
     </div>
 </div>
+
+
 
