@@ -111,27 +111,30 @@ namespace RH.View.Controllers
             List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome", oCargo.Car_Setor_Set_ID);
 
-            if (ChefeSetor)
+            Cargo oCargo1 = _Control.SelecionarCargo(oCargo.Car_ID);
+
+            if (ChefeSetor && oCargo.Car_Setor_Set_ID!=oCargo1.Car_Setor_Set_ID)
             {
                 bool StatusChefe = _Control.SelecionarChefeSetor(oCargo.Car_Setor_Set_ID);
+               
                 if (StatusChefe)
                 {
                     ModelState.AddModelError("ChefeSetor", "Este setor já possui um chefe, troque o status de chefe do cargo ou selecione outro setor de atividade");
-                    return View();
+                    return View(oCargo);
                 }
             }
 
             bool CargosComMesmoNome = _Control.CargosComMesmoNome(oCargo.Car_Nome, oCargo.Car_Setor_Set_ID);
-            if (CargosComMesmoNome)
+            if (CargosComMesmoNome && oCargo.Car_Setor_Set_ID != oCargo1.Car_Setor_Set_ID)
             {
                 ModelState.AddModelError("Car_Nome", "Este setor já possui um cargo com este nome");
-                return View();
+                return View(oCargo);
             }
 
 
             if (ModelState.IsValid)
             {
-                Cargo oCargo1 = _Control.SelecionarCargo(oCargo.Car_ID);
+                
                 oCargo1.Car_Nome = oCargo.Car_Nome;
                 oCargo1.Car_Setor_Set_ID = oCargo.Car_Setor_Set_ID;
                 oCargo1.Car_Chefe = ChefeSetor;

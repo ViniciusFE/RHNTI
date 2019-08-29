@@ -41,5 +41,10 @@ namespace RH.Model.Repositories
             odb.Entry(aNota).State = System.Data.Entity.EntityState.Modified;
             odb.SaveChanges();
         }
+
+        public List<VW_Notas> SelecionarNotasProva()
+        {
+            return odb.VW_Notas.ToList();
+        }
     }
 }

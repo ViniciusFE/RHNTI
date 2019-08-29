@@ -69,6 +69,9 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Select.HtmlToPdf, Version=19.1.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.HtmlToPdf.19.1.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -181,9 +184,14 @@
     <Content Include="Imagem\1486504363-building-business-company-house-home-real-estate-state_81296.png" />
     <Content Include="Imagem\805.gif" />
     <Content Include="Imagem\833.gif" />
+    <Content Include="Imagem\AEDBUNDA.png" />
+    <Content Include="Imagem\Capturar.jpeg" />
+    <Content Include="Imagem\Capturar.png" />
+    <Content Include="Imagem\EntregarProva.jpg" />
     <Content Include="Imagem\logo1.png" />
     <Content Include="Content\sass\Login.scss" />
     <Content Include="Imagem\sem-imagem-avatar.png" />
+    <Content Include="Imagem\VisualizarProva.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -292,6 +300,9 @@
     <Content Include="Views\Avaliacao\Index.cshtml" />
     <Content Include="Views\Aluno\Beneficios.cshtml" />
     <Content Include="Views\Prova\Index.cshtml" />
+    <Content Include="Views\Home\GerarProva.cshtml" />
+    <Content Include="Views\Aluno\Notas.cshtml" />
+    <Content Include="Views\Prova\Notas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

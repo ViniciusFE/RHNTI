@@ -128,21 +128,18 @@ namespace RH.View.Controllers
             {
                 byte[] imagem = new byte[Imagem.ContentLength];
                 Imagem.InputStream.Read(imagem, 0, Imagem.ContentLength);
-                aEmpresa.Emp_Logo = imagem;
+                empresa.Emp_Logo = imagem;
             }
 
-            else
-            {
-                aEmpresa.Emp_Logo = empresa.Emp_Logo;
-            }
+            empresa.Emp_Nome = aEmpresa.Emp_Nome;
+            empresa.Emp_Estado = aEmpresa.Emp_Estado;
+            empresa.Emp_Cidade = aEmpresa.Emp_Cidade;
+            empresa.Emp_Endereco = aEmpresa.Emp_Endereco;
+            empresa.Emp_CNPJ = aEmpresa.Emp_CNPJ;
+            empresa.Emp_RegistroEstadual = aEmpresa.Emp_RegistroEstadual;
 
-            aEmpresa.Emp_DataAtual = empresa.Emp_DataAtual;
-            aEmpresa.Emp_DataCadastro = empresa.Emp_DataCadastro;
-            aEmpresa.Emp_Aluno_Alu_ID = empresa.Emp_Aluno_Alu_ID;
-            aEmpresa.Emp_Situation = empresa.Emp_Situation;
-
-            _Control.AlterarEmpresa(aEmpresa);
-            return RedirectToAction("MinhasEmpresas");
+            _Control.AlterarEmpresa(empresa);
+            return RedirectToAction("Index","Home",new { id=empresa.Emp_ID,nomeEmpresa=empresa.Emp_Nome});
 
         }
 

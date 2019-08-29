@@ -12,11 +12,10 @@ namespace RH.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class VW_Provas
+    public partial class VW_MeusBeneficios
     {
-        public int CodigoProva { get; set; }
-        public System.DateTime DataCadastro { get; set; }
-        public System.DateTime DataTermino { get; set; }
-        public Nullable<int> QuantidadeProvas { get; set; }
+        public int CodigoBeneficio { get; set; }
+        public string NomeBeneficio { get; set; }
+        public string Situacao { get; set; }
     }
 }

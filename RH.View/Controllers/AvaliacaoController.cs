@@ -35,7 +35,7 @@ namespace RH.View.Controllers
 
         public ActionResult Avaliacao()
         {
-            List<Pessoa> Chefes = _Control.SelecionarTodosChefes();
+            List<Pessoa> Chefes = _Control.SelecionarTodosChefes(Convert.ToInt32(Session["IDEmpresa"]));
             ViewBag.Pes_Nome = new SelectList(Chefes, "Pes_ID", "Pes_Nome");
             return View(Chefes);
         }
@@ -44,7 +44,8 @@ namespace RH.View.Controllers
         {
             Pessoa ChefeSetor = _Control.SelecionarPessoa(IDChefe);
             Cargo CargoChefe = _Control.SelecionarCargo(ChefeSetor.Pes_Cargo_Car_ID);
-            List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(CargoChefe.Car_Setor_Set_ID, ChefeSetor.Pes_ID);
+            Setor oSetorChefe = _Control.SelecionarSetor(CargoChefe.Car_Setor_Set_ID);
+            List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(CargoChefe.Car_Setor_Set_ID, oSetorChefe.Set_Empresa_Emp_ID);
 
             List<object> DadosFuncionarios = new List<object>();
 
@@ -80,15 +81,24 @@ namespace RH.View.Controllers
 
         public ActionResult AvaliacaoFuncionario(int id,string Avaliacao)
         {
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (_Control.LimiteAvaliacoesEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    return Json("O limite de avaliações nessa Empresa Avaliativa foi atingido. (Limite de Avaliações = 4)");
+                }
+            }
+
             Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             Avaliacao aAvaliacao = new Avaliacao()
             {
                 Ava_Pessoa_Pes_ID = id,
                 Ava_DataCadastro =aEmpresa.Emp_DataAtual,
                 Ava_Situation = true,
+                Ava_Avaliacao=Avaliacao
             };
             _Control.CadastrarAvaliacao(aAvaliacao);
-            return Json("A avaliação do funcionário foi efetuada com sucesso, obrigado!");
+            return Json("A avaliação do funcionário foi efetuada com sucesso!");
         }
     }
 }

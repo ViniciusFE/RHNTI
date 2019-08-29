@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="animated bounceInDown">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Style/css")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/docco.min.css">
+    <link href="~/Content/hover.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/socicon/css/styles.css" rel="stylesheet" />
+    <link href="~/Content/codemirror.css" rel="stylesheet" />
+    <link href="~/Content/codemirror-theme/solarized.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -22,14 +31,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
-                <ul class="navbar-nav ">
-                    
-
-                </ul>
+                <ul class="navbar-nav "></ul>
             </div>
 
             <ul class="nav justify-content-end logout">
-                <li> <a class="nav-link" href="#">Logout</a></li>
+                <li> <a class="nav-link" href="@Url.Action("Logout","Login")">Logout</a></li>
             </ul>
 
         </nav>
@@ -48,6 +54,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="https://cdn.ckeditor.com/4.11.3/full-all/ckeditor.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/js/fileinput.min.js"></script>
+    <script src="~/Scripts/fileInputPT-BR.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/Scripts/codemirror.js"></script>
+    <script src="~/Scripts/javascript.js"></script>
 </body>
 </html>
 

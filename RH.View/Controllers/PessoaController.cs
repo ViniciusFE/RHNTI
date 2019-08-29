@@ -40,14 +40,21 @@ namespace RH.View.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizacaoEmpresa]
-        public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
-        {
-            oFuncionario.Pes_Situation = true;
-
+        public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem,string Salario)
+        {            
             Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             oFuncionario.Pes_DataCadastro=aEmpresa.Emp_DataAtual;
-
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
+
+
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (DbPessoa.LimiteFuncionariosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    ModelState.AddModelError("Limite", "O limite de funcionários nessa Empresa Avaliativa foi atingido. (Limite de Funcionários = 5)");
+                }
+            }
+
 
             if (Imagem == null)
             {
@@ -62,15 +69,29 @@ namespace RH.View.Controllers
                 oFuncionario.Pes_Imagem = ImagemFuncionario;
             }
 
-            if (oFuncionario.Pes_Cargo_Car_ID==0)
+            if(string.IsNullOrEmpty(Salario))
             {
-                return View();
+                ModelState.AddModelError("Pes_Salario", "Digite o Salário do funcionário");
             }
 
-            
+            Cargo oCargo = DbPessoa.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            if(oCargo.Car_Chefe)
+            {
+                if(DbPessoa.CargoOcupado(oCargo.Car_ID))
+                {
+                    ModelState.AddModelError("CargoChefe", "Este cargo selecionado é um cargo com uma posição de chefe do setor e já está ocupado por outro funcionário, o cargo de chefe do setor só pode existir um funcionário que o ocupe");
+                }
+            }
 
-            DbPessoa.CadastrarFuncionario(oFuncionario);
-            return RedirectToAction("MeusFuncionarios");
+            if(ModelState.IsValid)
+            {
+                oFuncionario.Pes_Situation = true;
+                oFuncionario.Pes_Salario = Convert.ToDouble(Salario);
+                DbPessoa.CadastrarFuncionario(oFuncionario);
+                return RedirectToAction("MeusFuncionarios");
+            }
+
+            return View();
 
         }
 
@@ -87,18 +108,34 @@ namespace RH.View.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizacaoEmpresa]
-        public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem)
+        public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem,string Salario="")
         {
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
 
-            //Retorna pra tela de alteração com todos os erros
-            if(!ModelState.IsValid)
-            {
-                return View();
-            }
+            
+
+            
 
             //Altera o funcionário e redireciona para tela de meus funcionários
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(oFuncionario.Pes_ID);
+
+            if(aPessoa.Pes_Cargo_Car_ID!=oFuncionario.Pes_Cargo_Car_ID)
+            {
+                Cargo oCargo = DbPessoa.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+                if (oCargo.Car_Chefe)
+                {
+                    if (DbPessoa.CargoOcupado(oCargo.Car_ID))
+                    {
+                        ModelState.AddModelError("CargoChefe", "Este cargo selecionado é um cargo com uma posição de chefe do setor e já está ocupado por outro funcionário, o cargo de chefe do setor só pode existir um funcionário que o ocupe");
+                    }
+                }
+            }
+
+            //Retorna pra tela de alteração com todos os erros
+            if (!ModelState.IsValid)
+            {
+                return View(oFuncionario);
+            }
 
             if (Imagem != null)
             {
@@ -107,8 +144,14 @@ namespace RH.View.Controllers
                 aPessoa.Pes_Imagem = NovaImagem;
             }
 
+            if(!string.IsNullOrEmpty(Salario))
+            {
+                aPessoa.Pes_Salario = Convert.ToDouble(Salario);
+            }
+
+
+
             aPessoa.Pes_Nome = oFuncionario.Pes_Nome;
-            aPessoa.Pes_Salario = oFuncionario.Pes_Salario;
             aPessoa.Pes_Endereco = oFuncionario.Pes_Endereco;
             aPessoa.Pes_CTrabalho = oFuncionario.Pes_CTrabalho;
             aPessoa.Pes_CPF = oFuncionario.Pes_CPF;
@@ -173,6 +216,14 @@ namespace RH.View.Controllers
 
         public ActionResult Demitir(int id,string Motivo)
         {
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (DbPessoa.LimiteDemissoesEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    return Json("1");
+                }
+            }
+
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(id);
             aPessoa.Pes_Situation = false;
             DbPessoa.AlterarFuncionario(aPessoa);
@@ -200,6 +251,7 @@ namespace RH.View.Controllers
             DbPessoa.DesabilitarDadosBancarios(id);
             DbPessoa.DesabilitarBeneficiosFuncionario(id);
             DbPessoa.DesabilitarDependentesFuncionario(id);
+            DbPessoa.DesabilitarAvaliacoes(id);
 
             return Json("O funcionário foi demitido com sucesso!");
         }
@@ -240,6 +292,14 @@ namespace RH.View.Controllers
 
        public ActionResult AdicionarBeneficio(int beneficio,int funcionario)
         {
+            if (Convert.ToBoolean(Session["Avaliativa"]))
+            {
+                if (DbPessoa.LimiteBeneficiosFuncionariosEmpresaAvaliativa(Convert.ToInt32(Session["IDEmpresa"])))
+                {
+                    return Json("1");
+                }
+            }
+
             Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
 
             PessoaBeneficio Beneficio = new PessoaBeneficio()

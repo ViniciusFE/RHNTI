@@ -27,7 +27,7 @@
 <div class="logout-emp">
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Logout</a>
+            <a class="nav-link active" href="@Url.Action("Logout","Login")">Logout</a>
         </li>
     </ul>
 </div>
@@ -85,18 +85,38 @@
                     <h4>Você possui uma prova pendente, que será encerrada dia @ViewBag.DataTermino, caso ainda não tenha começado a realizá-la siga as instruções abaixo, caso contrário apenas ignore este aviso.</h4>
                     <h4>Instruções para realização da prova:</h4>
                     <ul>
-                        <li>Cadastre uma nova empresa, e marque SIM na opção "Empresa Avaliativa".</li>
-                        <li>Após o cadastro da sua empresa avaliativa, na tela se "Minhas Empresas" entre em sua empresa que acabou de cadastrar.</li>
-                        <li>Quando entrar em sua Empresa Avaliativa na página inicial você poderá visualizar sua prova clicando em visualizar sua prova.</li>
+                        <li>Cadastre uma nova empresa, e marque SIM na opção "Empresa Avaliativa". (Conforme a imagem abaixo)</li>
+                    </ul>
+                    <div align="center">
+                        <img src="~/Imagem/Capturar.png" style="width:80%; height:80%;" />
+                    </div>
+
+                    <ul>
+                        <li>Após o cadastro da sua empresa avaliativa, na tela de "Minhas Empresas" entre em sua empresa que acabou de cadastrar.</li>
+                        <li>Quando entrar em sua Empresa Avaliativa na página inicial você poderá visualizar sua prova clicando em "Visualizar Prova".</li>
+                    </ul>
+                    <div align="center">
+                        <img src="~/Imagem/VisualizarProva.jpg" style="width:80%; height:80%;" />
+                    </div>
+                    <ul>
                         <li>Você deverá fazer os mesmos cadastrados do pdf em sua Empresa Avaliativa.</li>
                         <li>Sua prova será corrigida seguindo o conceito de comparação de seus cadastros com o seu pdf, portanto seus cadastros devem ser <strong>IGUAIS</strong> ao do pdf.</li>
                         <li>Os cadastros devem ser feitos nas datas corretas de acordo com o pdf, podendo alterar seus dados em dias diferentes, mas os <strong>Cadastros</strong> devem ser feitos nos dias corretos.</li>
                         <li>As imagens dos funcionários não serão levadas em consideração, portanto as imagens serão de escolha do aluno.</li>
-                        <li>Em sua empresa avaliativa você terá somente o número de cadastros iguais aos requeridos na prova.</li>
+                        <li>Em sua empresa avaliativa você terá somente o número de cadastros iguais aos requeridos na prova.<br />Limite de Cadastro de Setores=5<br />Limite de Cadastro de Cargos=5<br />Limite de Cadastro de Funcionários=5<br />Limite de Cadastro de Dependentes=5<br />Limite de Cadastro de Dados Bancários=5<br />Limite de Cadastro de Benefícios=5<br />Limite de Cadastro dos Benefícios dos Funcionários=10<br />Limite de Cadastros de Avaliações de Funcionários=4<br />Limite de Demissões=3</li>
+
                         <li>Fique atento a data de termino de sua prova (@ViewBag.DataTermino), ao fim de seus cadastros clique em "Entregar Prova".</li>
-                        <li>Após o vencimento da data de sua prova ao entrar novamente na plataforma você poderá ver sua nota e seus erros.</li>
+
                     </ul>
-                    <h4>Boa Prova - Associação Educacional Dom Bosco @DateTime.Now.Year</h4>
+
+                    <div align="center">
+                        <img src="~/Imagem/EntregarProva.jpg" style="width:80%; height:80%;" />
+                    </div>
+
+                    <ul>
+                        <li>Após o vencimento da data de sua prova ao entrar novamente na plataforma você poderá ver sua nota e seus erros. A empresa utilizada para realização da prova será excluída por questões de segurança.</li>
+                    </ul>
+                    <h4 class="text-center">Boa Prova - Associação Educacional Dom Bosco @DateTime.Now.Year</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>

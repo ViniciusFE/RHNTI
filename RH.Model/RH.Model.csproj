@@ -40,6 +40,9 @@
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="Select.HtmlToPdf, Version=19.1.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.HtmlToPdf.19.1.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -62,6 +65,7 @@
     <Compile Include="Annotations\DadoBancario.cs" />
     <Compile Include="Annotations\DadosDependente.cs" />
     <Compile Include="Annotations\Empresa.cs" />
+    <Compile Include="Annotations\Pessoa.cs" />
     <Compile Include="Annotations\Professor.cs" />
     <Compile Include="Annotations\Setor.cs" />
     <Compile Include="Avaliacao.cs">
@@ -133,10 +137,12 @@
     <Compile Include="Repositories\RepositorieAvaliacao.cs" />
     <Compile Include="Repositories\RepositorieBeneficio.cs" />
     <Compile Include="Repositories\RepositorieCargo.cs" />
+    <Compile Include="Repositories\RepositorieCurso.cs" />
     <Compile Include="Repositories\RepositorieDadosBancarios.cs" />
     <Compile Include="Repositories\RepositorieDemissao.cs" />
     <Compile Include="Repositories\RepositorieDependente.cs" />
     <Compile Include="Repositories\RepositorieEmpresa.cs" />
+    <Compile Include="Repositories\RepositorieErro.cs" />
     <Compile Include="Repositories\RepositorieNota.cs" />
     <Compile Include="Repositories\RepositoriePessoa.cs" />
     <Compile Include="Repositories\RepositoriePessoaBeneficio.cs" />
@@ -153,6 +159,15 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Vaga.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_BeneficiosFuncionario.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_MeusBeneficios.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_Notas.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_Provas.cs">

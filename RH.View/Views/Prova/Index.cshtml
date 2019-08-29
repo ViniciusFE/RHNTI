@@ -35,42 +35,45 @@
 <h2 class="text-center">Provas Cadastradas</h2>
 <hr />
 
-@if (Model.Count() > 0)
-{
-    foreach (var x in Model)
+<div id="ProvasCadastradas">
+    @if (Model.Count() > 0)
     {
-        <div class="container my-4">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Código da Prova: @x.CodigoProva</h2>
-                </div>
-
-                <div class="card-body">
-                    <h2>Data de Cadastro: @x.DataCadastro.Day/@if (x.DataCadastro.Month.ToString().Count() == 1) {<span>0</span>}@x.DataCadastro.Month/@x.DataCadastro.Year</h2>
-                    <h2>Data de Termino: @x.DataTermino.Date</h2>
-                    <h2>Quantidade de Provas Geradas: @x.QuantidadeProvas</h2>
-                </div>
-
-                @if (DateTime.Compare(x.DataTermino, DateTime.Now.Date) < 0)
-                {
-                    <div class="card-footer">
-                        <button class="btn btn-danger custom"><span class="fa fa-eye"></span> Visualizar Notas</button>
+        foreach (var x in Model)
+        {
+            <div class="container my-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Código da Prova: @x.CodigoProva</h2>
                     </div>
-                }
 
+                    <div class="card-body">
+                        <h2>Data de Cadastro: @x.DataCadastro.Day/@if (x.DataCadastro.Month.ToString().Count() == 1)
+                        {<span>0</span>}@x.DataCadastro.Month/@x.DataCadastro.Year</h2>
+                        <h2>Data de Termino: @x.DataTermino.Date</h2>
+                        <h2>Quantidade de Provas Geradas: @x.QuantidadeProvas</h2>
+                    </div>
+
+                    @if (DateTime.Compare(x.DataTermino, DateTime.Now.Date) < 0)
+                    {
+                        <div class="card-footer">
+                            <a class="btn btn-danger custom" href="@Url.Action("Notas","Prova",new { CodigoProva=x.CodigoProva})"><span class="fa fa-eye"></span> Visualizar Notas</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        }
+    }
+
+    else
+    {
+        <div class="alert alert-primary" id="Aviso">
+            <div class="alert-body">
+                <h4>Não existem provas cadastradas...</h4>
             </div>
         </div>
     }
-}
-
-else
-{
-    <div class="alert alert-primary">
-        <div class="alert-body">
-            <h4>Não existem provas cadastradas...</h4>
-        </div>
-    </div>
-}
+</div>
 
 <hr>
 
@@ -139,12 +142,13 @@ else
             });
 
             $("#CadastrarProva").click(function () {
+                $(this).attr("disabled", "disabled");
                 $("#Carregando").css("display", "block");
+                $("#Mensagem").css("display", "none");
                 var url = "@Url.Action("CadastrarProva","Prova")";
                 var Data = $("#DataFim").val();
                 $.post(url, { DataTermino: Data }, function (resposta) {
 
-                    $("#Mensagem").css("display", "none");
                     $("#Carregando").css("display", "none");
                     $("#Resposta").css("display", "block");
 
@@ -161,7 +165,40 @@ else
                     }
 
                     else {
+
+                        $("#Aviso").css("display", "none");
+
+                        var data = new Date();
+                        var dia = data.getDate();
+                        dia = (dia.length == 1) ? "0" + dia : dia;
+                        var mes = data.getMonth() + 1;
+                        mes = (mes.length == 1) ? "0" + mes : mes;
+                        var ano = data.getFullYear();
+
+                        var DataTermino = new Date(Data);
+                        var diaTermino = DataTermino.getDate() + 1;
+                        diaTermino = (diaTermino.length == 1) ? "0" + diaTermino : diaTermino;
+                        var mesTermino = DataTermino.getMonth() + 1;
+                        mesTermino = (mesTermino.length == 1) ? "0" + mesTermino : mesTermino;
+                        var DataFormatada = [diaTermino, mesTermino, DataTermino.getFullYear()].join("/");
+
+
                         $("#Resposta").html("<p class='text-center'>Provas Cadastradas com sucesso!</p>");
+
+                        $("#ProvasCadastradas").append("<div class='container my-4'>" +
+                            "<div class='card'>" +
+                            "<div class='card-header'>" +
+                            "<h2>Código da Prova:Teste</h2>" +
+                            "</div>" +
+
+                            "<div class='card-body'>" +
+                            "<h2>Data de Cadastro:" + dia + "/" + mes + "/" + ano + "</h2>" +
+                            "<h2>Data de Termino: " + DataFormatada + " 00:00:00</h2>" +
+                            "<h2>Quantidade de Provas Geradas: " + @ViewBag.QuantidadeAlunos + "</h2>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>"
+                        );
                     }
 
                     $("#CadastrarProva").attr("disabled", "disabled");

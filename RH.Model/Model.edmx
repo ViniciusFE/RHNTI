@@ -35,7 +35,7 @@
           </Key>
           <Property Name="Ben_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ben_Nome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Ben_Descricao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ben_Descricao" Type="varchar(max)" Nullable="false" />
           <Property Name="Ben_Custo" Type="float" Nullable="false" />
           <Property Name="Ben_Situation" Type="bit" Nullable="false" />
           <Property Name="Ben_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
@@ -129,7 +129,6 @@
           </Key>
           <Property Name="Err_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Err_Prova_Pro_ID" Type="int" Nullable="false" />
-          <Property Name="Err_Aluno_Alu_ID" Type="int" Nullable="false" />
           <Property Name="Err_RespostaCerta" Type="varchar(max)" Nullable="false" />
           <Property Name="Err_RespostaAluno" Type="varchar(max)" Nullable="false" />
         </EntityType>
@@ -293,6 +292,45 @@
           <Property Name="Vag_Situation" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'RH.dbo.VW_BeneficiosFuncionario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_BeneficiosFuncionario">
+          <Key>
+            <PropertyRef Name="NomeBeneficio" />
+            <PropertyRef Name="CodigoBeneficio" />
+          </Key>
+          <Property Name="NomeBeneficio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodigoBeneficio" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RH.dbo.VW_MeusBeneficios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_MeusBeneficios">
+          <Key>
+            <PropertyRef Name="CodigoBeneficio" />
+            <PropertyRef Name="NomeBeneficio" />
+            <PropertyRef Name="Situacao" />
+          </Key>
+          <Property Name="CodigoBeneficio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeBeneficio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Situacao" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RH.dbo.VW_Notas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_Notas">
+          <Key>
+            <PropertyRef Name="NomeAluno" />
+            <PropertyRef Name="MatriculaAluno" />
+            <PropertyRef Name="SerieAluno" />
+            <PropertyRef Name="NotaProva" />
+          </Key>
+          <Property Name="NomeAluno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatriculaAluno" Type="int" Nullable="false" />
+          <Property Name="Curso" Type="varchar" MaxLength="50" />
+          <Property Name="SerieAluno" Type="int" Nullable="false" />
+          <Property Name="CodigoProva" Type="int" />
+          <Property Name="Entregou" Type="varchar" MaxLength="30" />
+          <Property Name="NotaProva" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_Provas">
           <Key>
@@ -434,18 +472,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Principal>
             <Dependent Role="Empresa">
               <PropertyRef Name="Emp_Aluno_Alu_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Erro_Aluno">
-          <End Role="Aluno" Type="Self.Aluno" Multiplicity="1" />
-          <End Role="Erro" Type="Self.Erro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Aluno">
-              <PropertyRef Name="Alu_ID" />
-            </Principal>
-            <Dependent Role="Erro">
-              <PropertyRef Name="Err_Aluno_Alu_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1167,6 +1193,30 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treinamento" EntityType="Self.Treinamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vaga" EntityType="Self.Vaga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_BeneficiosFuncionario" EntityType="Self.VW_BeneficiosFuncionario" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_BeneficiosFuncionario].[NomeBeneficio] AS [NomeBeneficio], 
+    [VW_BeneficiosFuncionario].[CodigoBeneficio] AS [CodigoBeneficio]
+    FROM [dbo].[VW_BeneficiosFuncionario] AS [VW_BeneficiosFuncionario]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_MeusBeneficios" EntityType="Self.VW_MeusBeneficios" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_MeusBeneficios].[CodigoBeneficio] AS [CodigoBeneficio], 
+    [VW_MeusBeneficios].[NomeBeneficio] AS [NomeBeneficio], 
+    [VW_MeusBeneficios].[Situacao] AS [Situacao]
+    FROM [dbo].[VW_MeusBeneficios] AS [VW_MeusBeneficios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_Notas" EntityType="Self.VW_Notas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_Notas].[NomeAluno] AS [NomeAluno], 
+    [VW_Notas].[MatriculaAluno] AS [MatriculaAluno], 
+    [VW_Notas].[Curso] AS [Curso], 
+    [VW_Notas].[SerieAluno] AS [SerieAluno], 
+    [VW_Notas].[CodigoProva] AS [CodigoProva], 
+    [VW_Notas].[Entregou] AS [Entregou], 
+    [VW_Notas].[NotaProva] AS [NotaProva]
+    FROM [dbo].[VW_Notas] AS [VW_Notas]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_Provas" EntityType="Self.VW_Provas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_Provas].[CodigoProva] AS [CodigoProva], 
@@ -1218,10 +1268,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <AssociationSet Name="FK_Empresa_Aluno" Association="Self.FK_Empresa_Aluno">
             <End Role="Aluno" EntitySet="Aluno" />
             <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Erro_Aluno" Association="Self.FK_Erro_Aluno">
-            <End Role="Aluno" EntitySet="Aluno" />
-            <End Role="Erro" EntitySet="Erro" />
           </AssociationSet>
           <AssociationSet Name="FK_Erro_Prova" Association="Self.FK_Erro_Prova">
             <End Role="Prova" EntitySet="Prova" />
@@ -1482,6 +1528,9 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySet Name="sysdiagrams" EntityType="RHModel.sysdiagrams" />
           <EntitySet Name="Treinamento" EntityType="RHModel.Treinamento" />
           <EntitySet Name="Vaga" EntityType="RHModel.Vaga" />
+          <EntitySet Name="VW_BeneficiosFuncionario" EntityType="RHModel.VW_BeneficiosFuncionario" />
+          <EntitySet Name="VW_MeusBeneficios" EntityType="RHModel.VW_MeusBeneficios" />
+          <EntitySet Name="VW_Provas" EntityType="RHModel.VW_Provas" />
           <AssociationSet Name="FK_Aluno_Curso" Association="RHModel.FK_Aluno_Curso">
             <End Role="Curso" EntitySet="Curso" />
             <End Role="Aluno" EntitySet="Aluno" />
@@ -1489,10 +1538,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <AssociationSet Name="FK_Empresa_Aluno" Association="RHModel.FK_Empresa_Aluno">
             <End Role="Aluno" EntitySet="Aluno" />
             <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Erro_Aluno" Association="RHModel.FK_Erro_Aluno">
-            <End Role="Aluno" EntitySet="Aluno" />
-            <End Role="Erro" EntitySet="Erro" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Aluno" Association="RHModel.FK_Prova_Aluno">
             <End Role="Aluno" EntitySet="Aluno" />
@@ -1762,7 +1807,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
-          <EntitySet Name="VW_Provas" EntityType="RHModel.VW_Provas" />
+          <EntitySet Name="VW_Notas" EntityType="RHModel.VW_Notas" />
         </EntityContainer>
         <EntityType Name="Aluno">
           <Key>
@@ -1779,7 +1824,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Alu_Situation" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Curso" Relationship="RHModel.FK_Aluno_Curso" FromRole="Aluno" ToRole="Curso" />
           <NavigationProperty Name="Empresa" Relationship="RHModel.FK_Empresa_Aluno" FromRole="Aluno" ToRole="Empresa" />
-          <NavigationProperty Name="Erro" Relationship="RHModel.FK_Erro_Aluno" FromRole="Aluno" ToRole="Erro" />
           <NavigationProperty Name="Prova" Relationship="RHModel.FK_Prova_Aluno" FromRole="Aluno" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Avaliacao">
@@ -1803,7 +1847,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           </Key>
           <Property Name="Ben_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ben_Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Ben_Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ben_Descricao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Ben_Custo" Type="Double" Nullable="false" />
           <Property Name="Ben_Situation" Type="Boolean" Nullable="false" />
           <Property Name="Ben_DataCadastro" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
@@ -1936,10 +1980,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           </Key>
           <Property Name="Err_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Err_Prova_Pro_ID" Type="Int32" Nullable="false" />
-          <Property Name="Err_Aluno_Alu_ID" Type="Int32" Nullable="false" />
           <Property Name="Err_RespostaCerta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Err_RespostaAluno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Aluno" Relationship="RHModel.FK_Erro_Aluno" FromRole="Erro" ToRole="Aluno" />
           <NavigationProperty Name="Prova" Relationship="RHModel.FK_Erro_Prova" FromRole="Erro" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Movimentacao">
@@ -2191,6 +2233,35 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Vag_Situation" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Cargo" Relationship="RHModel.FK_Vaga_Cargo" FromRole="Vaga" ToRole="Cargo" />
         </EntityType>
+        <EntityType Name="VW_BeneficiosFuncionario">
+          <Key>
+            <PropertyRef Name="NomeBeneficio" />
+            <PropertyRef Name="CodigoBeneficio" />
+          </Key>
+          <Property Name="NomeBeneficio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoBeneficio" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_MeusBeneficios">
+          <Key>
+            <PropertyRef Name="CodigoBeneficio" />
+            <PropertyRef Name="NomeBeneficio" />
+            <PropertyRef Name="Situacao" />
+          </Key>
+          <Property Name="CodigoBeneficio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeBeneficio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Situacao" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VW_Provas">
+          <Key>
+            <PropertyRef Name="CodigoProva" />
+            <PropertyRef Name="DataCadastro" />
+            <PropertyRef Name="DataTermino" />
+          </Key>
+          <Property Name="CodigoProva" Type="Int32" Nullable="false" />
+          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataTermino" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="QuantidadeProvas" Type="Int32" />
+        </EntityType>
         <Association Name="FK_Aluno_Curso">
           <End Type="RHModel.Curso" Role="Curso" Multiplicity="1" />
           <End Type="RHModel.Aluno" Role="Aluno" Multiplicity="*" />
@@ -2212,18 +2283,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Principal>
             <Dependent Role="Empresa">
               <PropertyRef Name="Emp_Aluno_Alu_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Erro_Aluno">
-          <End Type="RHModel.Aluno" Role="Aluno" Multiplicity="1" />
-          <End Type="RHModel.Erro" Role="Erro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Aluno">
-              <PropertyRef Name="Alu_ID" />
-            </Principal>
-            <Dependent Role="Erro">
-              <PropertyRef Name="Err_Aluno_Alu_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3031,16 +3090,20 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="VW_Provas">
+        <EntityType Name="VW_Notas">
           <Key>
-            <PropertyRef Name="CodigoProva" />
-            <PropertyRef Name="DataCadastro" />
-            <PropertyRef Name="DataTermino" />
+            <PropertyRef Name="NomeAluno" />
+            <PropertyRef Name="MatriculaAluno" />
+            <PropertyRef Name="SerieAluno" />
+            <PropertyRef Name="NotaProva" />
           </Key>
-          <Property Name="CodigoProva" Type="Int32" Nullable="false" />
-          <Property Name="QuantidadeProvas" Type="Int32" />
-          <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DataTermino" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NomeAluno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MatriculaAluno" Type="Int32" Nullable="false" />
+          <Property Name="Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SerieAluno" Type="Int32" Nullable="false" />
+          <Property Name="CodigoProva" Type="Int32" />
+          <Property Name="Entregou" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NotaProva" Type="Double" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3181,7 +3244,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
               <MappingFragment StoreEntitySet="Erro">
                 <ScalarProperty Name="Err_RespostaAluno" ColumnName="Err_RespostaAluno" />
                 <ScalarProperty Name="Err_RespostaCerta" ColumnName="Err_RespostaCerta" />
-                <ScalarProperty Name="Err_Aluno_Alu_ID" ColumnName="Err_Aluno_Alu_ID" />
                 <ScalarProperty Name="Err_Prova_Pro_ID" ColumnName="Err_Prova_Pro_ID" />
                 <ScalarProperty Name="Err_ID" ColumnName="Err_ID" />
               </MappingFragment>
@@ -3356,13 +3418,43 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VW_BeneficiosFuncionario">
+            <EntityTypeMapping TypeName="RHModel.VW_BeneficiosFuncionario">
+              <MappingFragment StoreEntitySet="VW_BeneficiosFuncionario">
+                <ScalarProperty Name="CodigoBeneficio" ColumnName="CodigoBeneficio" />
+                <ScalarProperty Name="NomeBeneficio" ColumnName="NomeBeneficio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_MeusBeneficios">
+            <EntityTypeMapping TypeName="RHModel.VW_MeusBeneficios">
+              <MappingFragment StoreEntitySet="VW_MeusBeneficios">
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+                <ScalarProperty Name="NomeBeneficio" ColumnName="NomeBeneficio" />
+                <ScalarProperty Name="CodigoBeneficio" ColumnName="CodigoBeneficio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VW_Provas">
             <EntityTypeMapping TypeName="RHModel.VW_Provas">
               <MappingFragment StoreEntitySet="VW_Provas">
+                <ScalarProperty Name="QuantidadeProvas" ColumnName="QuantidadeProvas" />
                 <ScalarProperty Name="DataTermino" ColumnName="DataTermino" />
                 <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
-                <ScalarProperty Name="QuantidadeProvas" ColumnName="QuantidadeProvas" />
                 <ScalarProperty Name="CodigoProva" ColumnName="CodigoProva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_Notas">
+            <EntityTypeMapping TypeName="RHModel.VW_Notas">
+              <MappingFragment StoreEntitySet="VW_Notas">
+                <ScalarProperty Name="NotaProva" ColumnName="NotaProva" />
+                <ScalarProperty Name="Entregou" ColumnName="Entregou" />
+                <ScalarProperty Name="CodigoProva" ColumnName="CodigoProva" />
+                <ScalarProperty Name="SerieAluno" ColumnName="SerieAluno" />
+                <ScalarProperty Name="Curso" ColumnName="Curso" />
+                <ScalarProperty Name="MatriculaAluno" ColumnName="MatriculaAluno" />
+                <ScalarProperty Name="NomeAluno" ColumnName="NomeAluno" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

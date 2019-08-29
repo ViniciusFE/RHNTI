@@ -30,14 +30,14 @@ namespace RH.Control
             _RepositorieAvaliacao.CadastrarAvaliacao(aAvaliacao);
         }
 
-        public List<Pessoa> SelecionarTodosChefes()
+        public List<Pessoa> SelecionarTodosChefes(int IDEmpresa)
         {
-            return _RepositoriePessoa.SelecionarTodosChefes();
+            return _RepositoriePessoa.SelecionarTodosChefes(IDEmpresa);
         }
 
-        public List<Pessoa> SelecionarTodosMeusFuncionarios(int IDSetor,int IDFuncionario)
+        public List<Pessoa> SelecionarTodosMeusFuncionarios(int IDSetor,int IDEmpresa)
         {
-            return _RepositoriePessoa.SelcionarTodosMeusFuncionarios(IDSetor,IDFuncionario);
+            return _RepositoriePessoa.SelcionarTodosMeusFuncionarios(IDSetor,IDEmpresa);
         }
 
         public List<Cargo> SelecionarTodosCargosFuncionarios(int id)
@@ -68,6 +68,11 @@ namespace RH.Control
         public List<Avaliacao> SelecionarAvaliacoesEmpresa(int IDEmpresa,string Pesquisado)
         {
             return _RepositorieAvaliacao.SelecionarAAvaliacoesEmpresa(IDEmpresa, Pesquisado);
+        }
+
+        public bool LimiteAvaliacoesEmpresaAvaliativa(int IDEmpresa)
+        {
+            return _RepositorieAvaliacao.LimiteAvaliacoesEmpresaAvaliativa(IDEmpresa);
         }
     }
 }

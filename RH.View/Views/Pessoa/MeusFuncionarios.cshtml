@@ -151,35 +151,42 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                @if (ViewBag.Beneficios.Count > 0)
-                {
+                <div id="FormBeneficios">
+                    @if (ViewBag.Beneficios.Count > 0)
+                    {
 
-                    <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
-                        <tr style="background-color: rgb(148,72,72);" class="text-white">
-                            <td>Benefício</td>
-                            <td>Ações</td>
-                        </tr>
-                    </table>
+                        <table class="table-hover table-bordered col-md-12 text-center" id="TabelaBeneficiosFuncionario">
+                            <tr style="background-color: rgb(148,72,72);" class="text-white">
+                                <td>Benefício</td>
+                                <td>Ações</td>
+                            </tr>
+                        </table>
 
-                }
-                else
-                {
-                    <div class="col-12">
-                        <h5 class="text-center">Essa Empresa Ainda Não Possui Benefícios</h5>
-                    </div>
-                    <div class="col-12 ">
-                        <h6 class="text-center">Adicione Benefícios</h6>
-                        <div class=" col-12 d-flex justify-content-center">
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <h5 class="text-center">Essa Empresa Ainda Não Possui Benefícios</h5>
+                        </div>
+                        <div class="col-12 ">
+                            <h6 class="text-center">Adicione Benefícios</h6>
                             <div class=" col-12 d-flex justify-content-center">
-                                <a class="btn btn-warning custom text-center " href="@Url.Action("Index", "Beneficio", new { IDFuncionario = ViewBag.IDE })"><i class="fa fa-thumbs-up"></i> Benefícios</a>
+                                <div class=" col-12 d-flex justify-content-center">
+                                    <a class="btn btn-warning custom text-center " href="@Url.Action("Index", "Beneficio", new { IDFuncionario = ViewBag.IDE })"><i class="fa fa-thumbs-up"></i> Benefícios</a>
+
+                                </div>
+
 
                             </div>
 
-
                         </div>
+                    }
+                </div>
 
-                    </div>
-                }
+                <div id="Mensagem" style="display:none;">
+
+                </div>
+               
             </div>
 
         </div>
@@ -376,6 +383,8 @@ else
                     }
                 });
 
+                $("#FormBeneficios").css("display", "block");
+                $("#Mensagem").css("display", "none");
                 $("#beneficios-func").modal('show');
         });
 
@@ -393,6 +402,7 @@ else
             $("BtnModal").removeAttr("disabled");
             $("#MensagemInicial").css("display", "block");
             $("#MensagemRetorno").css("display", "none");
+            $(".BtnModal").removeAttr("disabled");
         });
 
         $("#DemitirFuncionario").click(function () {
@@ -414,7 +424,14 @@ else
             $.post(url, { id: IDFuncionario, Motivo: motivo }, RespostaServidor);
         });
 
-        function RespostaServidor(retorno) {
+            function RespostaServidor(retorno) {
+
+                if (retorno == "1") {
+                    $("#MensagemRetorno").html("<h5 class='text-danger'>O limite de funcionários demitidos nessa Empresa Avaliativa foi atingido. (Limite de Demissões = 3)</h5>");
+                    $("#MensagemRetorno").css("display", "block");
+                    $("#Carregando").css("display", "none");
+                    return;
+                }
             $("#MensagemRetorno").css("display", "block");
             $("#MensagemRetorno").html(retorno);
             $("#Carregando").css("display", "none");
@@ -435,10 +452,19 @@ else
 
             var url = "@Url.Action("AdicionarBeneficio","Pessoa")";
 
-            $.post(url, { beneficio: IDBeneficio, funcionario: ID });
+            $.post(url, { beneficio: IDBeneficio, funcionario: ID }, function (resposta="") {
+
+                if (resposta == "1") {
+                    $("#FormBeneficios").css("display", "none");
+                    $("#Mensagem").css("display", "block");
+                    $("#Mensagem").html("<h5 class='text-danger'>O limite de Benefício dos Funcionários nessa Empresa Avaliativa foi atingido. (Limite=10)</h5>");
+                    return;
+                }
+                $("#" + IDBeneficio + "-" + ID).removeClass().addClass('btn btn-danger mr-1').html("<span class='fa fa-minus'></span>").attr('onclick', 'RemoverBeneficio(' + IDBeneficio + ',' + ID + ')').removeAttr('disabled');
+
+            });
 
 
-            $("#" + IDBeneficio + "-" + ID).removeClass().addClass('btn btn-danger mr-1').html("<span class='fa fa-minus'></span>").attr('onclick', 'RemoverBeneficio(' + IDBeneficio + ',' + ID + ')').removeAttr('disabled');
         }
 
         function RemoverBeneficio(IDBeneficio,ID) {

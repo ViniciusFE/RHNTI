@@ -8,6 +8,36 @@
 @Styles.Render("~/Content/Pages/css")
 
 <style>
+    #mask {
+        position: absolute;
+        z-index: 9000;
+        background-color: #000;
+        display: none;
+        top: 0px;
+        left: 0px;
+    }
+
+    .window {
+        position: fixed;
+        width: 440px;
+        height: 200px;
+        display: none;
+        z-index: 9090;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    #dialog {
+        width: 375px;
+        height: 203px;
+        border: 5px solid #d32d2d;
+    }
+
+    .close {
+        display: block;
+        text-align: right;
+    }
+
 </style>
 
 
@@ -29,8 +59,8 @@
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalAvaliar">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-aval" role="document">
+        <div class="modal-content modal-av">
             <div class="modal-header">
                 <h5 class="modal-title">Avaliação de funcionário</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -38,8 +68,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h4>Por favor digite a avaliação do funcionário</h4>
-                @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
+                <div id="FormAvaliacao">
+                    <h4>Por favor digite a avaliação do funcionário</h4>
+                    @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
+                </div>
+
+                <div id="Mensagem">
+
+                </div>
+                
                 <br />
                 <div align="center">
                     <br />
@@ -48,8 +85,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar Avaliação</button>
-                <button type="button" class="btn btn-outline-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar Avaliação</button>
+                <button type="button" class="btn btn-success" disabled="disabled" id="BtnAvaliar">Avaliar</button>
             </div>
         </div>
     </div>
@@ -57,7 +94,16 @@
 
 @section Scripts
 {
+
     <script>
+
+     
+
+
+
+
+
+
         var IdFuncionario;
 
         $(document).ready(function () {
@@ -78,7 +124,7 @@
                              $("#Funcionarios").append(
                                  "<div class='alert alert-primary' role='alert'>" +
                                     "<div class='alert-body'>"+
-                                        "<h4>Não ´foi encontrado nenhum funcionário que responda a este Chefe de Setor</h4>" +
+                                        "<h4>Não foi encontrado nenhum funcionário que responda a este Chefe de Setor</h4>" +
                                     "</div>"+
                                  "</div>"
                              );
@@ -107,7 +153,7 @@
                                     "</div>" +
                                     "</div>" +
                                     "<div class='card-footer'>" +
-                                    "<button onclick='Abrir(" + data[i].ID + ")' class='btn btn-danger custom'><span class='fa fa-star'></span> Avaliar</button>" +
+                                    "<button onclick='Abrir(" + data[i].ID + ")' class='btn btn-danger custom avaliar'><span class='fa fa-star'></span> Avaliar</button>" +
                                     "</div>" +
                                     "</div>" +
                                     "</div>"
@@ -140,8 +186,7 @@
 
             $("#BtnAvaliar").click(function () {
                 var avaliacao = $("#TextBox").val();
-                alert(IdFuncionario);
-                alert(avaliacao);
+               
                 var url = "@Url.Action("AvaliacaoFuncionario","Avaliacao")";
                 $("#TextBox").attr("disabled", "disabed");
                 $.post(url, { id: IdFuncionario, Avaliacao: avaliacao }, RespostaAvaliacao);
@@ -151,16 +196,71 @@
 
             function RespostaAvaliacao(resposta) {
                 $("#Carregando").css("display", "none");
-                $("modal-body").html("<h4>" + resposta + "</h4>");
+                $("#FormAvaliacao").css("display", "none");
+                $("#Mensagem").css("display", "block");
+                $("#Mensagem").html("<h4>" + resposta + "</h4>");
                 $("BtnAvaliar").attr("disabled", "disabled");
             }
 
         });
-
+        var clicks = 0;
         function Abrir(id) {
             IdFuncionario = id;
+            $("#FormAvaliacao").css("display", "block");
+            $("#Mensagem").css("display", "none");
             $("#ModalAvaliar").modal('show');
+            $("#TextBox").removeAttr("disabled");
+            $("#TextBox").val("");
+            console.log()
+
+                clicks++;
+            console.log(clicks + "click funcao");
+
+         
         }
+
+
+        modal();
+
+        function modal() {
+            window.addEventListener('click', function (e) {
+                var mouse = {
+                    page: {
+                        x: e.pageX,
+                        y: e.pageY
+                    },
+                    client: {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+                }
+            
+            console.log(mouse.page.y);
+                console.log(clicks + "click funcao");
+
+
+                if (clicks == 1) {
+
+                    document.querySelector(".modal-aval").style.marginTop = (mouse.page.y -410) + "px";
+                    console.log("entrou")
+
+                }
+                else {
+                    if (document.querySelector("#ModalAvaliar").style.display == "none") {
+                        document.querySelector(".modal-aval").style.marginTop = (mouse.page.y - 410) + "px";
+                        this.console.log("oi")
+                    }
+
+                    
+                }
+
+            });
+
+
+
+
+        }
+
 
     </script>
 }

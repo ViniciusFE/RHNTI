@@ -16,11 +16,9 @@ namespace RH.Model
     {
         public int Err_ID { get; set; }
         public int Err_Prova_Pro_ID { get; set; }
-        public int Err_Aluno_Alu_ID { get; set; }
         public string Err_RespostaCerta { get; set; }
         public string Err_RespostaAluno { get; set; }
     
-        public virtual Aluno Aluno { get; set; }
         public virtual Prova Prova { get; set; }
     }
 }

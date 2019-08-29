@@ -64,7 +64,7 @@ namespace RH.Model.Repositories
         {
             int QuantidadeBeneficios = BeneficiosEmpresa(IDEmpresa).Count();
 
-            if(QuantidadeBeneficios==10)
+            if(QuantidadeBeneficios==5)
             {
                 return true;
             }

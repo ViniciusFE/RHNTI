@@ -235,5 +235,10 @@ namespace RH.View.Controllers
             ViewBag.NomeEmpresa = aEmpresa.Emp_Nome;
             return View(b);
         }
+
+        public ActionResult Notas(int CodigoProva)
+        {
+            return View(_Control.SelecionarNotasProva(CodigoProva).OrderBy(p=>p.MatriculaAluno));
+        }
     }
 }

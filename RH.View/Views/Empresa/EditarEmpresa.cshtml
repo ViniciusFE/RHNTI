@@ -1,104 +1,133 @@
 @model RH.Model.Empresa
 
 @{
-    ViewBag.Title = "EditarEmpresa";
+    ViewBag.Title = "Editar Empresa";
 }
 <style>
-    #info-img{
-        display:none;
-        color:gray;
+    #info-img {
+        display: none;
+        color: gray;
     }
+
     .fa-question-circle {
         color: gray;
     }
 </style>
 
-<<<<<<< HEAD
-<h2 class="text-center">EditarEmpresa</h2>
-=======
-<h2 class="text-center">Editar Empresa</h2>
->>>>>>> 2d5ac815289a1f634351c98627f40967a691e32c
 
 
 @using (Html.BeginForm(Html.BeginForm("EditarEmpresa", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" })))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-<<<<<<< HEAD
-    <h4 class="text-center">Empresa</h4>
-=======
->>>>>>> 2d5ac815289a1f634351c98627f40967a691e32c
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Emp_ID)
 
-    <div class="border-top-0 border-dark col-md-12" align="center">
-        <label for="text2" class="control-label">Logo da Empresa @Model.Emp_Nome: <i class="far fa-question-circle"></i>
-        <span id="info-img"><br />Clique no Logo para Poder Troca-la</span> 
-        </label>
-        <br />
-
-        <input id="Imagem" name="Imagem" style="display:none;" type="file" />
-        <label for="Imagem"><img class="img-responsive img-fluid rounded-circle mr-2" src="@Url.Action("GetImagem",new { id=Model.Emp_Aluno_Alu_ID})" id="aImagem" style="width:130%;height:220px;" /></label>
-
-    </div>
-    <div class="form-row">
-
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Emp_Nome, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Emp_Nome, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Emp_Nome, "", new { @class = "text-danger" })
-        </div>
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header">
+                <h1>Alterar Empresa</h1>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="file" name="Imagem" id="Imagem" data-preview-file-type="text" data-msg-placeholder="Selecione uma Logo para sua empresa" />
+                        @Html.ValidationMessage("Imagem", "", new { @class = "text-danger" })
 
 
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Emp_Estado, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Emp_Estado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Emp_Estado, "", new { @class = "text-danger" })
-        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Emp_Nome, htmlAttributes: new { })
+
+                        @Html.EditorFor(model => model.Emp_Nome, new { htmlAttributes = new { @class = "form-control ", @type = "text", @placeholder = "Digite o Nome da Empresa" } })
+                        @Html.ValidationMessageFor(model => model.Emp_Nome, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Emp_Estado, htmlAttributes: new { @class = "control-label " })
+
+                        <select id="estado" name="Emp_Estado" class="form-control">
+                            <option disabled selected>@Model.Emp_Estado</option>
+                            <option value="Acre">Acre</option>
+                            <option value="Alagoas">Alagoas</option>
+                            <option value="Amapá">Amapá</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Bahia">Bahia</option>
+                            <option value="Ceará">Ceará</option>
+                            <option value="Distrito Federal">Distrito Federal</option>
+                            <option value="Espírito Santo">Espírito Santo</option>
+                            <option value="Goiás">Goiás</option>
+                            <option value="Maranhão">Maranhão</option>
+                            <option value="Mato Grosso">Mato Grosso</option>
+                            <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                            <option value="Minas Gerais">Minas Gerais</option>
+                            <option value="Pará">Pará</option>
+                            <option value="Paraíba">Paraíba</option>
+                            <option value="Paraná">Paraná</option>
+                            <option value="Pernambuco">Pernambuco</option>
+                            <option value="Piauí">Piauí</option>
+                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                            <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                            <option value="Rio Grande so Sul">Rio Grande do Sul</option>
+                            <option value="Rondônia">Rondônia</option>
+                            <option value="Roraima">Roraima</option>
+                            <option value="Santa Catarina">Santa Catarina</option>
+                            <option value="São Paulo">São Paulo</option>
+                            <option value="Sergipe">Sergipe</option>
+                            <option value="Tocantins">Tocantins</option>
+                            <option value="Estrangeiro">Estrangeiro</option>
+                        </select>
+
+                        @Html.ValidationMessageFor(model => model.Emp_Estado, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Emp_Cidade, htmlAttributes: new { @class = "control-label" })
+                        <div class="">
+                            @Html.EditorFor(model => model.Emp_Cidade, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite a Cidade da Empresa" } })
+                            @Html.ValidationMessageFor(model => model.Emp_Cidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Emp_Endereco, htmlAttributes: new { @class = "control-label" })
+                        <div class="">
+                            @Html.EditorFor(model => model.Emp_Endereco, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Endereço da Empresa" } })
+                            @Html.ValidationMessageFor(model => model.Emp_Endereco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Emp_CNPJ, htmlAttributes: new { @class = "control-label " })
+                        <div class="">
+                            @Html.EditorFor(model => model.Emp_CNPJ, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o CNPJ da Empresa" } })
+                            @Html.ValidationMessageFor(model => model.Emp_CNPJ, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Emp_RegistroEstadual, htmlAttributes: new { @class = "control-label " })
+                        <div class="">
+                            @Html.EditorFor(model => model.Emp_RegistroEstadual, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Digite o Registro Estadual da Empresa" } })
+                            @Html.ValidationMessageFor(model => model.Emp_RegistroEstadual, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
 
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Emp_Cidade, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Emp_Cidade, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Emp_Cidade, "", new { @class = "text-danger" })
-        </div>
 
 
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Emp_Endereco, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Emp_Endereco, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Emp_Endereco, "", new { @class = "text-danger" })
-        </div>
 
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Emp_CNPJ, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Emp_CNPJ, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Emp_CNPJ, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Emp_RegistroEstadual, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Emp_RegistroEstadual, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Emp_RegistroEstadual, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="from-group col-md-12">
-        <div class="form-group col-md-6 ">
-            <div class="col-md-offset-2 col-md-10">
-                <a class="btn btn-outline-danger" href="~/Empresa/MinhasEmpresas">Cancelar</a>
-                <input type="submit" value="Alterar" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="from-group col-md-12">
+                    <button type="submit" class="btn btn-outline-secondary"><span class="fa fa-plus"></span> Salvar</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="back">
-        <a href="~/Empresa/MinhasEmpresas"><i class="fas fa-arrow-left"></i> Voltar</a>
-
-    </div>
-</div>
 }
 
 @section Scripts {
@@ -106,17 +135,18 @@
     <script>
         document.querySelector(".fa-question-circle").addEventListener("click", () => {
             var a = (document.getElementById("info-img").style.display);
-            if (a=="none") {
+            if (a == "none") {
                 document.getElementById("info-img").style.display = "inline";
             } else {
                 document.getElementById("info-img").style.display = "none";
             }
 
-        });       
+        });
     </script>
 
     <script>
         $(document).ready(function () {
+            $("#Imagem").fileinput({ language: "pt-BR", 'showUpload': false, 'previewFileType': 'any' });
             $("#Imagem").change(function (e) {
                 for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
                     var file = e.originalEvent.srcElement.files[i];
