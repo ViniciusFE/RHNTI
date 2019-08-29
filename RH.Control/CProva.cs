@@ -248,5 +248,10 @@ namespace RH.Control
         {
             _RepositorieErro.CadastrarErro(oErro);
         }
+
+        public List<PessoaBeneficio> SelecionarBeneficiosFuncionarioDiaCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return _RepositoriePessoaBeneficio.SelecionarBeneficiosFuncionarioDiaCadastro(DataCadastro, IDEmpresa);
+        }
     }
 }

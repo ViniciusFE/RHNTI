@@ -131,6 +131,7 @@
           <Property Name="Err_Prova_Pro_ID" Type="int" Nullable="false" />
           <Property Name="Err_RespostaCerta" Type="varchar(max)" Nullable="false" />
           <Property Name="Err_RespostaAluno" Type="varchar(max)" Nullable="false" />
+          <Property Name="Erro_Tipo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Movimentacao">
           <Key>
@@ -1983,6 +1984,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Err_RespostaCerta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Err_RespostaAluno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Prova" Relationship="RHModel.FK_Erro_Prova" FromRole="Erro" ToRole="Prova" />
+          <Property Name="Erro_Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Movimentacao">
           <Key>
@@ -3242,6 +3244,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySetMapping Name="Erro">
             <EntityTypeMapping TypeName="RHModel.Erro">
               <MappingFragment StoreEntitySet="Erro">
+                <ScalarProperty Name="Erro_Tipo" ColumnName="Erro_Tipo" />
                 <ScalarProperty Name="Err_RespostaAluno" ColumnName="Err_RespostaAluno" />
                 <ScalarProperty Name="Err_RespostaCerta" ColumnName="Err_RespostaCerta" />
                 <ScalarProperty Name="Err_Prova_Pro_ID" ColumnName="Err_Prova_Pro_ID" />

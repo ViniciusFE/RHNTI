@@ -88,5 +88,10 @@ namespace RH.Model.Repositories
 
             return false;
         }
+
+        public List<PessoaBeneficio> SelecionarBeneficiosFuncionarioDiaCadastro(string DiaCadastro, int IDEmpresa)
+        {
+            return odb.PessoaBeneficio.SqlQuery("select * from PessoaBeneficio pb inner join Beneficio b on pb.PB_Beneficio_Ben_ID = b.Ben_ID and b.Ben_Empresa_Emp_ID = " + IDEmpresa + " where pb.PB_DataCadastro = '" + DiaCadastro + "'").ToList();
+        }
     }
 }

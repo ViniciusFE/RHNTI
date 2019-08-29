@@ -704,6 +704,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: "+SetorAluno.Set_Nome+"</br>Data de Cadastro: "+SetorAluno.Set_DataCadastro+"</br>Setor Respondente: "+SetorRespondenteAluno;
                     oErro.Err_RespostaCerta= "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
                     _Control.CadastrarErro(oErro);
@@ -725,9 +726,11 @@ namespace RH.View.Controllers
                 }
 
                 Erro oErro = new Erro();
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";  
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                 oErro.Err_RespostaAluno = "Não foi encontrado um setor cadastrado no dia " + SetorProva.Set_DataCadastro;
                 oErro.Err_RespostaCerta = oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Setor 2
@@ -771,6 +774,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
                     oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
                     _Control.CadastrarErro(oErro);
@@ -793,8 +797,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado um setor cadastrado no dia " + SetorProva.Set_DataCadastro;
                 oErro.Err_RespostaCerta = oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Setor 3
@@ -838,6 +844,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
                     oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
                     _Control.CadastrarErro(oErro);
@@ -860,8 +867,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado um setor cadastrado no dia " + SetorProva.Set_DataCadastro;
                 oErro.Err_RespostaCerta = oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Setor 4
@@ -905,6 +914,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
                     oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
                     _Control.CadastrarErro(oErro);
@@ -927,8 +937,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado um setor cadastrado no dia " + SetorProva.Set_DataCadastro;
                 oErro.Err_RespostaCerta = oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Setor 5
@@ -972,6 +984,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Setor:</br>Nome do Setor: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + SetorAluno.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteAluno;
                     oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
                     _Control.CadastrarErro(oErro);
@@ -994,8 +1007,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado um setor cadastrado no dia " + SetorProva.Set_DataCadastro;
                 oErro.Err_RespostaCerta = oErro.Err_RespostaCerta = "Setor:</br>Nome do Setor: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + SetorProva.Set_DataCadastro + "</br>Setor Respondente: " + SetorRespondenteProva;
+                _Control.CadastrarErro(oErro);
             }
 
 
@@ -1044,6 +1059,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Cargo:</br>Nome do Cargo: " + CargoAluno.Car_Nome + "</br>Setor do Cargo: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeAluno;
                     oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
                     _Control.CadastrarErro(oErro);
@@ -1066,8 +1082,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum cargo cadastrado no dia " + CargoProva.Car_DataCadastro;
                 oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Cargo 2
@@ -1113,6 +1131,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Cargo:</br>Nome do Cargo: " + CargoAluno.Car_Nome + "</br>Setor do Cargo: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeAluno;
                     oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
                     _Control.CadastrarErro(oErro);
@@ -1135,8 +1154,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum cargo cadastrado no dia " + CargoProva.Car_DataCadastro;
                 oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Cargo 3
@@ -1182,6 +1203,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Cargo:</br>Nome do Cargo: " + CargoAluno.Car_Nome + "</br>Setor do Cargo: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeAluno;
                     oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
                     _Control.CadastrarErro(oErro);
@@ -1204,8 +1226,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum cargo cadastrado no dia " + CargoProva.Car_DataCadastro;
                 oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Cargo 4
@@ -1251,6 +1275,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Cargo:</br>Nome do Cargo: " + CargoAluno.Car_Nome + "</br>Setor do Cargo: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeAluno;
                     oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
                     _Control.CadastrarErro(oErro);
@@ -1273,8 +1298,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum cargo cadastrado no dia " + CargoProva.Car_DataCadastro;
                 oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Cargo 5
@@ -1320,6 +1347,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Cargo:</br>Nome do Cargo: " + CargoAluno.Car_Nome + "</br>Setor do Cargo: " + SetorAluno.Set_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeAluno;
                     oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
                     _Control.CadastrarErro(oErro);
@@ -1342,8 +1370,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum cargo cadastrado no dia " + CargoProva.Car_DataCadastro;
                 oErro.Err_RespostaCerta = "Cargo:</br>Nome do Cargo: " + CargoProva.Car_Nome + "</br>Setor do Cargo: " + SetorProva.Set_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro + "</br>Chefe do Setor: " + ChefeProva;
+                _Control.CadastrarErro(oErro);
             }
 
             //Verificar Funcionarios
@@ -1367,6 +1397,7 @@ namespace RH.View.Controllers
 
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
                     oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
                     _Control.CadastrarErro(oErro);
@@ -1379,8 +1410,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
                 oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                _Control.CadastrarErro(oErro);
             }
 
             //Funcionario 2
@@ -1401,6 +1434,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
                     oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
                     _Control.CadastrarErro(oErro);
@@ -1414,8 +1448,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
                 oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                _Control.CadastrarErro(oErro);
             }
 
             //Funcionario 3
@@ -1436,6 +1472,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
                     oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
                     _Control.CadastrarErro(oErro);
@@ -1448,8 +1485,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
                 oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                _Control.CadastrarErro(oErro);
             }
 
             //Funcionário 4
@@ -1470,6 +1509,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
                     oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
                     _Control.CadastrarErro(oErro);
@@ -1482,8 +1522,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
-                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                _Control.CadastrarErro(oErro);
             }
 
             //Funcionário 5
@@ -1504,6 +1546,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
                     oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
                     _Control.CadastrarErro(oErro);
@@ -1516,8 +1559,10 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
                 oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                _Control.CadastrarErro(oErro);
             }
 
             //Verifica Dependentes
@@ -1540,6 +1585,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1553,6 +1599,7 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum dependente cadastrado no dia " + DependenteProva.DP_DataCadastro;
                 oErro.Err_RespostaCerta= "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                 _Control.CadastrarErro(oErro);
@@ -1576,6 +1623,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1588,6 +1636,7 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum dependente cadastrado no dia " + DependenteProva.DP_DataCadastro;
                 oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                 _Control.CadastrarErro(oErro);
@@ -1611,6 +1660,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1623,6 +1673,7 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum dependente cadastrado no dia " + DependenteProva.DP_DataCadastro;
                 oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                 _Control.CadastrarErro(oErro);
@@ -1646,6 +1697,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1658,6 +1710,7 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum dependente cadastrado no dia " + DependenteProva.DP_DataCadastro;
                 oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                 _Control.CadastrarErro(oErro);
@@ -1681,6 +1734,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1693,6 +1747,7 @@ namespace RH.View.Controllers
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum dependente cadastrado no dia " + DependenteProva.DP_DataCadastro;
                 oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
                 _Control.CadastrarErro(oErro);
@@ -1718,6 +1773,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dado Bancário:</br>Dado do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Tipo: " + DadoBancarioAluno.DB_Tipo + "</br>Número: " + DadoBancarioAluno.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioAluno.DB_DataCadastro;
                     oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1729,8 +1785,10 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum Dado Bancário cadastrado no dia " + DadoBancarioProva.DB_DataCadastro;
                 oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
+                _Control.CadastrarErro(oErro);
             }
 
             //Dado Bancário 2
@@ -1751,6 +1809,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Errro no Cadastro";
                     oErro.Err_RespostaAluno = "Dado Bancário:</br>Dado do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Tipo: " + DadoBancarioAluno.DB_Tipo + "</br>Número: " + DadoBancarioAluno.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioAluno.DB_DataCadastro;
                     oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1762,8 +1821,10 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum Dado Bancário cadastrado no dia " + DadoBancarioProva.DB_DataCadastro;
                 oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
+                _Control.CadastrarErro(oErro);
             }
 
             //Dado Bancário 3
@@ -1784,6 +1845,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dado Bancário:</br>Dado do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Tipo: " + DadoBancarioAluno.DB_Tipo + "</br>Número: " + DadoBancarioAluno.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioAluno.DB_DataCadastro;
                     oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1795,8 +1857,10 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum Dado Bancário cadastrado no dia " + DadoBancarioProva.DB_DataCadastro;
                 oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
+                _Control.CadastrarErro(oErro);
             }
 
             //Dado Bancário 4
@@ -1817,6 +1881,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dado Bancário:</br>Dado do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Tipo: " + DadoBancarioAluno.DB_Tipo + "</br>Número: " + DadoBancarioAluno.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioAluno.DB_DataCadastro;
                     oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1828,8 +1893,10 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum Dado Bancário cadastrado no dia " + DadoBancarioProva.DB_DataCadastro;
                 oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
+                _Control.CadastrarErro(oErro);
             }
 
             //Dado Bancário 5
@@ -1850,6 +1917,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dado Bancário:</br>Dado do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Tipo: " + DadoBancarioAluno.DB_Tipo + "</br>Número: " + DadoBancarioAluno.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioAluno.DB_DataCadastro;
                     oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
                     _Control.CadastrarErro(oErro);
@@ -1861,16 +1929,598 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum Dado Bancário cadastrado no dia " + DadoBancarioProva.DB_DataCadastro;
                 oErro.Err_RespostaCerta = "Dado Bancário:</br>Dado do Funcionário: " + PessoaProva.Pes_Nome + "</br>Tipo: " + DadoBancarioProva.DB_Tipo + "</br>Número: " + DadoBancarioProva.DB_Numero + "</br>Data de Cadastro: " + DadoBancarioProva.DB_DataCadastro;
+                _Control.CadastrarErro(oErro);
             }
 
             //Verifica Benefícios
+            List<Beneficio> BeneficiosAluno = _Control.SelecionarBeneficiosAluno(aEmpresa.Emp_ID);
+            bool Acertou = false;
 
-            
+            //Benefício 1
+            Beneficio oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+
+            foreach(var x in BeneficiosAluno)
+            {
+                if(oBeneficio.Ben_Nome.Trim()==x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim()==x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo==x.Ben_Custo && oBeneficio.Ben_DataCadastro==x.Ben_DataCadastro)
+                {
+                    Nota = Nota + 0.2;
+                    Acertou = true;
+                    break;
+                }
+            }
+
+            if(!Acertou)
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Erro no Cadastro";
+                oErro.Err_RespostaAluno = "Nenhum dos seus benefícios cadastrados se compara ao benefício da prova.";
+                oErro.Err_RespostaCerta = "Benefício:</br>Nome do Benefício: " + oBeneficio.Ben_Nome + "</br>Descrição: " + oBeneficio.Ben_Descricao + "</br>Custo: " + oBeneficio.Ben_Custo + "R$</br>Data de Cadastro: " + oBeneficio.Ben_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Benefício 2
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio2);
+
+            foreach (var x in BeneficiosAluno)
+            {
+                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                {
+                    Nota = Nota + 0.2;
+                    Acertou = true;
+                    break;
+                }
+            }
+
+            if (!Acertou)
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Erro no Cadastro";
+                oErro.Err_RespostaAluno = "Nenhum dos seus benefícios cadastrados se compara ao benefício da prova.";
+                oErro.Err_RespostaCerta = "Benefício:</br>Nome do Benefício: " + oBeneficio.Ben_Nome + "</br>Descrição: " + oBeneficio.Ben_Descricao + "</br>Custo: " + oBeneficio.Ben_Custo + "R$</br>Data de Cadastro: " + oBeneficio.Ben_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Benefício 3
+
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+
+            foreach (var x in BeneficiosAluno)
+            {
+                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                {
+                    Nota = Nota + 0.2;
+                    Acertou = true;
+                    break;
+                }
+            }
+
+            if (!Acertou)
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Erro no Cadastro";
+                oErro.Err_RespostaAluno = "Nenhum dos seus benefícios cadastrados se compara ao benefício da prova.";
+                oErro.Err_RespostaCerta = "Benefício:</br>Nome do Benefício: " + oBeneficio.Ben_Nome + "</br>Descrição: " + oBeneficio.Ben_Descricao + "</br>Custo: " + oBeneficio.Ben_Custo + "R$</br>Data de Cadastro: " + oBeneficio.Ben_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Benefício 4
+
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+
+            foreach (var x in BeneficiosAluno)
+            {
+                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                {
+                    Nota = Nota + 0.2;
+                    Acertou = true;
+                    break;
+                }
+            }
+
+            if (!Acertou)
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Erro no Cadastro";
+                oErro.Err_RespostaAluno = "Nenhum dos seus benefícios cadastrados se compara ao benefício da prova.";
+                oErro.Err_RespostaCerta = "Benefício:</br>Nome do Benefício: " + oBeneficio.Ben_Nome + "</br>Descrição: " + oBeneficio.Ben_Descricao + "</br>Custo: " + oBeneficio.Ben_Custo + "R$</br>Data de Cadastro: " + oBeneficio.Ben_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Benefício 5
+
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+
+            foreach (var x in BeneficiosAluno)
+            {
+                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                {
+                    Nota = Nota + 0.2;
+                    Acertou = true;
+                    break;
+                }
+            }
+
+            if (!Acertou)
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Erro no Cadastro";
+                oErro.Err_RespostaAluno = "Nenhum dos seus benefícios cadastrados se compara ao benefício da prova.";
+                oErro.Err_RespostaCerta = "Benefício:</br>Nome do Benefício: " + oBeneficio.Ben_Nome + "</br>Descrição: " + oBeneficio.Ben_Descricao + "</br>Custo: " + oBeneficio.Ben_Custo + "R$</br>Data de Cadastro: " + oBeneficio.Ben_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
 
             //Verifica Benefícios do Funcionário
+
+            //Verifica Benefícios 1
+            PessoaBeneficio BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario1);
+            List<PessoaBeneficio> BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+            Beneficio BeneficioAluno = new Beneficio();
+            Beneficio oBeneficioProva = new Beneficio();
             
+
+            if(BeneficiosFuncionarioAluno!=null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim()==oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if(!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 2
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario2);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 3
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario3);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 4
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario4);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 5
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario5);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 6
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BenefcioFuncionario6);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 7
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario7);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 8
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario8);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 9
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario9);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
+
+            //Verifica Benefíco 10
+
+            BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario10);
+            BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
+
+            if (BeneficiosFuncionarioAluno != null)
+            {
+                foreach (var x in BeneficiosFuncionarioAluno)
+                {
+                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
+                    oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    {
+                        Nota = Nota + 0.2;
+                        Acertou = true;
+                        break;
+                    }
+                }
+
+                if (!Acertou)
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Err_RespostaAluno = "Nenhum dos seus benefícios de funcionários cadastrados se compara ao benefício de funcionário da prova.";
+                    oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum cadastro de benefíco de funcionário no dia " + BeneficioProva.PB_DataCadastro;
+                oErro.Err_RespostaCerta = "Benefíco Funcionário</br>Funcionário: " + PessoaProva.Pes_Nome + "</br>Benefício: " + oBeneficioProva.Ben_Nome + "</br>Data de Cadastro: " + BeneficioProva.PB_DataCadastro;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                _Control.CadastrarErro(oErro);
+            }
+
+            Acertou = false;
 
             //Verifica Avaliações dos Funcionários
 
@@ -1892,6 +2542,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Avaliação:</br>Avaliação do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoAluno.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoAluno.Ava_Avaliacao;
                     oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                     _Control.CadastrarErro(oErro);
@@ -1903,6 +2554,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Avaliação de Funcionário no dia " + AvaliacaoProva.Ava_DataCadastro;
                 oErro.Err_RespostaCerta= "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                 _Control.CadastrarErro(oErro);
@@ -1926,6 +2578,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Avaliação:</br>Avaliação do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoAluno.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoAluno.Ava_Avaliacao;
                     oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                     _Control.CadastrarErro(oErro);
@@ -1937,6 +2590,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Avaliação de Funcionário no dia " + AvaliacaoProva.Ava_DataCadastro;
                 oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                 _Control.CadastrarErro(oErro);
@@ -1960,6 +2614,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Avaliação:</br>Avaliação do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoAluno.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoAluno.Ava_Avaliacao;
                     oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                     _Control.CadastrarErro(oErro);
@@ -1971,6 +2626,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Avaliação de Funcionário no dia " + AvaliacaoProva.Ava_DataCadastro;
                 oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                 _Control.CadastrarErro(oErro);
@@ -1994,6 +2650,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Avaliação:</br>Avaliação do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoAluno.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoAluno.Ava_Avaliacao;
                     oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                     _Control.CadastrarErro(oErro);
@@ -2005,6 +2662,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Avaliação de Funcionário no dia " + AvaliacaoProva.Ava_DataCadastro;
                 oErro.Err_RespostaCerta = "Avaliação:</br>Avaliação do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data de Cadastro: " + AvaliacaoProva.Ava_DataCadastro + "</br>Avaliação: " + AvaliacaoProva.Ava_Avaliacao;
                 _Control.CadastrarErro(oErro);
@@ -2030,6 +2688,7 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Demissao:</br>Demissão do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data da Demissão: " + DemissaoAluno.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoAluno.Dem_Motivo;
                     oErro.Err_RespostaCerta= "Demissao:</br>Demissão do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data da Demissão: " + DemissaoProva.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoProva.Dem_Motivo;
                     _Control.CadastrarErro(oErro);
@@ -2038,7 +2697,14 @@ namespace RH.View.Controllers
 
             else
             {
+                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
 
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Demissão de Funcionário no dia " + DemissaoProva.Dem_DataCadastro;
+                oErro.Err_RespostaCerta= "Demissao:</br>Demissão do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data da Demissão: " + DemissaoProva.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoProva.Dem_Motivo;
+                _Control.CadastrarErro(oErro);
             }
 
             //Demissao 2
@@ -2059,10 +2725,23 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Demissao:</br>Demissão do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data da Demissão: " + DemissaoAluno.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoAluno.Dem_Motivo;
                     oErro.Err_RespostaCerta = "Demissao:</br>Demissão do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data da Demissão: " + DemissaoProva.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoProva.Dem_Motivo;
                     _Control.CadastrarErro(oErro);
                 }
+            }
+
+            else
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Demissão de Funcionário no dia " + DemissaoProva.Dem_DataCadastro;
+                oErro.Err_RespostaCerta = "Demissao:</br>Demissão do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data da Demissão: " + DemissaoProva.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoProva.Dem_Motivo;
+                _Control.CadastrarErro(oErro);
             }
 
             //Demissao 3
@@ -2083,10 +2762,23 @@ namespace RH.View.Controllers
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Demissao:</br>Demissão do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Data da Demissão: " + DemissaoAluno.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoAluno.Dem_Motivo;
                     oErro.Err_RespostaCerta = "Demissao:</br>Demissão do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data da Demissão: " + DemissaoProva.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoProva.Dem_Motivo;
                     _Control.CadastrarErro(oErro);
                 }
+            }
+
+            else
+            {
+                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhuma Demissão de Funcionário no dia " + DemissaoProva.Dem_DataCadastro;
+                oErro.Err_RespostaCerta = "Demissao:</br>Demissão do Funcionário: " + PessoaProva.Pes_Nome + "</br>Data da Demissão: " + DemissaoProva.Dem_DataCadastro + "</br>Motivo da Demissao: " + DemissaoProva.Dem_Motivo;
+                _Control.CadastrarErro(oErro);
             }
 
             aNota.Not_Nota = Nota;

@@ -18,6 +18,7 @@ namespace RH.Model
         public int Err_Prova_Pro_ID { get; set; }
         public string Err_RespostaCerta { get; set; }
         public string Err_RespostaAluno { get; set; }
+        public string Erro_Tipo { get; set; }
     
         public virtual Prova Prova { get; set; }
     }
