@@ -59,8 +59,8 @@
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalAvaliar">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-aval" role="document">
+        <div class="modal-content modal-av">
             <div class="modal-header">
                 <h5 class="modal-title">Avaliação de funcionário</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -94,7 +94,16 @@
 
 @section Scripts
 {
+
     <script>
+
+     
+
+
+
+
+
+
         var IdFuncionario;
 
         $(document).ready(function () {
@@ -144,7 +153,7 @@
                                     "</div>" +
                                     "</div>" +
                                     "<div class='card-footer'>" +
-                                    "<button onclick='Abrir(" + data[i].ID + ")' class='btn btn-danger custom'><span class='fa fa-star'></span> Avaliar</button>" +
+                                    "<button onclick='Abrir(" + data[i].ID + ")' class='btn btn-danger custom avaliar'><span class='fa fa-star'></span> Avaliar</button>" +
                                     "</div>" +
                                     "</div>" +
                                     "</div>"
@@ -194,7 +203,7 @@
             }
 
         });
-
+        var clicks = 0;
         function Abrir(id) {
             IdFuncionario = id;
             $("#FormAvaliacao").css("display", "block");
@@ -202,7 +211,55 @@
             $("#ModalAvaliar").modal('show');
             $("#TextBox").removeAttr("disabled");
             $("#TextBox").val("");
+            console.log()
+
+                clicks++;
+            console.log(clicks + "click funcao");
+
+         
         }
+
+
+        modal();
+
+        function modal() {
+            window.addEventListener('click', function (e) {
+                var mouse = {
+                    page: {
+                        x: e.pageX,
+                        y: e.pageY
+                    },
+                    client: {
+                        x: e.clientX,
+                        y: e.clientY
+                    }
+                }
+            
+            console.log(mouse.page.y);
+          
+
+
+                if (clicks == 1) {
+
+                    document.querySelector(".modal-aval").style.marginTop = (mouse.page.y -410) + "px";
+                   
+                }
+                else {
+                    if (document.querySelector("#ModalAvaliar").style.display == "none") {
+                        document.querySelector(".modal-aval").style.marginTop = (mouse.page.y - 410) + "px";
+                      
+                    }
+
+                    
+                }
+
+            });
+
+
+
+
+        }
+
 
     </script>
 }
