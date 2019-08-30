@@ -24,6 +24,7 @@ namespace RH.Control
         RepositorieBeneficio _RepositorieBeneficio;
         RepositorieNota _RepositorieNota;
         RepositorieErro _RepositorieErro;
+        RepositorieCurso _RepositorieCurso;
         
 
         public CProva()
@@ -42,6 +43,7 @@ namespace RH.Control
             _RepositorieBeneficio = new RepositorieBeneficio();
             _RepositorieNota = new RepositorieNota();
             _RepositorieErro = new RepositorieErro();
+            _RepositorieCurso = new RepositorieCurso();
         }
 
         public void CadastrarProva(Prova aProva)
@@ -252,6 +254,26 @@ namespace RH.Control
         public List<PessoaBeneficio> SelecionarBeneficiosFuncionarioDiaCadastro(string DataCadastro,int IDEmpresa)
         {
             return _RepositoriePessoaBeneficio.SelecionarBeneficiosFuncionarioDiaCadastro(DataCadastro, IDEmpresa);
+        }
+
+        public List<Erro> SelecionarErrosProva(int IDProva)
+        {
+            return _RepositorieErro.SelecionarErroProva(IDProva);
+        }
+
+        public Prova SelecionarProvaPorID(int IDProva)
+        {
+            return _RepositorieProva.SelecionarProvaPorID(IDProva);
+        }
+
+        public Nota SelecionarNotaProva(int IDProva)
+        {
+            return _RepositorieNota.SelecionarNota(IDProva);
+        }
+
+        public Curso SelecionarCurso(int id)
+        {
+            return _RepositorieCurso.SelecionarCurso(id);
         }
     }
 }

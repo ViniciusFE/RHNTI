@@ -633,18 +633,21 @@ namespace RH.View.Controllers
         public ActionResult EntregarProva()
         {
             Aluno oAluno = (Aluno)Session["User"];
+           
+            
+            CalcularNota(oAluno.Alu_ID);
+
             Prova aProva = _Control.SelecionarProvaAluno(oAluno.Alu_ID);
             aProva.Pro_Entregue = true;
+            aProva.Pro_Situation = false;
             _Control.AlterarProva(aProva);
-
-            CalcularNota(oAluno.Alu_ID);
 
             Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(oAluno.Alu_ID);
             aEmpresa.Emp_Situation = false;
             _Control.AlterarEmpresa(aEmpresa);  
 
 
-            return Json("Sua prova foi entregue e sua nota foi calculada, após o vencimento do dia prova a próxima vez que acessar a plataforma terá a acesso a sua nota.");
+            return Json("Sua nota foi calculada com sucesso, após o vencimento do dia da prova que será no dia "+aProva.Pro_DataTermino+", a próxima vez que você logar na plataforma você terá acesso a sua nota e poderá visualizar seus erros.");
         }
 
         public void CalcularNota(int IDAluno)
@@ -668,12 +671,12 @@ namespace RH.View.Controllers
 
             if (SetorAluno != null)
             {
-                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
                 string SetorRespondenteProva = oSetor.Set_Nome;
-                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno==SetorRespondenteProva)
+                if (SetorAluno.Set_Nome.Replace(" ","") == SetorProva.Set_Nome.Replace(" ","") && SetorRespondenteAluno.Replace(" ","")==SetorRespondenteProva.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -738,12 +741,12 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
                 string SetorRespondenteProva = oSetor.Set_Nome;
-                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
+                if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -808,12 +811,12 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
                 string SetorRespondenteProva = oSetor.Set_Nome;
-                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
+                if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {                    
                     Nota = Nota + 0.2;
                 }
@@ -878,12 +881,12 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
                 string SetorRespondenteProva = oSetor.Set_Nome;
-                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
+                if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -948,12 +951,12 @@ namespace RH.View.Controllers
             SetorAluno = _Control.SelecionarSetorDiaCadastro(SetorProva.Set_DataCadastro, aEmpresa.Emp_ID);
             if (SetorAluno != null)
             {
-                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_ID);
+                Setor oSetor = _Control.SelecionarSetor(SetorProva.Set_Setor_Set_ID);
                 string SetorRespondenteProva = oSetor.Set_Nome;
-                oSetor = _Control.SelecionarSetor(SetorAluno.Set_ID);
+                oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
-                if (SetorAluno.Set_Nome.Trim() == SetorProva.Set_Nome.Trim() && SetorRespondenteAluno == SetorRespondenteProva)
+                if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1026,7 +1029,7 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
-                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                if (CargoAluno.Car_Nome.Replace(" ","") == CargoProva.Car_Nome.Replace(" ","") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1098,7 +1101,7 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
-                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1170,7 +1173,7 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
-                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1242,7 +1245,7 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
-                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1314,7 +1317,7 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
-                if (CargoAluno.Car_Nome.Trim() == CargoProva.Car_Nome.Trim() && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome == SetorAluno.Set_Nome)
+                if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1387,7 +1390,7 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
-                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1425,7 +1428,7 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
-                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1463,7 +1466,7 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
-                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1500,7 +1503,7 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
-                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1537,7 +1540,7 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
-                if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && PessoaAluno.Pes_CPF.Trim() == PessoaProva.Pes_CPF.Trim() && PessoaAluno.Pes_Cidade.Trim() == PessoaProva.Pes_Cidade.Trim() && PessoaAluno.Pes_Endereco.Trim() == PessoaProva.Pes_Endereco.Trim() && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Trim() == CargoAluno.Car_Nome.Trim())
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1576,7 +1579,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
-                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DependenteAluno.DP_Nome.Replace(" ","") == DependenteProva.DP_Nome.Replace(" ","") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ","") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1614,7 +1617,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
-                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1651,7 +1654,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
-                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1688,7 +1691,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
-                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1725,7 +1728,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
-                if (DependenteAluno.DP_Nome.Trim() == DependenteProva.DP_Nome && DependenteAluno.DP_Parentesco.Trim() == DependenteProva.DP_Parentesco.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1761,10 +1764,10 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ","") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1797,10 +1800,10 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1833,10 +1836,10 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1869,10 +1872,10 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1905,10 +1908,10 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_ID);
+                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Trim() == DadoBancarioProva.DB_Tipo.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1944,7 +1947,7 @@ namespace RH.View.Controllers
 
             foreach(var x in BeneficiosAluno)
             {
-                if(oBeneficio.Ben_Nome.Trim()==x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim()==x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo==x.Ben_Custo && oBeneficio.Ben_DataCadastro==x.Ben_DataCadastro)
+                if (oBeneficio.Ben_Nome.Replace(" ","")==x.Ben_Nome.Replace(" ","") && oBeneficio.Ben_Descricao.Replace(" ","").Replace("\n","").Replace("\r","")==x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo==x.Ben_Custo && oBeneficio.Ben_DataCadastro==x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
                     Acertou = true;
@@ -1969,7 +1972,7 @@ namespace RH.View.Controllers
 
             foreach (var x in BeneficiosAluno)
             {
-                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
                     Acertou = true;
@@ -1991,11 +1994,11 @@ namespace RH.View.Controllers
 
             //Benefício 3
 
-            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio3);
 
             foreach (var x in BeneficiosAluno)
             {
-                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
                     Acertou = true;
@@ -2017,11 +2020,11 @@ namespace RH.View.Controllers
 
             //Benefício 4
 
-            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio4);
 
             foreach (var x in BeneficiosAluno)
             {
-                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
                     Acertou = true;
@@ -2043,11 +2046,11 @@ namespace RH.View.Controllers
 
             //Benefício 5
 
-            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
+            oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio5);
 
             foreach (var x in BeneficiosAluno)
             {
-                if (oBeneficio.Ben_Nome.Trim() == x.Ben_Nome.Trim() && oBeneficio.Ben_Descricao.Trim() == x.Ben_Descricao.Trim() && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
+                if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
                     Acertou = true;
@@ -2086,7 +2089,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim()==oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && BeneficioAluno.Ben_Nome.Replace(" ","")==oBeneficioProva.Ben_Nome.Replace(" ",""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2131,7 +2134,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2176,7 +2179,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2221,7 +2224,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2266,7 +2269,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && BeneficioAluno.Ben_Nome.Replace(" ","") == oBeneficioProva.Ben_Nome.Replace(" ",""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2311,7 +2314,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2356,7 +2359,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2401,7 +2404,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2446,7 +2449,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2491,7 +2494,7 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim() && BeneficioAluno.Ben_Nome.Trim() == oBeneficioProva.Ben_Nome.Trim())
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2533,7 +2536,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
-                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ","") == AvaliacaoProva.Ava_Avaliacao.Replace(" ","") && PessoaProva.Pes_Nome.Replace(" ","") == PessoaAluno.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -2569,7 +2572,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
-                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ", "") == AvaliacaoProva.Ava_Avaliacao.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.4;
                 }
@@ -2605,7 +2608,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
-                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ", "") == AvaliacaoProva.Ava_Avaliacao.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.4;
                 }
@@ -2641,7 +2644,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
-                if (AvaliacaoAluno.Ava_Avaliacao.Trim() == AvaliacaoProva.Ava_Avaliacao.Trim() && PessoaProva.Pes_Nome.Trim() == PessoaAluno.Pes_Nome.Trim())
+                if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ", "") == AvaliacaoProva.Ava_Avaliacao.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.4;
                 }
@@ -2679,7 +2682,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
-                if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -2716,7 +2719,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
-                if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                if (DemissaoAluno.Dem_Motivo.Replace(" ", "") == DemissaoProva.Dem_Motivo.Replace(" ", "") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -2753,7 +2756,7 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
-                if (DemissaoAluno.Dem_Motivo.Trim() == DemissaoProva.Dem_Motivo && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Trim() == PessoaProva.Pes_Nome.Trim())
+                if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -2791,6 +2794,20 @@ namespace RH.View.Controllers
 
             List<VW_Notas> FiltroNotasProva = NotasProva.Where(p => p.CodigoProva.Equals(CodigoProva)).ToList();
             return View(FiltroNotasProva);
+        }
+
+        public ActionResult Erros(int IDProva)
+        {
+            List<Erro> Erros = _Control.SelecionarErrosProva(IDProva);
+            Prova aProva = _Control.SelecionarProvaPorID(IDProva);
+            Aluno oAluno = _Control.SelecionarAluno(aProva.Pro_Aluno_Alu_ID);
+            ViewBag.NomeAluno = oAluno.Alu_Nome;
+            ViewBag.MatriculaAluno = oAluno.Alu_Matricula;
+            ViewBag.Serie = oAluno.Alu_Serie+"º Ano";
+            ViewBag.Curso = _Control.SelecionarCurso(oAluno.Alu_Curso_Cur_ID);
+            ViewBag.Nota = _Control.SelecionarNotaProva(IDProva);
+
+            return View(Erros);
         }
     }
 }

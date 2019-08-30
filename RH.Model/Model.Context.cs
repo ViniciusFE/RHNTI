@@ -48,7 +48,7 @@ namespace RH.Model
         public virtual DbSet<Vaga> Vaga { get; set; }
         public virtual DbSet<VW_BeneficiosFuncionario> VW_BeneficiosFuncionario { get; set; }
         public virtual DbSet<VW_MeusBeneficios> VW_MeusBeneficios { get; set; }
-        public virtual DbSet<VW_Provas> VW_Provas { get; set; }
         public virtual DbSet<VW_Notas> VW_Notas { get; set; }
+        public virtual DbSet<VW_Provas> VW_Provas { get; set; }
     }
 }
