@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Erros da Prova";
+    Layout = "~/Views/Shared/LayoutSemMenu.cshtml";
+    int Erro = 1;
 }
 
 <div class="container my-4">
@@ -9,19 +11,43 @@
     <div class="card">
 
         <div class="card-header">
-            <h5>@ViewBag.NomeAluno - @ViewBag.MatriculaAluno</h5>
-            <h5>@ViewBag.Curso - @ViewBag.Serie</h5>
+            <h3 class="text-center">@ViewBag.NomeAluno - @ViewBag.MatriculaAluno</h3>
+            <h3 class="text-center">@ViewBag.Curso - @ViewBag.Serie</h3>
             <br />
-            <h5 class="text-center text-danger">@ViewBag.Nota</h5>
+            <h2 class="text-center text-danger">Nota da Prova: @ViewBag.Nota</h2>
+            <br />
+            <p class="text-danger text-center"><b>Atenção: </b>Caso encontre alguma anomalia na correção de sua prova, por favor entre em contato o mais rápido possível com seu professor.</p>
         </div>
 
         <div class="card-body">
-
-            @foreach(var x in Model)
+            @foreach (var x in Model)
             {
+            <h5>@Erro º Erro</h5>
+            <hr />
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h5>Sua Resposta:</h5>
+                    <div class="alert alert-danger" role="alert">
+                        @Html.Raw(x.Err_RespostaAluno)
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Resposta Certa:</h5>
+                    <div class="alert alert-success" role="alert">
+                        @Html.Raw(x.Err_RespostaCerta)
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            <br />
+            <br />
+
+                Erro++;
 
             }
-
         </div>
 
     </div>

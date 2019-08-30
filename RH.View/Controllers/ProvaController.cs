@@ -2804,8 +2804,10 @@ namespace RH.View.Controllers
             ViewBag.NomeAluno = oAluno.Alu_Nome;
             ViewBag.MatriculaAluno = oAluno.Alu_Matricula;
             ViewBag.Serie = oAluno.Alu_Serie+"º Ano";
-            ViewBag.Curso = _Control.SelecionarCurso(oAluno.Alu_Curso_Cur_ID);
-            ViewBag.Nota = _Control.SelecionarNotaProva(IDProva);
+            Curso oCurso = _Control.SelecionarCurso(oAluno.Alu_Curso_Cur_ID);
+            ViewBag.Curso = oCurso.Cur_Nome;
+            Nota aNota = _Control.SelecionarNotaProva(IDProva);
+            ViewBag.Nota = aNota.Not_Nota;
 
             return View(Erros);
         }
