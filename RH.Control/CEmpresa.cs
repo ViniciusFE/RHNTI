@@ -23,6 +23,7 @@ namespace RH.Control
         private RepositoriePessoaBeneficio _RepositorieBeneficioFuncionario;
         private RepositorieAvaliacao _RepositorieAvaliacao;
         private RepositorieDemissao _RepositorieDemissao;
+        private RepositorieNota _RepositorieNota;
 
         public CEmpresa()
         {
@@ -39,6 +40,7 @@ namespace RH.Control
             _RepositorieBeneficioFuncionario = new RepositoriePessoaBeneficio();
             _RepositorieAvaliacao = new RepositorieAvaliacao();
             _RepositorieDemissao = new RepositorieDemissao();
+            _RepositorieNota = new RepositorieNota();
         }
 
         public List<Empresa> SelecionarTodasEmpresa()
@@ -135,5 +137,26 @@ namespace RH.Control
         {
             return _RepositorieDemissao.SelecionarDemissao(id);
         }
+
+        public Prova SelecionarProvaEntregue(int IDAluno)
+        {
+            return _RepositorieProva.SelecionarProvaEntregue(IDAluno);
+        }
+
+        public Nota SelecionarNotaProva(int IDProva)
+        {
+            return _RepositorieNota.SelecionarNota(IDProva);
+        }
+
+        public List<Beneficio> SelecionarBeneficiosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.SelecionarBeneficioporEmpresa(IDEmpresa);
+        }
+
+        public Empresa SelecionarEmpresaAvaliativaAluno(int IDAluno)
+        {
+            return _RepositorieEmpresa.SelecionarEmpresaAvaliativaAluno(IDAluno);
+        }
+
     }
 }

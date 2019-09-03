@@ -8,12 +8,12 @@
 <div class="container my-4">
     <div class="card">
         <div class="card-header">
-            <h3>Notas da prova da turma de @Model.Select(p=>p.Curso).First() - @Model.Select(p=>p.SerieAluno).First()º Ano</h3>
+            <h3 class="text-center">Notas das provas da turma de @Model.Select(p=>p.Curso).First() - @Model.Select(p=>p.SerieAluno).First()º Ano</h3>
         </div>
         <div class="card-body">
             @if (Model.Count() > 0)
             {
-                <table class="table table-bordered text-center">
+                <table class="table table-bordered text-center table-hover">
                     <tr style="background-color: rgb(148,72,72);" class="text-white">
                         <th>
                             Código
@@ -31,7 +31,7 @@
                             Série
                         </th>
                         <th>
-                            Status da Prova
+                            Data de Entrega
                         </th>
                         <th>
                             Nota da Prova

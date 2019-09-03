@@ -42,6 +42,20 @@ namespace RH.View.Controllers
                 ViewBag.DataTermino = aProva.Pro_DataTermino;
             }
 
+            aProva = _Control.SelecionarProvaEntregue(oAluno.Alu_ID);
+            if(aProva!=null && DateTime.Compare(aProva.Pro_DataTermino.Date,DateTime.Now.Date)>0)
+            {
+                Nota aNota = _Control.SelecionarNotaProva(aProva.Pro_ID);
+                if(aNota.Not_Nota<10)
+                {
+                    ViewBag.Nota = aNota.Not_Nota;
+                    ViewBag.NomeAluno = oAluno.Alu_Nome;
+                    ViewBag.DataEntrega = aNota.Not_DataCadastro;
+                    ViewBag.IDProva = aProva.Pro_ID;                    
+                }
+               
+            }
+
             return View(MinhasEmpresas.ToPagedList(paginaNumero, paginaTamanho));
         }
 

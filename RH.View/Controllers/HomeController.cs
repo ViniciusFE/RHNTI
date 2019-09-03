@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
 using SelectPdf;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
@@ -19,12 +20,15 @@ namespace RH.View.Controllers
         }
 
 
-        public ActionResult Index(int id,string nomeEmpresa)
+        public ActionResult Index(string id,string nomeEmpresa)
         {
-            Session["IDEmpresa"] = id;
-            Session["NomeEmpresa"] = nomeEmpresa;
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            string NomeDescriptografado = Criptografia.DecryptQueryString(nomeEmpresa);
 
-            Empresa aEmpresa = _Control.SelecionarEmpresa(id);
+            Session["IDEmpresa"] = IDDescriptografado;
+            Session["NomeEmpresa"] = NomeDescriptografado;           
+
+            Empresa aEmpresa = _Control.SelecionarEmpresa(IDDescriptografado);
             if(aEmpresa.Emp_Avaliativa)
             {
                 Session["Avaliativa"] = true;

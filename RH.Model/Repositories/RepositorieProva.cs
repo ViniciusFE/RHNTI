@@ -79,6 +79,11 @@ namespace RH.Model.Repositories
         {
             return odb.Prova.Where(p => p.Pro_ID.Equals(IDProva)).FirstOrDefault();
         }
+
+        public Prova SelecionarProvaEntregue(int IDAluno)
+        {
+            return odb.Prova.Where(p => p.Pro_Aluno_Alu_ID.Equals(IDAluno) && p.Pro_Entregue == true).FirstOrDefault();
+        }
        
     }
 }

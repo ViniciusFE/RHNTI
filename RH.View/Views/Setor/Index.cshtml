@@ -7,6 +7,7 @@
 }
 
 @using PagedList.Mvc
+@using RH.View.CriptoHelper;
 
 @Styles.Render("~/Content/Pages/css")
 
@@ -95,7 +96,7 @@ else
                             </div>
 
                             <div class="col-md-3 float-right">
-                                <a class="btn btn-warning custom text-white" href="@Url.Action("AlterarSetor","Setor",new { id=x.Set_ID})"><i class="fas fa-edit"></i> Alterar</a>
+                                <a class="btn btn-warning custom text-white" href="@Url.Action("AlterarSetor","Setor",new { id=Criptografia.EncryptQueryString(x.Set_ID.ToString())})"><i class="fas fa-edit"></i> Alterar</a>
                                 <button class="btn btn-danger custom excluir" data-id="@x.Set_ID"><i class="fas fa-ban"></i> Excluir Setor</button>
                             </div>
 

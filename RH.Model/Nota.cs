@@ -18,6 +18,7 @@ namespace RH.Model
         public int Not_Prova_Pro_ID { get; set; }
         public double Not_Nota { get; set; }
         public System.DateTime Not_DataCadastro { get; set; }
+        public bool Not_Situation { get; set; }
     
         public virtual Prova Prova { get; set; }
     }

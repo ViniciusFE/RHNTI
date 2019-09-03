@@ -8,9 +8,11 @@ using RH.Control;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    
     public class ProvaController : Controller
     {
         CProva _Control;
@@ -226,6 +228,7 @@ namespace RH.View.Controllers
             return Enderecos[posicao];
         }
 
+        [AutorizacaoProfessor]
         // GET: Prova
         public ActionResult Index()
         {
@@ -236,6 +239,7 @@ namespace RH.View.Controllers
             return View(Provas);
         }
 
+        [AutorizacaoProfessor]
         public ActionResult CadastrarProva(string DataTermino)
         {
             bool ProvaAtiva = _Control.ProvaAtiva();
@@ -630,6 +634,7 @@ namespace RH.View.Controllers
             return Json("2");
         }
 
+        [Autorizacao]
         public ActionResult EntregarProva()
         {
             Aluno oAluno = (Aluno)Session["User"];
@@ -650,6 +655,7 @@ namespace RH.View.Controllers
             return Json("Sua nota foi calculada com sucesso, após o vencimento do dia da prova que será no dia "+aProva.Pro_DataTermino+", a próxima vez que você logar na plataforma você terá acesso a sua nota e poderá visualizar seus erros.");
         }
 
+        [Autorizacao]
         public void CalcularNota(int IDAluno)
         {
             List<Aluno> Alunos = _Control.SelecionarTodosAlunos();
@@ -675,6 +681,22 @@ namespace RH.View.Controllers
                 string SetorRespondenteProva = oSetor.Set_Nome;
                 oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorRespondenteAluno.Replace("\t", "");
+                SetorRespondenteAluno.Replace("\n", "");
+                SetorRespondenteAluno.Replace("\r", "");
+
+                SetorRespondenteProva.Replace("\t", "");
+                SetorRespondenteProva.Replace("\n", "");
+                SetorRespondenteProva.Replace("\r", "");
 
                 if (SetorAluno.Set_Nome.Replace(" ","") == SetorProva.Set_Nome.Replace(" ","") && SetorRespondenteAluno.Replace(" ","")==SetorRespondenteProva.Replace(" ",""))
                 {
@@ -746,6 +768,22 @@ namespace RH.View.Controllers
                 oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorRespondenteAluno.Replace("\t", "");
+                SetorRespondenteAluno.Replace("\n", "");
+                SetorRespondenteAluno.Replace("\r", "");
+
+                SetorRespondenteProva.Replace("\t", "");
+                SetorRespondenteProva.Replace("\n", "");
+                SetorRespondenteProva.Replace("\r", "");
+
                 if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -815,6 +853,22 @@ namespace RH.View.Controllers
                 string SetorRespondenteProva = oSetor.Set_Nome;
                 oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorRespondenteAluno.Replace("\t", "");
+                SetorRespondenteAluno.Replace("\n", "");
+                SetorRespondenteAluno.Replace("\r", "");
+
+                SetorRespondenteProva.Replace("\t", "");
+                SetorRespondenteProva.Replace("\n", "");
+                SetorRespondenteProva.Replace("\r", "");
 
                 if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {                    
@@ -886,6 +940,22 @@ namespace RH.View.Controllers
                 oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
 
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorRespondenteAluno.Replace("\t", "");
+                SetorRespondenteAluno.Replace("\n", "");
+                SetorRespondenteAluno.Replace("\r", "");
+
+                SetorRespondenteProva.Replace("\t", "");
+                SetorRespondenteProva.Replace("\n", "");
+                SetorRespondenteProva.Replace("\r", "");
+
                 if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -955,6 +1025,22 @@ namespace RH.View.Controllers
                 string SetorRespondenteProva = oSetor.Set_Nome;
                 oSetor = _Control.SelecionarSetor(SetorAluno.Set_Setor_Set_ID);
                 string SetorRespondenteAluno = oSetor.Set_Nome;
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
+                SetorRespondenteAluno.Replace("\t", "");
+                SetorRespondenteAluno.Replace("\n", "");
+                SetorRespondenteAluno.Replace("\r", "");
+
+                SetorRespondenteProva.Replace("\t", "");
+                SetorRespondenteProva.Replace("\n", "");
+                SetorRespondenteProva.Replace("\r", "");
 
                 if (SetorAluno.Set_Nome.Replace(" ", "") == SetorProva.Set_Nome.Replace(" ", "") && SetorRespondenteAluno.Replace(" ", "") == SetorRespondenteProva.Replace(" ", ""))
                 {
@@ -1029,6 +1115,22 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
                 if (CargoAluno.Car_Nome.Replace(" ","") == CargoProva.Car_Nome.Replace(" ","") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1101,6 +1203,22 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
                 if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1168,10 +1286,28 @@ namespace RH.View.Controllers
             CargoAluno = _Control.SelecionarCargoDiaCadastro(CargoProva.Car_DataCadastro, aEmpresa.Emp_ID);
 
 
+
+
             if (CargoAluno != null)
             {
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
 
                 if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
@@ -1245,6 +1381,22 @@ namespace RH.View.Controllers
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
 
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
+
                 if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1316,6 +1468,22 @@ namespace RH.View.Controllers
             {
                 SetorProva = _Control.SelecionarSetor(CargoProva.Car_Setor_Set_ID);
                 SetorAluno = _Control.SelecionarSetor(CargoAluno.Car_Setor_Set_ID);
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\t", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\n", "");
+                SetorAluno.Set_Nome = SetorAluno.Set_Nome.Replace("\r", "");
+
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\t", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\n", "");
+                SetorProva.Set_Nome = SetorProva.Set_Nome.Replace("\r", "");
 
                 if (CargoAluno.Car_Nome.Replace(" ", "") == CargoProva.Car_Nome.Replace(" ", "") && CargoAluno.Car_Chefe == CargoProva.Car_Chefe && SetorProva.Set_Nome.Replace(" ", "") == SetorAluno.Set_Nome.Replace(" ", ""))
                 {
@@ -1390,6 +1558,46 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\t", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\n", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\r", "");
+
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\t", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\n", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\r", "");
+
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\t", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\n", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\r", "");
+
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\t", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\n", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\r", "");
+
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\t", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\n", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\r", "");
+
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\t", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\n", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\r", "");
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
                 if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1427,6 +1635,46 @@ namespace RH.View.Controllers
             {
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\t", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\n", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\r", "");
+
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\t", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\n", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\r", "");
+
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\t", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\n", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\r", "");
+
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\t", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\n", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\r", "");
+
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\t", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\n", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\r", "");
+
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\t", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\n", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\r", "");
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
 
                 if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
@@ -1466,6 +1714,45 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\t", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\n", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\r", "");
+
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\t", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\n", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\r", "");
+
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\t", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\n", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\r", "");
+
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\t", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\n", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\r", "");
+
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\t", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\n", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\r", "");
+
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\t", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\n", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\r", "");
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
                 if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1503,6 +1790,46 @@ namespace RH.View.Controllers
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
 
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\t", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\n", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\r", "");
+
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\t", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\n", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\r", "");
+
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\t", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\n", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\r", "");
+
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\t", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\n", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\r", "");
+
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\t", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\n", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\r", "");
+
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\t", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\n", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\r", "");
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
+
                 if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1539,6 +1866,46 @@ namespace RH.View.Controllers
             {
                 CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
                 CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\t", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\n", "");
+                PessoaAluno.Pes_CPF = PessoaAluno.Pes_CPF.Replace("\r", "");
+
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\t", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\n", "");
+                PessoaProva.Pes_CPF = PessoaProva.Pes_CPF.Replace("\r", "");
+
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\t", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\n", "");
+                PessoaAluno.Pes_Cidade = PessoaAluno.Pes_Cidade.Replace("\r", "");
+
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\t", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\n", "");
+                PessoaProva.Pes_Cidade = PessoaProva.Pes_Cidade.Replace("\r", "");
+
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\t", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\n", "");
+                PessoaAluno.Pes_Endereco = PessoaAluno.Pes_Endereco.Replace("\r", "");
+
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\t", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\n", "");
+                PessoaProva.Pes_Endereco = PessoaProva.Pes_Endereco.Replace("\r", "");
+
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\t", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\n", "");
+                CargoAluno.Car_Nome = CargoAluno.Car_Nome.Replace("\r", "");
+
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\t", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
+                CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
 
                 if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
                 {
@@ -1579,6 +1946,30 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\r", "");
+
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\t", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\n", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\r", "");
+
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\t", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\n", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\r", "");
+
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\t", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\n", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n","");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
                 if (DependenteAluno.DP_Nome.Replace(" ","") == DependenteProva.DP_Nome.Replace(" ","") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ","") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1617,6 +2008,30 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\r", "");
+
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\t", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\n", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\r", "");
+
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\t", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\n", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\r", "");
+
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\t", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\n", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
                 if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1653,6 +2068,30 @@ namespace RH.View.Controllers
             {
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\r", "");
+
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\t", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\n", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\r", "");
+
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\t", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\n", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\r", "");
+
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\t", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\n", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
                 if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
@@ -1691,6 +2130,30 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
 
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\r", "");
+
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\t", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\n", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\r", "");
+
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\t", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\n", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\r", "");
+
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\t", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\n", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
                 if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -1727,6 +2190,30 @@ namespace RH.View.Controllers
             {
                 PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
+                DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\r", "");
+
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\t", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\n", "");
+                DependenteProva.DP_Nome = DependenteProva.DP_Nome.Replace("\r", "");
+
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\t", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\n", "");
+                DependenteAluno.DP_Parentesco = DependenteAluno.DP_Parentesco.Replace("\r", "");
+
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\t", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\n", "");
+                DependenteProva.DP_Parentesco = DependenteProva.DP_Parentesco.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
                 if (DependenteAluno.DP_Nome.Replace(" ", "") == DependenteProva.DP_Nome.Replace(" ", "") && DependenteAluno.DP_Parentesco.Replace(" ", "") == DependenteProva.DP_Parentesco.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
@@ -1767,7 +2254,29 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ","") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\t", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\n", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\r", "");
+
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\t", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\n", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\t", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\n", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+
+
+                if (DadoBancarioAluno.DB_Numero.Replace(" ","")== DadoBancarioProva.DB_Numero.Replace(" ","") && DadoBancarioAluno.DB_Tipo.Replace(" ","") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1803,7 +2312,27 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\t", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\n", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\r", "");
+
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\t", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\n", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\t", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\n", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                if (DadoBancarioAluno.DB_Numero.Replace(" ", "") == DadoBancarioProva.DB_Numero.Replace(" ", "") && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1839,7 +2368,27 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\t", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\n", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\r", "");
+
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\t", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\n", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\t", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\n", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                if (DadoBancarioAluno.DB_Numero.Replace(" ", "") == DadoBancarioProva.DB_Numero.Replace(" ", "") && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1875,7 +2424,27 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\t", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\n", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\r", "");
+
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\t", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\n", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\t", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\n", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                if (DadoBancarioAluno.DB_Numero.Replace(" ", "") == DadoBancarioProva.DB_Numero.Replace(" ", "") && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1911,7 +2480,27 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
-                if (DadoBancarioAluno.DB_Numero == DadoBancarioProva.DB_Numero && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
+                DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\t", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\n", "");
+                DadoBancarioAluno.DB_Numero = DadoBancarioAluno.DB_Numero.Replace("\r", "");
+
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\t", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\n", "");
+                DadoBancarioProva.DB_Tipo = DadoBancarioProva.DB_Tipo.Replace("\r", "");
+
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\t", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\n", "");
+                DadoBancarioAluno.DB_Tipo = DadoBancarioAluno.DB_Tipo.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                if (DadoBancarioAluno.DB_Numero.Replace(" ", "") == DadoBancarioProva.DB_Numero.Replace(" ", "") && DadoBancarioAluno.DB_Tipo.Replace(" ", "") == DadoBancarioProva.DB_Tipo.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1945,8 +2534,24 @@ namespace RH.View.Controllers
             //Benefício 1
             Beneficio oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio1);
 
-            foreach(var x in BeneficiosAluno)
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\t", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\n", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\r", "");
+
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\t", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\n", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\r", "");
+
+            foreach (var x in BeneficiosAluno)
             {
+                x.Ben_Nome = x.Ben_Nome.Replace("\t", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\n", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\r", "");
+
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\t", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\n", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\r", "");
+
                 if (oBeneficio.Ben_Nome.Replace(" ","")==x.Ben_Nome.Replace(" ","") && oBeneficio.Ben_Descricao.Replace(" ","").Replace("\n","").Replace("\r","")==x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo==x.Ben_Custo && oBeneficio.Ben_DataCadastro==x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
@@ -1970,8 +2575,24 @@ namespace RH.View.Controllers
             //Benefício 2
             oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio2);
 
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\t", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\n", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\r", "");
+
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\t", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\n", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\r", "");
+
             foreach (var x in BeneficiosAluno)
             {
+                x.Ben_Nome = x.Ben_Nome.Replace("\t", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\n", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\r", "");
+
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\t", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\n", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\r", "");
+
                 if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
@@ -1993,11 +2614,26 @@ namespace RH.View.Controllers
             Acertou = false;
 
             //Benefício 3
-
             oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio3);
+
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\t", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\n", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\r", "");
+
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\t", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\n", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\r", "");
 
             foreach (var x in BeneficiosAluno)
             {
+                x.Ben_Nome = x.Ben_Nome.Replace("\t", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\n", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\r", "");
+
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\t", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\n", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\r", "");
+
                 if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
@@ -2019,11 +2655,26 @@ namespace RH.View.Controllers
             Acertou = false;
 
             //Benefício 4
-
             oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio4);
+
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\t", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\n", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\r", "");
+
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\t", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\n", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\r", "");
 
             foreach (var x in BeneficiosAluno)
             {
+                x.Ben_Nome = x.Ben_Nome.Replace("\t", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\n", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\r", "");
+
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\t", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\n", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\r", "");
+
                 if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
@@ -2045,11 +2696,26 @@ namespace RH.View.Controllers
             Acertou = false;
 
             //Benefício 5
-
             oBeneficio = _Control.SelecionarBeneficio(aProva.Pro_Beneficio5);
+
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\t", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\n", "");
+            oBeneficio.Ben_Nome = oBeneficio.Ben_Nome.Replace("\r", "");
+
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\t", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\n", "");
+            oBeneficio.Ben_Descricao = oBeneficio.Ben_Descricao.Replace("\r", "");
 
             foreach (var x in BeneficiosAluno)
             {
+                x.Ben_Nome = x.Ben_Nome.Replace("\t", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\n", "");
+                x.Ben_Nome = x.Ben_Nome.Replace("\r", "");
+
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\t", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\n", "");
+                x.Ben_Descricao = x.Ben_Descricao.Replace("\r", "");
+
                 if (oBeneficio.Ben_Nome.Replace(" ", "") == x.Ben_Nome.Replace(" ", "") && oBeneficio.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") == x.Ben_Descricao.Replace(" ", "").Replace("\n", "").Replace("\r", "") && oBeneficio.Ben_Custo == x.Ben_Custo && oBeneficio.Ben_DataCadastro == x.Ben_DataCadastro)
                 {
                     Nota = Nota + 0.2;
@@ -2070,17 +2736,16 @@ namespace RH.View.Controllers
 
             Acertou = false;
 
-
             //Verifica Benefícios do Funcionário
 
             //Verifica Benefícios 1
+
             PessoaBeneficio BeneficioProva = _Control.SelecionarBeneficioFuncionario(aProva.Pro_BeneficioFuncionario1);
             List<PessoaBeneficio> BeneficiosFuncionarioAluno = _Control.SelecionarBeneficiosFuncionarioDiaCadastro(BeneficioProva.PB_DataCadastro, aEmpresa.Emp_ID);
             Beneficio BeneficioAluno = new Beneficio();
             Beneficio oBeneficioProva = new Beneficio();
-            
 
-            if(BeneficiosFuncionarioAluno!=null)
+            if (BeneficiosFuncionarioAluno != null)
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
@@ -2089,7 +2754,23 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && BeneficioAluno.Ben_Nome.Replace(" ","")==oBeneficioProva.Ben_Nome.Replace(" ",""))
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2097,7 +2778,7 @@ namespace RH.View.Controllers
                     }
                 }
 
-                if(!Acertou)
+                if (!Acertou)
                 {
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
@@ -2133,6 +2814,22 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
 
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
@@ -2179,6 +2876,22 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
@@ -2223,6 +2936,22 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
 
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
@@ -2269,7 +2998,23 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
-                    if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && BeneficioAluno.Ben_Nome.Replace(" ","") == oBeneficioProva.Ben_Nome.Replace(" ",""))
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
                         Acertou = true;
@@ -2313,6 +3058,22 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
 
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
@@ -2359,6 +3120,22 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
@@ -2403,6 +3180,22 @@ namespace RH.View.Controllers
                     PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
+
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
 
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
@@ -2449,6 +3242,22 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
@@ -2494,6 +3303,22 @@ namespace RH.View.Controllers
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                    PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                    PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    oBeneficioProva.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\t", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\n", "");
+                    BeneficioAluno.Ben_Nome = oBeneficioProva.Ben_Nome.Replace("\r", "");
+
                     if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && BeneficioAluno.Ben_Nome.Replace(" ", "") == oBeneficioProva.Ben_Nome.Replace(" ", ""))
                     {
                         Nota = Nota + 0.2;
@@ -2536,6 +3361,22 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\n", "");
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\t", "");
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\r", "");
+
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\n", "");
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\t", "");
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
                 if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ","") == AvaliacaoProva.Ava_Avaliacao.Replace(" ","") && PessoaProva.Pes_Nome.Replace(" ","") == PessoaAluno.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
@@ -2572,6 +3413,22 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\n", "");
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\t", "");
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\r", "");
+
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\n", "");
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\t", "");
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
                 if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ", "") == AvaliacaoProva.Ava_Avaliacao.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.4;
@@ -2607,6 +3464,22 @@ namespace RH.View.Controllers
             {
                 PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\n", "");
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\t", "");
+                AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\r", "");
+
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\n", "");
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\t", "");
+                AvaliacaoProva.Ava_Avaliacao = AvaliacaoProva.Ava_Avaliacao.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
                 if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ", "") == AvaliacaoProva.Ava_Avaliacao.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
@@ -2682,6 +3555,23 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\t", "");
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\n", "");
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\r", "");
+
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\t", "");
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\n", "");
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
+
                 if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
@@ -2719,6 +3609,22 @@ namespace RH.View.Controllers
                 PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\t", "");
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\n", "");
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\r", "");
+
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\t", "");
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\n", "");
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
+
                 if (DemissaoAluno.Dem_Motivo.Replace(" ", "") == DemissaoProva.Dem_Motivo.Replace(" ", "") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
@@ -2751,10 +3657,28 @@ namespace RH.View.Controllers
             DemissaoProva = _Control.SelecionarDemissao(aProva.Pro_Demissao3);
             DemissaoAluno = _Control.SelecionarDemissaoDataCadastro(DemissaoProva.Dem_DataCadastro, aEmpresa.Emp_ID);
 
+            
+
             if (DemissaoAluno != null)
             {
                 PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
                 PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\t", "");
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\n", "");
+                DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\r", "");
+
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\t", "");
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\n", "");
+                DemissaoProva.Dem_Motivo = DemissaoProva.Dem_Motivo.Replace("\r", "");
+
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
+                PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\r", "");
+
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\t", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
+                PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
                 if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
                 {
@@ -2784,10 +3708,12 @@ namespace RH.View.Controllers
                 _Control.CadastrarErro(oErro);
             }
 
+            aNota.Not_Situation = true;
             aNota.Not_Nota = Nota;
             _Control.CadastrarNota(aNota);
         }
 
+        [AutorizacaoProfessor]
         public ActionResult Notas(int CodigoProva)
         {
             List<VW_Notas> NotasProva = _Control.SelecionarNotasProva();
@@ -2796,6 +3722,7 @@ namespace RH.View.Controllers
             return View(FiltroNotasProva);
         }
 
+        [Autorizacao]
         public ActionResult Erros(int IDProva)
         {
             List<Erro> Erros = _Control.SelecionarErrosProva(IDProva);
@@ -2808,6 +3735,9 @@ namespace RH.View.Controllers
             ViewBag.Curso = oCurso.Cur_Nome;
             Nota aNota = _Control.SelecionarNotaProva(IDProva);
             ViewBag.Nota = aNota.Not_Nota;
+            Empresa aEmpresa = _Control.SelecionarEmpresaAvaliativaAluno(aProva.Pro_Aluno_Alu_ID);
+
+            ViewBag.MeusBeneficios = _Control.SelecionarBeneficiosEmpresa(aEmpresa.Emp_ID);
 
             return View(Erros);
         }

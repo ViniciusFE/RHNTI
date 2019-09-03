@@ -16,6 +16,11 @@ namespace RH.Model.Repositories
             Db = new RHEntities();
         }
 
+        public RepositorieBeneficio(RHEntities _odb)
+        {
+            Db = _odb;
+        }
+
         public List<Beneficio> SelecionarTodosBeneficions()
         {
             return Db.Beneficio.Where(i => i.Ben_Situation == true).ToList();
@@ -23,7 +28,7 @@ namespace RH.Model.Repositories
 
         public Beneficio SelecionarBeneficioporID(int id)
         {
-            return Db.Beneficio.Find(id);
+            return Db.Beneficio.SqlQuery("select * from Beneficio where Ben_ID=" + id).FirstOrDefault();
         }
 
         public List<Beneficio> SelecionarBeneficioporEmpresa(int id)

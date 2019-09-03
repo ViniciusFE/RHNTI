@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aluno">
           <Key>
             <PropertyRef Name="Alu_ID" />
@@ -151,6 +151,7 @@
           <Property Name="Not_Prova_Pro_ID" Type="int" Nullable="false" />
           <Property Name="Not_Nota" Type="float" Nullable="false" />
           <Property Name="Not_DataCadastro" Type="date" Nullable="false" />
+          <Property Name="Not_Situation" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Pessoa">
           <Key>
@@ -1503,8 +1504,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Vaga" EntitySet="Vaga" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1704,6 +1704,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Not_Nota" Type="Double" Nullable="false" />
           <Property Name="Not_DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Prova" Relationship="Self.FK_Nota_Prova" FromRole="Nota" ToRole="Prova" />
+          <Property Name="Not_Situation" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Pessoa">
           <Key>
@@ -3267,6 +3268,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySetMapping Name="Nota">
             <EntityTypeMapping TypeName="RHModel.Nota">
               <MappingFragment StoreEntitySet="Nota">
+                <ScalarProperty Name="Not_Situation" ColumnName="Not_Situation" />
                 <ScalarProperty Name="Not_ID" ColumnName="Not_ID" />
                 <ScalarProperty Name="Not_Prova_Pro_ID" ColumnName="Not_Prova_Pro_ID" />
                 <ScalarProperty Name="Not_Nota" ColumnName="Not_Nota" />

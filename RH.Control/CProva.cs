@@ -275,5 +275,10 @@ namespace RH.Control
         {
             return _RepositorieCurso.SelecionarCurso(id);
         }
+
+        public List<Beneficio> SelecionarBeneficiosEmpresa(int IDEmpresa)
+        {
+            return _RepositorieBeneficio.SelecionarBeneficioporEmpresa(IDEmpresa);
+        }
     }
 }

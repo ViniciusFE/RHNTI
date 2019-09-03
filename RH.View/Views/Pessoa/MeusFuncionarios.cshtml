@@ -1,7 +1,7 @@
 @model PagedList.IPagedList<RH.Model.Pessoa>
 
 @{
-    ViewBag.Title = "MeusFuncionarios";
+    ViewBag.Title = "Meus Funcionários";
 
 }
 
@@ -10,6 +10,7 @@
 @using PagedList.Mvc
 
 <style>
+    
 </style>
 
 
@@ -195,7 +196,7 @@ else
 
 
 <!-- Modal Demitir-->
-<div class="modal fade " tabindex="-1" role="dialog" id="ModalDemissao">
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalDemissao">
     <div class="modal-dialog modal-demitir" role="document">
         <div class="modal-content ">
             <div class="modal-header">
@@ -236,6 +237,8 @@ else
 @section Scripts{
     <script>
 
+
+
         var clicksBeneficios = 0; var clicksDemissao = 0;
 
 
@@ -250,6 +253,7 @@ else
             clicksBeneficios++;
             console.log(clicksBeneficios + "click funcao");
         });
+
 
         window.addEventListener('click', function (e) {
             var mouse = {
@@ -270,14 +274,14 @@ else
                 ////beneficios
             if (clicksBeneficios <= 0) {
 
-                document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
+                document.querySelector(".model-beneficios").style.marginTop = (mouse.page.y - 500) + "px";
                     console.log("entrou")
 
             }
             else {
 
                 if (document.querySelector("#beneficios-func").style.display == "none") {
-                    document.querySelector(".modal-beneficios").style.marginTop = (mouse.page.y - 400) + "px";
+                    document.querySelector(".modal-beneficios").style.marginTop = (mouse.page.y - 500) + "px";
                     this.console.log("oi")
 
                 } else {
@@ -317,6 +321,7 @@ else
 
 
         $(document).ready(function () {
+
             var IDFuncionario;
 
 

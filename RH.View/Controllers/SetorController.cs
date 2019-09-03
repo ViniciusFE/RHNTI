@@ -7,6 +7,7 @@ using RH.Model;
 using RH.Control;
 using RH.View.Filtro;
 using PagedList;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
@@ -118,9 +119,10 @@ namespace RH.View.Controllers
             
         }
 
-        public ActionResult AlterarSetor(int id)
+        public ActionResult AlterarSetor(string id)
         {
-            Setor oSetor = _Control.SelecionarSetor(id);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            Setor oSetor = _Control.SelecionarSetor(IDDescriptografado);
             ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             return View(oSetor);
         }

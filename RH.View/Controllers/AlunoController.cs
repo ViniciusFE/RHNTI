@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
 using PagedList;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [AutorizacaoProfessor]
     public class AlunoController : Controller
     {
         CAluno _Control;
