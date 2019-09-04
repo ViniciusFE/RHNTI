@@ -43,7 +43,7 @@ namespace RH.View.Controllers
             }
 
             aProva = _Control.SelecionarProvaEntregue(oAluno.Alu_ID);
-            if(aProva!=null && DateTime.Compare(aProva.Pro_DataTermino.Date,DateTime.Now.Date)>0)
+            if(aProva!=null && DateTime.Compare(aProva.Pro_DataTermino.Date,DateTime.Now.Date)<=0)
             {
                 Nota aNota = _Control.SelecionarNotaProva(aProva.Pro_ID);
                 if(aNota.Not_Nota<10)

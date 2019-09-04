@@ -8,7 +8,7 @@
 @Styles.Render("~/Content/Pages/css")
 
 @using PagedList.Mvc
-
+@using RH.View.CriptoHelper;
 <style>
     
 </style>
@@ -90,10 +90,10 @@ else
 
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario", "Pessoa", new { id = x.Pes_ID })"><i class="fas fa-user-edit"></i> Alterar</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("AlterarFuncionario", "Pessoa", new { id = Criptografia.EncryptQueryString(x.Pes_ID.ToString()) })"><i class="fas fa-user-edit"></i> Alterar</a>
                             <button class="btn btn-danger custom demitir" data-id="@x.Pes_ID" title="Demitir"><i class="fas fa-user-times"></i> Demitir</button>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index", "Dependente", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-users"></i> Dependentes</a>
-                            <a class="btn btn-warning custom" href="@Url.Action("Index", "DadosBancarios", new { IDFuncionario = x.Pes_ID })"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "Dependente", new { IDFuncionario = Criptografia.EncryptQueryString(x.Pes_ID.ToString()) })"><i class="fa fa-users"></i> Dependentes</a>
+                            <a class="btn btn-warning custom" href="@Url.Action("Index", "DadosBancarios", new { IDFuncionario = Criptografia.EncryptQueryString(x.Pes_ID.ToString()) })"><i class="fa fa-money-check-alt"></i> Dados Bancários</a>
                             <!-- Button modal Beneficios -->
                             <button type="button" class="btn btn-warning custom BtnAbrirModalBeneficios" data-id="@x.Pes_ID"><i class="fa fa-thumbs-up"></i>  Benefícios</button>
                         </div>

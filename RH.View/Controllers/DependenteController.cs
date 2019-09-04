@@ -4,6 +4,7 @@ using RH.Control;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
@@ -79,17 +80,21 @@ namespace RH.View.Controllers
             _Control = new CDependente();
         }
 
-        public ActionResult Index(int IDFuncionario)
+        public ActionResult Index(string IDFuncionario)
         {
-            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);
             ViewBag.IDFuncionario = IDFuncionario;
             ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
-            return View(_Control.SelecionarDependetesFuncionario(IDFuncionario));
+            return View(_Control.SelecionarDependetesFuncionario(IDDescriptografado));
         }
 
-        public ActionResult CadastrarDependente(int IDFuncionario)
+        public ActionResult CadastrarDependente(string IDFuncionario)
         {
-            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);
+
             ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
             ViewBag.IDFuncionario = IDFuncionario;
 
@@ -100,10 +105,12 @@ namespace RH.View.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarDependente(DadoDependente oDependente,int IDFuncionario)
+        public ActionResult CadastrarDependente(DadoDependente oDependente,string IDFuncionario)
         {
             ViewBag.DP_Parentesco = new SelectList(Parentescos(), "Valor", "Nome");
             ViewBag.IDFuncionario = IDFuncionario;
+
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
 
 
             if (Convert.ToBoolean(Session["Avaliativa"]))
@@ -116,7 +123,7 @@ namespace RH.View.Controllers
 
             if (oDependente.DP_Parentesco=="Pai" || oDependente.DP_Parentesco=="Mãe")
             {
-                if (_Control.VerificarParentesco(IDFuncionario,oDependente.DP_Parentesco))
+                if (_Control.VerificarParentesco(IDDescriptografado,oDependente.DP_Parentesco))
                 {
                     ModelState.AddModelError("DP_Parentesco", "Este usuário já possui um dependente o grau de parentesco '" + oDependente.DP_Parentesco + "'");
                     return View();
@@ -126,7 +133,7 @@ namespace RH.View.Controllers
             if (ModelState.IsValid)
             {
                 Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
-                oDependente.DP_Pessoa_Pes_ID = IDFuncionario;
+                oDependente.DP_Pessoa_Pes_ID = IDDescriptografado;
                 oDependente.DP_DataCadastro = aEmpresa.Emp_DataAtual;
                 oDependente.DP_Situation = true;
                 _Control.CadastrarDependente(oDependente);
@@ -136,9 +143,10 @@ namespace RH.View.Controllers
             return View();
         }
 
-        public ActionResult AlterarDependente(int id)
+        public ActionResult AlterarDependente(string id)
         {
-            DadoDependente Dependente = _Control.SelecionarDependente(id);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            DadoDependente Dependente = _Control.SelecionarDependente(IDDescriptografado);
             ViewBag.DP_Parentesco = new SelectList(Parentescos(), "Valor", "Nome");
             return View(Dependente);
         }
@@ -152,11 +160,14 @@ namespace RH.View.Controllers
 
             if (oDependente.DP_Parentesco == "Pai" || oDependente.DP_Parentesco == "Mãe")
             {
-                if (_Control.VerificarParentesco(DP.DP_Pessoa_Pes_ID, oDependente.DP_Parentesco))
+                if(DP.DP_Parentesco!=oDependente.DP_Parentesco)
                 {
-                    ModelState.AddModelError("DP_Parentesco", "Este usuário já possui um dependente o grau de parentesco '" + oDependente.DP_Parentesco + "'");
-                    return View(oDependente);
-                }
+                    if (_Control.VerificarParentesco(DP.DP_Pessoa_Pes_ID, oDependente.DP_Parentesco))
+                    {
+                        ModelState.AddModelError("DP_Parentesco", "Este usuário já possui um dependente o grau de parentesco '" + oDependente.DP_Parentesco + "'");
+                        return View(oDependente);
+                    }
+                }               
             }
 
             if (ModelState.IsValid)
@@ -165,7 +176,7 @@ namespace RH.View.Controllers
                 DP.DP_Nome = oDependente.DP_Nome;
                 DP.DP_Parentesco = oDependente.DP_Parentesco;
                 _Control.AlterarDependente(DP);
-                return RedirectToAction("Index",new { IDFuncionario=DP.DP_Pessoa_Pes_ID});
+                return RedirectToAction("Index",new { IDFuncionario=Criptografia.EncryptQueryString(DP.DP_Pessoa_Pes_ID.ToString())});
             }
 
             return View(oDependente);

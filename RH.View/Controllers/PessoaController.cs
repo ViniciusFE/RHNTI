@@ -8,10 +8,11 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
-    [Autorizacao]
+    [AutorizacaoEmpresa]
     public class PessoaController : Controller
     {
         private CPessoa DbPessoa = new CPessoa();
@@ -38,8 +39,7 @@ namespace RH.View.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AutorizacaoEmpresa]
+        [ValidateAntiForgeryToken]    
         public ActionResult CadastrarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem,string Salario)
         {            
             Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
@@ -97,17 +97,17 @@ namespace RH.View.Controllers
 
         //edição dados do Funcionario
 
-        [AutorizacaoEmpresa]
-        public ActionResult AlterarFuncionario(int id)
+        public ActionResult AlterarFuncionario(string id)
         {
-            var aPessoa = DbPessoa.SelecionarFuncionario(id);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+
+            var aPessoa = DbPessoa.SelecionarFuncionario(IDDescriptografado);
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome",aPessoa.Pes_Cargo_Car_ID);
             return View(aPessoa);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AutorizacaoEmpresa]
         public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem,string Salario="")
         {
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
@@ -169,9 +169,7 @@ namespace RH.View.Controllers
             return File(aPessoa.Pes_Imagem, aPessoa.Pes_Imagem.GetType().ToString());
         }
 
-        [AutorizacaoEmpresa]
-      
-            
+                 
         public ActionResult MeusFuncionarios(int? pagina,string Pesquisa="")
         { 
             ViewBag.Pesquisado=null;

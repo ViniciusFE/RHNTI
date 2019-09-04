@@ -7,6 +7,7 @@ using RH.Model;
 using RH.Control;
 using RH.View.Filtro;
 using PagedList;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
@@ -93,11 +94,13 @@ namespace RH.View.Controllers
             return View();
         }
 
-        public ActionResult AlterarCargo(int id)
+        public ActionResult AlterarCargo(string id)
         {
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+
             List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             
-            Cargo oCargo = _Control.SelecionarCargo(id);
+            Cargo oCargo = _Control.SelecionarCargo(IDDescriptografado);
 
             ViewBag.Car_Setor_Set_ID = new SelectList(Setores, "Set_ID", "Set_Nome", oCargo.Car_Setor_Set_ID);
 
@@ -113,7 +116,7 @@ namespace RH.View.Controllers
 
             Cargo oCargo1 = _Control.SelecionarCargo(oCargo.Car_ID);
 
-            if (ChefeSetor && oCargo.Car_Setor_Set_ID!=oCargo1.Car_Setor_Set_ID)
+            if (!oCargo1.Car_Chefe && ChefeSetor)
             {
                 bool StatusChefe = _Control.SelecionarChefeSetor(oCargo.Car_Setor_Set_ID);
                

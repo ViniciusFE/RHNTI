@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
@@ -19,10 +20,12 @@ namespace RH.View.Controllers
         }
 
         // GET: DadosBancarios
-        public ActionResult Index(int IDFuncionario)
+        public ActionResult Index(string IDFuncionario)
         {
-            List<DadoBancario> Dados = _Control.DadosBanacarioFuncionario(IDFuncionario);
-            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+
+            List<DadoBancario> Dados = _Control.DadosBanacarioFuncionario(IDDescriptografado);
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);
             ViewBag.IDFuncionario = IDFuncionario;
             ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
             return View(Dados);

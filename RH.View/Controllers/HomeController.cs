@@ -7,9 +7,11 @@ using RH.Model;
 using RH.Control;
 using SelectPdf;
 using RH.View.CriptoHelper;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [Autorizacao]
     public class HomeController : Controller
     {
         private CEmpresa _Control;
@@ -19,10 +21,10 @@ namespace RH.View.Controllers
             _Control = new CEmpresa();
         }
 
-
+        [ValidateInput(false)]
         public ActionResult Index(string id,string nomeEmpresa)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            int IDDescriptografado = Convert.ToInt32(HttpContext.Server.UrlDecode(Criptografia.DecryptQueryString(id)));
             string NomeDescriptografado = Criptografia.DecryptQueryString(nomeEmpresa);
 
             Session["IDEmpresa"] = IDDescriptografado;

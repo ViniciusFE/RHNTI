@@ -1,5 +1,6 @@
 @model RH.Model.DadoDependente
 
+@using RH.View.CriptoHelper;
 
 @using (Html.BeginForm())
 {
@@ -40,7 +41,7 @@
             </div>
         </div>
         <div class="back">
-            <a href="@Url.Action("Index","Dependente",new { IDFuncionario=Model.DP_Pessoa_Pes_ID})"><i class="fas fa-arrow-left"></i> Voltar</a>
+            <a href="@Url.Action("Index","Dependente",new { IDFuncionario=Criptografia.EncryptQueryString(Model.DP_Pessoa_Pes_ID.ToString())})"><i class="fas fa-arrow-left"></i> Voltar</a>
         </div>
     </div>
 }
