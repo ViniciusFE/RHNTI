@@ -1,63 +1,61 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.IO;
 using System.Security.Cryptography;
-using System.Text;
+using System.Web;
 
 namespace RH.View.CriptoHelper
 {
-    public static class Criptografia
+    public class Criptografia
     {
-        const string encryptionKey = "RH"; //Coloque aqui uma chave única
-
-        /// <summary>
-        /// Método para criptografar os dados da querystring
-        /// </summary>
-        /// <param name="clearText"></param>
-        /// <returns></returns>
-        public static string EncryptQueryString(string clearText)
+        public static string EncryptQueryString(string Message)
         {
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-            using (Aes encryptor = Aes.Create())
+            byte[] Results;
+            System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
+            MD5CryptoServiceProvider HashProvider = new MD5CryptoServiceProvider();
+            byte[] TDESKey = HashProvider.ComputeHash(UTF8.GetBytes("Aezx-\\d-xxlxV"));
+            TripleDESCryptoServiceProvider TDESAlgorithm = new TripleDESCryptoServiceProvider();
+            TDESAlgorithm.Key = TDESKey;
+            TDESAlgorithm.Mode = CipherMode.ECB;
+            TDESAlgorithm.Padding = PaddingMode.PKCS7;
+            byte[] DataToEncrypt = UTF8.GetBytes(Message);
+            try
             {
-                var pdb = new Rfc2898DeriveBytes(encryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (var ms = new MemoryStream())
-                {
-                    using (var cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
-                    }
-                    clearText = Convert.ToBase64String(ms.ToArray());
-                }
+                ICryptoTransform Encryptor = TDESAlgorithm.CreateEncryptor();
+                Results = Encryptor.TransformFinalBlock(DataToEncrypt, 0, DataToEncrypt.Length);
             }
-            return HttpUtility.UrlEncode(clearText);
+            finally
+            {
+                TDESAlgorithm.Clear();
+                HashProvider.Clear();
+            }
+            return Convert.ToBase64String(Results);
+
         }
 
-        /// <summary>
-        /// Método para criptografar os dados da querystring
-        /// </summary>
-        /// <param name="clearText"></param>
-        /// <returns></returns>
-        public static string DecryptQueryString(string EncryptedText)
+        public static string DecriptQueryString(string Message)
         {
-            byte[] inputByteArray = new byte[EncryptedText.Length + 1];
-            byte[] rgbIV = { 0x21, 0x43, 0x56, 0x87, 0x10, 0xfd, 0xea, 0x1c };
-            byte[] key = { };
-            key = System.Text.Encoding.UTF8.GetBytes("A0D1nX0Q");
-            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-            inputByteArray = Convert.FromBase64String(EncryptedText);
-            MemoryStream ms = new MemoryStream();
-            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(key, rgbIV), CryptoStreamMode.Write);
-            cs.Write(inputByteArray, 0, inputByteArray.Length);
-            cs.FlushFinalBlock();
-            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-            return encoding.GetString(ms.ToArray());
+            byte[] Results;
+            System.Text.UTF8Encoding UTF8 = new System.Text.UTF8Encoding();
+            MD5CryptoServiceProvider HashProvider = new MD5CryptoServiceProvider();
+            byte[] TDESKey = HashProvider.ComputeHash(UTF8.GetBytes("Aezx-\\d-xxlxV"));
+            TripleDESCryptoServiceProvider TDESAlgorithm = new TripleDESCryptoServiceProvider();
+            TDESAlgorithm.Key = TDESKey;
+            TDESAlgorithm.Mode = CipherMode.ECB;
+            TDESAlgorithm.Padding = PaddingMode.PKCS7;
+            byte[] DataToDecrypt = Convert.FromBase64String(Message);
+            try
+            {
+                ICryptoTransform Decryptor = TDESAlgorithm.CreateDecryptor();
+                Results = Decryptor.TransformFinalBlock(DataToDecrypt, 0, DataToDecrypt.Length);
+            }
+            finally
+            {
+                TDESAlgorithm.Clear();
+                HashProvider.Clear();
+            }
+            return UTF8.GetString(Results);
+
         }
     }
 }
-

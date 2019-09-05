@@ -5,6 +5,7 @@
 }
 
 @Styles.Render("~/Content/Pages/css")
+@using RH.View.CriptoHelper;
 
 
 <br />
@@ -57,7 +58,7 @@
                             </td>
 
                             <td>
-                                <a class="btn btn-warning custom" href="@Url.Action("AlterarBeneficio","Beneficio",new { id=item.Ben_ID})"><i class="fas fa-user-edit"></i> Alterar</a>
+                                <a class="btn btn-warning custom" href="@Url.Action("AlterarBeneficio","Beneficio",new { id=Criptografia.EncryptQueryString(item.Ben_ID.ToString())})"><i class="fas fa-user-edit"></i> Alterar</a>
                                 <button class="btn btn-danger custom AbrirModal" data-id="@item.Ben_ID"><i class="fas fa-user-times"></i> Excluir</button>
                             </td>
                         </tr>

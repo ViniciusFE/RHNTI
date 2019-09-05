@@ -21,17 +21,15 @@ namespace RH.View.Controllers
             _Control = new CEmpresa();
         }
 
-        [ValidateInput(false)]
         public ActionResult Index(string id,string nomeEmpresa)
         {
-            int IDDescriptografado = Convert.ToInt32(HttpContext.Server.UrlDecode(Criptografia.DecryptQueryString(id)));
-            string NomeDescriptografado = Criptografia.DecryptQueryString(nomeEmpresa);
-
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
             Session["IDEmpresa"] = IDDescriptografado;
-            Session["NomeEmpresa"] = NomeDescriptografado;           
+            Session["NomeEmpresa"] = Criptografia.DecriptQueryString(nomeEmpresa);
 
             Empresa aEmpresa = _Control.SelecionarEmpresa(IDDescriptografado);
-            if(aEmpresa.Emp_Avaliativa)
+
+            if (aEmpresa.Emp_Avaliativa)
             {
                 Session["Avaliativa"] = true;
             }

@@ -17,7 +17,7 @@ namespace RH.View.Filtro
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(
-                        new { controller = "Empresa", action = "MinhasEmpresas" }
+                        new { controller = "Login", action = "Index" }
                         )
                     );
             }

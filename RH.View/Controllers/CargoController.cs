@@ -96,7 +96,7 @@ namespace RH.View.Controllers
 
         public ActionResult AlterarCargo(string id)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
 
             List<Setor> Setores = _Control.SelecionarSetoresEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             

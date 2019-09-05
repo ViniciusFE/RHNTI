@@ -5,9 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Control;
 using RH.Model;
+using RH.View.CriptoHelper;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class BeneficioController : Controller
     {
         private CBeneficio _Control;
@@ -65,9 +68,10 @@ namespace RH.View.Controllers
             return View();
         }
 
-        public ActionResult AlterarBeneficio(int id)
+        public ActionResult AlterarBeneficio(string id)
         {
-            Beneficio b =  _Control.SelecionarBeneficioID(id);
+            int IDDescriptografada = Convert.ToInt32(Criptografia.DecriptQueryString(id));
+            Beneficio b =  _Control.SelecionarBeneficioID(IDDescriptografada);
             return View(b);
         }
 

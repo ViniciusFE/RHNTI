@@ -22,7 +22,7 @@ namespace RH.View.Controllers
         // GET: DadosBancarios
         public ActionResult Index(string IDFuncionario)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(IDFuncionario));
 
             List<DadoBancario> Dados = _Control.DadosBanacarioFuncionario(IDDescriptografado);
             Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);

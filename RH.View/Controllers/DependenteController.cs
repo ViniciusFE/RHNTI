@@ -82,7 +82,7 @@ namespace RH.View.Controllers
 
         public ActionResult Index(string IDFuncionario)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(IDFuncionario));
 
             Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);
             ViewBag.IDFuncionario = IDFuncionario;
@@ -92,7 +92,7 @@ namespace RH.View.Controllers
 
         public ActionResult CadastrarDependente(string IDFuncionario)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(IDFuncionario));
             Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);
 
             ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
@@ -110,7 +110,7 @@ namespace RH.View.Controllers
             ViewBag.DP_Parentesco = new SelectList(Parentescos(), "Valor", "Nome");
             ViewBag.IDFuncionario = IDFuncionario;
 
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(IDFuncionario));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(IDFuncionario));
 
 
             if (Convert.ToBoolean(Session["Avaliativa"]))
@@ -145,7 +145,7 @@ namespace RH.View.Controllers
 
         public ActionResult AlterarDependente(string id)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
             DadoDependente Dependente = _Control.SelecionarDependente(IDDescriptografado);
             ViewBag.DP_Parentesco = new SelectList(Parentescos(), "Valor", "Nome");
             return View(Dependente);

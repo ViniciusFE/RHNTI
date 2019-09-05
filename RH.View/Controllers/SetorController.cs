@@ -121,7 +121,7 @@ namespace RH.View.Controllers
 
         public ActionResult AlterarSetor(string id)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
             Setor oSetor = _Control.SelecionarSetor(IDDescriptografado);
             ViewBag.Setores = _Control.SelecionarSetorEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             return View(oSetor);

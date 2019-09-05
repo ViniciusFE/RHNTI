@@ -99,7 +99,7 @@ namespace RH.View.Controllers
 
         public ActionResult AlterarFuncionario(string id)
         {
-            int IDDescriptografado = Convert.ToInt32(Criptografia.DecryptQueryString(id));
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
 
             var aPessoa = DbPessoa.SelecionarFuncionario(IDDescriptografado);
             ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome",aPessoa.Pes_Cargo_Car_ID);
