@@ -74,5 +74,15 @@ namespace RH.Control
         {
             return _RepositorieAvaliacao.LimiteAvaliacoesEmpresaAvaliativa(IDEmpresa);
         }
+
+        public Avaliacao SelecionarAvaliacao(int id)
+        {
+            return _RepositorieAvaliacao.SelecionarAvaliacao(id);
+        }
+
+        public void AlterarAvaliacao(Avaliacao aAvaliacao)
+        {
+            _RepositorieAvaliacao.AlterarAvaliacao(aAvaliacao);
+        }
     }
 }

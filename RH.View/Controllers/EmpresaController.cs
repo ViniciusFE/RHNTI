@@ -7,6 +7,7 @@ using RH.Model;
 using RH.Control;
 using PagedList;
 using RH.View.Filtro;
+using RH.View.CriptoHelper;
 
 namespace RH.View.Controllers
 {
@@ -121,9 +122,9 @@ namespace RH.View.Controllers
         }
 
         [AutorizacaoEmpresa]        
-        public ActionResult EditarEmpresa(int id)
+        public ActionResult EditarEmpresa(string id)
         {
-            Empresa aEmpresa = _Control.SelecionarEmpresa(id);
+            Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Criptografia.DecriptQueryString(id)));
             return View(aEmpresa);
         }
 

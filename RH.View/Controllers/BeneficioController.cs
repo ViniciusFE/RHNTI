@@ -72,6 +72,10 @@ namespace RH.View.Controllers
         {
             int IDDescriptografada = Convert.ToInt32(Criptografia.DecriptQueryString(id));
             Beneficio b =  _Control.SelecionarBeneficioID(IDDescriptografada);
+            if(b==null)
+            {
+                return new HttpNotFoundResult();
+            }
             return View(b);
         }
 

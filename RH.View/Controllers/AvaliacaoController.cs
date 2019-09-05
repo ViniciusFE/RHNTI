@@ -100,5 +100,13 @@ namespace RH.View.Controllers
             _Control.CadastrarAvaliacao(aAvaliacao);
             return Json("A avaliação do funcionário foi efetuada com sucesso!");
         }
+
+        public ActionResult ExcluirAvaliacao(int id)
+        {
+            Avaliacao aAvaliacao = _Control.SelecionarAvaliacao(id);
+            aAvaliacao.Ava_Situation = false;
+            _Control.AlterarAvaliacao(aAvaliacao);
+            return Json("A avaliação foi excluída com sucesso!");
+        }
     }
 }

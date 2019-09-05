@@ -42,7 +42,7 @@ else
     {
         foreach (var x in Model)
         {
-            <div class="container my-4">
+            <div class="container my-4" id="Avaliacao-@x.Ava_ID">
                 <div class="card">
                     <div class="card-header">
                         <h4><strong>Funcionários: </strong>@x.Pessoa.Pes_Nome</h4>
@@ -60,7 +60,7 @@ else
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-warning custom" id="Alterar" data-avaliacao='@x.Ava_Avaliacao' data-id="@x.Ava_ID"><i class="fas fa-user-edit"></i> Alterar</button>
-                        <button class="btn btn-danger custom demitir" data-id="@x.Ava_ID"><i class="fas fa-user-times"></i> Excluir</button>
+                        <button class="btn btn-danger custom ExcluirAvaliacao" data-id="@x.Ava_ID"><i class="fas fa-user-times"></i> Excluir</button>
                     </div>
 
                 </div>
@@ -81,10 +81,64 @@ else
     }
 }
 
-
+        <div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluir">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Excluir Avaliação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="Mensagem"></p>
+                        <div align="center">
+                            <img src="~/Imagem/833.gif" id="Carregando" style="display:none;" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning custom BtnExcluir" id="Excluir">Sim</button>
+                        <button type="button" class="btn btn-danger custom BtnExcluir" data-dismiss="modal" id="BtnNao">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 <hr />
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            var IDAvaliacao;
+
+            $(".ExcluirAvaliacao").click(function () {
+
+                IDAvaliacao = $(this).attr("data-id");
+                $("#Mensagem").html("Tem certeza que deseja excluir essa avaliação?");
+                $(".BtnExcluir").removeAttr("disabled");
+                $("#ModalExcluir").modal('show');
+                
+
+            });
+
+            $("#Excluir").click(function () {
+                $(".BtnExcluir").attr("disabled", "disabled");
+                var URL ="@Url.Action("ExcluirAvaliacao", "Avaliacao")";
+                $("#Mensagem").css("display", "none");
+                $("#Carregando").css("display", "block");
+                $.post(URL, { id: IDAvaliacao }, function (resposta) {
+                    $("#Mensagem").css("display", "block");
+                    $("#Carregando").css("display", "none");
+                    $("#Mensagem").html(resposta);
+                    $("#Avaliacao-" + IDAvaliacao).slideUp("1000");
+                });
+            });
+
+        });
+    </script>
+
+    }
 
 
 

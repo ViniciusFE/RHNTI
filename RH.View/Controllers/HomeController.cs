@@ -386,5 +386,10 @@ namespace RH.View.Controllers
             return fileResult;
         }
 
+        public ActionResult NotFound()
+        {
+            return new HttpNotFoundResult();
+        }
+
     }
 }

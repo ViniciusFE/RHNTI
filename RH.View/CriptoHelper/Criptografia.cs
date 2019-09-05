@@ -43,9 +43,10 @@ namespace RH.View.CriptoHelper
             TDESAlgorithm.Key = TDESKey;
             TDESAlgorithm.Mode = CipherMode.ECB;
             TDESAlgorithm.Padding = PaddingMode.PKCS7;
-            byte[] DataToDecrypt = Convert.FromBase64String(Message);
+           
             try
             {
+                byte[] DataToDecrypt = Convert.FromBase64String(Message);
                 ICryptoTransform Decryptor = TDESAlgorithm.CreateDecryptor();
                 Results = Decryptor.TransformFinalBlock(DataToDecrypt, 0, DataToDecrypt.Length);
             }
