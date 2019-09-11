@@ -85,7 +85,7 @@ namespace RH.Model.Repositories
 
         public Pessoa SelecionarPessoaDiaCadastro(string DataCadastro, int IDEmpresa)
         {
-            return Db.Pessoa.Join(Db.Cargo.Join(Db.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), p => p.Pes_Cargo_Car_ID, c => c.Car_ID, (p, c) => p).Where(p => p.Pes_DataCadastro.Equals(DataCadastro) && p.Pes_Situation == true).FirstOrDefault();
+            return Db.Pessoa.Join(Db.Cargo.Join(Db.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), p => p.Pes_Cargo_Car_ID, c => c.Car_ID, (p, c) => p).Where(p => p.Pes_DataCadastro.Equals(DataCadastro)).OrderBy(p => p.Pes_ID).ToList().Last();
         }
 
         public bool LimiteFuncionariosEmpresaAvaliativa(int IDEmpresa)
@@ -110,6 +110,11 @@ namespace RH.Model.Repositories
             }
 
             return false;
+        }
+
+        public Pessoa SelecionarPessoa(int IDFuncionario)
+        {
+            return Db.Pessoa.Where(p => p.Pes_ID.Equals(IDFuncionario)).FirstOrDefault();
         }
     }
 }

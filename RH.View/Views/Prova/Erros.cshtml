@@ -12,7 +12,7 @@
             <h3 class="text-center">@ViewBag.NomeAluno - @ViewBag.MatriculaAluno</h3>
             <h3 class="text-center">@ViewBag.Curso - @ViewBag.Serie</h3>
             <br />
-            <h2 class="text-center text-danger">Nota da Prova: @ViewBag.Nota</h2>
+            <h2 class="text-center text-danger">Nota da Prova: @Math.Round(ViewBag.Nota,2)</h2>
             <br />
             <p class="text-danger text-center"><b>Atenção: </b>Caso encontre alguma anomalia na correção de sua prova, por favor entre em contato o mais rápido possível com seu professor.</p>
         </div>

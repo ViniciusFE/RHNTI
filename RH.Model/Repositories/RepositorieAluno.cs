@@ -55,5 +55,11 @@ namespace RH.Model.Repositories
         {
             return Db.VW_Notas.Where(p => p.CodigoProva.Equals(CodigoProva)).ToList();
         }
+
+        public Aluno AlunoProva()
+        {
+            return Db.Aluno.Where(p => p.Alu_Nome.Equals("ALUNO PROVA")).FirstOrDefault();
+            
+        }
     }
 }

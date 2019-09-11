@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RH.View.CriptoHelper;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class DependenteController : Controller
     {
         CDependente _Control;

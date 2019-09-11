@@ -120,8 +120,7 @@ namespace RH.View.Controllers
             }
             return View();
         }
-
-        [AutorizacaoEmpresa]        
+    
         public ActionResult EditarEmpresa(string id)
         {
             Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Criptografia.DecriptQueryString(id)));

@@ -50,7 +50,7 @@ namespace RH.Model.Repositories
 
         public DadoBancario SelecionarDadoBancarioDataCadastro(string DataCadastro, int IDEmpresa)
         {
-            return odb.DadoBancario.SqlQuery("select * from DadoBancario d inner join Pessoa p on d.DB_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where DB_DataCadastro = '"+DataCadastro+"'").FirstOrDefault();
+            return odb.DadoBancario.Join(odb.Pessoa.Join(odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(IDEmpresa)),c=>c.Car_Setor_Set_ID,s=>s.Set_ID,(c,s)=>c),p=>p.Pes_Cargo_Car_ID,c=>c.Car_ID,(p,c)=>p), d => d.DB_Pessoa_Pes_ID, p => p.Pes_ID, (d, p) => d).Where(d => d.DB_DataCadastro.Equals(DataCadastro)).OrderBy(d => d.DB_ID).ToList().Last();
         }
 
         public bool LimiteDadosBancariosEmpresaAvaliativa(int IDEmpresa)

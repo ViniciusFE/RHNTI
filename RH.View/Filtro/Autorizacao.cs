@@ -13,7 +13,7 @@ namespace RH.View.Filtro
         {
             object usuario=filterContext.HttpContext.Session["TypeUser"];            
 
-            if(usuario!=null && usuario.ToString()!="Aluno")
+            if(usuario==null)
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(

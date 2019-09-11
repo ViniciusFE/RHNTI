@@ -59,7 +59,7 @@ namespace RH.Model.Repositories
 
         public DadoDependente SelecionarDependenteDataCadastro(string DataCadastro,int IDEmpresa)
         {
-            return odb.DadoDependente.SqlQuery("select * from DadoDependente d inner join Pessoa p on d.DP_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = " + IDEmpresa + " where d.DP_DataCadastro ='" + DataCadastro + "' and d.DP_Situation = 1").FirstOrDefault();
+            return odb.DadoDependente.Join(odb.Pessoa.Join(odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(IDEmpresa)),c=>c.Car_Setor_Set_ID,s=>s.Set_ID,(c,s)=>c),p=>p.Pes_Cargo_Car_ID,c=>c.Car_ID,(p,c)=>p), dd => dd.DP_Pessoa_Pes_ID, p => p.Pes_ID, (dd, p) => dd).Where(dd=>dd.DP_DataCadastro.Equals(DataCadastro)).OrderBy(dd => dd.DP_ID).ToList().Last();
         }
 
         public bool LimiteDependentesEmpresaAvaliativa(int IDEmpresa)

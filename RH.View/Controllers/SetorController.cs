@@ -81,38 +81,17 @@ namespace RH.View.Controllers
                 oSetor.Set_DataCadastro = aEmpresa.Emp_DataAtual;
                 oSetor.Set_Situation = true;
                 oSetor.Set_Empresa_Emp_ID = Convert.ToInt32(Session["IDEmpresa"]);
-
-                if(SetorRespondente==0)
-                {
-                    oSetor.Set_Setor_Set_ID = oSetor.Set_ID;
-                }
-
-                else
-                {
-                    oSetor.Set_Setor_Set_ID = SetorRespondente;
-                }
+                oSetor.Set_Setor_Set_ID = SetorRespondente;
 
                 _Control.CadastrarSetor(oSetor);
 
                 if(SetorRespondente==0)
                 {
-                    Setor oSetor2 = _Control.SelecionarSetorPeloNome(oSetor.Set_Nome);
-                    oSetor2.Set_Setor_Set_ID = oSetor2.Set_ID;
-                    _Control.AlterarSetor(oSetor2);
+                    oSetor = _Control.SelecionarSetor(oSetor.Set_ID);
+                    oSetor.Set_Setor_Set_ID = oSetor.Set_ID;
+                    _Control.AlterarSetor(oSetor);
                 }
 
-                //Cargo t = _CCargo.SelecionarCargoPorNome("-");
-                //if (t == null)
-                //{
-                //    Cargo chefe = new Cargo();
-                //    chefe.Car_Setor_Set_ID = oSetor.Set_ID;
-                //    chefe.Car_Nome = "-";
-                //    chefe.Car_DataCadastro = DateTime.Now;
-                //    chefe.Car_Situation = false;
-                //    _CCargo.CadastrarCargo(chefe);
-                //    chefe.Car_Cargo_Car_ID = chefe.Car_ID;
-                //    _CCargo.AlterarCargo(chefe);
-                //}
                 return RedirectToAction("Index");
             }
             return View();

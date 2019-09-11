@@ -10,8 +10,7 @@ using RH.View.CriptoHelper;
 using RH.View.Filtro;
 
 namespace RH.View.Controllers
-{
-    [Autorizacao]
+{    
     public class HomeController : Controller
     {
         private CEmpresa _Control;
@@ -21,6 +20,7 @@ namespace RH.View.Controllers
             _Control = new CEmpresa();
         }
 
+        [Autorizacao]
         public ActionResult Index(string id,string nomeEmpresa)
         {
             int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
@@ -43,11 +43,13 @@ namespace RH.View.Controllers
             return View();
         }
 
+        [AutorizacaoProfessor]
         public ActionResult Professor()
         {
             return View();
         }
 
+        [AutorizacaoEmpresa]
         public ActionResult MudarDataEmpresa(string Data)
         {
             Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
@@ -365,6 +367,7 @@ namespace RH.View.Controllers
             return View();
         }
 
+        [AutorizacaoEmpresa]
         public ActionResult VisualizarProva()
         {
             Aluno oAluno = (Aluno)Session["User"];
@@ -372,7 +375,7 @@ namespace RH.View.Controllers
             // instantiate a html to pdf converter object 
             HtmlToPdf converter = new HtmlToPdf();
             // create a new pdf document converting an url 
-            PdfDocument doc = converter.ConvertUrl("http://localhost:52257/Home/GerarProva/"+oAluno.Alu_ID);
+            PdfDocument doc = converter.ConvertUrl("http://rh.aedb.br/Home/GerarProva/"+oAluno.Alu_ID);
 
             // save pdf document 
             byte[] pdf = doc.Save();

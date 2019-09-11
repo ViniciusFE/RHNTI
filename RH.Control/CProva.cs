@@ -280,5 +280,50 @@ namespace RH.Control
         {
             return _RepositorieBeneficio.SelecionarBeneficioporEmpresa(IDEmpresa);
         }
+
+        public Aluno AlunoProva()
+        {
+            return _RepositorieAluno.AlunoProva();
+        }
+
+        public void CadastrarAluno(Aluno oAluno)
+        {
+            _RepositorieAluno.CadastrarAluno(oAluno);
+        }
+
+        public Empresa EmpresaAlunoProva()
+        {
+            return _RepositorieEmpresa.EmpresaAlunoProva();
+        }
+
+        public void CadastrarEmpresa(Empresa aEmpresa)
+        {
+            _RepositorieEmpresa.CadastrarEmpresa(aEmpresa);
+        }
+
+        public void CadastrarSetor(Setor oSetor)
+        {
+            _RepositorieSetor.CadastrarSetor(oSetor);
+        }
+
+        public void CadastrarCargo(Cargo oCargo)
+        {
+            _RepositorieCargo.CadastrarCargo(oCargo);
+        }
+
+        public void CadastrarBeneficio(Beneficio oBeneficio)
+        {
+            _RepositorieBeneficio.Incluir(oBeneficio);
+        }
+
+        public void AlterarSetor(Setor oSetor)
+        {
+            _RepositorieSetor.AlterarSetor(oSetor);
+        }
+
+        public Pessoa SelecionarPessoa(int IDFuncionario)
+        {
+            return _RepositoriePessoa.SelecionarPessoa(IDFuncionario);
+        }
     }
 }

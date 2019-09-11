@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using RH.Model;
 using RH.Control;
 using RH.View.CriptoHelper;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class DadosBancariosController : Controller
     {
 
@@ -31,19 +33,21 @@ namespace RH.View.Controllers
             return View(Dados);
         }
 
-        public ActionResult CadastrarDadoBancario(int IDFuncionario)
+        public ActionResult CadastrarDadoBancario(string IDFuncionario)
         {
             ViewBag.IDFuncionario = IDFuncionario;
-            Pessoa oFuncionario = _Control.SelecionarFuncionario(IDFuncionario);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(IDFuncionario));
+            Pessoa oFuncionario = _Control.SelecionarFuncionario(IDDescriptografado);
             ViewBag.NomeFuncionario = oFuncionario.Pes_Nome;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastrarDadoBancario(DadoBancario oDado,int IDFuncionario)
+        public ActionResult CadastrarDadoBancario(DadoBancario oDado,string IDFuncionario)
         {
-            Pessoa aPessoa = _Control.SelecionarFuncionario(IDFuncionario);
+            int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(IDFuncionario));
+            Pessoa aPessoa = _Control.SelecionarFuncionario(IDDescriptografado);
             ViewBag.IDFuncionario = IDFuncionario;
             ViewBag.NomeFuncionario = aPessoa.Pes_Nome;
 
@@ -59,7 +63,7 @@ namespace RH.View.Controllers
             {
                 Empresa aEmpresa = _Control.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
                 oDado.DB_DataCadastro = aEmpresa.Emp_DataAtual;
-                oDado.DB_Pessoa_Pes_ID = IDFuncionario;
+                oDado.DB_Pessoa_Pes_ID = IDDescriptografado;
                 oDado.DB_Situation = true;
                 _Control.CadastrarDadoBancario(oDado);
                 return RedirectToAction("Index",new { IDFuncionario=IDFuncionario});

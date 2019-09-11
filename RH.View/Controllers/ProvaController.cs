@@ -284,21 +284,171 @@ namespace RH.View.Controllers
                 aProva.Pro_Aluno_Alu_ID = x.Alu_ID;
                 aProva.Pro_DataInicio = DateTime.Now;
                 aProva.Pro_DataTermino = Convert.ToDateTime(DataTermino);
-                aProva.Pro_Setor1 = 18;
-                aProva.Pro_Setor2 = 19;
-                aProva.Pro_Setor3 = 20;
-                aProva.Pro_Setor4 = 25;
-                aProva.Pro_Setor5 = 27;
-                aProva.Pro_Cargo1 = 10;
-                aProva.Pro_Cargo2 = 11;
-                aProva.Pro_Cargo3 = 12;
-                aProva.Pro_Cargo4 = 14;
-                aProva.Pro_Cargo5 = 15;
+
+                int IDAlunoProva = 0;
+                Aluno oAluno = _Control.AlunoProva();
+                if(oAluno==null)
+                {
+                    Aluno AlunoProva = new Aluno();
+                    AlunoProva.Alu_Curso_Cur_ID = 1;
+                    AlunoProva.Alu_DataCadastro = DateTime.Now;
+                    AlunoProva.Alu_Email = "ALUNO PROVA";
+                    AlunoProva.Alu_Matricula = 1;
+                    AlunoProva.Alu_Nome = "ALUNO PROVA";
+                    AlunoProva.Alu_Senha = "ALUNO PROVA";
+                    AlunoProva.Alu_Serie = 1;
+                    AlunoProva.Alu_Situation = false;
+                    _Control.CadastrarAluno(AlunoProva);
+                    IDAlunoProva = AlunoProva.Alu_ID;
+                }
+
+                else
+                {
+                    IDAlunoProva = oAluno.Alu_ID;
+                }
+
+                Empresa aEmpresa = _Control.EmpresaAlunoProva();
+                int IDEmpresaProva;
+
+                if(aEmpresa==null)
+                {
+                    Empresa EmpresaAlunoProva = new Empresa();
+                    EmpresaAlunoProva.Emp_Nome = "EMPRESA";
+                    EmpresaAlunoProva.Emp_Aluno_Alu_ID = IDAlunoProva;
+                    EmpresaAlunoProva.Emp_Avaliativa = true;
+                    EmpresaAlunoProva.Emp_Cidade = "EMPRESA";
+                    EmpresaAlunoProva.Emp_CNPJ = "EMPRESA";
+                    EmpresaAlunoProva.Emp_DataAtual = "01/01";
+                    EmpresaAlunoProva.Emp_DataCadastro = DateTime.Now;
+                    EmpresaAlunoProva.Emp_Endereco = "EMPRESA";
+                    EmpresaAlunoProva.Emp_Estado = "EMPRESA";
+                    EmpresaAlunoProva.Emp_Logo = data;
+                    EmpresaAlunoProva.Emp_RegistroEstadual = "EMPRESA";
+                    EmpresaAlunoProva.Emp_Situation = false;
+                    _Control.CadastrarEmpresa(EmpresaAlunoProva);
+                    IDEmpresaProva = EmpresaAlunoProva.Emp_ID;
+                }
+
+                else
+                {
+                    IDEmpresaProva = aEmpresa.Emp_ID;
+                }
+                               
+
+                Setor oSetor = new Setor();
+
+                //Cadastra Setores da Prova
+
+                //Setor 1
+                oSetor.Set_Nome = "Administrativo";
+                oSetor.Set_Empresa_Emp_ID = IDEmpresaProva;
+                oSetor.Set_Setor_Set_ID = oSetor.Set_ID;
+                oSetor.Set_DataCadastro = "01/01";
+                oSetor.Set_Situation = true;
+                _Control.CadastrarSetor(oSetor);
+                int IDSetorAdiministrativo = oSetor.Set_ID;
+                aProva.Pro_Setor1 = oSetor.Set_ID;
+                oSetor.Set_Setor_Set_ID = oSetor.Set_ID;
+                _Control.AlterarSetor(oSetor);
+
+
+                //Setor 2
+                oSetor.Set_Nome = "Tesouraria";
+                oSetor.Set_Empresa_Emp_ID = IDEmpresaProva;
+                oSetor.Set_Setor_Set_ID = IDSetorAdiministrativo;
+                oSetor.Set_DataCadastro = "10/03";
+                oSetor.Set_Situation = true;
+                _Control.CadastrarSetor(oSetor);
+                aProva.Pro_Setor2 = oSetor.Set_ID;
+                int IDSetorTesouararia = oSetor.Set_ID;
+
+                //Setor 3
+                oSetor.Set_Nome = "Tecnologia da Informação";
+                oSetor.Set_Empresa_Emp_ID = IDEmpresaProva;
+                oSetor.Set_Setor_Set_ID = IDSetorAdiministrativo;
+                oSetor.Set_DataCadastro = "25/06";
+                oSetor.Set_Situation = true;
+                _Control.CadastrarSetor(oSetor);
+                aProva.Pro_Setor3 = oSetor.Set_ID;
+                int IDSetorTI = oSetor.Set_ID;
+
+                //Setor 4
+                oSetor.Set_Nome = "Produção";
+                oSetor.Set_Empresa_Emp_ID = IDEmpresaProva;
+                oSetor.Set_Setor_Set_ID = IDSetorAdiministrativo;
+                oSetor.Set_DataCadastro = "30/08";
+                oSetor.Set_Situation = true;
+                _Control.CadastrarSetor(oSetor);
+                aProva.Pro_Setor4 = oSetor.Set_ID;
+                int IDSetorProducao = oSetor.Set_ID;
+
+                //Setor 5
+                oSetor.Set_Nome = "Marketing";
+                oSetor.Set_Empresa_Emp_ID = IDEmpresaProva;
+                oSetor.Set_Setor_Set_ID = IDSetorAdiministrativo;
+                oSetor.Set_DataCadastro = "07/09";
+                oSetor.Set_Situation = true;
+                _Control.CadastrarSetor(oSetor);
+                aProva.Pro_Setor5 = oSetor.Set_ID;
+                int IDSetorMarketing = oSetor.Set_ID;
+
+                //Cadastrar Cargos
+
+                //Cargo 1
+                Cargo oCargo = new Cargo();
+                oCargo.Car_Chefe = true;
+                oCargo.Car_DataCadastro = "01/01";
+                oCargo.Car_Nome = "C.E.O";
+                oCargo.Car_Setor_Set_ID = IDSetorAdiministrativo;
+                oCargo.Car_Situation = true;
+                _Control.CadastrarCargo(oCargo);
+                aProva.Pro_Cargo1 = oCargo.Car_ID;
+                int IDCargoCEO = oCargo.Car_ID;
+
+                //Cargo 2
+                oCargo.Car_Chefe = false;
+                oCargo.Car_DataCadastro = "10/03";
+                oCargo.Car_Nome = "Tesoureiro";
+                oCargo.Car_Setor_Set_ID = IDSetorTesouararia;
+                oCargo.Car_Situation = true;
+                _Control.CadastrarCargo(oCargo);
+                aProva.Pro_Cargo2 = oCargo.Car_ID;
+                int IDCargoTesoureiro = oCargo.Car_ID;
+
+                //Cargo 3
+                oCargo.Car_Chefe = false;
+                oCargo.Car_DataCadastro = "25/06";
+                oCargo.Car_Nome = "Programador";
+                oCargo.Car_Setor_Set_ID = IDSetorTI;
+                oCargo.Car_Situation = true;
+                _Control.CadastrarCargo(oCargo);
+                aProva.Pro_Cargo3 = oCargo.Car_ID;
+                int IDCargoProgramador = oCargo.Car_ID;
+
+                //Cargo 4
+                oCargo.Car_Chefe = true;
+                oCargo.Car_DataCadastro = "30/08";
+                oCargo.Car_Nome = "Gerente de Produção";
+                oCargo.Car_Setor_Set_ID = IDSetorProducao;
+                oCargo.Car_Situation = true;
+                _Control.CadastrarCargo(oCargo);
+                aProva.Pro_Cargo4 = oCargo.Car_ID;
+                int IDCargoGerenteProducao = oCargo.Car_ID;
+
+                //Cargo 5
+                oCargo.Car_Chefe = false;
+                oCargo.Car_DataCadastro = "07/09";
+                oCargo.Car_Nome = "Profissional de Marketing";
+                oCargo.Car_Setor_Set_ID = IDSetorMarketing;
+                oCargo.Car_Situation = true;
+                _Control.CadastrarCargo(oCargo);
+                aProva.Pro_Cargo5 = oCargo.Car_ID;
+                int IDCargoProfissionalMarketing = oCargo.Car_ID;
 
                 Pessoa aPessoa = new Pessoa();
 
                 //Cadastra funcionário do cargo de tesoureiro//
-                aPessoa.Pes_Cargo_Car_ID = 11;
+                aPessoa.Pes_Cargo_Car_ID = IDCargoTesoureiro;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "10/03";
@@ -313,7 +463,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa1 = IDTesoureiro;
 
                 //Cadastra funcionário do cargo de programador//
-                aPessoa.Pes_Cargo_Car_ID = 15;
+                aPessoa.Pes_Cargo_Car_ID = IDCargoProgramador;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "25/06";
@@ -328,7 +478,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa2 = IDProgramador;
 
                 //Cadastra funcionário do cargo de CEO
-                aPessoa.Pes_Cargo_Car_ID = 10;
+                aPessoa.Pes_Cargo_Car_ID = IDCargoCEO;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "01/01";
@@ -343,7 +493,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa3 = IDCEO;
 
                 //Cadastra funcionário do cargo Gerente de Produção
-                aPessoa.Pes_Cargo_Car_ID = 14;
+                aPessoa.Pes_Cargo_Car_ID = IDCargoGerenteProducao;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "30/08";
@@ -358,7 +508,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa4 = IDGerenteDeProducao;
 
                 //Cadastra funcionário do cargo Profissional de Marketing
-                aPessoa.Pes_Cargo_Car_ID = 12;
+                aPessoa.Pes_Cargo_Car_ID = IDCargoProfissionalMarketing;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "07/09";
@@ -474,25 +624,80 @@ namespace RH.View.Controllers
                 aProva.Pro_DadoBancario5 = oDado.DB_ID;
 
                 //Cadastrar Benefícos
-                aProva.Pro_Beneficio1 = 18; 
-                aProva.Pro_Beneficio2 = 19; 
-                aProva.Pro_Beneficio3 = 20; 
-                aProva.Pro_Beneficio4 = 21; 
-                aProva.Pro_Beneficio5 = 22; 
+
+                //Benefício 1
+                Beneficio oBeneficio = new Beneficio();
+                oBeneficio.Ben_Custo=300.00;
+                oBeneficio.Ben_DataCadastro = "01/01";
+                oBeneficio.Ben_Descricao = "É um benefício que impede que qualquer trabalhador gaste mais do que 6% do seu salário com despesas de transporte de sua casa até o trabalho e do trabalho até sua casa. O valor da despesa que superar os 6% deve ser custeado pela empresa";
+                oBeneficio.Ben_Empresa_Emp_ID = IDEmpresaProva;
+                oBeneficio.Ben_Nome = "Vale Transporte";
+                oBeneficio.Ben_Situation = true;
+                _Control.CadastrarBeneficio(oBeneficio);
+                int IDValeTransporte = oBeneficio.Ben_ID;
+                aProva.Pro_Beneficio1 = oBeneficio.Ben_ID;
+
+                //Benefício 2
+                oBeneficio = new Beneficio();
+                oBeneficio.Ben_Custo = 250.00;
+                oBeneficio.Ben_DataCadastro = "01/01";
+                oBeneficio.Ben_Descricao = "Para organizações com mais de 300 colaboradores é previsto que haja um ambiente para que os funcionários possam realizar suas refeições ,a instituição pode disponibilizar a refeição ou o profissional para trazer de casa.";
+                oBeneficio.Ben_Empresa_Emp_ID = IDEmpresaProva;
+                oBeneficio.Ben_Nome = "Vale Alimentação";
+                oBeneficio.Ben_Situation = true;
+                _Control.CadastrarBeneficio(oBeneficio);
+                int IDValeAlimentacao = oBeneficio.Ben_ID;
+                aProva.Pro_Beneficio2 = oBeneficio.Ben_ID;
+
+                //Benefício 3
+                oBeneficio = new Beneficio();
+                oBeneficio.Ben_Custo = 500.00;
+                oBeneficio.Ben_DataCadastro = "01/01";
+                oBeneficio.Ben_Descricao = "Quando a empresa oferece plano de saúde, o custo pode ser deduzido na folha de pagamento do funcionário. Entretanto, o colaborador pagaria abaixo do que se ele contratasse um plano particular, visto que a companhia paga boa parte do custo. Além do mais, planos corporativos habituam ser mais acessíveis do que individuais.";
+                oBeneficio.Ben_Empresa_Emp_ID = IDEmpresaProva;
+                oBeneficio.Ben_Nome = "Assistência Médica";
+                oBeneficio.Ben_Situation = true;
+                _Control.CadastrarBeneficio(oBeneficio);
+                int IDAssistenciaMedica = oBeneficio.Ben_ID;
+                aProva.Pro_Beneficio3 = oBeneficio.Ben_ID;
+
+                //Benefício 4
+                oBeneficio = new Beneficio();
+                oBeneficio.Ben_Custo = 150.00;
+                oBeneficio.Ben_DataCadastro = "01/01";
+                oBeneficio.Ben_Descricao = "O Vale-cultura, na prática, é um pagamento adicional ao trabalhador, em forma de benefício, entregue em um cartão magnético. Todo mês, este saldo é acrescentado no cartão para que o funcionário possa aplicar em livros, eventos, ingressos, filmes etc.";
+                oBeneficio.Ben_Empresa_Emp_ID = IDEmpresaProva;
+                oBeneficio.Ben_Nome = "Vale Alimentação";
+                oBeneficio.Ben_Situation = true;
+                _Control.CadastrarBeneficio(oBeneficio);
+                int IDValeCultura = oBeneficio.Ben_ID;
+                aProva.Pro_Beneficio4 = oBeneficio.Ben_ID;
+
+                //Benefício 5
+                oBeneficio = new Beneficio();
+                oBeneficio.Ben_Custo = 350.00;
+                oBeneficio.Ben_DataCadastro = "01/01";
+                oBeneficio.Ben_Descricao = "Oferece ao funcionário a possibilidade de realizar tratamentos dentários e funciona de forma semelhante à assistência médica.";
+                oBeneficio.Ben_Empresa_Emp_ID = IDEmpresaProva;
+                oBeneficio.Ben_Nome = "Plano Odontológico";
+                oBeneficio.Ben_Situation = true;
+                _Control.CadastrarBeneficio(oBeneficio);
+                int IDPlanoOdontologico = oBeneficio.Ben_ID;
+                aProva.Pro_Beneficio5 = oBeneficio.Ben_ID;
 
 
                 //Cadastrar Benefícios dos Funcionários
                 PessoaBeneficio BeneficioFuncionario = new PessoaBeneficio();
 
                 //Cadastra Beneficios do Funcionario Programador
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 19;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDValeTransporte;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDProgramador;
                 BeneficioFuncionario.PB_DataCadastro = "25/06";
                 BeneficioFuncionario.PB_Situation = true;
                 _Control.CadastrarBeneficioFuncionario(BeneficioFuncionario);
                 aProva.Pro_BeneficioFuncionario1 = BeneficioFuncionario.PB_ID;
 
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 22;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDValeAlimentacao;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDProgramador;
                 BeneficioFuncionario.PB_DataCadastro = "25/06";
                 BeneficioFuncionario.PB_Situation = true;
@@ -500,14 +705,14 @@ namespace RH.View.Controllers
                 aProva.Pro_BeneficioFuncionario2 = BeneficioFuncionario.PB_ID;
 
                 //Cadastra Benefícios do CEO
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 20;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDValeCultura;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDCEO;
                 BeneficioFuncionario.PB_DataCadastro = "01/01";
                 BeneficioFuncionario.PB_Situation = true;
                 _Control.CadastrarBeneficioFuncionario(BeneficioFuncionario);
                 aProva.Pro_BeneficioFuncionario3 = BeneficioFuncionario.PB_ID;
 
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 18;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID =  IDPlanoOdontologico;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDCEO;
                 BeneficioFuncionario.PB_DataCadastro = "01/01";
                 BeneficioFuncionario.PB_Situation = true;
@@ -515,14 +720,14 @@ namespace RH.View.Controllers
                 aProva.Pro_BeneficioFuncionario4 = BeneficioFuncionario.PB_ID;
 
                 //Cadastrar Benefícios Profissional de Marketing
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 21;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDAssistenciaMedica;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDProfissionalMarketing;
                 BeneficioFuncionario.PB_DataCadastro = "07/09";
                 BeneficioFuncionario.PB_Situation = true;
                 _Control.CadastrarBeneficioFuncionario(BeneficioFuncionario);
                 aProva.Pro_BeneficioFuncionario5 = BeneficioFuncionario.PB_ID;
 
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 20;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDValeCultura;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDProfissionalMarketing;
                 BeneficioFuncionario.PB_DataCadastro = "07/09";
                 BeneficioFuncionario.PB_Situation = true;
@@ -530,14 +735,14 @@ namespace RH.View.Controllers
                 aProva.Pro_BenefcioFuncionario6 = BeneficioFuncionario.PB_ID;
 
                 //Cadastrar Beneficios do Tesoureiro
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 22;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDValeAlimentacao;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDTesoureiro;
                 BeneficioFuncionario.PB_DataCadastro = "10/03";
                 BeneficioFuncionario.PB_Situation = true;
                 _Control.CadastrarBeneficioFuncionario(BeneficioFuncionario);
                 aProva.Pro_BeneficioFuncionario7 = BeneficioFuncionario.PB_ID;
 
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 18;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDPlanoOdontologico;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDTesoureiro;
                 BeneficioFuncionario.PB_DataCadastro = "10/03";
                 BeneficioFuncionario.PB_Situation = true;
@@ -545,14 +750,14 @@ namespace RH.View.Controllers
                 aProva.Pro_BeneficioFuncionario8 = BeneficioFuncionario.PB_ID;
 
                 //Cadastrar Benefícios do Gerente de Produção
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 21;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDAssistenciaMedica;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDGerenteDeProducao;
                 BeneficioFuncionario.PB_DataCadastro = "30/08";
                 BeneficioFuncionario.PB_Situation = true;
                 _Control.CadastrarBeneficioFuncionario(BeneficioFuncionario);
                 aProva.Pro_BeneficioFuncionario9 = BeneficioFuncionario.PB_ID;
 
-                BeneficioFuncionario.PB_Beneficio_Ben_ID = 19;
+                BeneficioFuncionario.PB_Beneficio_Ben_ID = IDValeTransporte;
                 BeneficioFuncionario.PB_Pessoa_Pes_ID = IDGerenteDeProducao;
                 BeneficioFuncionario.PB_DataCadastro = "30/08";
                 BeneficioFuncionario.PB_Situation = true;
@@ -587,7 +792,7 @@ namespace RH.View.Controllers
                 aProva.Pro_AvaliacaoFuncionario3 = aAvaliacao.Ava_ID;
 
                 //Avaliação do Programador
-                aAvaliacao.Ava_Pessoa_Pes_ID = IDProfissionalMarketing;
+                aAvaliacao.Ava_Pessoa_Pes_ID = IDProgramador;
                 aAvaliacao.Ava_DataCadastro = "10/09";
                 aAvaliacao.Ava_Situation = true;
                 aAvaliacao.Ava_Avaliacao = "Está sempre chegando atrasado no trabalho, além não trabalhar bem em equipe.";
@@ -609,16 +814,16 @@ namespace RH.View.Controllers
 
                 aDemissao.Dem_Pessoa_Pes_ID = IDTesoureiro;
                 aDemissao.Dem_Motivo = "Pediu demissão";
-                aPessoa = _Control.SelecionarFuncionario(IDProfissionalMarketing);
+                aPessoa = _Control.SelecionarFuncionario(IDTesoureiro);
                 aDemissao.Dem_Salario = aPessoa.Pes_Salario;
-                aDemissao.Dem_DataCadastro = "31/12";
+                aDemissao.Dem_DataCadastro = "30/12";
                 aDemissao.Dem_Situation = true;
                 _Control.CadastrarDemissao(aDemissao);
                 aProva.Pro_Demissao2 = aDemissao.Dem_ID;
 
                 aDemissao.Dem_Pessoa_Pes_ID = IDProgramador;
                 aDemissao.Dem_Motivo = "Foi demitido";
-                aPessoa = _Control.SelecionarFuncionario(IDProfissionalMarketing);
+                aPessoa = _Control.SelecionarFuncionario(IDProgramador);
                 aDemissao.Dem_Salario = aPessoa.Pes_Salario;
                 aDemissao.Dem_DataCadastro = "12/12";
                 aDemissao.Dem_Situation = true;
@@ -1943,8 +2148,8 @@ namespace RH.View.Controllers
 
             if (DependenteAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DependenteAluno.DP_Pessoa_Pes_ID);
 
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
@@ -1978,7 +2183,7 @@ namespace RH.View.Controllers
                 else
                 {
                     Erro oErro = new Erro();
-                    oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
@@ -2005,8 +2210,8 @@ namespace RH.View.Controllers
 
             if (DependenteAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DependenteAluno.DP_Pessoa_Pes_ID);
 
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
@@ -2040,7 +2245,7 @@ namespace RH.View.Controllers
                 else
                 {
                     Erro oErro = new Erro();
-                    oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
@@ -2066,8 +2271,8 @@ namespace RH.View.Controllers
 
             if (DependenteAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DependenteAluno.DP_Pessoa_Pes_ID);
 
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
@@ -2101,7 +2306,7 @@ namespace RH.View.Controllers
                 else
                 {
                     Erro oErro = new Erro();
-                    oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
@@ -2127,8 +2332,8 @@ namespace RH.View.Controllers
 
             if (DependenteAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DependenteAluno.DP_Pessoa_Pes_ID);
 
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
@@ -2162,7 +2367,7 @@ namespace RH.View.Controllers
                 else
                 {
                     Erro oErro = new Erro();
-                    oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
@@ -2188,8 +2393,8 @@ namespace RH.View.Controllers
 
             if (DependenteAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DependenteProva.DP_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DependenteAluno.DP_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DependenteProva.DP_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DependenteAluno.DP_Pessoa_Pes_ID);
 
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\t", "");
                 DependenteAluno.DP_Nome = DependenteAluno.DP_Nome.Replace("\n", "");
@@ -2223,7 +2428,7 @@ namespace RH.View.Controllers
                 else
                 {
                     Erro oErro = new Erro();
-                    oErro.Err_Prova_Pro_ID = aProva.Pro_Codigo;
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
                     oErro.Err_RespostaAluno = "Dependente</br>Parente do Funcionário: " + PessoaAluno.Pes_Nome + "</br>Nome do Dependente: " + DependenteAluno.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteAluno.DP_Parentesco + "</br>Data de Cadastro: " + DependenteAluno.DP_DataCadastro;
                     oErro.Err_RespostaCerta = "Dependente</br>Parente do Funcionário: " + PessoaProva.Pes_Nome + "</br>Nome do Dependente: " + DependenteProva.DP_Nome + "</br>Parentesco com o funcionário: " + DependenteProva.DP_Parentesco + "</br>Data de Cadastro: " + DependenteProva.DP_DataCadastro;
@@ -2251,8 +2456,8 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
@@ -2309,8 +2514,8 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
@@ -2365,8 +2570,8 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
@@ -2421,8 +2626,8 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
@@ -2477,8 +2682,8 @@ namespace RH.View.Controllers
 
             if (DadoBancarioAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DadoBancarioProva.DB_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DadoBancarioAluno.DB_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DadoBancarioProva.DB_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DadoBancarioAluno.DB_Pessoa_Pes_ID);
 
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\t", "");
                 DadoBancarioProva.DB_Numero = DadoBancarioProva.DB_Numero.Replace("\n", "");
@@ -2749,8 +2954,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -2810,8 +3015,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -2871,8 +3076,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -2932,8 +3137,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -2993,8 +3198,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -3054,8 +3259,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -3115,8 +3320,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -3176,8 +3381,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -3237,8 +3442,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -3298,8 +3503,8 @@ namespace RH.View.Controllers
             {
                 foreach (var x in BeneficiosFuncionarioAluno)
                 {
-                    PessoaAluno = _Control.SelecionarFuncionario(x.PB_Pessoa_Pes_ID);
-                    PessoaProva = _Control.SelecionarFuncionario(BeneficioProva.PB_Pessoa_Pes_ID);
+                    PessoaAluno = _Control.SelecionarPessoa(x.PB_Pessoa_Pes_ID);
+                    PessoaProva = _Control.SelecionarPessoa(BeneficioProva.PB_Pessoa_Pes_ID);
                     BeneficioAluno = _Control.SelecionarBeneficio(x.PB_Beneficio_Ben_ID);
                     oBeneficioProva = _Control.SelecionarBeneficio(BeneficioProva.PB_Beneficio_Ben_ID);
 
@@ -3358,8 +3563,8 @@ namespace RH.View.Controllers
 
             if (AvaliacaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
                 AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\n", "");
                 AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\t", "");
@@ -3410,8 +3615,8 @@ namespace RH.View.Controllers
 
             if (AvaliacaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
                 AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\n", "");
                 AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\t", "");
@@ -3462,8 +3667,8 @@ namespace RH.View.Controllers
 
             if (AvaliacaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
                 AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\n", "");
                 AvaliacaoAluno.Ava_Avaliacao = AvaliacaoAluno.Ava_Avaliacao.Replace("\t", "");
@@ -3514,8 +3719,8 @@ namespace RH.View.Controllers
 
             if (AvaliacaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(AvaliacaoProva.Ava_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(AvaliacaoProva.Ava_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(AvaliacaoAluno.Ava_Pessoa_Pes_ID);
 
                 if (AvaliacaoAluno.Ava_Avaliacao.Replace(" ", "") == AvaliacaoProva.Ava_Avaliacao.Replace(" ", "") && PessoaProva.Pes_Nome.Replace(" ", "") == PessoaAluno.Pes_Nome.Replace(" ", ""))
                 {
@@ -3552,8 +3757,8 @@ namespace RH.View.Controllers
 
             if (DemissaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DemissaoProva.Dem_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
                 DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\t", "");
                 DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\n", "");
@@ -3572,7 +3777,7 @@ namespace RH.View.Controllers
                 PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
 
-                if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
+                if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -3606,8 +3811,8 @@ namespace RH.View.Controllers
 
             if (DemissaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DemissaoProva.Dem_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
                 DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\t", "");
                 DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\n", "");
@@ -3625,7 +3830,7 @@ namespace RH.View.Controllers
                 PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
                 PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
-                if (DemissaoAluno.Dem_Motivo.Replace(" ", "") == DemissaoProva.Dem_Motivo.Replace(" ", "") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", ""))
+                if (DemissaoAluno.Dem_Motivo.Replace(" ", "") == DemissaoProva.Dem_Motivo.Replace(" ", "") && PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -3661,8 +3866,8 @@ namespace RH.View.Controllers
 
             if (DemissaoAluno != null)
             {
-                PessoaProva = _Control.SelecionarFuncionario(DemissaoProva.Dem_Pessoa_Pes_ID);
-                PessoaAluno = _Control.SelecionarFuncionario(DemissaoAluno.Dem_Pessoa_Pes_ID);
+                PessoaProva = _Control.SelecionarPessoa(DemissaoProva.Dem_Pessoa_Pes_ID);
+                PessoaAluno = _Control.SelecionarPessoa(DemissaoAluno.Dem_Pessoa_Pes_ID);
 
                 DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\t", "");
                 DemissaoAluno.Dem_Motivo = DemissaoAluno.Dem_Motivo.Replace("\n", "");
@@ -3680,7 +3885,7 @@ namespace RH.View.Controllers
                 PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\n", "");
                 PessoaProva.Pes_Nome = PessoaProva.Pes_Nome.Replace("\r", "");
 
-                if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && DemissaoAluno.Dem_Salario == DemissaoProva.Dem_Salario && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
+                if (DemissaoAluno.Dem_Motivo.Replace(" ","") == DemissaoProva.Dem_Motivo.Replace(" ","") && PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ",""))
                 {
                     Nota = Nota + 0.2;
                 }

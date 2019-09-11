@@ -4,28 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5311f363a5ab4aadb7e878e4cd80fd59" Name="Diagram1" ZoomLevel="47">
-        <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="26.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="9.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.CadastroTreinamento" Width="1.5" PointX="19.5" PointY="32.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Cargo" Width="1.5" PointX="12" PointY="26.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Curso" Width="1.5" PointX="3" PointY="27.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.DadoBancario" Width="1.5" PointX="16.5" PointY="25.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.DadoDependente" Width="1.5" PointX="16.5" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Demissao" Width="1.5" PointX="16.5" PointY="33.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Empresa" Width="1.5" PointX="7.5" PointY="26" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Erro" Width="1.5" PointX="24" PointY="22.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Movimentacao" Width="1.5" PointX="16.5" PointY="37.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Nota" Width="1.5" PointX="24" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Pessoa" Width="1.5" PointX="14.25" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.PessoaBeneficio" Width="1.5" PointX="19.5" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Professor" Width="1.5" PointX="0.75" PointY="27" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="21.75" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Setor" Width="1.5" PointX="9.75" PointY="26.875" IsExpanded="true" />
+      <Diagram DiagramId="ce50fa30a7fe46d682d4de39215863b3" Name="Diagram1">
+        <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="9.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.CadastroTreinamento" Width="1.5" PointX="19.5" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Cargo" Width="1.5" PointX="12" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Curso" Width="1.5" PointX="3" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.DadoBancario" Width="1.5" PointX="16.5" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.DadoDependente" Width="1.5" PointX="16.5" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Demissao" Width="1.5" PointX="16.5" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Empresa" Width="1.5" PointX="7.5" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Erro" Width="1.5" PointX="24" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Movimentacao" Width="1.5" PointX="16.5" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Nota" Width="1.5" PointX="24" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Pessoa" Width="1.5" PointX="14.25" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.PessoaBeneficio" Width="1.5" PointX="19.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Posicao" Width="1.5" PointX="19.5" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Professor" Width="1.5" PointX="0.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="21.75" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Setor" Width="1.5" PointX="9.75" PointY="28.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Treinamento" Width="1.5" PointX="9.75" PointY="39.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Treinamento" Width="1.5" PointX="9.75" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="38.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.VW_BeneficiosFuncionario" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.VW_MeusBeneficios" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.VW_Notas" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
@@ -49,6 +50,8 @@
         <AssociationConnector Association="RHModel.FK_CadastroTreinamento_Treinamento" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Cargo_Setor" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Pessoa_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Posicao_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Posicao_Cargo1" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Cargo" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Cargo1" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Cargo2" ManuallyRouted="false" />
@@ -78,6 +81,7 @@
         <AssociationConnector Association="RHModel.FK_Movimentacao_Pessoa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Nota_Prova" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_PessoaBeneficio_Pessoa" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Posicao_Pessoa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Pessoa" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Pessoa1" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Pessoa2" ManuallyRouted="false" />
@@ -93,6 +97,8 @@
         <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio7" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio8" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_PessoaBeneficio9" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Posicao_Setor" ManuallyRouted="false" />
+        <AssociationConnector Association="RHModel.FK_Posicao_Setor1" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Professor" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Setor" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Setor1" ManuallyRouted="false" />

@@ -60,7 +60,7 @@ namespace RH.Model.Repositories
 
         public Empresa SelecionarEmpresaAvaliativaAluno(int IDAluno)
         {
-            return odb.Empresa.Where(p => p.Emp_Aluno_Alu_ID.Equals(IDAluno) && p.Emp_Avaliativa == true).FirstOrDefault();
+            return odb.Empresa.Where(p => p.Emp_Aluno_Alu_ID.Equals(IDAluno) && p.Emp_Avaliativa == true).ToList().Last();
         }
 
         public bool EmpresaAvaliativaAtiva(int IDUsuario)
@@ -73,6 +73,11 @@ namespace RH.Model.Repositories
             }
 
             return false;
+        }
+
+        public Empresa EmpresaAlunoProva()
+        {
+            return odb.Empresa.Join(odb.Aluno.Where(a => a.Alu_Nome.Equals("ALUNO PROVA")), e => e.Emp_Aluno_Alu_ID, a => a.Alu_ID, (e, a) => e).FirstOrDefault();
         }
     }
 }

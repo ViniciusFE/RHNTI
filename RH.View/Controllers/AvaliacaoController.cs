@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using RH.Control;
 using RH.Model;
+using RH.View.Filtro;
 
 namespace RH.View.Controllers
 {
+    [AutorizacaoEmpresa]
     public class AvaliacaoController : Controller
     {
         private CAvaliacao _Control;

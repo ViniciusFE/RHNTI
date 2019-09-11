@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="RHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aluno">
           <Key>
             <PropertyRef Name="Alu_ID" />
@@ -57,10 +57,10 @@
             <PropertyRef Name="Car_ID" />
           </Key>
           <Property Name="Car_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Car_Setor_Set_ID" Type="int" Nullable="false" />
           <Property Name="Car_Nome" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Car_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Car_Situation" Type="bit" Nullable="false" />
+          <Property Name="Car_Setor_Set_ID" Type="int" Nullable="false" />
           <Property Name="Car_Chefe" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Curso">
@@ -166,8 +166,8 @@
           <Property Name="Pes_Endereco" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Pes_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Pes_Situation" Type="bit" Nullable="false" />
-          <Property Name="Pes_Cargo_Car_ID" Type="int" Nullable="false" />
           <Property Name="Pes_Imagem" Type="image" Nullable="false" />
+          <Property Name="Pes_Cargo_Car_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PessoaBeneficio">
           <Key>
@@ -178,6 +178,16 @@
           <Property Name="PB_Beneficio_Ben_ID" Type="int" Nullable="false" />
           <Property Name="PB_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="PB_Situation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posicao">
+          <Key>
+            <PropertyRef Name="Pos_ID" />
+          </Key>
+          <Property Name="Pos_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pos_Pessoa_Pes_ID" Type="int" Nullable="false" />
+          <Property Name="Pos_Cargo_Car_ID" Type="int" Nullable="false" />
+          <Property Name="Pos_Setor_Set_ID" Type="int" Nullable="false" />
+          <Property Name="Pos_Situation" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Professor">
           <Key>
@@ -546,6 +556,66 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Principal>
             <Dependent Role="PessoaBeneficio">
               <PropertyRef Name="PB_Pessoa_Pes_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Car_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Cargo_Car_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Cargo1">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Car_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Cargo_Car_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Pessoa">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="Pes_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Pessoa_Pes_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="Set_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Setor_Set_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Setor1">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="Set_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Setor_Set_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1189,6 +1259,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySet Name="Nota" EntityType="Self.Nota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PessoaBeneficio" EntityType="Self.PessoaBeneficio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posicao" EntityType="Self.Posicao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prova" EntityType="Self.Prova" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setor" EntityType="Self.Setor" Schema="dbo" store:Type="Tables" />
@@ -1294,6 +1365,26 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <AssociationSet Name="FK_PessoaBeneficio_Pessoa" Association="Self.FK_PessoaBeneficio_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Cargo" Association="Self.FK_Posicao_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Cargo1" Association="Self.FK_Posicao_Cargo1">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Pessoa" Association="Self.FK_Posicao_Pessoa">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Setor" Association="Self.FK_Posicao_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Setor1" Association="Self.FK_Posicao_Setor1">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Posicao" EntitySet="Posicao" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Aluno" Association="Self.FK_Prova_Aluno">
             <End Role="Aluno" EntitySet="Aluno" />
@@ -1504,7 +1595,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Vaga" EntitySet="Vaga" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1577,13 +1669,15 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <PropertyRef Name="Car_ID" />
           </Key>
           <Property Name="Car_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Car_Setor_Set_ID" Type="Int32" Nullable="false" />
           <Property Name="Car_Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Car_DataCadastro" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Car_Situation" Type="Boolean" Nullable="false" />
+          <Property Name="Car_Setor_Set_ID" Type="Int32" Nullable="false" />
           <Property Name="Car_Chefe" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Setor" Relationship="Self.FK_Cargo_Setor" FromRole="Cargo" ToRole="Setor" />
           <NavigationProperty Name="Pessoa" Relationship="Self.FK_Pessoa_Cargo" FromRole="Cargo" ToRole="Pessoa" />
+          <NavigationProperty Name="Posicao" Relationship="Self.FK_Posicao_Cargo" FromRole="Cargo" ToRole="Posicao" />
+          <NavigationProperty Name="Posicao1" Relationship="Self.FK_Posicao_Cargo1" FromRole="Cargo" ToRole="Posicao" />
           <NavigationProperty Name="Prova" Relationship="Self.FK_Prova_Cargo" FromRole="Cargo" ToRole="Prova" />
           <NavigationProperty Name="Prova1" Relationship="Self.FK_Prova_Cargo1" FromRole="Cargo" ToRole="Prova" />
           <NavigationProperty Name="Prova2" Relationship="Self.FK_Prova_Cargo2" FromRole="Cargo" ToRole="Prova" />
@@ -1703,8 +1797,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Not_Prova_Pro_ID" Type="Int32" Nullable="false" />
           <Property Name="Not_Nota" Type="Double" Nullable="false" />
           <Property Name="Not_DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Prova" Relationship="Self.FK_Nota_Prova" FromRole="Nota" ToRole="Prova" />
           <Property Name="Not_Situation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Prova" Relationship="Self.FK_Nota_Prova" FromRole="Nota" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Pessoa">
           <Key>
@@ -1719,8 +1813,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Pes_Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Pes_DataCadastro" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Pes_Situation" Type="Boolean" Nullable="false" />
-          <Property Name="Pes_Cargo_Car_ID" Type="Int32" Nullable="false" />
           <Property Name="Pes_Imagem" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Pes_Cargo_Car_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Avaliacao" Relationship="Self.FK_Avaliacao_Pessoa" FromRole="Pessoa" ToRole="Avaliacao" />
           <NavigationProperty Name="CadastroTreinamento" Relationship="Self.FK_CadastroTreinamento_Pessoa" FromRole="Pessoa" ToRole="CadastroTreinamento" />
           <NavigationProperty Name="Cargo" Relationship="Self.FK_Pessoa_Cargo" FromRole="Pessoa" ToRole="Cargo" />
@@ -1729,6 +1823,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <NavigationProperty Name="Demissao" Relationship="Self.FK_Demissao_Pessoa" FromRole="Pessoa" ToRole="Demissao" />
           <NavigationProperty Name="Movimentacao" Relationship="Self.FK_Movimentacao_Pessoa" FromRole="Pessoa" ToRole="Movimentacao" />
           <NavigationProperty Name="PessoaBeneficio" Relationship="Self.FK_PessoaBeneficio_Pessoa" FromRole="Pessoa" ToRole="PessoaBeneficio" />
+          <NavigationProperty Name="Posicao" Relationship="Self.FK_Posicao_Pessoa" FromRole="Pessoa" ToRole="Posicao" />
           <NavigationProperty Name="Prova" Relationship="Self.FK_Prova_Pessoa" FromRole="Pessoa" ToRole="Prova" />
           <NavigationProperty Name="Prova1" Relationship="Self.FK_Prova_Pessoa1" FromRole="Pessoa" ToRole="Prova" />
           <NavigationProperty Name="Prova2" Relationship="Self.FK_Prova_Pessoa2" FromRole="Pessoa" ToRole="Prova" />
@@ -1756,6 +1851,21 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <NavigationProperty Name="Prova7" Relationship="Self.FK_Prova_PessoaBeneficio7" FromRole="PessoaBeneficio" ToRole="Prova" />
           <NavigationProperty Name="Prova8" Relationship="Self.FK_Prova_PessoaBeneficio8" FromRole="PessoaBeneficio" ToRole="Prova" />
           <NavigationProperty Name="Prova9" Relationship="Self.FK_Prova_PessoaBeneficio9" FromRole="PessoaBeneficio" ToRole="Prova" />
+        </EntityType>
+        <EntityType Name="Posicao">
+          <Key>
+            <PropertyRef Name="Pos_ID" />
+          </Key>
+          <Property Name="Pos_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pos_Pessoa_Pes_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pos_Cargo_Car_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pos_Setor_Set_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pos_Situation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cargo" Relationship="Self.FK_Posicao_Cargo" FromRole="Posicao" ToRole="Cargo" />
+          <NavigationProperty Name="Cargo1" Relationship="Self.FK_Posicao_Cargo1" FromRole="Posicao" ToRole="Cargo" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK_Posicao_Pessoa" FromRole="Posicao" ToRole="Pessoa" />
+          <NavigationProperty Name="Setor" Relationship="Self.FK_Posicao_Setor" FromRole="Posicao" ToRole="Setor" />
+          <NavigationProperty Name="Setor1" Relationship="Self.FK_Posicao_Setor1" FromRole="Posicao" ToRole="Setor" />
         </EntityType>
         <EntityType Name="Professor">
           <Key>
@@ -1892,6 +2002,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Set_Setor_Set_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cargo" Relationship="Self.FK_Cargo_Setor" FromRole="Setor" ToRole="Cargo" />
           <NavigationProperty Name="Empresa" Relationship="Self.FK_Setor_Empresa" FromRole="Setor" ToRole="Empresa" />
+          <NavigationProperty Name="Posicao" Relationship="Self.FK_Posicao_Setor" FromRole="Setor" ToRole="Posicao" />
+          <NavigationProperty Name="Posicao1" Relationship="Self.FK_Posicao_Setor1" FromRole="Setor" ToRole="Posicao" />
           <NavigationProperty Name="Prova" Relationship="Self.FK_Prova_Setor" FromRole="Setor" ToRole="Prova" />
           <NavigationProperty Name="Prova1" Relationship="Self.FK_Prova_Setor1" FromRole="Setor" ToRole="Prova" />
           <NavigationProperty Name="Prova2" Relationship="Self.FK_Prova_Setor2" FromRole="Setor" ToRole="Prova" />
@@ -2203,6 +2315,30 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Principal>
             <Dependent Role="Pessoa">
               <PropertyRef Name="Pes_Cargo_Car_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Cargo">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Car_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Cargo_Car_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Cargo1">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Car_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Cargo_Car_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2554,6 +2690,18 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Posicao_Pessoa">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="Pes_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Pessoa_Pes_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Prova_Pessoa">
           <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
           <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
@@ -2734,6 +2882,30 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Posicao_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="Set_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Setor_Set_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posicao_Setor1">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="Set_ID" />
+            </Principal>
+            <Dependent Role="Posicao">
+              <PropertyRef Name="Pos_Setor_Set_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Prova_Professor">
           <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
           <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
@@ -2822,6 +2994,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySet Name="Nota" EntityType="Self.Nota" />
           <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
           <EntitySet Name="PessoaBeneficio" EntityType="Self.PessoaBeneficio" />
+          <EntitySet Name="Posicao" EntityType="Self.Posicao" />
           <EntitySet Name="Professor" EntityType="Self.Professor" />
           <EntitySet Name="Prova" EntityType="Self.Prova" />
           <EntitySet Name="Setor" EntityType="Self.Setor" />
@@ -2907,6 +3080,14 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <AssociationSet Name="FK_Pessoa_Cargo" Association="Self.FK_Pessoa_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
             <End Role="Pessoa" EntitySet="Pessoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Cargo" Association="Self.FK_Posicao_Cargo">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Cargo1" Association="Self.FK_Posicao_Cargo1">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Posicao" EntitySet="Posicao" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Cargo" Association="Self.FK_Prova_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
@@ -3024,6 +3205,10 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
           </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Pessoa" Association="Self.FK_Posicao_Pessoa">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
           <AssociationSet Name="FK_Prova_Pessoa" Association="Self.FK_Prova_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="Prova" EntitySet="Prova" />
@@ -3083,6 +3268,14 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <AssociationSet Name="FK_Prova_PessoaBeneficio9" Association="Self.FK_Prova_PessoaBeneficio9">
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
             <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Setor" Association="Self.FK_Posicao_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Posicao" EntitySet="Posicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posicao_Setor1" Association="Self.FK_Posicao_Setor1">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Posicao" EntitySet="Posicao" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Professor" Association="Self.FK_Prova_Professor">
             <End Role="Professor" EntitySet="Professor" />
@@ -3170,10 +3363,10 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <EntityTypeMapping TypeName="RHModel.Cargo">
               <MappingFragment StoreEntitySet="Cargo">
                 <ScalarProperty Name="Car_ID" ColumnName="Car_ID" />
-                <ScalarProperty Name="Car_Setor_Set_ID" ColumnName="Car_Setor_Set_ID" />
                 <ScalarProperty Name="Car_Nome" ColumnName="Car_Nome" />
                 <ScalarProperty Name="Car_DataCadastro" ColumnName="Car_DataCadastro" />
                 <ScalarProperty Name="Car_Situation" ColumnName="Car_Situation" />
+                <ScalarProperty Name="Car_Setor_Set_ID" ColumnName="Car_Setor_Set_ID" />
                 <ScalarProperty Name="Car_Chefe" ColumnName="Car_Chefe" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3268,11 +3461,11 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <EntitySetMapping Name="Nota">
             <EntityTypeMapping TypeName="RHModel.Nota">
               <MappingFragment StoreEntitySet="Nota">
-                <ScalarProperty Name="Not_Situation" ColumnName="Not_Situation" />
                 <ScalarProperty Name="Not_ID" ColumnName="Not_ID" />
                 <ScalarProperty Name="Not_Prova_Pro_ID" ColumnName="Not_Prova_Pro_ID" />
                 <ScalarProperty Name="Not_Nota" ColumnName="Not_Nota" />
                 <ScalarProperty Name="Not_DataCadastro" ColumnName="Not_DataCadastro" />
+                <ScalarProperty Name="Not_Situation" ColumnName="Not_Situation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3288,8 +3481,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
                 <ScalarProperty Name="Pes_Endereco" ColumnName="Pes_Endereco" />
                 <ScalarProperty Name="Pes_DataCadastro" ColumnName="Pes_DataCadastro" />
                 <ScalarProperty Name="Pes_Situation" ColumnName="Pes_Situation" />
-                <ScalarProperty Name="Pes_Cargo_Car_ID" ColumnName="Pes_Cargo_Car_ID" />
                 <ScalarProperty Name="Pes_Imagem" ColumnName="Pes_Imagem" />
+                <ScalarProperty Name="Pes_Cargo_Car_ID" ColumnName="Pes_Cargo_Car_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3301,6 +3494,17 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
                 <ScalarProperty Name="PB_Beneficio_Ben_ID" ColumnName="PB_Beneficio_Ben_ID" />
                 <ScalarProperty Name="PB_DataCadastro" ColumnName="PB_DataCadastro" />
                 <ScalarProperty Name="PB_Situation" ColumnName="PB_Situation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posicao">
+            <EntityTypeMapping TypeName="RHModel.Posicao">
+              <MappingFragment StoreEntitySet="Posicao">
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="Pos_Pessoa_Pes_ID" ColumnName="Pos_Pessoa_Pes_ID" />
+                <ScalarProperty Name="Pos_Cargo_Car_ID" ColumnName="Pos_Cargo_Car_ID" />
+                <ScalarProperty Name="Pos_Setor_Set_ID" ColumnName="Pos_Setor_Set_ID" />
+                <ScalarProperty Name="Pos_Situation" ColumnName="Pos_Situation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
