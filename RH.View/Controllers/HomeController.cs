@@ -367,16 +367,15 @@ namespace RH.View.Controllers
             return View();
         }
 
-        [AutorizacaoEmpresa]
-        public ActionResult VisualizarProva()
+        public FileResult VisualizarProva()
         {
             Aluno oAluno = (Aluno)Session["User"];
 
             // instantiate a html to pdf converter object 
             HtmlToPdf converter = new HtmlToPdf();
-            // create a new pdf document converting an url 
-            PdfDocument doc = converter.ConvertUrl("http://rh.aedb.br/Home/GerarProva/"+oAluno.Alu_ID);
 
+            // create a new pdf document converting an url 
+            PdfDocument doc = converter.ConvertUrl("http://rh.aedb.br/Home/GerarProva/" + oAluno.Alu_ID);
             // save pdf document 
             byte[] pdf = doc.Save();
 
@@ -385,8 +384,9 @@ namespace RH.View.Controllers
 
             // return resulted pdf document 
             FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-            fileResult.FileDownloadName = "PROVA - "+oAluno.Alu_Nome+".pdf";
+            fileResult.FileDownloadName = "PROVA - " + oAluno.Alu_Nome + ".pdf";
             return fileResult;
+
         }
 
         public ActionResult NotFound()
