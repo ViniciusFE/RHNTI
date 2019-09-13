@@ -54,12 +54,12 @@ else
 
                         <div class="col-md-8">
                             <h4>Data Avaliacao: @x.Ava_DataCadastro</h4>
-                            <h4>Avaliação: @x.Ava_Avaliacao</h4>
+                            <h4 id="AvaliacaoFuncionario-@x.Ava_ID">Avaliação: @x.Ava_Avaliacao</h4>
                         </div>
 
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-warning custom" id="Alterar" data-avaliacao='@x.Ava_Avaliacao' data-id="@x.Ava_ID"><i class="fas fa-user-edit"></i> Alterar</button>
+                        <button class="btn btn-warning custom Alterar" id="Avaliacao-@x.Ava_ID" data-avaliacao='@x.Ava_Avaliacao' data-id="@x.Ava_ID"><i class="fas fa-user-edit"></i> Alterar</button>
                         <button class="btn btn-danger custom ExcluirAvaliacao" data-id="@x.Ava_ID"><i class="fas fa-user-times"></i> Excluir</button>
                     </div>
 
@@ -104,6 +104,30 @@ else
             </div>
         </div>
 
+        <div class="modal fade" tabindex="-1" role="dialog" id="ModalAlterar">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Alterar Avaliação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @Html.TextArea("Motivo", null, new { rows = 10, cols = 30, id = "TextBox" })
+                        <div align="center">
+                            <img src="~/Imagem/833.gif" id="CarregandoAlterar" style="display:none;" />
+                        </div>
+                        <p id="MensagemAlterar"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning custom BtnAlterar" id="AlterarAvaliacao">Alterar</button>
+                        <button type="button" class="btn btn-danger custom BtnAlterar" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 <hr />
 
@@ -133,6 +157,35 @@ else
                     $("#Mensagem").html(resposta);
                     $("#Avaliacao-" + IDAvaliacao).slideUp("1000");
                 });
+            });
+
+            $(".Alterar").click(function () {
+                var Avaliacao = $(this).attr("data-avaliacao");
+                IDAvaliacao = $(this).attr("data-id");
+                $("#TextBox").val(Avaliacao);
+
+                $("#MensagemAlterar").html("");
+
+                $("#ModalAlterar").modal('show');
+
+                $("#CarregandoAlterar").css("display", "none");
+
+                $(".BtnAlterar").removeAttr("disabled");
+
+            });
+
+            $("#AlterarAvaliacao").click(function () {
+                $("#CarregandoAlterar").css("display", "block");
+                $(".BtnAlterar").attr("disabled", "disabled");
+                var url = "@Url.Action("AlterarAvaliacao","Avaliacao")";
+                var Avaliacao = $("#TextBox").val();
+                $.post(url, { Avaliacao: Avaliacao, IDAvaliacao: IDAvaliacao }, function (resposta) {
+                    $("#CarregandoAlterar").css("display", "none");
+                    $("#MensagemAlterar").html(resposta);
+                    $("#AvaliacaoFuncionario-" + IDAvaliacao).html("Avaliação: " + Avaliacao);
+                    $("#Avaliacao-" + IDAvaliacao).removeAttr("data-avaliacao");
+                    $("#Avaliacao-" + IDAvaliacao).attr("data-avaliacao", "Avaliação: " + Avaliacao);
+                })
             });
 
         });

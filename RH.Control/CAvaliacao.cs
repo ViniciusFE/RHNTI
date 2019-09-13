@@ -35,9 +35,9 @@ namespace RH.Control
             return _RepositoriePessoa.SelecionarTodosChefes(IDEmpresa);
         }
 
-        public List<Pessoa> SelecionarTodosMeusFuncionarios(int IDSetor,int IDEmpresa)
+        public List<Pessoa> SelecionarTodosMeusFuncionarios(int IDSetor,int IDEmpresa,int IDChefe)
         {
-            return _RepositoriePessoa.SelcionarTodosMeusFuncionarios(IDSetor,IDEmpresa);
+            return _RepositoriePessoa.SelcionarTodosMeusFuncionarios(IDSetor,IDEmpresa,IDChefe);
         }
 
         public List<Cargo> SelecionarTodosCargosFuncionarios(int id)

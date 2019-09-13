@@ -58,9 +58,9 @@ namespace RH.Model.Repositories
             }
         }
 
-        public List<Pessoa> SelcionarTodosMeusFuncionarios(int IDSetor,int IDEmpresa)
+        public List<Pessoa> SelcionarTodosMeusFuncionarios(int IDSetor,int IDEmpresa,int IDChefe)
         {
-            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Setor_Set_ID = "+IDSetor+" and s.Set_Empresa_Emp_ID = "+IDEmpresa+" and s.Set_ID <> s.Set_Setor_Set_ID where p.Pes_Situation = 1").ToList();
+            return Db.Pessoa.SqlQuery("select * from Pessoa p inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" and s.Set_Setor_Set_ID = "+IDSetor+" where p.Pes_Situation = 1 and p.Pes_ID <> "+IDChefe).ToList();
         }
 
         public List<Pessoa> SelecionarTodosChefes(int IDEmpresa)

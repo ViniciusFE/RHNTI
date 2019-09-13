@@ -47,7 +47,7 @@ namespace RH.View.Controllers
             Pessoa ChefeSetor = _Control.SelecionarPessoa(IDChefe);
             Cargo CargoChefe = _Control.SelecionarCargo(ChefeSetor.Pes_Cargo_Car_ID);
             Setor oSetorChefe = _Control.SelecionarSetor(CargoChefe.Car_Setor_Set_ID);
-            List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(CargoChefe.Car_Setor_Set_ID, oSetorChefe.Set_Empresa_Emp_ID);
+            List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(CargoChefe.Car_Setor_Set_ID, oSetorChefe.Set_Empresa_Emp_ID,IDChefe);
 
             List<object> DadosFuncionarios = new List<object>();
 
@@ -109,6 +109,14 @@ namespace RH.View.Controllers
             aAvaliacao.Ava_Situation = false;
             _Control.AlterarAvaliacao(aAvaliacao);
             return Json("A avaliação foi excluída com sucesso!");
+        }
+
+        public ActionResult AlterarAvaliacao(string Avaliacao,int IDAvaliacao)
+        {
+            Avaliacao aAvaliacao = _Control.SelecionarAvaliacao(IDAvaliacao);
+            aAvaliacao.Ava_Avaliacao = Avaliacao;
+            _Control.AlterarAvaliacao(aAvaliacao);
+            return Json("A avaliação foi alterada com sucesso!");
         }
     }
 }
