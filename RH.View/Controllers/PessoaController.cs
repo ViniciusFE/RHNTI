@@ -44,7 +44,7 @@ namespace RH.View.Controllers
         {            
             Empresa aEmpresa = DbPessoa.SelecionarEmpresa(Convert.ToInt32(Session["IDEmpresa"]));
             oFuncionario.Pes_DataCadastro=aEmpresa.Emp_DataAtual;
-            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarVagasEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Vag_ID", "Vag_Titulo", oFuncionario.Pes_Vaga_Vag_ID);
 
 
             if (Convert.ToBoolean(Session["Avaliativa"]))
@@ -74,7 +74,8 @@ namespace RH.View.Controllers
                 ModelState.AddModelError("Pes_Salario", "Digite o Salário do funcionário");
             }
 
-            Cargo oCargo = DbPessoa.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            Vaga aVaga = DbPessoa.SelecionarVaga(oFuncionario.Pes_Vaga_Vag_ID);
+            Cargo oCargo = DbPessoa.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             if(oCargo.Car_Chefe)
             {
                 if(DbPessoa.CargoOcupado(oCargo.Car_ID))
@@ -102,7 +103,7 @@ namespace RH.View.Controllers
             int IDDescriptografado = Convert.ToInt32(Criptografia.DecriptQueryString(id));
 
             var aPessoa = DbPessoa.SelecionarFuncionario(IDDescriptografado);
-            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome",aPessoa.Pes_Cargo_Car_ID);
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarVagasEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Vag_ID", "Vag_Titulo",aPessoa.Pes_Vaga_Vag_ID);
             return View(aPessoa);
         }
 
@@ -110,7 +111,7 @@ namespace RH.View.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AlterarFuncionario(Pessoa oFuncionario, HttpPostedFileBase Imagem,string Salario="")
         {
-            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarCargosEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Car_ID", "Car_Nome", oFuncionario.Pes_Cargo_Car_ID);
+            ViewBag.Pes_Cargo_Car_ID = new SelectList(DbPessoa.SelecionarVagasEmpresa(Convert.ToInt32(Session["IDEmpresa"])), "Vag_ID", "Vag_Titulo", oFuncionario.Pes_Vaga_Vag_ID);
 
             
 
@@ -119,9 +120,10 @@ namespace RH.View.Controllers
             //Altera o funcionário e redireciona para tela de meus funcionários
             Pessoa aPessoa = DbPessoa.SelecionarFuncionario(oFuncionario.Pes_ID);
 
-            if(aPessoa.Pes_Cargo_Car_ID!=oFuncionario.Pes_Cargo_Car_ID)
+            if(aPessoa.Pes_Vaga_Vag_ID!=oFuncionario.Pes_Vaga_Vag_ID)
             {
-                Cargo oCargo = DbPessoa.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+                Vaga aVaga = DbPessoa.SelecionarVaga(aPessoa.Pes_Vaga_Vag_ID);
+                Cargo oCargo = DbPessoa.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
                 if (oCargo.Car_Chefe)
                 {
                     if (DbPessoa.CargoOcupado(oCargo.Car_ID))
@@ -156,7 +158,7 @@ namespace RH.View.Controllers
             aPessoa.Pes_CTrabalho = oFuncionario.Pes_CTrabalho;
             aPessoa.Pes_CPF = oFuncionario.Pes_CPF;
             aPessoa.Pes_Cidade = oFuncionario.Pes_Cidade;
-            aPessoa.Pes_Cargo_Car_ID = oFuncionario.Pes_Cargo_Car_ID;
+            aPessoa.Pes_Vaga_Vag_ID = oFuncionario.Pes_Vaga_Vag_ID;
             DbPessoa.AlterarFuncionario(aPessoa);
 
             return RedirectToAction("MeusFuncionarios");

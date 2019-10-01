@@ -71,6 +71,7 @@
     <Compile Include="Annotations\Pessoa.cs" />
     <Compile Include="Annotations\Professor.cs" />
     <Compile Include="Annotations\Setor.cs" />
+    <Compile Include="Annotations\Vaga.cs" />
     <Compile Include="Avaliacao.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -155,6 +156,7 @@
     <Compile Include="Repositories\RepositorieProfessor.cs" />
     <Compile Include="Repositories\RepositorieProva.cs" />
     <Compile Include="Repositories\RepositorieSetor.cs" />
+    <Compile Include="Repositories\RepositorieVaga.cs" />
     <Compile Include="Setor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

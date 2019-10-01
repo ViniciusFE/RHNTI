@@ -77,6 +77,33 @@ namespace RH.Model.Repositories
             return false;
         }
 
+        public bool Cadastrar(Beneficio oBeneficio)
+        {
+            try
+            {
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool TesteAlterar(Beneficio oBeneficio)
+        {
+            try
+            {
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
+        }
+
+
 
     }
 }

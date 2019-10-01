@@ -14,13 +14,37 @@ namespace RH.Model
     
     public partial class Vaga
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vaga()
+        {
+            this.Pessoa = new HashSet<Pessoa>();
+            this.Prova = new HashSet<Prova>();
+            this.Prova1 = new HashSet<Prova>();
+            this.Prova2 = new HashSet<Prova>();
+            this.Prova3 = new HashSet<Prova>();
+            this.Prova4 = new HashSet<Prova>();
+        }
+    
         public int Vag_ID { get; set; }
         public int Vag_Cargo_Car_ID { get; set; }
         public string Vag_Descricao { get; set; }
         public string Vag_DataCadastro { get; set; }
-        public string Vag_DataTermino { get; set; }
         public bool Vag_Situation { get; set; }
+        public string Vag_Titulo { get; set; }
+        public bool Vag_Preenchida { get; set; }
     
         public virtual Cargo Cargo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pessoa> Pessoa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova4 { get; set; }
     }
 }

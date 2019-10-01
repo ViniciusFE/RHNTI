@@ -162,28 +162,33 @@ namespace RH.View.Controllers
             //Funcionários
             Pessoa oFuncionario = _Control.SelecionarFuncionario(aProva.Pro_Pessoa1);
             ViewBag.Funcionario1 = oFuncionario;
-            oCargo = _Control.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            Vaga aVaga = _Control.SelecionarVaga(oFuncionario.Pes_Vaga_Vag_ID);
+            oCargo = _Control.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             ViewBag.CargoFuncionario1 = oCargo.Car_Nome;
 
 
             oFuncionario = _Control.SelecionarFuncionario(aProva.Pro_Pessoa2);
             ViewBag.Funcionario2 = oFuncionario;
-            oCargo = _Control.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            aVaga = _Control.SelecionarVaga(oFuncionario.Pes_Vaga_Vag_ID);
+            oCargo = _Control.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             ViewBag.CargoFuncionario2 = oCargo.Car_Nome;
 
             oFuncionario = _Control.SelecionarFuncionario(aProva.Pro_Pessoa3);
             ViewBag.Funcionario3 = oFuncionario;
-            oCargo = _Control.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            aVaga = _Control.SelecionarVaga(oFuncionario.Pes_Vaga_Vag_ID);
+            oCargo = _Control.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             ViewBag.CargoFuncionario3 = oCargo.Car_Nome;
 
             oFuncionario = _Control.SelecionarFuncionario(aProva.Pro_Pessoa4);
             ViewBag.Funcionario4 = oFuncionario;
-            oCargo = _Control.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            aVaga = _Control.SelecionarVaga(oFuncionario.Pes_Vaga_Vag_ID);
+            oCargo = _Control.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             ViewBag.CargoFuncionario4 = oCargo.Car_Nome;
 
             oFuncionario = _Control.SelecionarFuncionario(aProva.Pro_Pessoa5);
             ViewBag.Funcionario5 = oFuncionario;
-            oCargo = _Control.SelecionarCargo(oFuncionario.Pes_Cargo_Car_ID);
+            aVaga = _Control.SelecionarVaga(oFuncionario.Pes_Vaga_Vag_ID);
+            oCargo = _Control.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             ViewBag.CargoFuncionario5 = oCargo.Car_Nome;
 
             //Dependentes

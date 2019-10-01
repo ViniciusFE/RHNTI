@@ -15,6 +15,7 @@ namespace RH.Control
         private RepositorieCargo _RepositorieCargo;
         private RepositorieSetor _RepositorieSetor;
         private RepositorieEmpresa _RepositorieEmpresa;
+        private RepositorieVaga _RepositorieVaga;
 
         public CAvaliacao()
         {
@@ -83,6 +84,11 @@ namespace RH.Control
         public void AlterarAvaliacao(Avaliacao aAvaliacao)
         {
             _RepositorieAvaliacao.AlterarAvaliacao(aAvaliacao);
+        }
+
+        public Vaga SelecionarVaga(int id)
+        {
+            return _RepositorieVaga.SelecionarVaga(id);
         }
     }
 }

@@ -45,9 +45,7 @@ namespace RH.Model
             [DisplayName("Situação")]
             public bool Pes_Situation { get; set; }
 
-            [DisplayName("Cargo do Funcionário")]
-            [Required(ErrorMessage ="Selecione o Cargo do funcionário")]
-            public int Pes_Cargo_Car_ID { get; set; }
+            
 
             [DisplayName("Imagem do Funcionário")]
             public byte[] Pes_Imagem { get; set; }
