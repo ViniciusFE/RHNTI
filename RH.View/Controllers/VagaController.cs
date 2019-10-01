@@ -49,5 +49,12 @@ namespace RH.View.Controllers
             ViewBag.Vag_Cargo_Car_ID = new SelectList(Cargos, "Car_ID", "Car_Nome");
             return View(aVaga);
         }
+
+        public ActionResult ExcluirVaga(int id)
+        {
+            Vaga aVaga = _Control.SelecionarVaga(id);
+            aVaga.Vag_Situation = false;
+            _Control.AlterarVaga(aVaga);
+        }
     }
 }

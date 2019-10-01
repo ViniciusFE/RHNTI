@@ -109,6 +109,8 @@
             $("#Mensagem").text("Tem certeza que deseja excluir essa vaga?");
             $("#ModalExcluirVaga").modal('show');
             $(".BtnModal").removeAttr("disabled");
+            $("#Mensagem").css("disaplay", "block");
+            $("#Carregando").css("display", "none");
         });
 
         $("#ExcluirVaga").click(function () {
@@ -116,7 +118,15 @@
 
             $(".BtnModal").attr("disabled", "disabled");
 
+            $("#Mensagem").css("disaplay", "none");
+            $("#Carregando").css("display", "block");
 
+            $.post(url, { id: IDVaga }, function (resposta) {
+                $("#Vaga-" + IDVaga).slideUp('slow');
+                $("#Mensagem").text(resposta);
+                $("#Mensagem").css("disaplay", "block");
+                $("#Carregando").css("display", "none");
+            })
         });
 
 

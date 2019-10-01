@@ -40,5 +40,15 @@ namespace RH.Control
         {
             return _RepositorieEmpresa.SelecionarEmpresa(id);
         }
+
+        public Vaga SelecionarVaga(int id)
+        {
+            return _RepositorieVaga.SelecionarVaga(id);
+        }
+
+        public void AlterarVaga(Vaga aVaga)
+        {
+            _RepositorieVaga.AlterarVaga(aVaga);
+        }
     }
 }

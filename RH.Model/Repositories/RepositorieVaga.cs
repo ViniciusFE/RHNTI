@@ -35,5 +35,11 @@ namespace RH.Model.Repositories
         {
             return odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(IDEmpresa)),c=>c.Car_Setor_Set_ID,s=>s.Set_Setor_Set_ID,(c,s)=>c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v,c) => v).Where(v => v.Vag_DataCadastro.Equals(DataCadastro) && v.Vag_Situation == true).Last();
         }
+
+        public void AlterarVaga(Vaga aVaga)
+        {
+            odb.Entry(aVaga).State = System.Data.Entity.EntityState.Modified;
+            odb.SaveChanges();
+        }
     }
 }
