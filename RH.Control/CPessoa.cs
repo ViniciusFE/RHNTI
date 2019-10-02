@@ -20,6 +20,7 @@ namespace RH.Control
         private RepositorieDependente _RepositorieDependente = new RepositorieDependente();
         private RepositorieEmpresa _RepositorieEmpresa = new RepositorieEmpresa();
         private RepositorieAvaliacao _RepositorieAvaliacao = new RepositorieAvaliacao();
+        private RepositorieVaga _RepositorieVaga = new RepositorieVaga();
 
         public void CadastrarFuncionario(Pessoa oFuncionario)
         {
@@ -46,10 +47,7 @@ namespace RH.Control
             RepFuncionario.DeletarFuncionario(oFuncionario);
         }
 
-        public bool AutenticaCargo(int cargo)
-        {
-            return RepFuncionario.AutenticaCargo(cargo);
-        }
+
 
         public List<Pessoa> SelecionarTodosFuncionariosEmpresa(int IDEmpresa)
         {
@@ -161,6 +159,16 @@ namespace RH.Control
         public bool LimiteBeneficiosFuncionariosEmpresaAvaliativa(int IDEmpresa)
         {
             return _RepositoriePessoaBeneficio.LimiteBeneficiosFuncionariosEmpresaAvaliativa(IDEmpresa);
+        }
+
+        public List<Vaga> SelecionarVagasEmpresa(int IDEmpresa)
+        {
+            return _RepositorieVaga.SelecionarVagas(IDEmpresa);
+        }
+
+        public Vaga SelecionarVaga(int id)
+        {
+            return _RepositorieVaga.SelecionarVaga(id);
         }
     }
 }

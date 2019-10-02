@@ -44,18 +44,17 @@ namespace RH.Model.Repositories
 
         public List<Avaliacao> SelecionarAAvaliacoesEmpresa(int IDEmpresa, string Pesquisado)
         {
-            return odb.Avaliacao.SqlQuery("select * from Avaliacao a inner join Pessoa p on a.Ava_Pessoa_Pes_ID = p.Pes_ID and p.Pes_Situation = 1 and p.Pes_Nome like '" + Pesquisado + "%' inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID =" + IDEmpresa+"  where a.Ava_Situation=1").ToList();
+            return odb.Avaliacao.Join(odb.Pessoa.Where(p=>p.Pes_Nome.Contains(Pesquisado)).Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.Ava_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.Ava_Situation == true).ToList();
         }
 
         public Avaliacao SelecionarAvaliacaoDiaCadastro(string DataCadastro, int IDEmpresa)
         {
-            return odb.Avaliacao.Join(odb.Pessoa.Join(odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(IDEmpresa)),c=>c.Car_Setor_Set_ID,s=>s.Set_ID,(c,s)=>c),p=>p.Pes_Cargo_Car_ID,c=>c.Car_ID,(p,c)=>p), a => a.Ava_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.Ava_DataCadastro.Equals(DataCadastro)).OrderBy(p => p.Ava_ID).ToList().Last();
+            return odb.Avaliacao.Join(odb.Pessoa.Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.Ava_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.Ava_Situation == true && a.Ava_DataCadastro.Equals(DataCadastro)).Last();
         }
 
         public bool LimiteAvaliacoesEmpresaAvaliativa(int IDEmpresa)
         {
-            int QuantidadeAvaliacoes = odb.Avaliacao.SqlQuery("select * from Avaliacao a inner join Pessoa p on a.Ava_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = c.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = " + IDEmpresa + " where a.Ava_Situation = 1").Count();
-
+            int QuantidadeAvaliacoes=odb.Avaliacao.Join(odb.Pessoa.Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.Ava_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.Ava_Situation == true).ToList().Count();
             if (QuantidadeAvaliacoes == 4)
             {
                 return true;
@@ -68,6 +67,11 @@ namespace RH.Model.Repositories
         {
             odb.Database.ExecuteSqlCommand("update Avaliacao set Ava_Situation=0 where Ava_Pessoa_Pes_ID=" + IDPessoa);
             odb.SaveChanges();
+        }
+
+        public bool Cadastrar(Avaliacao aAvaliacao)
+        {
+            return true;
         }
 
     }

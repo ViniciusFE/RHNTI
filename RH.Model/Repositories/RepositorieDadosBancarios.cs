@@ -50,14 +50,14 @@ namespace RH.Model.Repositories
 
         public DadoBancario SelecionarDadoBancarioDataCadastro(string DataCadastro, int IDEmpresa)
         {
-            return odb.DadoBancario.Join(odb.Pessoa.Join(odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(IDEmpresa)),c=>c.Car_Setor_Set_ID,s=>s.Set_ID,(c,s)=>c),p=>p.Pes_Cargo_Car_ID,c=>c.Car_ID,(p,c)=>p), d => d.DB_Pessoa_Pes_ID, p => p.Pes_ID, (d, p) => d).Where(d => d.DB_DataCadastro.Equals(DataCadastro)).OrderBy(d => d.DB_ID).ToList().Last();
+            return odb.DadoBancario.Join(odb.Pessoa.Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.DB_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.DB_Situation == true && a.DB_DataCadastro.Equals(DataCadastro)).Last();
         }
 
         public bool LimiteDadosBancariosEmpresaAvaliativa(int IDEmpresa)
         {
-            int QuantidadeDados = odb.DadoBancario.SqlQuery("select * from DadoBancario d inner join Pessoa p on d.DB_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = C.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where d.DB_Situation = 1").Count();
+            int QuantidadeDados = odb.DadoBancario.Join(odb.Pessoa.Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.DB_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.DB_Situation == true).Count();
 
-            if(QuantidadeDados==5)
+            if (QuantidadeDados==5)
             {
                 return true;
             }

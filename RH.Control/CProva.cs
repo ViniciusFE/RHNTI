@@ -25,6 +25,7 @@ namespace RH.Control
         RepositorieNota _RepositorieNota;
         RepositorieErro _RepositorieErro;
         RepositorieCurso _RepositorieCurso;
+        RepositorieVaga _RepositorieVaga;
         
 
         public CProva()
@@ -44,6 +45,7 @@ namespace RH.Control
             _RepositorieNota = new RepositorieNota();
             _RepositorieErro = new RepositorieErro();
             _RepositorieCurso = new RepositorieCurso();
+            _RepositorieVaga = new RepositorieVaga();
         }
 
         public void CadastrarProva(Prova aProva)
@@ -324,6 +326,21 @@ namespace RH.Control
         public Pessoa SelecionarPessoa(int IDFuncionario)
         {
             return _RepositoriePessoa.SelecionarPessoa(IDFuncionario);
+        }
+
+        public void CadastrarVaga(Vaga aVaga)
+        {
+            _RepositorieVaga.CadastrarVaga(aVaga);
+        }
+
+        public Vaga SelecionarVaga(int id)
+        {
+            return _RepositorieVaga.SelecionarVaga(id);
+        }
+
+        public Vaga SelecionarVagaDataCadastro(string DataCadastro,int IDEmpresa)
+        {
+            return _RepositorieVaga.SelecionarVagaDiaCadastro(DataCadastro, IDEmpresa);
         }
     }
 }

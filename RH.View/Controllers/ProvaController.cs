@@ -445,10 +445,69 @@ namespace RH.View.Controllers
                 aProva.Pro_Cargo5 = oCargo.Car_ID;
                 int IDCargoProfissionalMarketing = oCargo.Car_ID;
 
+
+                //Cadastrar Vagas Empresa
+                Vaga aVaga = new Vaga();
+
+                //Vaga 1
+                aVaga.Vag_Cargo_Car_ID = IDCargoTesoureiro;
+                aVaga.Vag_DataCadastro = "10/03";
+                aVaga.Vag_Descricao = "O profissional será responsável por planejar, organizar, dirigir e controlar os serviços da tesouraria se relaciona com toda área financeira, contábil e administrativa.";
+                aVaga.Vag_Situation = true;
+                aVaga.Vag_Titulo = "Vaga de Tesoureiro";
+                aVaga.Vag_Preenchida = false;
+                _Control.CadastrarVaga(aVaga);
+                aProva.Pro_Vaga1 = aVaga.Vag_ID;
+                int IDVagaTesoureiro = aVaga.Vag_ID;
+
+                //Vaga 2
+                aVaga.Vag_Cargo_Car_ID = IDCargoProfissionalMarketing;
+                aVaga.Vag_DataCadastro = "07/09";
+                aVaga.Vag_Descricao = "Auxiliar no desenvolvimento e implementação de ações de Marketing, incluindo pesquisas de mercado, campanhas publicitárias e promocionais, visando projetar a imagem da empresa e elevar as vendas.";
+                aVaga.Vag_Situation = true;
+                aVaga.Vag_Titulo = "Vaga de Profissional de Marketing";
+                aVaga.Vag_Preenchida = false;
+                _Control.CadastrarVaga(aVaga);
+                aProva.Pro_Vaga1 = aVaga.Vag_ID;
+                int IDVagaProfissionalMarketing = aVaga.Vag_ID;
+
+                //Vaga 3
+                aVaga.Vag_Cargo_Car_ID = IDCargoProgramador;
+                aVaga.Vag_DataCadastro = "25/06";
+                aVaga.Vag_Descricao = "Será responsável pela implementação e/ou correção dos erros e defeitos no sistema.";
+                aVaga.Vag_Situation = true;
+                aVaga.Vag_Titulo = "Vaga de Programador";
+                aVaga.Vag_Preenchida = false;
+                _Control.CadastrarVaga(aVaga);
+                aProva.Pro_Vaga1 = aVaga.Vag_ID;
+                int IDVagaProgramador = aVaga.Vag_ID;
+
+                //Vaga 4
+                aVaga.Vag_Cargo_Car_ID = IDCargoGerenteProducao;
+                aVaga.Vag_DataCadastro = "30/08";
+                aVaga.Vag_Descricao = "Será responsável por assegurar o cumprimento das metas de produção, dentro dos padrões de qualidade, quantidade, custos e prazo estabelecidos pela empresa.";
+                aVaga.Vag_Situation = true;
+                aVaga.Vag_Titulo = "Vaga de Gerente de Produção";
+                aVaga.Vag_Preenchida = false;
+                _Control.CadastrarVaga(aVaga);
+                aProva.Pro_Vaga1 = aVaga.Vag_ID;
+                int IDVagaGerente = aVaga.Vag_ID;
+
+                //Vaga 5
+                aVaga.Vag_Cargo_Car_ID = IDCargoCEO;
+                aVaga.Vag_DataCadastro = "01/01";
+                aVaga.Vag_Descricao = "Será É o responsável pelas estratégias e pela visão da empresa. Não são todas as empresas que possuem uma pessoa no cargo de CEO.";
+                aVaga.Vag_Situation = true;
+                aVaga.Vag_Titulo = "Vaga de C.E.O";
+                aVaga.Vag_Preenchida = false;
+                _Control.CadastrarVaga(aVaga);
+                aProva.Pro_Vaga1 = aVaga.Vag_ID;
+                int IDVagaCEO = aVaga.Vag_ID;
+
                 Pessoa aPessoa = new Pessoa();
 
                 //Cadastra funcionário do cargo de tesoureiro//
-                aPessoa.Pes_Cargo_Car_ID = IDCargoTesoureiro;
+                aPessoa.Pes_Vaga_Vag_ID = IDVagaTesoureiro;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "10/03";
@@ -463,7 +522,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa1 = IDTesoureiro;
 
                 //Cadastra funcionário do cargo de programador//
-                aPessoa.Pes_Cargo_Car_ID = IDCargoProgramador;
+                aPessoa.Pes_Vaga_Vag_ID = IDVagaProgramador;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "25/06";
@@ -478,7 +537,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa2 = IDProgramador;
 
                 //Cadastra funcionário do cargo de CEO
-                aPessoa.Pes_Cargo_Car_ID = IDCargoCEO;
+                aPessoa.Pes_Vaga_Vag_ID = IDVagaCEO;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "01/01";
@@ -493,7 +552,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa3 = IDCEO;
 
                 //Cadastra funcionário do cargo Gerente de Produção
-                aPessoa.Pes_Cargo_Car_ID = IDCargoGerenteProducao;
+                aPessoa.Pes_Vaga_Vag_ID = IDVagaGerente;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "30/08";
@@ -508,7 +567,7 @@ namespace RH.View.Controllers
                 aProva.Pro_Pessoa4 = IDGerenteDeProducao;
 
                 //Cadastra funcionário do cargo Profissional de Marketing
-                aPessoa.Pes_Cargo_Car_ID = IDCargoProfissionalMarketing;
+                aPessoa.Pes_Vaga_Vag_ID = IDVagaProfissionalMarketing;
                 aPessoa.Pes_Nome = SelecionarNome();
                 aPessoa.Pes_Endereco = SelecionarEndereco();
                 aPessoa.Pes_DataCadastro = "07/09";
@@ -1752,6 +1811,273 @@ namespace RH.View.Controllers
                 _Control.CadastrarErro(oErro);
             }
 
+            //Verifica Vagas
+
+            //Vaga 1
+            Vaga VagaProva = _Control.SelecionarVaga(aProva.Pro_Vaga1);
+            Vaga VagaAluno = _Control.SelecionarVagaDataCadastro(VagaProva.Vag_DataCadastro, aEmpresa.Emp_ID);
+
+            if(VagaAluno!=null)
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(VagaAluno.Vag_Cargo_Car_ID);
+
+                VagaProva.Vag_Descricao=VagaProva.Vag_Descricao.Replace("\t", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\n", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\r", "");
+
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\t", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\n", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\r", "");
+
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\t", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\n", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\r", "");
+
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\t", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\n", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\r", "");
+
+                if(VagaProva.Vag_Descricao==VagaAluno.Vag_Descricao && VagaProva.Vag_Titulo==VagaAluno.Vag_Titulo && CargoProva.Car_Nome==CargoAluno.Car_Nome)
+                {
+                    Nota = Nota + 0.1;
+                }
+
+                else
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    oErro.Err_RespostaAluno = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                    oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaAluno.Vag_Titulo + "</br>Descrição da Vaga: " + VagaAluno.Vag_Descricao + "</br>Cargo da Vaga: " + CargoAluno.Car_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro;
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + VagaProva.Vag_DataCadastro;
+                oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            //Vaga 2
+            VagaProva = _Control.SelecionarVaga(aProva.Pro_Vaga2);
+            VagaAluno = _Control.SelecionarVagaDataCadastro(VagaProva.Vag_DataCadastro, aEmpresa.Emp_ID);
+
+            if (VagaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(VagaAluno.Vag_Cargo_Car_ID);
+
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\t", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\n", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\r", "");
+
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\t", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\n", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\r", "");
+
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\t", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\n", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\r", "");
+
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\t", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\n", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\r", "");
+
+                if (VagaProva.Vag_Descricao == VagaAluno.Vag_Descricao && VagaProva.Vag_Titulo == VagaAluno.Vag_Titulo && CargoProva.Car_Nome == CargoAluno.Car_Nome)
+                {
+                    Nota = Nota + 0.1;
+                }
+
+                else
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    oErro.Err_RespostaAluno = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                    oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaAluno.Vag_Titulo + "</br>Descrição da Vaga: " + VagaAluno.Vag_Descricao + "</br>Cargo da Vaga: " + CargoAluno.Car_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro;
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + VagaProva.Vag_DataCadastro;
+                oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            //Vaga 3
+            VagaProva = _Control.SelecionarVaga(aProva.Pro_Vaga3);
+            VagaAluno = _Control.SelecionarVagaDataCadastro(VagaProva.Vag_DataCadastro, aEmpresa.Emp_ID);
+
+            if (VagaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(VagaAluno.Vag_Cargo_Car_ID);
+
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\t", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\n", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\r", "");
+
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\t", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\n", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\r", "");
+
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\t", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\n", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\r", "");
+
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\t", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\n", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\r", "");
+
+                if (VagaProva.Vag_Descricao == VagaAluno.Vag_Descricao && VagaProva.Vag_Titulo == VagaAluno.Vag_Titulo && CargoProva.Car_Nome == CargoAluno.Car_Nome)
+                {
+                    Nota = Nota + 0.1;
+                }
+
+                else
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    oErro.Err_RespostaAluno = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                    oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaAluno.Vag_Titulo + "</br>Descrição da Vaga: " + VagaAluno.Vag_Descricao + "</br>Cargo da Vaga: " + CargoAluno.Car_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro;
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + VagaProva.Vag_DataCadastro;
+                oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            //Vaga 4
+            VagaProva = _Control.SelecionarVaga(aProva.Pro_Vaga4);
+            VagaAluno = _Control.SelecionarVagaDataCadastro(VagaProva.Vag_DataCadastro, aEmpresa.Emp_ID);
+
+            if (VagaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(VagaAluno.Vag_Cargo_Car_ID);
+
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\t", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\n", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\r", "");
+
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\t", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\n", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\r", "");
+
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\t", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\n", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\r", "");
+
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\t", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\n", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\r", "");
+
+                if (VagaProva.Vag_Descricao == VagaAluno.Vag_Descricao && VagaProva.Vag_Titulo == VagaAluno.Vag_Titulo && CargoProva.Car_Nome == CargoAluno.Car_Nome)
+                {
+                    Nota = Nota + 0.1;
+                }
+
+                else
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    oErro.Err_RespostaAluno = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                    oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaAluno.Vag_Titulo + "</br>Descrição da Vaga: " + VagaAluno.Vag_Descricao + "</br>Cargo da Vaga: " + CargoAluno.Car_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro;
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + VagaProva.Vag_DataCadastro;
+                oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
+            //Vaga 5
+            VagaProva = _Control.SelecionarVaga(aProva.Pro_Vaga5);
+            VagaAluno = _Control.SelecionarVagaDataCadastro(VagaProva.Vag_DataCadastro, aEmpresa.Emp_ID);
+
+            if (VagaAluno != null)
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+                CargoAluno = _Control.SelecionarCargo(VagaAluno.Vag_Cargo_Car_ID);
+
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\t", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\n", "");
+                VagaProva.Vag_Descricao = VagaProva.Vag_Descricao.Replace("\r", "");
+
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\t", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\n", "");
+                VagaAluno.Vag_Descricao = VagaAluno.Vag_Descricao.Replace("\r", "");
+
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\t", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\n", "");
+                VagaProva.Vag_Titulo = VagaProva.Vag_Titulo.Replace("\r", "");
+
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\t", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\n", "");
+                VagaAluno.Vag_Titulo = VagaAluno.Vag_Titulo.Replace("\r", "");
+
+                if (VagaProva.Vag_Descricao == VagaAluno.Vag_Descricao && VagaProva.Vag_Titulo == VagaAluno.Vag_Titulo && CargoProva.Car_Nome == CargoAluno.Car_Nome)
+                {
+                    Nota = Nota + 0.1;
+                }
+
+                else
+                {
+                    Erro oErro = new Erro();
+                    oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                    oErro.Erro_Tipo = "Erro no Cadastro";
+                    oErro.Err_RespostaAluno = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                    oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaAluno.Vag_Titulo + "</br>Descrição da Vaga: " + VagaAluno.Vag_Descricao + "</br>Cargo da Vaga: " + CargoAluno.Car_Nome + "</br>Data de Cadastro: " + CargoAluno.Car_DataCadastro;
+                    _Control.CadastrarErro(oErro);
+                }
+            }
+
+            else
+            {
+                CargoProva = _Control.SelecionarCargo(VagaProva.Vag_Cargo_Car_ID);
+
+                Erro oErro = new Erro();
+                oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
+                oErro.Erro_Tipo = "Cadastro realizado no dia errado";
+                oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + VagaProva.Vag_DataCadastro;
+                oErro.Err_RespostaCerta = "Vaga:</br>Título da Vaga: " + VagaProva.Vag_Titulo + "</br>Descrição da Vaga: " + VagaProva.Vag_Descricao + "</br>Cargo da Vaga: " + CargoProva.Car_Nome + "</br>Data de Cadastro: " + CargoProva.Car_DataCadastro;
+                _Control.CadastrarErro(oErro);
+            }
+
             //Verificar Funcionarios
 
             //Funcionario 1
@@ -1760,8 +2086,8 @@ namespace RH.View.Controllers
 
             if (PessoaAluno != null)
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
+                VagaAluno = _Control.SelecionarVaga(PessoaAluno.Pes_Vaga_Vag_ID);
 
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
@@ -1803,7 +2129,7 @@ namespace RH.View.Controllers
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
 
-                if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
+                if (PessoaAluno.Pes_Nome.Replace(" ","") == PessoaProva.Pes_Nome.Replace(" ","") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && VagaProva.Vag_Titulo.Replace(" ", "") == VagaAluno.Vag_Titulo.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1814,21 +2140,21 @@ namespace RH.View.Controllers
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
-                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
-                    oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaAluno.Vag_Titulo;
+                    oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                     _Control.CadastrarErro(oErro);
                 }
             }
 
             else
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                 oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
-                oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                 _Control.CadastrarErro(oErro);
             }
 
@@ -1838,8 +2164,8 @@ namespace RH.View.Controllers
 
             if (PessoaAluno != null)
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
+                VagaAluno = _Control.SelecionarVaga(PessoaAluno.Pes_Vaga_Vag_ID);
 
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
@@ -1881,7 +2207,7 @@ namespace RH.View.Controllers
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
 
-                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && VagaProva.Vag_Titulo.Replace(" ", "") == VagaAluno.Vag_Titulo.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1891,8 +2217,8 @@ namespace RH.View.Controllers
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
-                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
-                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaAluno.Vag_Titulo;
+                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                     _Control.CadastrarErro(oErro);
                     
                 }
@@ -1900,13 +2226,13 @@ namespace RH.View.Controllers
 
             else
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                 oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
-                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                 _Control.CadastrarErro(oErro);
             }
 
@@ -1916,8 +2242,8 @@ namespace RH.View.Controllers
 
             if (PessoaAluno != null)
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
+                VagaAluno = _Control.SelecionarVaga(PessoaAluno.Pes_Vaga_Vag_ID);
 
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
@@ -1958,7 +2284,7 @@ namespace RH.View.Controllers
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\t", "");
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
-                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && VagaProva.Vag_Titulo.Replace(" ", "") == VagaAluno.Vag_Titulo.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -1968,21 +2294,21 @@ namespace RH.View.Controllers
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
-                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
-                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaAluno.Vag_Titulo;
+                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                     _Control.CadastrarErro(oErro);
                 }
             }
 
             else
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                 oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
-                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                 _Control.CadastrarErro(oErro);
             }
 
@@ -1992,8 +2318,8 @@ namespace RH.View.Controllers
 
             if (PessoaAluno != null)
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
+                VagaAluno = _Control.SelecionarVaga(PessoaAluno.Pes_Vaga_Vag_ID);
 
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
@@ -2035,7 +2361,7 @@ namespace RH.View.Controllers
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
 
-                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && VagaProva.Vag_Titulo.Replace(" ", "") == VagaAluno.Vag_Titulo.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -2045,21 +2371,21 @@ namespace RH.View.Controllers
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
-                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
-                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaAluno.Vag_Titulo;
+                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                     _Control.CadastrarErro(oErro);
                 }
             }
 
             else
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                 oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
-                oErro.Err_RespostaCerta= "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                 _Control.CadastrarErro(oErro);
             }
 
@@ -2069,8 +2395,8 @@ namespace RH.View.Controllers
 
             if (PessoaAluno != null)
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
-                CargoAluno = _Control.SelecionarCargo(PessoaAluno.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
+                VagaAluno = _Control.SelecionarVaga(PessoaAluno.Pes_Vaga_Vag_ID);
 
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\t", "");
                 PessoaAluno.Pes_Nome = PessoaAluno.Pes_Nome.Replace("\n", "");
@@ -2112,7 +2438,7 @@ namespace RH.View.Controllers
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\n", "");
                 CargoProva.Car_Nome = CargoProva.Car_Nome.Replace("\r", "");
 
-                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && CargoProva.Car_Nome.Replace(" ", "") == CargoAluno.Car_Nome.Replace(" ", ""))
+                if (PessoaAluno.Pes_Nome.Replace(" ", "") == PessoaProva.Pes_Nome.Replace(" ", "") && PessoaAluno.Pes_CPF.Replace(" ", "") == PessoaProva.Pes_CPF.Replace(" ", "") && PessoaAluno.Pes_Cidade.Replace(" ", "") == PessoaProva.Pes_Cidade.Replace(" ", "") && PessoaAluno.Pes_Endereco.Replace(" ", "") == PessoaProva.Pes_Endereco.Replace(" ", "") && PessoaAluno.Pes_Salario == PessoaProva.Pes_Salario && VagaProva.Vag_Titulo.Replace(" ", "") == VagaAluno.Vag_Titulo.Replace(" ", ""))
                 {
                     Nota = Nota + 0.2;
                 }
@@ -2122,21 +2448,21 @@ namespace RH.View.Controllers
                     Erro oErro = new Erro();
                     oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                     oErro.Erro_Tipo = "Erro no Cadastro";
-                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoAluno.Car_Nome;
-                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                    oErro.Err_RespostaAluno = "Funcionário:</br>Nome do Funcionário: " + PessoaAluno.Pes_Nome + "</br>CPF: " + PessoaAluno.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaAluno.Pes_CTrabalho + "</br>Salário: " + PessoaAluno.Pes_Salario + "</br>Cidade: " + PessoaAluno.Pes_Cidade + "</br>Endereço: " + PessoaAluno.Pes_Endereco + "</br>Data de Cadastro: " + PessoaAluno.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaAluno.Vag_Titulo;
+                    oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                     _Control.CadastrarErro(oErro);
                 }
             }
 
             else
             {
-                CargoProva = _Control.SelecionarCargo(PessoaProva.Pes_Cargo_Car_ID);
+                VagaProva = _Control.SelecionarVaga(PessoaProva.Pes_Vaga_Vag_ID);
 
                 Erro oErro = new Erro();
                 oErro.Err_Prova_Pro_ID = aProva.Pro_ID;
                 oErro.Erro_Tipo = "Cadastro realizado no dia errado";
                 oErro.Err_RespostaAluno = "Não foi encontrado nenhum funcionário cadastrado no dia " + PessoaProva.Pes_DataCadastro;
-                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Cargo do Funcionário: " + CargoProva.Car_Nome;
+                oErro.Err_RespostaCerta = "Funcionário:</br>Nome do Funcionário: " + PessoaProva.Pes_Nome + "</br>CPF: " + PessoaProva.Pes_CPF + "</br>Carteira de Trabalho: " + PessoaProva.Pes_CTrabalho + "</br>Salário: " + PessoaProva.Pes_Salario + "</br>Cidade: " + PessoaProva.Pes_Cidade + "</br>Endereço: " + PessoaProva.Pes_Endereco + "</br>Data de Cadastro: " + PessoaProva.Pes_DataCadastro + "</br>Vaga do Funcionário: " + VagaProva.Vag_Titulo;
                 _Control.CadastrarErro(oErro);
             }
 

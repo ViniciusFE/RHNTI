@@ -76,6 +76,11 @@ namespace RH.Model
         public int Pro_Codigo { get; set; }
         public bool Pro_Situation { get; set; }
         public bool Pro_Entregue { get; set; }
+        public int Pro_Vaga1 { get; set; }
+        public int Pro_Vaga2 { get; set; }
+        public int Pro_Vaga3 { get; set; }
+        public int Pro_Vaga4 { get; set; }
+        public int Pro_Vaga5 { get; set; }
     
         public virtual Aluno Aluno { get; set; }
         public virtual Avaliacao Avaliacao { get; set; }
@@ -130,5 +135,10 @@ namespace RH.Model
         public virtual Setor Setor2 { get; set; }
         public virtual Setor Setor3 { get; set; }
         public virtual Setor Setor4 { get; set; }
+        public virtual Vaga Vaga { get; set; }
+        public virtual Vaga Vaga1 { get; set; }
+        public virtual Vaga Vaga2 { get; set; }
+        public virtual Vaga Vaga3 { get; set; }
+        public virtual Vaga Vaga4 { get; set; }
     }
 }

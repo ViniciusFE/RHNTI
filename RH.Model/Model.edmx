@@ -167,7 +167,7 @@
           <Property Name="Pes_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Pes_Situation" Type="bit" Nullable="false" />
           <Property Name="Pes_Imagem" Type="image" Nullable="false" />
-          <Property Name="Pes_Cargo_Car_ID" Type="int" Nullable="false" />
+          <Property Name="Pes_Vaga_Vag_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PessoaBeneficio">
           <Key>
@@ -258,6 +258,11 @@
           <Property Name="Pro_Codigo" Type="int" Nullable="false" />
           <Property Name="Pro_Situation" Type="bit" Nullable="false" />
           <Property Name="Pro_Entregue" Type="bit" Nullable="false" />
+          <Property Name="Pro_Vaga1" Type="int" Nullable="false" />
+          <Property Name="Pro_Vaga2" Type="int" Nullable="false" />
+          <Property Name="Pro_Vaga3" Type="int" Nullable="false" />
+          <Property Name="Pro_Vaga4" Type="int" Nullable="false" />
+          <Property Name="Pro_Vaga5" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Setor">
           <Key>
@@ -290,8 +295,9 @@
           <Property Name="Vag_Cargo_Car_ID" Type="int" Nullable="false" />
           <Property Name="Vag_Descricao" Type="varchar(max)" Nullable="false" />
           <Property Name="Vag_DataCadastro" Type="char" MaxLength="5" Nullable="false" />
-          <Property Name="Vag_DataTermino" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Vag_Situation" Type="bit" Nullable="false" />
+          <Property Name="Vag_Titulo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Vag_Preenchida" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'RH.dbo.VW_BeneficiosFuncionario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -513,15 +519,15 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pessoa_Cargo">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+        <Association Name="FK_Pessoa_Vaga">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
           <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
             </Principal>
             <Dependent Role="Pessoa">
-              <PropertyRef Name="Pes_Cargo_Car_ID" />
+              <PropertyRef Name="Pes_Vaga_Vag_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1197,6 +1203,66 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_Vaga">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga1">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga2">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga3">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga4">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Setor_Empresa">
           <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
           <End Role="Setor" Type="Self.Setor" Multiplicity="*" />
@@ -1343,8 +1409,8 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Prova" EntitySet="Prova" />
             <End Role="Nota" EntitySet="Nota" />
           </AssociationSet>
-          <AssociationSet Name="FK_Pessoa_Cargo" Association="Self.FK_Pessoa_Cargo">
-            <End Role="Cargo" EntitySet="Cargo" />
+          <AssociationSet Name="FK_Pessoa_Vaga" Association="Self.FK_Pessoa_Vaga">
+            <End Role="Vaga" EntitySet="Vaga" />
             <End Role="Pessoa" EntitySet="Pessoa" />
           </AssociationSet>
           <AssociationSet Name="FK_PessoaBeneficio_Beneficio" Association="Self.FK_PessoaBeneficio_Beneficio">
@@ -1571,6 +1637,26 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga" Association="Self.FK_Prova_Vaga">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga1" Association="Self.FK_Prova_Vaga1">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga2" Association="Self.FK_Prova_Vaga2">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga3" Association="Self.FK_Prova_Vaga3">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga4" Association="Self.FK_Prova_Vaga4">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
           <AssociationSet Name="FK_Setor_Empresa" Association="Self.FK_Setor_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Setor" EntitySet="Setor" />
@@ -1664,7 +1750,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Car_Setor_Set_ID" Type="Int32" Nullable="false" />
           <Property Name="Car_Chefe" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Setor" Relationship="Self.FK_Cargo_Setor" FromRole="Cargo" ToRole="Setor" />
-          <NavigationProperty Name="Pessoa" Relationship="Self.FK_Pessoa_Cargo" FromRole="Cargo" ToRole="Pessoa" />
           <NavigationProperty Name="Posicao" Relationship="Self.FK_Posicao_Cargo" FromRole="Cargo" ToRole="Posicao" />
           <NavigationProperty Name="Posicao1" Relationship="Self.FK_Posicao_Cargo1" FromRole="Cargo" ToRole="Posicao" />
           <NavigationProperty Name="Prova" Relationship="Self.FK_Prova_Cargo" FromRole="Cargo" ToRole="Prova" />
@@ -1803,14 +1888,14 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Pes_DataCadastro" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Pes_Situation" Type="Boolean" Nullable="false" />
           <Property Name="Pes_Imagem" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="Pes_Cargo_Car_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pes_Vaga_Vag_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Avaliacao" Relationship="Self.FK_Avaliacao_Pessoa" FromRole="Pessoa" ToRole="Avaliacao" />
           <NavigationProperty Name="CadastroTreinamento" Relationship="Self.FK_CadastroTreinamento_Pessoa" FromRole="Pessoa" ToRole="CadastroTreinamento" />
-          <NavigationProperty Name="Cargo" Relationship="Self.FK_Pessoa_Cargo" FromRole="Pessoa" ToRole="Cargo" />
           <NavigationProperty Name="DadoBancario" Relationship="Self.FK_DadoBancario_Pessoa" FromRole="Pessoa" ToRole="DadoBancario" />
           <NavigationProperty Name="DadoDependente" Relationship="Self.FK_DadoPendente_Pessoa" FromRole="Pessoa" ToRole="DadoDependente" />
           <NavigationProperty Name="Demissao" Relationship="Self.FK_Demissao_Pessoa" FromRole="Pessoa" ToRole="Demissao" />
           <NavigationProperty Name="Movimentacao" Relationship="Self.FK_Movimentacao_Pessoa" FromRole="Pessoa" ToRole="Movimentacao" />
+          <NavigationProperty Name="Vaga" Relationship="Self.FK_Pessoa_Vaga" FromRole="Pessoa" ToRole="Vaga" />
           <NavigationProperty Name="PessoaBeneficio" Relationship="Self.FK_PessoaBeneficio_Pessoa" FromRole="Pessoa" ToRole="PessoaBeneficio" />
           <NavigationProperty Name="Posicao" Relationship="Self.FK_Posicao_Pessoa" FromRole="Pessoa" ToRole="Posicao" />
           <NavigationProperty Name="Prova" Relationship="Self.FK_Prova_Pessoa" FromRole="Pessoa" ToRole="Prova" />
@@ -1927,6 +2012,11 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Pro_Codigo" Type="Int32" Nullable="false" />
           <Property Name="Pro_Situation" Type="Boolean" Nullable="false" />
           <Property Name="Pro_Entregue" Type="Boolean" Nullable="false" />
+          <Property Name="Pro_Vaga1" Type="Int32" Nullable="false" />
+          <Property Name="Pro_Vaga2" Type="Int32" Nullable="false" />
+          <Property Name="Pro_Vaga3" Type="Int32" Nullable="false" />
+          <Property Name="Pro_Vaga4" Type="Int32" Nullable="false" />
+          <Property Name="Pro_Vaga5" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Aluno" Relationship="Self.FK_Prova_Aluno" FromRole="Prova" ToRole="Aluno" />
           <NavigationProperty Name="Avaliacao" Relationship="Self.FK_Prova_Avaliacao" FromRole="Prova" ToRole="Avaliacao" />
           <NavigationProperty Name="Avaliacao1" Relationship="Self.FK_Prova_Avaliacao1" FromRole="Prova" ToRole="Avaliacao" />
@@ -1978,6 +2068,11 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <NavigationProperty Name="Setor2" Relationship="Self.FK_Prova_Setor2" FromRole="Prova" ToRole="Setor" />
           <NavigationProperty Name="Setor3" Relationship="Self.FK_Prova_Setor3" FromRole="Prova" ToRole="Setor" />
           <NavigationProperty Name="Setor4" Relationship="Self.FK_Prova_Setor4" FromRole="Prova" ToRole="Setor" />
+          <NavigationProperty Name="Vaga" Relationship="Self.FK_Prova_Vaga" FromRole="Prova" ToRole="Vaga" />
+          <NavigationProperty Name="Vaga1" Relationship="Self.FK_Prova_Vaga1" FromRole="Prova" ToRole="Vaga" />
+          <NavigationProperty Name="Vaga2" Relationship="Self.FK_Prova_Vaga2" FromRole="Prova" ToRole="Vaga" />
+          <NavigationProperty Name="Vaga3" Relationship="Self.FK_Prova_Vaga3" FromRole="Prova" ToRole="Vaga" />
+          <NavigationProperty Name="Vaga4" Relationship="Self.FK_Prova_Vaga4" FromRole="Prova" ToRole="Vaga" />
         </EntityType>
         <EntityType Name="Setor">
           <Key>
@@ -2021,9 +2116,16 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <Property Name="Vag_Cargo_Car_ID" Type="Int32" Nullable="false" />
           <Property Name="Vag_Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Vag_DataCadastro" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Vag_DataTermino" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Vag_Situation" Type="Boolean" Nullable="false" />
+          <Property Name="Vag_Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vag_Preenchida" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Cargo" Relationship="Self.FK_Vaga_Cargo" FromRole="Vaga" ToRole="Cargo" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK_Pessoa_Vaga" FromRole="Vaga" ToRole="Pessoa" />
+          <NavigationProperty Name="Prova" Relationship="Self.FK_Prova_Vaga" FromRole="Vaga" ToRole="Prova" />
+          <NavigationProperty Name="Prova1" Relationship="Self.FK_Prova_Vaga1" FromRole="Vaga" ToRole="Prova" />
+          <NavigationProperty Name="Prova2" Relationship="Self.FK_Prova_Vaga2" FromRole="Vaga" ToRole="Prova" />
+          <NavigationProperty Name="Prova3" Relationship="Self.FK_Prova_Vaga3" FromRole="Vaga" ToRole="Prova" />
+          <NavigationProperty Name="Prova4" Relationship="Self.FK_Prova_Vaga4" FromRole="Vaga" ToRole="Prova" />
         </EntityType>
         <EntityType Name="VW_BeneficiosFuncionario">
           <Key>
@@ -2285,18 +2387,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pessoa_Cargo">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="Car_ID" />
-            </Principal>
-            <Dependent Role="Pessoa">
-              <PropertyRef Name="Pes_Cargo_Car_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Posicao_Cargo">
           <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
           <End Role="Posicao" Type="Self.Posicao" Multiplicity="*" />
@@ -2657,6 +2747,18 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pessoa_Vaga">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Pessoa">
+              <PropertyRef Name="Pes_Vaga_Vag_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PessoaBeneficio_Pessoa">
           <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="1" />
           <End Role="PessoaBeneficio" Type="Self.PessoaBeneficio" Multiplicity="*" />
@@ -2957,6 +3059,66 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_Vaga">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga1">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga2">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga3">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Vaga4">
+          <End Role="Vaga" Type="Self.Vaga" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaga">
+              <PropertyRef Name="Vag_ID" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="Pro_Vaga5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RHEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Aluno" EntityType="Self.Aluno" />
           <EntitySet Name="Avaliacao" EntityType="Self.Avaliacao" />
@@ -3054,10 +3216,6 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           <AssociationSet Name="FK_Cargo_Setor" Association="Self.FK_Cargo_Setor">
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Cargo" EntitySet="Cargo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pessoa_Cargo" Association="Self.FK_Pessoa_Cargo">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Pessoa" EntitySet="Pessoa" />
           </AssociationSet>
           <AssociationSet Name="FK_Posicao_Cargo" Association="Self.FK_Posicao_Cargo">
             <End Role="Cargo" EntitySet="Cargo" />
@@ -3179,6 +3337,10 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
             <End Role="Prova" EntitySet="Prova" />
             <End Role="Nota" EntitySet="Nota" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pessoa_Vaga" Association="Self.FK_Pessoa_Vaga">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Pessoa" EntitySet="Pessoa" />
+          </AssociationSet>
           <AssociationSet Name="FK_PessoaBeneficio_Pessoa" Association="Self.FK_PessoaBeneficio_Pessoa">
             <End Role="Pessoa" EntitySet="Pessoa" />
             <End Role="PessoaBeneficio" EntitySet="PessoaBeneficio" />
@@ -3277,6 +3439,26 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Setor4" Association="Self.FK_Prova_Setor4">
             <End Role="Setor" EntitySet="Setor" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga" Association="Self.FK_Prova_Vaga">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga1" Association="Self.FK_Prova_Vaga1">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga2" Association="Self.FK_Prova_Vaga2">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga3" Association="Self.FK_Prova_Vaga3">
+            <End Role="Vaga" EntitySet="Vaga" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Vaga4" Association="Self.FK_Prova_Vaga4">
+            <End Role="Vaga" EntitySet="Vaga" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
         </EntityContainer>
@@ -3460,7 +3642,7 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
                 <ScalarProperty Name="Pes_DataCadastro" ColumnName="Pes_DataCadastro" />
                 <ScalarProperty Name="Pes_Situation" ColumnName="Pes_Situation" />
                 <ScalarProperty Name="Pes_Imagem" ColumnName="Pes_Imagem" />
-                <ScalarProperty Name="Pes_Cargo_Car_ID" ColumnName="Pes_Cargo_Car_ID" />
+                <ScalarProperty Name="Pes_Vaga_Vag_ID" ColumnName="Pes_Vaga_Vag_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3555,6 +3737,11 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
                 <ScalarProperty Name="Pro_Codigo" ColumnName="Pro_Codigo" />
                 <ScalarProperty Name="Pro_Situation" ColumnName="Pro_Situation" />
                 <ScalarProperty Name="Pro_Entregue" ColumnName="Pro_Entregue" />
+                <ScalarProperty Name="Pro_Vaga1" ColumnName="Pro_Vaga1" />
+                <ScalarProperty Name="Pro_Vaga2" ColumnName="Pro_Vaga2" />
+                <ScalarProperty Name="Pro_Vaga3" ColumnName="Pro_Vaga3" />
+                <ScalarProperty Name="Pro_Vaga4" ColumnName="Pro_Vaga4" />
+                <ScalarProperty Name="Pro_Vaga5" ColumnName="Pro_Vaga5" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3590,8 +3777,9 @@ warning 6002: The table/view 'RH.dbo.VW_Provas' does not have a primary key defi
                 <ScalarProperty Name="Vag_Cargo_Car_ID" ColumnName="Vag_Cargo_Car_ID" />
                 <ScalarProperty Name="Vag_Descricao" ColumnName="Vag_Descricao" />
                 <ScalarProperty Name="Vag_DataCadastro" ColumnName="Vag_DataCadastro" />
-                <ScalarProperty Name="Vag_DataTermino" ColumnName="Vag_DataTermino" />
                 <ScalarProperty Name="Vag_Situation" ColumnName="Vag_Situation" />
+                <ScalarProperty Name="Vag_Titulo" ColumnName="Vag_Titulo" />
+                <ScalarProperty Name="Vag_Preenchida" ColumnName="Vag_Preenchida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

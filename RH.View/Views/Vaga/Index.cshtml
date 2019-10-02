@@ -1,0 +1,145 @@
+@model IEnumerable<RH.Model.Vaga>
+
+@{
+    ViewBag.Title = "Vagas Cadastradas";
+}
+
+<br />
+<a href="@Url.Action("CadastrarVaga","Vaga")" class="btn btn-success">Cadastrar Vaga</a>
+<br />
+
+<div class="container my-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Vagas Cadastradas</h1>
+        </div>
+        <div class="card-body">
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-bordered table-hover text-center">
+                    <tr  style="background-color: rgb(148,72,72);" class="text-white">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vag_Titulo)
+                        </th>
+
+                      
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cargo.Car_Nome)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vag_DataCadastro)
+                        </th>
+
+
+
+                        <th>Ações</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vag_Titulo)
+                            </td>
+                       
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cargo.Car_Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vag_DataCadastro)
+                            </td>
+                            <td>
+                                <a class="btn btn-warning custom" href="#"><i class="fas fa-user-edit"></i> Alterar</a>
+                                <button class="btn btn-danger custom AbrirModalExcluir" data-id="@item.Vag_ID"><i class="fas fa-user-times"></i> Excluir</button>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-primary">
+                    <div class="alert-body">
+                        <h4>Esta empresa ainda não possui nenhum setor cadastrado...</h4>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalExcluirVaga">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Vaga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="Mensagem">
+                </div>
+                <div id="Carregando" align="center" style="display:none;">
+                    <img src="~/Imagem/833.gif" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success BtnModal" id="ExcluirVaga">Sim</button>
+                <button type="button" class="btn btn-danger BtnModal" data-dismiss="modal" id="BtnNao">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+<script>
+
+    $(document).ready(function () {
+
+        var IDVaga;
+
+        $(".AbrirModalExcluir").click(function () {
+            IDVaga = $(this).attr("data-id");
+            $("#Mensagem").text("Tem certeza que deseja excluir essa vaga?");
+            $("#ModalExcluirVaga").modal('show');
+            $(".BtnModal").removeAttr("disabled");
+            $("#Mensagem").css("disaplay", "block");
+            $("#Carregando").css("display", "none");
+        });
+
+        $("#ExcluirVaga").click(function () {
+            var url = "@Url.Action("ExcluirVaga","Vaga")";
+
+            $(".BtnModal").attr("disabled", "disabled");
+
+            $("#Mensagem").css("disaplay", "none");
+            $("#Carregando").css("display", "block");
+
+            $.post(url, { id: IDVaga }, function (resposta) {
+                $("#Vaga-" + IDVaga).slideUp('slow');
+                $("#Mensagem").text(resposta);
+                $("#Mensagem").css("disaplay", "block");
+                $("#Carregando").css("display", "none");
+            })
+        });
+
+
+    });
+
+</script>
+
+}
+
+
+
+
+
+
+
+

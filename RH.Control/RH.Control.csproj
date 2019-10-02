@@ -69,6 +69,7 @@
     <Compile Include="CProfessor.cs" />
     <Compile Include="CProva.cs" />
     <Compile Include="CSetor.cs" />
+    <Compile Include="CVaga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

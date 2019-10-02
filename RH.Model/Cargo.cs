@@ -17,7 +17,6 @@ namespace RH.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cargo()
         {
-            this.Pessoa = new HashSet<Pessoa>();
             this.Posicao = new HashSet<Posicao>();
             this.Posicao1 = new HashSet<Posicao>();
             this.Prova = new HashSet<Prova>();
@@ -36,8 +35,6 @@ namespace RH.Model
         public bool Car_Chefe { get; set; }
     
         public virtual Setor Setor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pessoa> Pessoa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Posicao> Posicao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

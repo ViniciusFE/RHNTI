@@ -59,14 +59,14 @@ namespace RH.Model.Repositories
 
         public DadoDependente SelecionarDependenteDataCadastro(string DataCadastro,int IDEmpresa)
         {
-            return odb.DadoDependente.Join(odb.Pessoa.Join(odb.Cargo.Join(odb.Setor.Where(s=>s.Set_Empresa_Emp_ID.Equals(IDEmpresa)),c=>c.Car_Setor_Set_ID,s=>s.Set_ID,(c,s)=>c),p=>p.Pes_Cargo_Car_ID,c=>c.Car_ID,(p,c)=>p), dd => dd.DP_Pessoa_Pes_ID, p => p.Pes_ID, (dd, p) => dd).Where(dd=>dd.DP_DataCadastro.Equals(DataCadastro)).OrderBy(dd => dd.DP_ID).ToList().Last();
+            return odb.DadoDependente.Join(odb.Pessoa.Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.DP_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.DP_Situation == true && a.DP_DataCadastro.Equals(DataCadastro)).Last();
         }
 
         public bool LimiteDependentesEmpresaAvaliativa(int IDEmpresa)
         {
-            int QuantidadeDependentes = odb.DadoDependente.SqlQuery("select * from DadoDependente dp inner join Pessoa p on dp.DP_Pessoa_Pes_ID = p.Pes_ID inner join Cargo c on p.Pes_Cargo_Car_ID = C.Car_ID inner join Setor s on c.Car_Setor_Set_ID = s.Set_ID and s.Set_Empresa_Emp_ID = "+IDEmpresa+" where dp.DP_Situation = 1").Count();
+            int QuantidadeDependentes = odb.DadoDependente.Join(odb.Pessoa.Join(odb.Vaga.Join(odb.Cargo.Join(odb.Setor.Where(s => s.Set_Empresa_Emp_ID.Equals(IDEmpresa)), c => c.Car_Setor_Set_ID, s => s.Set_ID, (c, s) => c), v => v.Vag_Cargo_Car_ID, c => c.Car_ID, (v, c) => v), p => p.Pes_Vaga_Vag_ID, v => v.Vag_ID, (p, v) => p), a => a.DP_Pessoa_Pes_ID, p => p.Pes_ID, (a, p) => a).Where(a => a.DP_Situation == true).Count();
 
-            if(QuantidadeDependentes==5)
+            if (QuantidadeDependentes==5)
             {
                 return true;
             }

@@ -45,7 +45,8 @@ namespace RH.View.Controllers
         public ActionResult MeusFuncionarios(int IDChefe)
         {
             Pessoa ChefeSetor = _Control.SelecionarPessoa(IDChefe);
-            Cargo CargoChefe = _Control.SelecionarCargo(ChefeSetor.Pes_Cargo_Car_ID);
+            Vaga aVaga = _Control.SelecionarVaga(ChefeSetor.Pes_Vaga_Vag_ID);
+            Cargo CargoChefe = _Control.SelecionarCargo(aVaga.Vag_Cargo_Car_ID);
             Setor oSetorChefe = _Control.SelecionarSetor(CargoChefe.Car_Setor_Set_ID);
             List<Pessoa> MeusFuncionarios = _Control.SelecionarTodosMeusFuncionarios(CargoChefe.Car_Setor_Set_ID, oSetorChefe.Set_Empresa_Emp_ID,IDChefe);
 
@@ -53,7 +54,8 @@ namespace RH.View.Controllers
 
             foreach(var x in MeusFuncionarios)
             {
-                Cargo oCargo = _Control.SelecionarCargo(x.Pes_Cargo_Car_ID);
+                Vaga Vaga2 = _Control.SelecionarVaga(x.Pes_Vaga_Vag_ID);
+                Cargo oCargo = _Control.SelecionarCargo(Vaga2.Vag_Cargo_Car_ID);
                 Setor oSetor = _Control.SelecionarSetor(oCargo.Car_Setor_Set_ID);
                 DadosFuncionarios.Add(
                     new
