@@ -157,5 +157,18 @@ namespace RH.View.Controllers
             return Json(retorno);
         }
 
+        private CPessoa DbPessoa = new CPessoa();
+
+        public ActionResult SelecionarTodosSetores()
+        {
+            int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
+            
+            List<Setor> setores = DbPessoa.SelecionarTodosSetores(IDEmpresa);
+
+            return View(setores);
+
+        }
+
+
     }
 }

@@ -158,9 +158,6 @@
     <Compile Include="Setor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Treinamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce50fa30a7fe46d682d4de39215863b3" Name="Diagram1">
+      <Diagram DiagramId="d544dc313beb4a1980a6335388df9105" Name="Diagram1">
         <EntityTypeShape EntityType="RHModel.Aluno" Width="1.5" PointX="5.25" PointY="28.625" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.Avaliacao" Width="1.5" PointX="16.5" PointY="20.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.Beneficio" Width="1.5" PointX="9.75" PointY="15.875" IsExpanded="true" />
@@ -24,13 +24,12 @@
         <EntityTypeShape EntityType="RHModel.Professor" Width="1.5" PointX="0.75" PointY="29" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.Prova" Width="1.5" PointX="21.75" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.Setor" Width="1.5" PointX="9.75" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.Treinamento" Width="1.5" PointX="9.75" PointY="41.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RHModel.Vaga" Width="1.5" PointX="14.25" PointY="38.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.VW_BeneficiosFuncionario" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.VW_MeusBeneficios" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.VW_Notas" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RHModel.VW_Provas" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.VW_BeneficiosFuncionario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.VW_MeusBeneficios" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.VW_Notas" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RHModel.VW_Provas" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="RHModel.FK_Aluno_Curso" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Empresa_Aluno" ManuallyRouted="false" />
         <AssociationConnector Association="RHModel.FK_Prova_Aluno" ManuallyRouted="false" />

@@ -313,6 +313,7 @@
     <Content Include="Views\Aluno\Notas.cshtml" />
     <Content Include="Views\Prova\Notas.cshtml" />
     <Content Include="Views\Prova\Erros.cshtml" />
+    <Content Include="Views\Setor\SelecionarTodosSetores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
